@@ -178,6 +178,7 @@
   --ol8-color-feedbackcritical-inlinecontent: #b6332e;
   --ol8-color-selection-surface: #e2e9ff;
   --ol8-color-selection-content: #1a2a59;
+  --ol8-color-control-thumb: #1a2a59;
   --ol8-material-gem-color-cutedge-outerhigh: #f5f1e6ed;
   --ol8-material-gem-color-cutedge-outermid: #9bb3ff7a;
   --ol8-material-gem-color-cutedge-outerlow: #f5f1e608;
@@ -354,10 +355,28 @@
   --ol8-component-iconbutton-artwork-comfortable: 24px;
   --ol8-component-iconbutton-artwork-large: 24px;
   --ol8-component-iconbutton-pressedscrim: rgba(0,0,0,0.24);
+  --ol8-component-checkbox-radius-compact: 3px;
+  --ol8-component-checkbox-radius-comfortable: 6px;
+  --ol8-component-checkbox-boundary: 1.8px;
+  --ol8-component-radio-boundary: 1.8px;
+  --ol8-component-radio-dot-compact: 9px;
+  --ol8-component-radio-dot-comfortable: 12px;
+  --ol8-component-switch-trackwidth-compact: 36px;
+  --ol8-component-switch-trackwidth-comfortable: 48px;
+  --ol8-component-switch-trackheight-compact: 18px;
+  --ol8-component-switch-trackheight-comfortable: 24px;
+  --ol8-component-switch-thumb-compact: 12px;
+  --ol8-component-switch-thumb-comfortable: 18px;
+  --ol8-component-switch-inset: 3px;
+  --ol8-component-choice-optical-stroke: 1.8px;
+  --ol8-component-choice-mixed-bar-width: 9px;
+  --ol8-component-choice-mixed-bar-height: 1.8px;
   --ol8-focus-ring-innerwidth: 3px;
   --ol8-focus-ring-outerwidth: 6px;
   --ol8-size-icon-small: 18px;
   --ol8-size-icon-standard: 24px;
+  --ol8-size-icon-micro: 9px;
+  --ol8-size-icon-compact: 12px;
 
   /* typography roles (composite) */
   --ol8-typography-display-large-family: var(--ol8-font-family-display);
