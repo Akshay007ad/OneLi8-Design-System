@@ -158,17 +158,6 @@
       }
     }
   },
-  "pending": {
-    "Choice Group": {
-      "tier": "organism",
-      "nodes": {
-        "checkbox": "273:603",
-        "radio": "859:5180"
-      },
-      "componentCount": 7,
-      "note": "Checkbox group Aggregate=None|Some|All drives an indeterminate parent from its children; Radio group Behavior=Safe Default|No Default|Horizontal|Invalid adds roving focus, fieldset/legend and group validation."
-    }
-  },
   "architecture": {
     "convention": "Atomic Design for developers (benjaminwfox.com/blog/tech/atomic-design-for-developers)",
     "layout": {
@@ -992,6 +981,108 @@
         "rowHeight": "exactly 48px at all four sizes; grows to 69px with a description",
         "geometry": "gap 6/9/9/9, padding-block 15/12/12/9, indicator 18/18/24/24, slot height 18/24/24/30 \u2014 all exact",
         "semantics": "label[for] wraps a real input; switch carries role=switch; indeterminate applied and reflected as Selection=mixed"
+      }
+    },
+    "ol8-choice-group": {
+      "tier": "organism",
+      "figma": {
+        "page": "Choice Controls (246:3)",
+        "sets": {
+          "checkbox-hierarchy": "273:603",
+          "radio-group": "859:5180"
+        },
+        "componentCount": 7,
+        "description": "Aggregate None/Some/All is computed from nested Checkbox molecules; Mixed is never a third preference. Runtime recursion, parent-child synchronization, group naming, required behavior, reset and announcements live in code."
+      },
+      "code": {
+        "package": "@oneli8/core",
+        "entry": "packages/core/src/organisms/choice-group/choice-group.js",
+        "styles": "packages/core/src/organisms/choice-group/choice-group.css",
+        "baseClass": "ol8-choice-group"
+      },
+      "composes": [
+        "ol8-choice (molecule)",
+        "ol8-selection (atom)"
+      ],
+      "footprint": {
+        "element": "fieldset",
+        "legend": "legend.ol8-choice-group__legend",
+        "note": "A real fieldset/legend, so the group name reaches assistive tech natively. legend is display:block so it lays out as a flex child."
+      },
+      "shells": {
+        "checkbox": {
+          "border": "1px border-subtle",
+          "radius": "radius-container 24px",
+          "legend": "Title/Small 21/30 semibold"
+        },
+        "radio": {
+          "border": "none",
+          "radius": "radius-standard 12px",
+          "legend": "Body/Medium 16/24 regular"
+        }
+      },
+      "variants": {
+        "Aggregate": {
+          "strategy": "computed",
+          "emitAs": {
+            "data-ol8-aggregate": "none|some|all"
+          },
+          "note": "OUTPUT ONLY. Never authored. computeAggregate(children) is the single source; disabled children are excluded. Emits an ol8:aggregatechange event."
+        },
+        "Behavior": {
+          "strategy": "none",
+          "emit": null,
+          "note": "Figma's Safe Default | No Default | Horizontal | Invalid are proof SCENARIOS, not visual axes. In code they are ordinary props: value present or absent, orientation, invalid."
+        },
+        "Orientation": {
+          "strategy": "data",
+          "emitAs": {
+            "data-ol8-orientation": "horizontal"
+          },
+          "default": "vertical"
+        },
+        "Invalid": {
+          "strategy": "data",
+          "emitAs": {
+            "data-ol8-invalid": "true",
+            "aria-invalid": "true"
+          },
+          "visual": "group message switches to feedbackcritical-inlinecontent and gains role=alert"
+        }
+      },
+      "rules": [
+        "Mixed is never a preference a user can choose. Clicking a Mixed parent resolves the whole subtree to CHECKED; it never cycles back through Mixed.",
+        "Disabled children are excluded from the aggregate.",
+        "The radio group needs no JS. A native radio group already provides arrow-key roving focus, single selection and form submission; adding script would only break them."
+      ],
+      "a11y": {
+        "invariants": [
+          "fieldset + legend names the group natively.",
+          "Instruction and message are wired through aria-describedby on the fieldset.",
+          "An invalid group's message carries role=alert.",
+          "Radios share one name \u2014 that is what makes them a group."
+        ]
+      },
+      "forbid": [
+        {
+          "pattern": "data-ol8-aggregate=",
+          "reason": "Aggregate is computed, never authored."
+        },
+        {
+          "pattern": "role=\"radiogroup\"",
+          "reason": "A fieldset with same-named radios is already a radio group; the ARIA role would override working native semantics."
+        },
+        {
+          "pattern": "keydown[^;]*Arrow",
+          "reason": "Native radio groups already implement arrow-key roving focus."
+        }
+      ],
+      "verification": {
+        "aggregate": "none/some/all computed correctly on load; parent indeterminate only for some",
+        "mixedResolution": "clicking a Mixed parent -> all children checked, aggregate all, indeterminate false",
+        "childToParent": "unchecking one of an all-checked group -> aggregate some, parent back to mixed",
+        "semantics": "FIELDSET + legend; radios share a name; invalid message has role=alert; aria-describedby wires instruction and message",
+        "notExercised": "native arrow-key roving focus is browser behaviour and was not driven with real key events"
       }
     }
   }

@@ -59,6 +59,16 @@ Figma file: 0wRnp6ulIEA8PCV6wqGmAJ ("Oneli8 Design System — 1.0.0-beta.1")
 - [x] `ol8-btn` — 4 families x 4 sizes, all 6 states. Verified in-browser.
 - [x] `ol8-icon-btn` — 4 families x 2 shapes x 4 sizes, all 6 states.
 - [x] Gem material — Primary + Secondary, Button and Icon Button.
+- [x] `ol8-selection` (atom) — checkbox, radio, switch indicators.
+- [x] `ol8-choice` (molecule) — Choice Item, 56 variants.
+- [x] `ol8-choice-group` (organism) — checkbox hierarchy + radio group.
+
+## Choice Controls rules
+
+Aggregate (none/some/all) is COMPUTED from children and never authored.
+Mixed is never a third preference: clicking a Mixed parent resolves the whole
+subtree to checked. A native radio group already gives arrow-key roving focus
+and single selection — do not reimplement them.
 
 ## Gem material
 

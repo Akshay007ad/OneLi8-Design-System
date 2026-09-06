@@ -298,6 +298,8 @@ export const tokens = {
   "font-variation-functional": "\"ARRR\" 10",
   "border-width-standard": "2px",
   "spacing-stack-grouped": "18px",
+  "spacing-stack-related": "12px",
+  "spacing-inset-standard": "18px",
   "elevation-flat": "none",
   "elevation-raised": "0 3px 6px 0 rgba(22,63,75,0.12)",
   "elevation-floating": "0 3px 6px 0 rgba(22,63,75,0.12), 0 6px 18px -3px rgba(22,63,75,0.18)",

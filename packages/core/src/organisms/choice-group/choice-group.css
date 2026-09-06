@@ -1,0 +1,93 @@
+/**
+ * Oneli8 · Choice Group (ORGANISM)
+ * Figma: Documentation / Organism / Choice Group
+ *   Checkbox Hierarchy 273:603  Aggregate = None | Some | All
+ *   Radio Group        859:5180 Behavior  = Safe Default | No Default |
+ *                                           Horizontal | Invalid
+ *
+ * First organism in the system, and the first tier allowed to hold logic:
+ * the checkbox group computes its parent from its children, and the radio
+ * group owns group-level validation.
+ *
+ * From Figma (273:603): "Aggregate None/Some/All is computed from nested
+ * Checkbox molecules; MIXED IS NEVER A THIRD PREFERENCE. Runtime recursion,
+ * parent-child synchronization, group naming, required behavior, reset, and
+ * announcements live in code."
+ *
+ * So Aggregate is an OUTPUT, never an input. Nothing may author it.
+ *
+ * The two shells differ, deliberately:
+ *   checkbox  bordered, radius-container (24px), legend Title/Small
+ *   radio     unbordered, radius-standard (12px), legend Body/Medium
+ */
+
+.ol8-choice-group {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ol8-spacing-stack-related);
+  padding: var(--ol8-spacing-inset-standard);
+  background: var(--ol8-color-surface-raised);
+  border: 0;
+  border-radius: var(--ol8-shape-radius-standard);
+  font-family: var(--ol8-font-family-functional);
+  font-variation-settings: var(--ol8-font-variation-functional);
+  min-inline-size: 0;   /* fieldset defaults to min-content; this lets it shrink */
+}
+
+.ol8-choice-group--checkbox {
+  border: 1px solid var(--ol8-color-border-subtle);
+  border-radius: var(--ol8-shape-radius-container);
+}
+
+/* <legend> is taken out of flow by default, so it is laid out as a normal
+   flex child instead — the group label is a real legend for assistive tech. */
+.ol8-choice-group__legend {
+  display: block;
+  float: none;
+  padding: 0;
+  inline-size: 100%;
+  color: var(--ol8-color-text-primary);
+}
+.ol8-choice-group--checkbox > .ol8-choice-group__legend {
+  font-size: var(--ol8-font-size-021);
+  line-height: var(--ol8-font-line-030);
+  font-weight: var(--ol8-font-weight-semibold);
+}
+.ol8-choice-group--radio > .ol8-choice-group__legend {
+  font-size: var(--ol8-font-size-016);
+  line-height: var(--ol8-font-line-024);
+  font-weight: var(--ol8-font-weight-regular);
+}
+
+.ol8-choice-group__instruction {
+  font-size: var(--ol8-font-size-012);
+  line-height: var(--ol8-font-line-018);
+  letter-spacing: 0.12px;
+  color: var(--ol8-color-text-secondary);
+}
+
+.ol8-choice-group__options { display: flex; flex-direction: column; }
+.ol8-choice-group[data-ol8-orientation="horizontal"] > .ol8-choice-group__options {
+  flex-direction: row;
+  gap: var(--ol8-spacing-stack-related);
+  flex-wrap: wrap;
+}
+
+/* Children of a hierarchy sit under their parent, indented one 24px step. */
+.ol8-choice-group__children {
+  display: flex;
+  flex-direction: column;
+  padding-inline-start: var(--ol8-dimension-scale-024);
+}
+
+/* Group-level validation message. */
+.ol8-choice-group__message {
+  font-size: var(--ol8-font-size-012);
+  line-height: var(--ol8-font-line-018);
+  letter-spacing: 0.12px;
+  color: var(--ol8-color-text-secondary);
+}
+.ol8-choice-group[data-ol8-invalid="true"] > .ol8-choice-group__message {
+  color: var(--ol8-color-feedbackcritical-inlinecontent);
+}

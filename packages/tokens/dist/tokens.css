@@ -299,6 +299,8 @@
   --ol8-font-variation-functional: "ARRR" 10;
   --ol8-border-width-standard: 2px;
   --ol8-spacing-stack-grouped: 18px;
+  --ol8-spacing-stack-related: 12px;
+  --ol8-spacing-inset-standard: 18px;
   --ol8-elevation-flat: none;
   --ol8-elevation-raised: 0 3px 6px 0 rgba(22,63,75,0.12);
   --ol8-elevation-floating: 0 3px 6px 0 rgba(22,63,75,0.12), 0 6px 18px -3px rgba(22,63,75,0.18);

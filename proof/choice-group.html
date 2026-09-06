@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Oneli8 · Choice Group proof</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=AR+One+Sans:wght@400..700&display=swap">
+<link rel="stylesheet" href="../packages/tokens/dist/tokens.css">
+<link rel="stylesheet" href="../packages/core/src/atoms/icon/icon.css">
+<link rel="stylesheet" href="../packages/core/src/atoms/selection-indicator/selection-indicator.css">
+<link rel="stylesheet" href="../packages/core/src/molecules/choice-item/choice-item.css">
+<link rel="stylesheet" href="../packages/core/src/organisms/choice-group/choice-group.css">
+<style>
+  body { margin:0; padding:36px; background:var(--ol8-color-background-canvas);
+         color:var(--ol8-color-text-primary); font-family:var(--ol8-font-family-functional); }
+  h2 { margin:28px 0 8px; font-size:15px; }
+  .grid { display:flex; gap:36px; flex-wrap:wrap; align-items:flex-start; }
+  .w360 { flex:0 0 360px; } .w600 { flex:0 0 600px; }
+</style>
+</head>
+<body>
+<h2>Choice Group / Checkbox Hierarchy · Aggregate is computed</h2>
+<div class="grid" id="cb"></div>
+<h2>Radio Group · Behavior proofs</h2>
+<div class="grid" id="rg"></div>
+<script type="module">
+import { renderCheckboxGroup, renderRadioGroup, hydrateChoiceGroups } from '../packages/core/src/organisms/choice-group/choice-group.js';
+import { hydrateChoiceItems } from '../packages/core/src/molecules/choice-item/choice-item.js';
+
+const passengers = ['Aarav Mehta','Mira Kapoor','Nila Rao','Dev Khanna'];
+const mk = (checkedCount, id) => renderCheckboxGroup({
+  id, legend:'Passenger selection', parentLabel:'All passengers',
+  instruction:'Select all passengers you want to check in.', name:`pax-${id}`,
+  options: passengers.map((label,i)=>({label, value:label, checked:i<checkedCount})),
+});
+cb.innerHTML = [0,2,4].map((n,i)=>`<div class="w360" data-agg="${['none','some','all'][i]}">${mk(n,`g${i}`)}</div>`).join('');
+
+const freq=[{label:'Daily summary',value:'d'},{label:'Weekly summary',value:'w'},{label:'Never',value:'n'}];
+rg.innerHTML = [
+  `<div class="w360" data-b="safe">${renderRadioGroup({id:'r1',legend:'Notification frequency',instruction:'A safe, reversible default is preselected.',name:'freq1',options:freq,value:'w'})}</div>`,
+  `<div class="w360" data-b="nodefault">${renderRadioGroup({id:'r2',legend:'File conflict',instruction:'Consequential — no default.',name:'freq2',options:[{label:'Keep both files',value:'k'},{label:'Delete the original',value:'d'},{label:'Ask every time',value:'a'}]})}</div>`,
+  `<div class="w600" data-b="horizontal">${renderRadioGroup({id:'r3',legend:'Billing period',instruction:'Short labels sit on one row.',name:'freq3',orientation:'horizontal',options:[{label:'Monthly',value:'m'},{label:'Quarterly',value:'q'},{label:'Annual',value:'a'}],value:'m'})}</div>`,
+  `<div class="w360" data-b="invalid">${renderRadioGroup({id:'r4',legend:'Contact method',instruction:'Choose one.',name:'freq4',options:[{label:'Email',value:'e'},{label:'Phone',value:'p'},{label:'Secure message',value:'s',disabled:true}],invalid:true,message:'Select a contact method to continue.'})}</div>`,
+].join('');
+
+hydrateChoiceItems();
+console.log('[proof] groups', hydrateChoiceGroups());
+</script>
+</body></html>
