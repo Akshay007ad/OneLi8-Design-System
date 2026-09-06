@@ -46,7 +46,7 @@ Figma file: 0wRnp6ulIEA8PCV6wqGmAJ ("Oneli8 Design System — 1.0.0-beta.1")
 ## Status
 
 - [x] Foundations — 337 tokens. Verified in-browser, 0 unresolved, 0 mismatches.
-- [x] `ol8-icon` — 14 masters, 11 universal sizes. Verified in-browser.
+- [x] `ol8-icon` — 17 masters (14 neutral + 3 selection), 11 universal sizes.
 - [x] `ol8-btn` — 4 families x 4 sizes, all 6 states. Verified in-browser.
 - [x] `ol8-icon-btn` — 4 families x 2 shapes x 4 sizes, all 6 states.
 - [x] Gem material — Primary + Secondary, Button and Icon Button.

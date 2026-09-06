@@ -22,7 +22,13 @@
         "page": "Iconography",
         "mastersFrame": "426:55",
         "sizingFrame": "418:51",
-        "documentation": "84:13"
+        "documentation": "84:13",
+        "selectionGlyphs": {
+          "check": "391:4",
+          "mixed": "391:9",
+          "selected-dot": "391:14",
+          "note": "These live OUTSIDE the Icon Library / Masters frame (426:55) and are easy to miss when extracting only that frame."
+        }
       },
       "code": {
         "package": "@oneli8/core",
@@ -51,6 +57,7 @@
           "values": [
             "add",
             "caution",
+            "check",
             "chevron-down",
             "chevron-up",
             "clear",
@@ -59,8 +66,10 @@
             "forward",
             "informative",
             "loading",
+            "mixed",
             "positive",
             "search",
+            "selected-dot",
             "visibility-closed",
             "visibility-open"
           ]
@@ -161,6 +170,10 @@
           "html": "<span data-ol8-icon=\"close\" data-ol8-icon-label=\"Dismiss\"></span>",
           "note": "declarative placeholder; hydrateIcons() upgrades it to role=\"img\" + aria-label"
         }
+      ],
+      "notes": [
+        "Masters bake one ink each and it is always discarded for currentColor. The neutral sources bake #151817; the selection glyphs bake #1a2a59 (check) and #e2e9ff (selected-dot). The build fails if a master carries more than one distinct ink.",
+        "The 18px Small master is an exact 0.75x geometric scale of the 24px Standard master \u2014 verified path-by-path on Add: M12 5V19M5 12H19 @1.8 -> M9 3.75V14.25M3.75 9H14.25 @1.35. Figma's own description on node 379:2 claims an 'independently drawn 18px optical master; 1.5px rounded stroke', which the built asset contradicts. Geometric scaling is correct."
       ]
     },
     "ol8-btn": {
@@ -687,6 +700,20 @@
         "secondary": "rgba(252,250,243,.22/.05/.12), border 0",
         "disabled": "gem layers display:none, opaque #e7e0d1 shows through"
       }
+    }
+  },
+  "pending": {
+    "Icon / Selection / Checkbox": {
+      "node": "365:2417",
+      "components": 12,
+      "axes": "Size(Compact|Comfortable) x Selection(Unchecked|Checked|Mixed) x Availability(Enabled|Disabled)",
+      "note": "A stateful icon component set, not a plain glyph. Belongs with a Checkbox control atom; it composes the check and mixed glyphs."
+    },
+    "Icon / Selection / Radio": {
+      "node": "366:2371",
+      "components": 8,
+      "axes": "Size(Compact|Comfortable) x Selection(Unselected|Selected) x Availability(Enabled|Disabled)",
+      "note": "Composes the selected-dot glyph. Belongs with a Radio control atom."
     }
   }
 }

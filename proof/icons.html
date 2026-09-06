@@ -44,6 +44,13 @@ const order = ['add','forward','critical','visibility-open','loading','caution',
 document.getElementById('masters').innerHTML =
   order.map(n => `<div class="cell">${renderIcon(n, { size: 24 })}<span>${n}</span></div>`).join('');
 
+// Selection glyphs live outside the Icon Library masters frame.
+const sel = Object.keys(OL8_ICONS).filter(n => OL8_ICONS[n].category === 'selection');
+document.getElementById('masters').insertAdjacentHTML('afterend',
+  `<h2>Selection glyphs · outside Icon Library / Masters</h2>
+   <div class="masters">${sel.map(n =>
+     `<div class="cell">${renderIcon(n, { size: 24 })}<span>${n}</span></div>`).join('')}</div>`);
+
 document.getElementById('sizes').innerHTML =
   OL8_ICON_SIZES.map(s => `<div class="cell">${renderIcon('add', { size: s })}<span>${s}</span></div>`).join('');
 

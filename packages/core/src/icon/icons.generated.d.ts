@@ -9,6 +9,8 @@ export interface Ol8IconEntry {
   readonly figmaNode: string;
   /** Semantic registry controls RTL mirroring (per Iconography documentation). */
   readonly mirrorInRTL: boolean;
+  /** The ink Figma baked into the master, discarded in favour of currentColor. */
+  readonly sourceInk: string | null;
   /** Drawing instructions in the canonical 24-unit source space. */
   readonly body: string;
 }
@@ -17,6 +19,7 @@ export declare const OL8_ICON_VIEWBOX: '0 0 24 24';
 export declare const OL8_ICONS: {
   readonly "add": Ol8IconEntry;
   readonly "caution": Ol8IconEntry;
+  readonly "check": Ol8IconEntry;
   readonly "chevron-down": Ol8IconEntry;
   readonly "chevron-up": Ol8IconEntry;
   readonly "clear": Ol8IconEntry;
@@ -25,8 +28,10 @@ export declare const OL8_ICONS: {
   readonly "forward": Ol8IconEntry;
   readonly "informative": Ol8IconEntry;
   readonly "loading": Ol8IconEntry;
+  readonly "mixed": Ol8IconEntry;
   readonly "positive": Ol8IconEntry;
   readonly "search": Ol8IconEntry;
+  readonly "selected-dot": Ol8IconEntry;
   readonly "visibility-closed": Ol8IconEntry;
   readonly "visibility-open": Ol8IconEntry;
 };

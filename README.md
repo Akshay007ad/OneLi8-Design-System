@@ -34,6 +34,10 @@ import { renderIcon } from '@oneli8/core/icon';
 renderIcon('forward', { size: 36 });
 ```
 
+17 masters: 14 neutral sources from `Icon Library / Masters` plus three
+selection glyphs (`check`, `mixed`, `selected-dot`) that live outside that
+frame.
+
 **Sizes** — 9, 12, 18, 24, 30, 36, 48, 60, 72, 96, 108.
 Scaling is *geometric*: the 1.8-unit source stroke scales with the box
 (48px icon renders a 3.6px stroke), exactly as the Figma Icon Frame does.
@@ -170,6 +174,12 @@ Reproduced faithfully, **not** silently corrected:
 - **Large artwork: docs say 36px, components use 24px.** The Iconography note
   (85:9) states artwork 18/18/24/36, but the built Large components measure a
   24px glyph and no `artwork-large` variable exists. Built components win.
+- **`Icon / Action / Add` Size=Small (379:2) is documented wrong.** Its
+  description claims an "independently drawn 18px optical master; 1.5px
+  rounded stroke". The built asset is an exact 0.75x geometric scale of the
+  24px master — `M12 5V19M5 12H19` @1.8 becomes `M9 3.75V14.25M3.75 9H14.25`
+  @1.35 — matching `Icon Frame`'s own rule that "no per-size source or stroke
+  tokens exist". The code follows the built asset.
 - `--ol8-component-icon-stroke` reports `1.7999999523162842` — a float32 artifact
   of 1.8. Normalized to `1.8` in `tokens.json`, matching the documented universal
   optical stroke.

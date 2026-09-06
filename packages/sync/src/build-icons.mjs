@@ -36,20 +36,41 @@ const REGISTRY = {
   'search':            { category: 'action',     figmaNode: '557:2',   mirrorInRTL: false },
   'clear':             { category: 'action',     figmaNode: '557:4',   mirrorInRTL: false },
   'close':             { category: 'action',     figmaNode: '894:123', mirrorInRTL: false },
+  // Selection glyphs. These live outside "Icon Library / Masters" (426:55) and
+  // bake different inks than the neutral sources — Check #1A2A59, Selected Dot
+  // #E2E9FF — but both are documented as "color is inherited from the consuming
+  // selection indicator", so both normalize to currentColor like the rest.
+  'check':             { category: 'selection',  figmaNode: '391:4',   mirrorInRTL: false },
+  'mixed':             { category: 'selection',  figmaNode: '391:9',   mirrorInRTL: false },
+  'selected-dot':      { category: 'selection',  figmaNode: '391:14',  mirrorInRTL: false },
 };
 
-const SOURCE_INK = '#151817';   // --ol8-color-text-primary, baked in by Figma export
 const SOURCE_STROKE = '1.8';    // universal optical stroke, in 24-unit source space
 
+/**
+ * Every master bakes exactly one ink, which the consumer is meant to override.
+ * We do not hardcode which ink: neutral sources bake #151817, but the selection
+ * glyphs bake #1A2A59 (Check) and #E2E9FF (Selected Dot). Whatever it is, it
+ * becomes currentColor — and more than one distinct ink is an error worth
+ * failing on rather than guessing at.
+ */
+function sourceInkOf(svg, name) {
+  const inks = [...new Set((svg.match(/#[0-9a-fA-F]{3,8}/g) ?? []).map(c => c.toLowerCase()))];
+  if (inks.length === 0) return null;
+  if (inks.length > 1) throw new Error(`${name}: expected one ink, found ${inks.join(', ')}`);
+  return inks[0];
+}
+
 /** Strip the <svg> wrapper and Figma's group, keep only the drawing instructions. */
-function extractBody(svg, name) {
+function extractBody(svg, name, ink) {
   const open = svg.indexOf('>', svg.indexOf('<svg'));
   let body = svg.slice(open + 1, svg.lastIndexOf('</svg>'));
   body = body.replace(/<g[^>]*>/g, '').replace(/<\/g>/g, '');
-  // Consumer supplies semantic color; the master is neutral.
-  body = body.replaceAll(`stroke="${SOURCE_INK}"`, 'stroke="currentColor"');
-  body = body.replaceAll(`fill="${SOURCE_INK}"`, 'fill="currentColor"');
-  if (body.includes(SOURCE_INK)) throw new Error(`${name}: unconverted ${SOURCE_INK}`);
+  // Consumer supplies semantic color; the master's own ink is discarded.
+  if (ink) {
+    body = body.replace(new RegExp(`(stroke|fill)="${ink}"`, 'gi'), '$1="currentColor"');
+    if (new RegExp(ink, 'i').test(body)) throw new Error(`${name}: unconverted ${ink}`);
+  }
   return body.split('\n').map(l => l.trim()).filter(Boolean).join('');
 }
 
@@ -100,8 +121,9 @@ for (const file of readdirSync(RAW).filter(f => f.endsWith('.svg')).sort()) {
     if (w !== `stroke-width="${SOURCE_STROKE}"`) throw new Error(`${name}: ${w}`);
   }
 
-  const body = extractBody(raw, name);
-  icons[name] = { ...meta, body };
+  const ink = sourceInkOf(raw, name);
+  const body = extractBody(raw, name, ink);
+  icons[name] = { ...meta, sourceInk: ink, body };
 
   // Optical-centre audit: report masters whose ink is off-centre in the 24 box.
   const box = pathBounds(body);
@@ -137,6 +159,8 @@ export interface Ol8IconEntry {
   readonly figmaNode: string;
   /** Semantic registry controls RTL mirroring (per Iconography documentation). */
   readonly mirrorInRTL: boolean;
+  /** The ink Figma baked into the master, discarded in favour of currentColor. */
+  readonly sourceInk: string | null;
   /** Drawing instructions in the canonical 24-unit source space. */
   readonly body: string;
 }

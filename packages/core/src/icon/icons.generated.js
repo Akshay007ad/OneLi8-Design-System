@@ -10,84 +10,119 @@ export const OL8_ICONS = {
     "category": "action",
     "figmaNode": "418:14",
     "mirrorInRTL": false,
+    "sourceInk": "#151817",
     "body": "<path id=\"glyph-path\" d=\"M12 5V19M5 12H19\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
   },
   "caution": {
     "category": "status",
     "figmaNode": "440:4",
     "mirrorInRTL": false,
+    "sourceInk": "#151817",
     "body": "<path id=\"Status Ring\" d=\"M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path id=\"Caution Stem\" d=\"M12 7V13\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path id=\"Caution Dot\" d=\"M12 17.6C12.5523 17.6 13 17.1523 13 16.6C13 16.0477 12.5523 15.6 12 15.6C11.4477 15.6 11 16.0477 11 16.6C11 17.1523 11.4477 17.6 12 17.6Z\" fill=\"currentColor\"/>"
+  },
+  "check": {
+    "category": "selection",
+    "figmaNode": "391:4",
+    "mirrorInRTL": false,
+    "sourceInk": "#1a2a59",
+    "body": "<path id=\"Check Mark\" d=\"M6.9 12.15L10.2 15.45L17.1 8.55\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
   },
   "chevron-down": {
     "category": "navigation",
     "figmaNode": "521:106",
     "mirrorInRTL": false,
+    "sourceInk": "#151817",
     "body": "<path id=\"glyph-path\" d=\"M5 8.5L12 15.5L19 8.5\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
   },
   "chevron-up": {
     "category": "navigation",
     "figmaNode": "521:108",
     "mirrorInRTL": false,
+    "sourceInk": "#151817",
     "body": "<path id=\"glyph-path\" d=\"M5 15.5L12 8.5L19 15.5\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
   },
   "clear": {
     "category": "action",
     "figmaNode": "557:4",
     "mirrorInRTL": false,
+    "sourceInk": "#151817",
     "body": "<path id=\"glyph-path\" d=\"M3 3L17 17M17 3L3 17\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
   },
   "close": {
     "category": "action",
     "figmaNode": "894:123",
     "mirrorInRTL": false,
+    "sourceInk": "#151817",
     "body": "<path id=\"glyph-path\" d=\"M6 6L18 18M18 6L6 18\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
   },
   "critical": {
     "category": "status",
     "figmaNode": "418:18",
     "mirrorInRTL": false,
+    "sourceInk": "#151817",
     "body": "<path id=\"Status Ring\" d=\"M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path id=\"Critical Mark\" d=\"M9 9L15 15M15 9L9 15\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
   },
   "forward": {
     "category": "navigation",
     "figmaNode": "418:16",
     "mirrorInRTL": true,
+    "sourceInk": "#151817",
     "body": "<path id=\"artwork\" d=\"M3 12H21M15 18L21 12L15 6\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
   },
   "informative": {
     "category": "status",
     "figmaNode": "440:11",
     "mirrorInRTL": false,
+    "sourceInk": "#151817",
     "body": "<path id=\"Status Ring\" d=\"M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path id=\"Information Stem\" d=\"M12 11V16\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path id=\"Information Dot\" d=\"M12 8.6C12.5523 8.6 13 8.15228 13 7.6C13 7.04771 12.5523 6.6 12 6.6C11.4477 6.6 11 7.04771 11 7.6C11 8.15228 11.4477 8.6 12 8.6Z\" fill=\"currentColor\"/>"
   },
   "loading": {
     "category": "status",
     "figmaNode": "440:2",
     "mirrorInRTL": false,
+    "sourceInk": "#151817",
     "body": "<path id=\"glyph-path\" d=\"M12 3C14.0823 2.99817 16.1008 3.71843 17.7116 5.03806C19.3223 6.35769 20.4257 8.19503 20.8336 10.237C21.2415 12.2789 20.9287 14.3992 19.9485 16.2363C18.9684 18.0735 17.3815 19.514 15.4583 20.3123C13.5351 21.1106 11.3946 21.2174 9.40156 20.6143C7.40849 20.0113 5.68619 18.7358 4.52813 17.0053C3.37008 15.2747 2.84794 13.1961 3.05068 11.1237C3.25343 9.05131 4.16851 7.11332 5.64 5.64\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
+  },
+  "mixed": {
+    "category": "selection",
+    "figmaNode": "391:9",
+    "mirrorInRTL": false,
+    "sourceInk": "#151817",
+    "body": "<rect id=\"Mixed Mark\" x=\"7.5\" y=\"11.1\" width=\"9\" height=\"1.8\" rx=\"0.9\" fill=\"currentColor\"/>"
   },
   "positive": {
     "category": "status",
     "figmaNode": "440:8",
     "mirrorInRTL": false,
+    "sourceInk": "#151817",
     "body": "<path id=\"Status Ring\" d=\"M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path id=\"Positive Mark\" d=\"M7.60002 12.2L10.6 15.2L16.6 9.2\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
   },
   "search": {
     "category": "action",
     "figmaNode": "557:2",
     "mirrorInRTL": false,
+    "sourceInk": "#151817",
     "body": "<path id=\"glyph-path\" d=\"M15 15L20 20M10 3C6.134 3 3 6.134 3 10C3 13.866 6.134 17 10 17C13.866 17 17 13.866 17 10C17 6.134 13.866 3 10 3Z\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
+  },
+  "selected-dot": {
+    "category": "selection",
+    "figmaNode": "391:14",
+    "mirrorInRTL": false,
+    "sourceInk": "#e2e9ff",
+    "body": "<circle id=\"Selected Dot\" cx=\"12\" cy=\"12\" r=\"6\" fill=\"currentColor\"/>"
   },
   "visibility-closed": {
     "category": "action",
     "figmaNode": "440:15",
     "mirrorInRTL": false,
+    "sourceInk": "#151817",
     "body": "<path id=\"Closed Lid\" d=\"M4.5 10.5C6.75 13.5 9.25 15 12 15C14.75 15 17.25 13.5 19.5 10.5\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path id=\"Lashes\" d=\"M6.75 13.05L5.4 15M9.75 14.55L9.3 16.8M14.25 14.55L14.7 16.8M17.25 13.05L18.6 15\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
   },
   "visibility-open": {
     "category": "action",
     "figmaNode": "418:21",
     "mirrorInRTL": false,
+    "sourceInk": "#151817",
     "body": "<path id=\"Eye Contour\" d=\"M3 12C5.25 8.25 8.25 6.375 12 6.375C15.75 6.375 18.75 8.25 21 12C18.75 15.75 15.75 17.625 12 17.625C8.25 17.625 5.25 15.75 3 12Z\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path id=\"Pupil\" d=\"M12 14.625C13.4497 14.625 14.625 13.4497 14.625 12C14.625 10.5503 13.4497 9.375 12 9.375C10.5503 9.375 9.375 10.5503 9.375 12C9.375 13.4497 10.5503 14.625 12 14.625Z\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
   }
 };
