@@ -1084,6 +1084,111 @@
         "semantics": "FIELDSET + legend; radios share a name; invalid message has role=alert; aria-describedby wires instruction and message",
         "notExercised": "native arrow-key roving focus is browser behaviour and was not driven with real key events"
       }
+    },
+    "ol8-option": {
+      "tier": "molecule",
+      "figma": {
+        "page": "Select and Combobox (1034:12628)",
+        "section": "01 \u00b7 Atomic Selection Building Blocks (570:123)",
+        "set": "570:122",
+        "componentCount": 8,
+        "description": "Label, optional supporting Description, optional Leading Icon from the canonical Icon Frame pool, Selected state, active preview, and disabled behavior map directly to code. Description is associated through aria-describedby and remains outside the option accessible name. Selection Popup composes this owner; keyboard focus remains on the Combobox input through aria-activedescendant."
+      },
+      "code": {
+        "package": "@oneli8/core",
+        "entry": "packages/core/src/molecules/selection-option/selection-option.js",
+        "styles": "packages/core/src/molecules/selection-option/selection-option.css",
+        "baseClass": "ol8-option"
+      },
+      "composes": [
+        "ol8-icon (atom)"
+      ],
+      "footprint": {
+        "element": "li",
+        "role": "option",
+        "note": "Named by its LABEL only via aria-labelledby; the description is referenced with aria-describedby and never nested into the name."
+      },
+      "sizeMatrix": {
+        "standard": {
+          "minHeight": "48px",
+          "insetInline": "12px",
+          "paddingBlock": "12px"
+        },
+        "large": {
+          "minHeight": "60px",
+          "insetInline": "15px",
+          "paddingBlock": "18px"
+        },
+        "rule": "padding-block = (minimum - 24px label line-height) / 2. The content box stays 24px in both sizes; padding absorbs the difference."
+      },
+      "variants": {
+        "Size": {
+          "strategy": "data",
+          "emitAs": {
+            "data-ol8-size": "standard|large"
+          }
+        },
+        "Selection": {
+          "strategy": "aria",
+          "emitAs": {
+            "aria-selected": "true|false"
+          },
+          "note": "Also paints the trailing check. The slot is reserved at 18px whether selected or not, so the label column never shifts."
+        },
+        "Active": {
+          "strategy": "data",
+          "emitAs": {
+            "data-ol8-active": "true"
+          },
+          "note": "The aria-activedescendant CURSOR \u2014 distinct from selected (data) and :hover (pointer), though all three paint the same wash."
+        },
+        "Availability": {
+          "strategy": "aria",
+          "emitAs": {
+            "aria-disabled": "true"
+          },
+          "note": "`disabled` is not valid on <li>; unavailability must be aria-disabled."
+        }
+      },
+      "a11y": {
+        "invariants": [
+          "The option is NEVER focusable \u2014 no tabindex. A listbox moves a virtual cursor with aria-activedescendant while real focus stays on the combobox input.",
+          "Accessible name is the label alone; the description is referenced, not nested.",
+          "Only one option carries data-ol8-active at a time."
+        ]
+      },
+      "forbid": [
+        {
+          "pattern": "tabindex",
+          "reason": "Options are never focusable; focus stays on the combobox input."
+        },
+        {
+          "pattern": "<li[^>]*disabled",
+          "reason": "`disabled` is not valid on <li>. Use aria-disabled."
+        },
+        {
+          "pattern": "<button[^>]*ol8-option",
+          "reason": "An option is a listbox item, not a button."
+        }
+      ],
+      "verification": {
+        "geometry": "standard 48/12/12 and large 60/15/18 \u2014 exact",
+        "trailingSlot": "18px reserved in both selected and unselected states",
+        "accessibleName": "aria-labelledby resolves to the label; description reachable only through aria-describedby and not contained in the name element",
+        "activedescendant": "driving ArrowDown/ArrowUp/Enter kept document.activeElement on the input throughout, moved aria-activedescendant one step at a time, never left more than one option active, and Enter moved selection with the check mark following"
+      }
+    }
+  },
+  "pending": {
+    "Select and Combobox": {
+      "page": "1034:12628",
+      "remaining": {
+        "02 Selection Popup (organism)": "574:534, 6 variants \u2014 Width Content|Anchor|Wide x Size Standard|Large",
+        "03 Select Trigger": "583:338, 24 variants \u2014 Size x Appearance Outline|Filled x Condition",
+        "04 Choice Chip Foundation": "612:657 \u2014 Soft Hexagon 636:847 and Neutral 983:6552",
+        "05 Mobbin-informed Compositions": "603:281 (documentation)",
+        "06 Canonical Public Owners": "875:1399 (documentation)"
+      }
     }
   }
 }

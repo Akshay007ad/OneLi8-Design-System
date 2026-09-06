@@ -375,6 +375,10 @@
   --ol8-component-choice-gap-compact: 6px;
   --ol8-component-choice-gap-standard: 9px;
   --ol8-component-choice-rowminimum: 48px;
+  --ol8-component-selectionoption-inset-standard: 12px;
+  --ol8-component-selectionoption-inset-large: 15px;
+  --ol8-component-selectionoption-minimum-standard: 48px;
+  --ol8-component-selectionoption-minimum-large: 60px;
   --ol8-focus-ring-innerwidth: 3px;
   --ol8-focus-ring-outerwidth: 6px;
   --ol8-size-icon-small: 18px;

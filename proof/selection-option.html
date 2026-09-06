@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Oneli8 · Selection Option proof</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=AR+One+Sans:wght@400..700&display=swap">
+<link rel="stylesheet" href="../packages/tokens/dist/tokens.css">
+<link rel="stylesheet" href="../packages/core/src/atoms/icon/icon.css">
+<link rel="stylesheet" href="../packages/core/src/molecules/selection-option/selection-option.css">
+<style>
+  body { margin:0; padding:36px; background:var(--ol8-color-background-canvas);
+         color:var(--ol8-color-text-primary); font-family:var(--ol8-font-family-functional); }
+  h2 { margin:28px 0 8px; font-size:15px; }
+  ul { list-style:none; margin:0; padding:0; width:360px; }
+  .grid { display:flex; gap:48px; flex-wrap:wrap; align-items:flex-start; }
+  .hd { font-size:10px; text-transform:uppercase; letter-spacing:.06em;
+        color:var(--ol8-color-text-muted); margin:0 0 4px; }
+  input { width:360px; box-sizing:border-box; padding:9px 12px; font:inherit;
+          border:2px solid var(--ol8-color-border-default); border-radius:9px;
+          background:var(--ol8-color-surface-default); color:inherit; }
+</style>
+</head>
+<body>
+<h2>Building Blocks / Selection Option</h2>
+<div class="grid" id="grid"></div>
+
+<h2>Live listbox · focus stays on the input, cursor moves via aria-activedescendant</h2>
+<input id="combo" role="combobox" aria-expanded="true" aria-controls="lb" aria-autocomplete="list" placeholder="Focus me, then press Down / Up / Enter">
+<ul id="lb" role="listbox" aria-label="Fruit"></ul>
+
+<script type="module">
+import { renderSelectionOption, setOptionSelected, setActiveOption } from '../packages/core/src/molecules/selection-option/selection-option.js';
+
+grid.innerHTML = ['standard','large'].map(size=>`
+  <div><p class="hd">${size}</p><ul data-size="${size}">
+    ${renderSelectionOption('Option label',{size,id:`${size}-a`})}
+    ${renderSelectionOption('Option label',{size,selected:true,id:`${size}-b`})}
+    ${renderSelectionOption('Option label',{size,description:'Optional supporting description',id:`${size}-c`})}
+    ${renderSelectionOption('Option label',{size,leadingIcon:'add',id:`${size}-d`})}
+    ${renderSelectionOption('Option label',{size,disabled:true,id:`${size}-e`})}
+    ${renderSelectionOption('Option label',{size,active:true,id:`${size}-f`})}
+  </ul></div>`).join('');
+
+const fruit=['Apricot','Blackcurrant','Clementine','Damson','Elderberry'];
+lb.innerHTML = fruit.map((f,i)=>renderSelectionOption(f,{value:f,id:`lb-${i}`,selected:i===1})).join('');
+const opts=[...lb.querySelectorAll('.ol8-option')];
+let cursor=-1;
+combo.addEventListener('keydown', e=>{
+  if(e.key==='ArrowDown'||e.key==='ArrowUp'){
+    e.preventDefault();
+    cursor = e.key==='ArrowDown' ? Math.min(cursor+1,opts.length-1) : Math.max(cursor-1,0);
+    setActiveOption(lb,opts[cursor],combo);
+  } else if(e.key==='Enter' && cursor>=0){
+    e.preventDefault();
+    opts.forEach(o=>setOptionSelected(o,false));
+    setOptionSelected(opts[cursor],true);
+  }
+});
+</script>
+</body></html>

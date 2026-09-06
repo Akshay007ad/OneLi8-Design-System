@@ -1,0 +1,121 @@
+/**
+ * Oneli8 · Selection Option (MOLECULE)
+ * Figma: Select and Combobox -> 01 · Atomic Selection Building Blocks
+ *        Building Blocks / Selection Option 570:122 (8 variants)
+ *        Size Standard|Large x Selection x Availability
+ *
+ * From the Figma description (570:122):
+ *   "Description is associated through aria-describedby and REMAINS OUTSIDE
+ *    the option accessible name. Selection Popup composes this owner;
+ *    KEYBOARD FOCUS REMAINS ON THE COMBOBOX INPUT through
+ *    aria-activedescendant."
+ *
+ * Two consequences that shape everything here:
+ *   - the option is never focusable and carries no tabindex
+ *   - "active" (the aria-activedescendant highlight) is a DIFFERENT thing from
+ *     :hover and from selected, so it gets its own attribute
+ *
+ * Row geometry: 48px (Standard) / 60px (Large) minimum, but the content box
+ * stays 24px tall in both — the padding absorbs the difference.
+ *   padding-block = (minimum - 24) / 2  ->  12px and 18px
+ */
+
+.ol8-option {
+  --_min:   var(--ol8-component-selectionoption-minimum-standard);
+  --_inset: var(--ol8-component-selectionoption-inset-standard);
+
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  min-block-size: var(--_min);
+  font-family: var(--ol8-font-family-functional);
+  font-variation-settings: var(--ol8-font-variation-functional);
+  list-style: none;
+  cursor: pointer;
+}
+.ol8-option[data-ol8-size="large"] {
+  --_min:   var(--ol8-component-selectionoption-minimum-large);
+  --_inset: var(--ol8-component-selectionoption-inset-large);
+}
+.ol8-option[aria-disabled="true"] { cursor: not-allowed; }
+
+/* The surface carries every wash and the focus ring; the row itself stays
+   clean so a popup can lay options out without fighting them. */
+.ol8-option__surface {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--ol8-component-choice-gap-standard);
+  flex: 1 0 0;
+  min-inline-size: 0;
+  block-size: 100%;
+  padding-inline: var(--_inset);
+  padding-block: calc((var(--_min) - var(--ol8-font-line-024)) / 2);
+  border-radius: var(--ol8-shape-radius-medium);
+  overflow: clip;
+}
+
+/* Selected, hover and active all paint the same wash. Selected is a state of
+   the data; active is the aria-activedescendant cursor; hover is the pointer.
+   They coincide visually by design. */
+.ol8-option[aria-selected="true"] > .ol8-option__surface,
+.ol8-option[data-ol8-active="true"] > .ol8-option__surface,
+.ol8-option:hover:not([aria-disabled="true"]) > .ol8-option__surface {
+  background: var(--ol8-color-selection-surface);
+}
+.ol8-option:active:not([aria-disabled="true"]) > .ol8-option__surface {
+  background: var(--ol8-color-selection-surface);
+  opacity: 0.84;
+}
+
+/* Focus lives on the combobox input, never here — but the option still shows
+   the active ring when a popup marks it, so the two-tone ring is reproduced. */
+.ol8-option[data-ol8-focus-ring="true"] > .ol8-option__surface {
+  border: var(--ol8-focus-ring-outerwidth) solid var(--ol8-color-focus-outer);
+}
+.ol8-option[data-ol8-focus-ring="true"] > .ol8-option__surface::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border: var(--ol8-focus-ring-innerwidth) solid var(--ol8-color-focus-inner);
+  border-radius: 7px;
+  pointer-events: none;
+}
+
+.ol8-option__text {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 0;
+  min-inline-size: 0;
+}
+.ol8-option__label {
+  font-size: var(--ol8-font-size-016);
+  line-height: var(--ol8-font-line-024);
+  font-weight: var(--ol8-font-weight-regular);
+  color: var(--ol8-color-text-primary);
+  overflow-wrap: break-word;
+}
+.ol8-option__description {
+  font-size: var(--ol8-font-size-012);
+  line-height: var(--ol8-font-line-018);
+  letter-spacing: 0.12px;
+  color: var(--ol8-color-text-secondary);
+  overflow-wrap: break-word;
+}
+.ol8-option[aria-disabled="true"] .ol8-option__label,
+.ol8-option[aria-disabled="true"] .ol8-option__description {
+  color: var(--ol8-color-text-disabled);
+}
+
+/* The trailing slot is ALWAYS reserved, selected or not, so the label column
+   never shifts when selection changes. Figma keeps an empty 18px node there. */
+.ol8-option__check {
+  flex: none;
+  inline-size: var(--ol8-size-icon-small);
+  block-size: var(--ol8-size-icon-small);
+  color: var(--ol8-color-selection-content);
+}
+.ol8-option__check > svg { display: block; inline-size: 100%; block-size: 100%; }
+
+.ol8-option .ol8-icon { --_ol8-icon-size: var(--ol8-size-icon-small); }
