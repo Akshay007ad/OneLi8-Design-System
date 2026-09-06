@@ -122,6 +122,18 @@ Disabled keeps dark ink — its surface is light — and still passes at 4.86:1.
 To restore the Figma-exact behaviour, drop the `--_ink` declarations from
 `.ol8-icon-btn--primary` and `.ol8-icon-btn--destructive`.
 
+### Icon Button focus ring — occluded inner band
+
+Figma emits `0 0 0 6px focus-outer, 0 0 0 3px focus-inner`. `box-shadow`
+paints the first layer on top, so the 6px dark spread completely covers the
+3px light one and only a flat dark band renders — confirmed by sampling the
+Figma export, which is uniform `#101b3a` at every perimeter position and at
+both 2px and 4px depth.
+
+The declaration order is reversed here, so both bands show: light from the
+edge to 3px, dark from 3px to 6px — the ring the two tokens describe. Swap
+the two lines back for the Figma-exact single band.
+
 ## Known Figma-source issues
 
 Reproduced faithfully, **not** silently corrected:
@@ -133,11 +145,6 @@ Reproduced faithfully, **not** silently corrected:
 - `Icon / Action / Visibility Closed` (440:15) — ink centre y = 13.65. Likely
   intentional (a closed lid sits low), flagged for confirmation.
 
-- **Icon Button focus ring: the inner band never shows.** Figma emits
-  `0 0 0 6px focus-outer, 0 0 0 3px focus-inner`; the 6px dark spread is
-  declared first and paints over the 3px light one, so only the dark band
-  renders. Swapping the declaration order yields the two-tone ring the tokens
-  describe.
 - **Large artwork: docs say 36px, components use 24px.** The Iconography note
   (85:9) states artwork 18/18/24/36, but the built Large components measure a
   24px glyph and no `artwork-large` variable exists. Built components win.

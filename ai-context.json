@@ -484,7 +484,7 @@
           "values": {
             "Hover": ":hover",
             "Pressed": ":active / [aria-pressed] plus a 3px inset scrim",
-            "Focus": ":focus-visible, OUTSIDE ring (contrast with ol8-btn's inside stroke)",
+            "Focus": ":focus-visible, OUTSIDE two-tone ring: inner --ol8-color-focus-inner at 3px declared FIRST, outer --ol8-color-focus-outer at 6px second, so both bands paint. Figma declares them the other way round, which occludes the inner band.",
             "Disabled": "[disabled]",
             "Loading": "[data-ol8-loading] \u2014 paints with the HOVER colors in Figma, not the default ones"
           }
@@ -525,6 +525,13 @@
           "figma": "glyph bound to --ol8-color-icon-primary for all families",
           "here": "glyph bound to --ol8-color-action<family>-content on Primary and Destructive",
           "reason": "WCAG 1.4.11 \u2014 1.94:1 and 2.17:1 measured against a 3:1 minimum",
+          "commit": "see git history"
+        },
+        {
+          "id": "focus-ring-order",
+          "figma": "0 0 0 6px focus-outer, 0 0 0 3px focus-inner \u2014 dark paints over light, only one band renders",
+          "here": "inner declared first so both bands render",
+          "reason": "the two focus colour tokens describe a two-tone ring; the source order makes one of them dead",
           "commit": "see git history"
         }
       ]

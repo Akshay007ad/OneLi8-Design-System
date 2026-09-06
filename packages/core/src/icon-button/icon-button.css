@@ -191,14 +191,21 @@
 
 /* ---- Focus -----------------------------------------------------------
    OUTSIDE two-tone ring, unlike the labelled Button's inside stroke.
-   Shadow order is Figma's own: the 6px outer is declared first and therefore
-   paints over the 3px inner, which is why only the dark band is visible in
-   the design. See README — the inner ring is currently occluded. */
+
+   Figma declares the 6px outer shadow FIRST, and box-shadow paints the first
+   shadow on top — so the 6px dark spread completely covers the 3px light one
+   and only a flat dark band renders. Sampling the Figma export confirms it:
+   uniform #101b3a at every perimeter position and at both 2px and 4px depth.
+
+   The inner band is declared here first so both are visible: light from the
+   edge out to 3px, dark from 3px to 6px. That is the ring the two tokens
+   describe. To restore the Figma-exact single-band ring, swap these two
+   lines back. */
 .ol8-icon-btn:focus-visible { outline: none; }
 .ol8-icon-btn:focus-visible > .ol8-icon-btn__surface {
   box-shadow:
-    0 0 0 var(--ol8-focus-ring-outerwidth) var(--ol8-color-focus-outer),
-    0 0 0 var(--ol8-focus-ring-innerwidth) var(--ol8-color-focus-inner);
+    0 0 0 var(--ol8-focus-ring-innerwidth) var(--ol8-color-focus-inner),
+    0 0 0 var(--ol8-focus-ring-outerwidth) var(--ol8-color-focus-outer);
 }
 
 /* ---- Disabled / Loading ---------------------------------------------- */
