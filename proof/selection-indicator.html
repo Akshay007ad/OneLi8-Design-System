@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Oneli8 · Selection Indicator proof</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=AR+One+Sans:wght@400..700&display=swap">
+<link rel="stylesheet" href="../packages/tokens/dist/tokens.css">
+<link rel="stylesheet" href="../packages/core/src/atoms/icon/icon.css">
+<link rel="stylesheet" href="../packages/core/src/atoms/selection-indicator/selection-indicator.css">
+<style>
+  body { margin:0; padding:36px; background:var(--ol8-color-background-canvas);
+         color:var(--ol8-color-text-primary); font-family:var(--ol8-font-family-functional); }
+  h2 { margin:30px 0 10px; font-size:15px; }
+  .row { display:flex; gap:24px; flex-wrap:wrap; align-items:center; margin-bottom:12px; }
+  .cell { display:flex; flex-direction:column; align-items:center; gap:6px; font-size:10px;
+          color:var(--ol8-color-text-muted); }
+</style>
+</head>
+<body><div id="out"></div>
+<script type="module">
+import { renderSelectionIndicator, OL8_SELECTION_STATES } from '../packages/core/src/atoms/selection-indicator/selection-indicator.js';
+const html=[];
+for (const kind of ['checkbox','radio','switch']) {
+  html.push(`<h2>Icon / Selection / ${kind[0].toUpperCase()+kind.slice(1)}</h2>`);
+  for (const size of ['compact','comfortable']) {
+    html.push('<div class="row">');
+    for (const disabled of [false,true])
+      for (const selection of OL8_SELECTION_STATES[kind])
+        html.push(`<span class="cell" data-kind="${kind}" data-size="${size}" data-sel="${selection}" data-dis="${disabled}">
+          ${renderSelectionIndicator(kind,{selection,size,disabled})}
+          <span>${size.slice(0,4)} · ${selection}${disabled?' · dis':''}</span></span>`);
+    html.push('</div>');
+  }
+}
+out.innerHTML = html.join('');
+</script>
+</body></html>

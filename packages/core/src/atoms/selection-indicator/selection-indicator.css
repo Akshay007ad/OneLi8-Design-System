@@ -1,0 +1,140 @@
+/**
+ * Oneli8 · Selection Indicator (ATOM)
+ * Figma: Documentation / Choice Controls (246:3)
+ *   Icon / Selection / Checkbox  365:2417  (12 variants)
+ *   Icon / Selection / Radio     366:2371  (8)
+ *   Icon / Selection / Switch    824:1304  (8)
+ *
+ * Figma names the tier itself — "Documentation / Atom / Selection Indicator" —
+ * and points at packages/react/src/atoms/SelectionIndicator.js (kind=switch),
+ * so all three kinds are one atom parameterised by kind, not three components.
+ *
+ * It composes no other component: the marks are drawn from native elements and
+ * one inline path, which is what keeps this an atom rather than a molecule.
+ *
+ * PURELY PRESENTATIONAL. It carries no role and no state of its own — the
+ * native <input> inside Choice Item owns semantics. Always aria-hidden.
+ *
+ * Axes are Figma's: Selection and Availability.
+ */
+
+.ol8-selection {
+  --_box:      var(--ol8-size-icon-small);          /* 18px compact */
+  --_radius:   var(--ol8-component-checkbox-radius-compact);
+  --_dot:      var(--ol8-component-radio-dot-compact);
+  --_track-w:  var(--ol8-component-switch-trackwidth-compact);
+  --_track-h:  var(--ol8-component-switch-trackheight-compact);
+  --_thumb:    var(--ol8-component-switch-thumb-compact);
+
+  --_surface: transparent;
+  --_edge:    var(--ol8-color-border-strong);
+  --_ink:     var(--ol8-color-selection-content);
+
+  box-sizing: border-box;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  inline-size: var(--_box);
+  block-size: var(--_box);
+  background: var(--_surface);
+  color: var(--_ink);
+}
+
+.ol8-selection[data-ol8-size="comfortable"] {
+  --_box:     var(--ol8-size-icon-standard);        /* 24px */
+  --_radius:  var(--ol8-component-checkbox-radius-comfortable);
+  --_dot:     var(--ol8-component-radio-dot-comfortable);
+  --_track-w: var(--ol8-component-switch-trackwidth-comfortable);
+  --_track-h: var(--ol8-component-switch-trackheight-comfortable);
+  --_thumb:   var(--ol8-component-switch-thumb-comfortable);
+}
+
+/* ---- Checkbox -------------------------------------------------------- */
+.ol8-selection--checkbox {
+  border: var(--ol8-component-checkbox-boundary) solid var(--_edge);
+  border-radius: var(--_radius);
+}
+/* Filled states drop the boundary entirely so the mark occupies the whole
+   box, exactly as Figma draws it (glyph at 0,0 at full box size). */
+.ol8-selection--checkbox[data-ol8-selection="checked"],
+.ol8-selection--checkbox[data-ol8-selection="mixed"] {
+  border-width: 0;
+  --_surface: var(--ol8-color-selection-surface);
+}
+.ol8-selection--checkbox[data-ol8-availability="disabled"] { --_edge: var(--ol8-color-border-disabled); }
+.ol8-selection--checkbox[data-ol8-availability="disabled"][data-ol8-selection="checked"],
+.ol8-selection--checkbox[data-ol8-availability="disabled"][data-ol8-selection="mixed"] {
+  --_surface: var(--ol8-color-surface-disabled);
+  --_ink: var(--ol8-color-icon-disabled);
+}
+
+/* The check glyph scales geometrically with the box (18px master is an exact
+   0.75x of the 24px one), so a single 24-unit path serves both sizes. */
+.ol8-selection--checkbox > .ol8-selection__mark > svg {
+  display: block;
+  inline-size: var(--_box);
+  block-size: var(--_box);
+}
+
+/* The Mixed bar does NOT scale. Both the 18px and 24px masters carry the same
+   9 x 1.8px bar — an approved optical exception — so it is a fixed-size rule
+   here rather than a scaled glyph. */
+.ol8-selection--checkbox[data-ol8-selection="mixed"] > .ol8-selection__mark {
+  inline-size: var(--ol8-component-choice-mixed-bar-width);
+  block-size: var(--ol8-component-choice-mixed-bar-height);
+  border-radius: calc(var(--ol8-component-choice-mixed-bar-height) / 2);
+  background: currentColor;
+}
+
+/* ---- Radio ----------------------------------------------------------- */
+.ol8-selection--radio {
+  border: var(--ol8-component-radio-boundary) solid var(--_edge);
+  border-radius: var(--ol8-shape-radius-full);
+}
+.ol8-selection--radio[data-ol8-selection="selected"] {
+  --_edge: var(--ol8-color-selection-surface);
+  --_ink:  var(--ol8-color-selection-surface);
+}
+.ol8-selection--radio[data-ol8-availability="disabled"] { --_edge: var(--ol8-color-border-disabled); }
+.ol8-selection--radio[data-ol8-availability="disabled"][data-ol8-selection="selected"] {
+  --_ink: var(--ol8-color-icon-disabled);
+}
+.ol8-selection--radio > .ol8-selection__mark {
+  inline-size: var(--_dot);
+  block-size: var(--_dot);
+  border-radius: var(--ol8-shape-radius-full);
+  background: currentColor;
+}
+
+/* ---- Switch ---------------------------------------------------------- */
+.ol8-selection--switch {
+  inline-size: var(--_track-w);
+  block-size: var(--_track-h);
+  border-radius: var(--ol8-shape-radius-full);
+  --_surface: var(--ol8-color-surface-sunken);
+  justify-content: flex-start;
+}
+.ol8-selection--switch[data-ol8-selection="on"] { --_surface: var(--ol8-color-selection-surface); }
+.ol8-selection--switch[data-ol8-availability="disabled"] { --_surface: var(--ol8-color-surface-disabled); }
+
+.ol8-selection--switch > .ol8-selection__mark {
+  position: absolute;
+  inset-block-start: var(--ol8-component-switch-inset);
+  inset-inline-start: var(--ol8-component-switch-inset);
+  inline-size: var(--_thumb);
+  block-size: var(--_thumb);
+  border-radius: var(--ol8-shape-radius-full);
+  background: var(--ol8-color-control-thumb);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.ol8-selection--switch[data-ol8-selection="on"] > .ol8-selection__mark {
+  inset-inline-start: calc(var(--_track-w) - var(--_thumb) - var(--ol8-component-switch-inset));
+}
+/* Optional artwork inside the thumb: 9px compact, 12px comfortable. */
+.ol8-selection--switch .ol8-icon { --_ol8-icon-size: var(--ol8-size-icon-micro); }
+.ol8-selection--switch[data-ol8-size="comfortable"] .ol8-icon { --_ol8-icon-size: var(--ol8-size-icon-compact); }

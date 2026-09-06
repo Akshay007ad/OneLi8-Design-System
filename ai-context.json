@@ -159,17 +159,24 @@
     }
   },
   "pending": {
-    "Icon / Selection / Checkbox": {
-      "node": "365:2417",
-      "components": 12,
-      "axes": "Size(Compact|Comfortable) x Selection(Unchecked|Checked|Mixed) x Availability(Enabled|Disabled)",
-      "note": "A stateful icon component set, not a plain glyph. Belongs with a Checkbox control atom; it composes the check and mixed glyphs."
+    "Choice Item": {
+      "tier": "molecule",
+      "nodes": {
+        "checkbox": "252:301",
+        "radio": "331:1309",
+        "switch": "825:1591"
+      },
+      "componentCount": 56,
+      "note": "Consumes ol8-selection; adds the native input, label, 48px target and validation."
     },
-    "Icon / Selection / Radio": {
-      "node": "366:2371",
-      "components": 8,
-      "axes": "Size(Compact|Comfortable) x Selection(Unselected|Selected) x Availability(Enabled|Disabled)",
-      "note": "Composes the selected-dot glyph. Belongs with a Radio control atom."
+    "Choice Group": {
+      "tier": "organism",
+      "nodes": {
+        "checkbox": "273:603",
+        "radio": "859:5180"
+      },
+      "componentCount": 7,
+      "note": "Checkbox group Aggregate=None|Some|All (indeterminate parent); Radio group Behavior=Safe Default|No Default|Horizontal|Invalid."
     }
   },
   "architecture": {
@@ -745,6 +752,113 @@
           "commit": "see git history"
         }
       ]
+    },
+    "ol8-selection": {
+      "tier": "atom",
+      "figma": {
+        "page": "Choice Controls (246:3)",
+        "sets": {
+          "checkbox": "365:2417",
+          "radio": "366:2371",
+          "switch": "824:1304"
+        },
+        "componentCount": 28,
+        "note": "Figma labels the tier itself: 'Documentation / Atom / Selection Indicator'. Its React hint names packages/react/src/atoms/SelectionIndicator.js (kind=switch), so all three kinds are ONE atom parameterised by kind."
+      },
+      "code": {
+        "package": "@oneli8/core",
+        "entry": "packages/core/src/atoms/selection-indicator/selection-indicator.js",
+        "styles": "packages/core/src/atoms/selection-indicator/selection-indicator.css",
+        "baseClass": "ol8-selection"
+      },
+      "footprint": {
+        "element": "span",
+        "alwaysAriaHidden": true,
+        "note": "Purely presentational. Carries no role, no state, no focus \u2014 the native <input> in Choice Item owns all of that."
+      },
+      "variants": {
+        "Kind": {
+          "strategy": "class",
+          "values": [
+            "checkbox",
+            "radio",
+            "switch"
+          ]
+        },
+        "Size": {
+          "strategy": "data",
+          "emitAs": {
+            "data-ol8-size": "compact|comfortable"
+          },
+          "default": "compact",
+          "values": {
+            "compact": {
+              "box": "18px",
+              "radius": "3px",
+              "dot": "9px",
+              "track": "36x18",
+              "thumb": "12px"
+            },
+            "comfortable": {
+              "box": "24px",
+              "radius": "6px",
+              "dot": "12px",
+              "track": "48x24",
+              "thumb": "18px"
+            }
+          }
+        },
+        "Selection": {
+          "strategy": "data",
+          "emitAs": {
+            "data-ol8-selection": "<state>"
+          },
+          "byKind": {
+            "checkbox": [
+              "unchecked",
+              "checked",
+              "mixed"
+            ],
+            "radio": [
+              "unselected",
+              "selected"
+            ],
+            "switch": [
+              "off",
+              "on"
+            ]
+          }
+        },
+        "Availability": {
+          "strategy": "data",
+          "emitAs": {
+            "data-ol8-availability": "enabled|disabled"
+          }
+        }
+      },
+      "opticalExceptions": [
+        "The Mixed bar is a CONSTANT 9x1.8px in BOTH the 18px and 24px masters \u2014 it does not scale with the box. Verified: 9 x 1.796875 measured at both sizes.",
+        "The check glyph and the radio dot DO scale geometrically (dot 9 -> 12; check is one 24-unit path sized to the box)."
+      ],
+      "forbid": [
+        {
+          "pattern": "role=\"checkbox\"|role=\"radio\"|role=\"switch\"",
+          "reason": "The indicator is decorative. Semantics belong to the native input in Choice Item."
+        },
+        {
+          "pattern": "ol8-selection[^>]*tabindex",
+          "reason": "The indicator is never focusable."
+        }
+      ],
+      "verification": {
+        "geometry": "checkbox/radio 18 & 24; switch 36x18 & 48x24; thumb offsets 3->21 and 3->27; dot 9 & 12 \u2014 all exact",
+        "mixedBar": "9 x 1.8 at both sizes, constant as designed",
+        "contrast": {
+          "checkboxCheckedGlyphOnFill": 11.41,
+          "radioSelectedRingOnCanvas": 1.16,
+          "note": "The radio's selected ring and dot both bind --ol8-color-selection-surface. 'surface' is the MATERIAL layer (regular or gem), so this reads as intended on a gem/dark backdrop. On the regular light canvas (#fcfaf3) the ring measures 1.16:1. Reproduced as designed; flagged for the light-material case only."
+        }
+      }
     }
   }
 }
