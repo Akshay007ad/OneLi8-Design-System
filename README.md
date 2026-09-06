@@ -122,6 +122,28 @@ Disabled keeps dark ink — its surface is light — and still passes at 4.86:1.
 To restore the Figma-exact behaviour, drop the `--_ink` declarations from
 `.ol8-icon-btn--primary` and `.ol8-icon-btn--destructive`.
 
+### Button loading + leading icon — ambiguous source, now explicit
+
+Figma's codegen emits **both** the leading icon and the spinner while loading.
+The measured Loading widths (101/107/122/134 = default + spinner + gap) come
+from variants that carry no leading icon, so they cannot settle it.
+
+The default here is that the spinner **takes** the leading slot: one leading
+glyph, predictable width. Figma's literal reading is one flag away:
+
+```js
+renderButton('Saving', { leadingIcon: 'add', loading: true,
+                         keepLeadingIconWhileLoading: true });
+```
+
+```html
+<button class="ol8-btn ol8-btn--primary"
+        data-ol8-loading="true" data-ol8-loading-keep-icon="true"> … </button>
+```
+
+`hydrateButtons` honours the same attribute. Icon Button is unaffected — it
+has a single glyph slot, so the spinner always replaces it.
+
 ### Icon Button focus ring — occluded inner band
 
 Figma emits `0 0 0 6px focus-outer, 0 0 0 3px focus-inner`. `box-shadow`

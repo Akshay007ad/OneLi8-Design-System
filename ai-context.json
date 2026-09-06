@@ -328,7 +328,7 @@
                   }
                 }
               },
-              "note": "Spinner occupies the leading slot. Rotation is opt-in and guarded by prefers-reduced-motion: Figma 379:7 says Reduced Motion keeps the static busy mark."
+              "note": "Spinner occupies the leading slot by default; a leading icon is suppressed so the button never shows two competing leading glyphs. Figma's codegen emits both \u2014 pass keepLeadingIconWhileLoading (or data-ol8-loading-keep-icon=\"true\") for that literal reading. Rotation is opt-in and guarded by prefers-reduced-motion: Figma 379:7 says Reduced Motion keeps the static busy mark."
             }
           }
         }
@@ -396,7 +396,17 @@
         "heights": "36/42/48/60 exact at all four sizes",
         "widths": "constant -0.67px vs Figma's stored integer widths \u2014 Figma rounds its hug width up (label advance 52.33 -> 53); padding, gap and icon geometry are exact",
         "focusRing": "keyboard focus produces inset 0 0 0 3px rgb(16,27,58) with unchanged box"
-      }
+      },
+      "deviations": [
+        {
+          "id": "loading-leading-icon",
+          "figma": "codegen emits the leading icon AND the spinner",
+          "here": "spinner takes the leading slot by default; opt in to both with keepLeadingIconWhileLoading / data-ol8-loading-keep-icon",
+          "reason": "the source is ambiguous \u2014 the measured Loading widths come from variants with no leading icon, so they do not disambiguate. Default avoids two competing leading glyphs and keeps width predictable.",
+          "reversible": true,
+          "commit": "see git history"
+        }
+      ]
     },
     "ol8-icon-btn": {
       "figma": {

@@ -29,6 +29,7 @@ export function renderButton(label, options = {}) {
     variant = 'primary', size = 'standard', leadingIcon, trailingIcon,
     disabled = false, loading = false, pressed, fullWidth = false,
     href, type = 'button', className, material = 'regular',
+    keepLeadingIconWhileLoading = false,
   } = options;
 
   if (!OL8_BUTTON_VARIANTS.includes(variant)) throw new Error(`[ol8] unknown button variant "${variant}"`);
@@ -52,13 +53,22 @@ export function renderButton(label, options = {}) {
     pressed !== undefined ? `aria-pressed="${pressed}"` : '',
     fullWidth ? 'data-ol8-fullwidth="true"' : '',
     material === 'gem' ? 'data-ol8-material="gem"' : '',
+    loading && keepLeadingIconWhileLoading ? 'data-ol8-loading-keep-icon="true"' : '',
   ].filter(Boolean).join(' ');
 
-  // While loading the spinner occupies the leading slot; a leading icon is
-  // suppressed so the button never shows two competing leading glyphs.
+  // Loading + leading icon is genuinely ambiguous in the source. Figma's
+  // codegen emits BOTH the leading icon and the spinner, but the measured
+  // Loading widths (101/107/122/134 = default + spinner + gap) come from
+  // variants that carry no leading icon, so they do not disambiguate.
+  //
+  // Default here: the spinner TAKES the leading slot, so the button never
+  // shows two competing leading glyphs and its width stays predictable.
+  // Pass keepLeadingIconWhileLoading to get Figma's literal reading.
+  const spinner = `<span class="ol8-btn__spinner ol8-icon" aria-hidden="true">${renderIconSvg('loading')}</span>`;
+  const leadingGlyph = leadingIcon ? renderIcon(leadingIcon, { size: iconSize }) : '';
   const leading = loading
-    ? `<span class="ol8-btn__spinner ol8-icon" aria-hidden="true">${renderIconSvg('loading')}</span>`
-    : leadingIcon ? renderIcon(leadingIcon, { size: iconSize }) : '';
+    ? (keepLeadingIconWhileLoading ? leadingGlyph + spinner : spinner)
+    : leadingGlyph;
   const trailing = trailingIcon ? renderIcon(trailingIcon, { size: iconSize }) : '';
 
   const tag = isLink ? 'a' : 'button';
@@ -85,13 +95,18 @@ export function hydrateButtons(root = document) {
       else el.disabled = true;
 
       if (!el.querySelector('.ol8-btn__spinner')) {
-        const prevLeading = el.querySelector(':scope > .ol8-icon:first-child');
-        if (prevLeading) prevLeading.remove();
+        // Same call as renderButton: the spinner takes the leading slot unless
+        // data-ol8-loading-keep-icon opts into Figma's literal both-glyphs read.
+        if (el.dataset.ol8LoadingKeepIcon !== 'true') {
+          el.querySelector(':scope > .ol8-icon:first-child')?.remove();
+        }
         const spinner = document.createElement('span');
         spinner.className = 'ol8-btn__spinner ol8-icon';
         spinner.setAttribute('aria-hidden', 'true');
         spinner.innerHTML = renderIconSvg('loading');
-        el.prepend(spinner);
+        const keep = el.dataset.ol8LoadingKeepIcon === 'true';
+        const after = keep ? el.querySelector(':scope > .ol8-icon:first-child') : null;
+        if (after) after.after(spinner); else el.prepend(spinner);
       }
     } else {
       el.removeAttribute('aria-busy');
