@@ -18,7 +18,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 const RAW = join(ROOT, 'assets', 'icons-raw');
-const OUT = join(ROOT, 'packages', 'core', 'src', 'icon');
+const OUT = join(ROOT, 'packages', 'core', 'src', 'atoms', 'icon');
 
 /** Figma "Icon / <Category> / <Name>" -> registry metadata. */
 const REGISTRY = {

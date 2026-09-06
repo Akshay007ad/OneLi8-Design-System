@@ -16,7 +16,194 @@
       }
     }
   },
-  "atoms": {
+  "foundations": {
+    "source": {
+      "page": "Foundations",
+      "root": "9:7",
+      "sections": {
+        "color": "10:3",
+        "typography": "13:2",
+        "dimension": "13:43",
+        "shape": "13:97",
+        "elevation": "13:101"
+      }
+    },
+    "compiled": {
+      "source": "packages/tokens/src/tokens.json",
+      "css": "packages/tokens/dist/tokens.css",
+      "js": "packages/tokens/dist/tokens.js"
+    },
+    "counts": {
+      "primitives": 99,
+      "semanticRoles": 123,
+      "dimensionSteps": 17,
+      "radii": 9,
+      "typographyRoles": 9,
+      "elevations": 5,
+      "cssCustomProperties": 337
+    },
+    "rules": [
+      "Components consume SEMANTIC roles only. Primitives (color-<family>-<step>) are hidden from pickers in Figma and must not appear in component code.",
+      "color-primary-* is an alias ramp onto color-blue-* \u2014 identical values, distinct names. Prefer the semantic role over either.",
+      "Dimension scale is 3px-atomic. Even multiples for structural layout; odd multiples are deliberate optical or micro-gap choices.",
+      "Elevation ink is cyan-840 rgb(22,63,75) \u2014 never default black.",
+      "Typography roles are composite. Use the .ol8-type-<role> class, not the individual font vars.",
+      "shape-radius-full (999px) is reserved for pills and circles. Soft hexagons are component-specific recipes, not a radius token."
+    ],
+    "typographyRoles": [
+      "display-large",
+      "display-medium",
+      "display-small",
+      "title-large",
+      "title-medium",
+      "title-small",
+      "body-large",
+      "body-medium",
+      "body-small"
+    ],
+    "semanticGroups": [
+      "background",
+      "surface",
+      "text",
+      "icon",
+      "border",
+      "focus",
+      "actionprimary",
+      "actionsecondary",
+      "actionquiet",
+      "actiondestructive",
+      "feedbackinformative",
+      "feedbackpositive",
+      "feedbackcaution",
+      "feedbackcritical",
+      "selection",
+      "primary",
+      "material-gem"
+    ],
+    "verification": {
+      "method": "in-browser computed-style diff against Figma get_variable_defs",
+      "unresolved": 0,
+      "mismatches": 0
+    }
+  },
+  "materials": {
+    "gem": {
+      "figma": {
+        "section": "1034:9969",
+        "componentCount": 144,
+        "sets": {
+          "button-primary": "100:3",
+          "button-secondary": "100:208",
+          "iconbutton-primary": "102:78",
+          "iconbutton-secondary": "102:151",
+          "iconbutton-primary-circle": "119:202",
+          "iconbutton-secondary-circle": "119:299"
+        },
+        "description": "Material adapter \u2014 NOT a fifth semantic variant. Geometry, meaning, accessibility, protected target, Size, State, content and native behavior are inherited from the regular molecule. Material changes only the token-bound surface and inner focus edge. Reduced Transparency resolves to the regular opaque equivalent. Quiet and Destructive use the regular material until a distinct Gem treatment is explicitly approved."
+      },
+      "code": {
+        "styles": "packages/core/src/materials/gem/gem.css"
+      },
+      "strategy": "attribute",
+      "emitAs": {
+        "data-ol8-material": "gem"
+      },
+      "appliesTo": {
+        "ol8-btn": [
+          "primary",
+          "secondary"
+        ],
+        "ol8-icon-btn": [
+          "primary",
+          "secondary"
+        ]
+      },
+      "note": "Gem is an attribute on an existing button, never a new class or variant. renderButton/renderIconButton throw for quiet and destructive.",
+      "layers": {
+        "::before": "three-stop body + backdrop-filter blur(12px)",
+        "::after": "rim: specular top edge + integrated light rim"
+      },
+      "gradient": {
+        "stops": [
+          "14.639%",
+          "48.586%",
+          "85.361%"
+        ],
+        "angleRule": "theta = 90deg + atan(W/H)",
+        "figmaBaked": {
+          "standard 83x42": 153.1594904667868,
+          "comfortable 89x48": 151.6608679641041,
+          "large 101x60": 149.28717228484115
+        },
+        "cssEquivalent": "to bottom right",
+        "why": "All three baked angles satisfy the rule to 4 decimal places, which is exactly CSS's corner keyword (gradient line perpendicular to the opposite diagonal). The keyword reproduces Figma at any size AND any label width; a baked degree value is only correct for the single instance it was measured on.",
+        "verified": "mix-blend-mode:difference overlay of baked-angle vs to-bottom-right renders pure black at all three sizes"
+      },
+      "stateMap": {
+        "Default": "primary-start/mid/end",
+        "Hover": "primary-hover-* + rim-hover",
+        "Pressed": "reuses the HOVER stops, adds drop-shadow(0 9px 12px cutedge-shadow) and rim-hover",
+        "Loading": "primary-loading-*",
+        "Disabled": "gem layers suppressed; regular opaque treatment shows through"
+      },
+      "reducedTransparency": {
+        "query": "@media (prefers-reduced-transparency: reduce)",
+        "behavior": "::before and ::after are hidden, revealing the regular molecule's own background, which is never removed. Secondary also regains its 2px boundary."
+      },
+      "verification": {
+        "primaryDefault": "#3854ae -> #2c438b -> #23366f at 14.639/48.586/85.361%, blur(12px)",
+        "rim": "inset 0 2px 1px rgba(252,250,243,.54) + inset 0 0 0 0 rgba(252,250,243,.24)",
+        "secondary": "rgba(252,250,243,.22/.05/.12), border 0",
+        "disabled": "gem layers display:none, opaque #e7e0d1 shows through"
+      }
+    }
+  },
+  "pending": {
+    "Icon / Selection / Checkbox": {
+      "node": "365:2417",
+      "components": 12,
+      "axes": "Size(Compact|Comfortable) x Selection(Unchecked|Checked|Mixed) x Availability(Enabled|Disabled)",
+      "note": "A stateful icon component set, not a plain glyph. Belongs with a Checkbox control atom; it composes the check and mixed glyphs."
+    },
+    "Icon / Selection / Radio": {
+      "node": "366:2371",
+      "components": 8,
+      "axes": "Size(Compact|Comfortable) x Selection(Unselected|Selected) x Availability(Enabled|Disabled)",
+      "note": "Composes the selected-dot glyph. Belongs with a Radio control atom."
+    }
+  },
+  "architecture": {
+    "convention": "Atomic Design for developers (benjaminwfox.com/blog/tech/atomic-design-for-developers)",
+    "layout": {
+      "atoms": "packages/core/src/atoms/",
+      "molecules": "packages/core/src/molecules/",
+      "organisms": "packages/core/src/organisms/",
+      "materials": "packages/core/src/materials/"
+    },
+    "rules": [
+      "ATOM: composes no other component \u2014 native elements only. May hold internal state; must not read application state.",
+      "MOLECULE: composed of one or more atoms. Reusable, more specialised.",
+      "ORGANISM: composed of atoms/molecules/organisms. May hold business logic and application state.",
+      "MATERIALS are not an atomic tier. They are cross-cutting surface adapters applied by attribute (data-ol8-material) to an existing component, and live outside the hierarchy.",
+      "Assign margins to a component via its parent, NEVER to the component itself. Enforced by packages/sync/src/check-structure.mjs, which runs in npm run build."
+    ],
+    "tierMapping": {
+      "note": "Figma labels these tiers itself in the Choice Controls documentation (246:3), and they agree with the article's definitions.",
+      "atoms": [
+        "ol8-icon (and the selection indicators: checkbox, radio, switch)"
+      ],
+      "molecules": [
+        "ol8-btn (Figma: 'canonical Button molecule')",
+        "ol8-icon-btn (Figma: 'canonical Icon Button molecule')",
+        "Choice Item / Checkbox | Radio | Switch"
+      ],
+      "organisms": [
+        "Choice Group / Checkbox",
+        "Radio Group"
+      ]
+    }
+  },
+  "components": {
     "ol8-icon": {
       "figma": {
         "page": "Iconography",
@@ -32,9 +219,9 @@
       },
       "code": {
         "package": "@oneli8/core",
-        "entry": "packages/core/src/icon/icon.ts",
-        "styles": "packages/core/src/icon/icon.css",
-        "registry": "packages/core/src/icon/icons.generated.ts",
+        "entry": "packages/core/src/atoms/icon/icon.ts",
+        "styles": "packages/core/src/atoms/icon/icon.css",
+        "registry": "packages/core/src/atoms/icon/icons.generated.ts",
         "baseClass": "ol8-icon"
       },
       "footprint": {
@@ -190,8 +377,8 @@
       },
       "code": {
         "package": "@oneli8/core",
-        "entry": "packages/core/src/button/button.js",
-        "styles": "packages/core/src/button/button.css",
+        "entry": "packages/core/src/molecules/button/button.js",
+        "styles": "packages/core/src/molecules/button/button.css",
         "baseClass": "ol8-btn"
       },
       "footprint": {
@@ -439,8 +626,8 @@
       },
       "code": {
         "package": "@oneli8/core",
-        "entry": "packages/core/src/icon-button/icon-button.js",
-        "styles": "packages/core/src/icon-button/icon-button.css",
+        "entry": "packages/core/src/molecules/icon-button/icon-button.js",
+        "styles": "packages/core/src/molecules/icon-button/icon-button.css",
         "baseClass": "ol8-icon-btn"
       },
       "footprint": {
@@ -558,162 +745,6 @@
           "commit": "see git history"
         }
       ]
-    }
-  },
-  "foundations": {
-    "source": {
-      "page": "Foundations",
-      "root": "9:7",
-      "sections": {
-        "color": "10:3",
-        "typography": "13:2",
-        "dimension": "13:43",
-        "shape": "13:97",
-        "elevation": "13:101"
-      }
-    },
-    "compiled": {
-      "source": "packages/tokens/src/tokens.json",
-      "css": "packages/tokens/dist/tokens.css",
-      "js": "packages/tokens/dist/tokens.js"
-    },
-    "counts": {
-      "primitives": 99,
-      "semanticRoles": 123,
-      "dimensionSteps": 17,
-      "radii": 9,
-      "typographyRoles": 9,
-      "elevations": 5,
-      "cssCustomProperties": 337
-    },
-    "rules": [
-      "Components consume SEMANTIC roles only. Primitives (color-<family>-<step>) are hidden from pickers in Figma and must not appear in component code.",
-      "color-primary-* is an alias ramp onto color-blue-* \u2014 identical values, distinct names. Prefer the semantic role over either.",
-      "Dimension scale is 3px-atomic. Even multiples for structural layout; odd multiples are deliberate optical or micro-gap choices.",
-      "Elevation ink is cyan-840 rgb(22,63,75) \u2014 never default black.",
-      "Typography roles are composite. Use the .ol8-type-<role> class, not the individual font vars.",
-      "shape-radius-full (999px) is reserved for pills and circles. Soft hexagons are component-specific recipes, not a radius token."
-    ],
-    "typographyRoles": [
-      "display-large",
-      "display-medium",
-      "display-small",
-      "title-large",
-      "title-medium",
-      "title-small",
-      "body-large",
-      "body-medium",
-      "body-small"
-    ],
-    "semanticGroups": [
-      "background",
-      "surface",
-      "text",
-      "icon",
-      "border",
-      "focus",
-      "actionprimary",
-      "actionsecondary",
-      "actionquiet",
-      "actiondestructive",
-      "feedbackinformative",
-      "feedbackpositive",
-      "feedbackcaution",
-      "feedbackcritical",
-      "selection",
-      "primary",
-      "material-gem"
-    ],
-    "verification": {
-      "method": "in-browser computed-style diff against Figma get_variable_defs",
-      "unresolved": 0,
-      "mismatches": 0
-    }
-  },
-  "materials": {
-    "gem": {
-      "figma": {
-        "section": "1034:9969",
-        "componentCount": 144,
-        "sets": {
-          "button-primary": "100:3",
-          "button-secondary": "100:208",
-          "iconbutton-primary": "102:78",
-          "iconbutton-secondary": "102:151",
-          "iconbutton-primary-circle": "119:202",
-          "iconbutton-secondary-circle": "119:299"
-        },
-        "description": "Material adapter \u2014 NOT a fifth semantic variant. Geometry, meaning, accessibility, protected target, Size, State, content and native behavior are inherited from the regular molecule. Material changes only the token-bound surface and inner focus edge. Reduced Transparency resolves to the regular opaque equivalent. Quiet and Destructive use the regular material until a distinct Gem treatment is explicitly approved."
-      },
-      "code": {
-        "styles": "packages/core/src/material-gem/gem.css"
-      },
-      "strategy": "attribute",
-      "emitAs": {
-        "data-ol8-material": "gem"
-      },
-      "appliesTo": {
-        "ol8-btn": [
-          "primary",
-          "secondary"
-        ],
-        "ol8-icon-btn": [
-          "primary",
-          "secondary"
-        ]
-      },
-      "note": "Gem is an attribute on an existing button, never a new class or variant. renderButton/renderIconButton throw for quiet and destructive.",
-      "layers": {
-        "::before": "three-stop body + backdrop-filter blur(12px)",
-        "::after": "rim: specular top edge + integrated light rim"
-      },
-      "gradient": {
-        "stops": [
-          "14.639%",
-          "48.586%",
-          "85.361%"
-        ],
-        "angleRule": "theta = 90deg + atan(W/H)",
-        "figmaBaked": {
-          "standard 83x42": 153.1594904667868,
-          "comfortable 89x48": 151.6608679641041,
-          "large 101x60": 149.28717228484115
-        },
-        "cssEquivalent": "to bottom right",
-        "why": "All three baked angles satisfy the rule to 4 decimal places, which is exactly CSS's corner keyword (gradient line perpendicular to the opposite diagonal). The keyword reproduces Figma at any size AND any label width; a baked degree value is only correct for the single instance it was measured on.",
-        "verified": "mix-blend-mode:difference overlay of baked-angle vs to-bottom-right renders pure black at all three sizes"
-      },
-      "stateMap": {
-        "Default": "primary-start/mid/end",
-        "Hover": "primary-hover-* + rim-hover",
-        "Pressed": "reuses the HOVER stops, adds drop-shadow(0 9px 12px cutedge-shadow) and rim-hover",
-        "Loading": "primary-loading-*",
-        "Disabled": "gem layers suppressed; regular opaque treatment shows through"
-      },
-      "reducedTransparency": {
-        "query": "@media (prefers-reduced-transparency: reduce)",
-        "behavior": "::before and ::after are hidden, revealing the regular molecule's own background, which is never removed. Secondary also regains its 2px boundary."
-      },
-      "verification": {
-        "primaryDefault": "#3854ae -> #2c438b -> #23366f at 14.639/48.586/85.361%, blur(12px)",
-        "rim": "inset 0 2px 1px rgba(252,250,243,.54) + inset 0 0 0 0 rgba(252,250,243,.24)",
-        "secondary": "rgba(252,250,243,.22/.05/.12), border 0",
-        "disabled": "gem layers display:none, opaque #e7e0d1 shows through"
-      }
-    }
-  },
-  "pending": {
-    "Icon / Selection / Checkbox": {
-      "node": "365:2417",
-      "components": 12,
-      "axes": "Size(Compact|Comfortable) x Selection(Unchecked|Checked|Mixed) x Availability(Enabled|Disabled)",
-      "note": "A stateful icon component set, not a plain glyph. Belongs with a Checkbox control atom; it composes the check and mixed glyphs."
-    },
-    "Icon / Selection / Radio": {
-      "node": "366:2371",
-      "components": 8,
-      "axes": "Size(Compact|Comfortable) x Selection(Unselected|Selected) x Availability(Enabled|Disabled)",
-      "note": "Composes the selected-dot glyph. Belongs with a Radio control atom."
     }
   }
 }

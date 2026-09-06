@@ -5,7 +5,7 @@
  * loading, pressed and fullWidth "remain implemented and tested in code; they
  * must not become fake visual axes." This module is that code.
  */
-import { renderIcon, renderIconSvg, isOl8IconName } from '../icon/icon.js';
+import { renderIcon, renderIconSvg, isOl8IconName } from '../../atoms/icon/icon.js';
 
 export const OL8_BUTTON_VARIANTS = ['primary', 'secondary', 'quiet', 'destructive'];
 export const OL8_BUTTON_SIZES = ['compact', 'standard', 'comfortable', 'large'];

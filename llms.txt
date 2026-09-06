@@ -29,8 +29,17 @@ Figma file: 0wRnp6ulIEA8PCV6wqGmAJ ("Oneli8 Design System — 1.0.0-beta.1")
 ## Packages
 
 - `packages/tokens` — `src/tokens.json` -> `dist/tokens.css` (`--ol8-*`) + `dist/tokens.js`
-- `packages/core`   — headless atoms; buildless ESM + `.d.ts`, no bundler required
-- `packages/sync`   — Figma extraction / normalization scripts
+- `packages/core`   — headless components, buildless ESM + `.d.ts`, no bundler
+  - `src/atoms/`     compose nothing; native elements only
+  - `src/molecules/` composed of atoms
+  - `src/organisms/` composed of atoms/molecules; may hold state and logic
+  - `src/materials/` NOT a tier — cross-cutting surface adapters (gem)
+- `packages/sync`   — Figma extraction, normalization, and structure lint
+
+## Structural rules (enforced by `npm run check`)
+
+- Assign margins to a component via its PARENT, never the component itself.
+- Atoms must not import from molecules or organisms.
 
 ## Foundations (page 9:7) — complete
 

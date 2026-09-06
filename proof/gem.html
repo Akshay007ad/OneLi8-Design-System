@@ -7,10 +7,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=AR+One+Sans:wght@400..700&display=swap">
 <link rel="stylesheet" href="../packages/tokens/dist/tokens.css">
-<link rel="stylesheet" href="../packages/core/src/icon/icon.css">
-<link rel="stylesheet" href="../packages/core/src/button/button.css">
-<link rel="stylesheet" href="../packages/core/src/icon-button/icon-button.css">
-<link rel="stylesheet" href="../packages/core/src/material-gem/gem.css">
+<link rel="stylesheet" href="../packages/core/src/atoms/icon/icon.css">
+<link rel="stylesheet" href="../packages/core/src/molecules/button/button.css">
+<link rel="stylesheet" href="../packages/core/src/molecules/icon-button/icon-button.css">
+<link rel="stylesheet" href="../packages/core/src/materials/gem/gem.css">
 <style>
   body { margin:0; padding:28px; background:var(--ol8-color-background-inverse);
          color:var(--ol8-color-text-inverse); font-family:var(--ol8-font-family-functional); }
@@ -34,8 +34,8 @@
 
   <div id="out"></div>
 <script type="module">
-import { renderButton, OL8_BUTTON_SIZES } from '../packages/core/src/button/button.js';
-import { renderIconButton } from '../packages/core/src/icon-button/icon-button.js';
+import { renderButton, OL8_BUTTON_SIZES } from '../packages/core/src/molecules/button/button.js';
+import { renderIconButton } from '../packages/core/src/molecules/icon-button/icon-button.js';
 
 const STOPS = 'var(--ol8-material-control-gem--primary-start) 14.639%, var(--ol8-material-control-gem--primary-mid) 48.586%, var(--ol8-material-control-gem--primary-end) 85.361%';
 const CASES = [

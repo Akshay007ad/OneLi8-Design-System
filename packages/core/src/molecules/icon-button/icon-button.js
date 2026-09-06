@@ -9,7 +9,7 @@
  *
  * "Accessible Name is mandatory" is enforced here, not left to reviewers.
  */
-import { renderIcon, renderIconSvg, isOl8IconName } from '../icon/icon.js';
+import { renderIcon, renderIconSvg, isOl8IconName } from '../../atoms/icon/icon.js';
 import { GEM_VARIANTS } from '../button/button.js';
 
 export const OL8_ICON_BUTTON_VARIANTS = ['primary', 'secondary', 'quiet', 'destructive'];
