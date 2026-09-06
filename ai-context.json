@@ -1,0 +1,665 @@
+{
+  "$schema": "./ai-context.schema.json",
+  "system": "Oneli8 Design System",
+  "version": "1.0.0-beta.1",
+  "tokenPrefix": "--ol8-",
+  "figma": {
+    "fileKey": "0wRnp6ulIEA8PCV6wqGmAJ",
+    "name": "Oneli8 Design System \u2014 1.0.0-beta.1",
+    "pages": {
+      "Foundations": "9:7",
+      "Iconography": "84:9",
+      "Button": {
+        "Button": "1034:9968",
+        "Icon Button": "1034:10546",
+        "Gem Button": "1034:9969"
+      }
+    }
+  },
+  "atoms": {
+    "ol8-icon": {
+      "figma": {
+        "page": "Iconography",
+        "mastersFrame": "426:55",
+        "sizingFrame": "418:51",
+        "documentation": "84:13"
+      },
+      "code": {
+        "package": "@oneli8/core",
+        "entry": "packages/core/src/icon/icon.ts",
+        "styles": "packages/core/src/icon/icon.css",
+        "registry": "packages/core/src/icon/icons.generated.ts",
+        "baseClass": "ol8-icon"
+      },
+      "footprint": {
+        "element": "span",
+        "leaf": {
+          "element": "svg",
+          "viewBox": "0 0 24 24",
+          "fill": "none",
+          "focusable": "false"
+        },
+        "note": "Inline SVG is mandatory. An <img> cannot inherit currentColor, and the Figma contract requires the consumer to supply semantic color."
+      },
+      "variants": {
+        "Name": {
+          "figmaProperty": "component name segment: Icon / <Category> / <Name>",
+          "strategy": "data",
+          "emitAs": {
+            "data-ol8-icon": "<kebab-name>"
+          },
+          "values": [
+            "add",
+            "caution",
+            "chevron-down",
+            "chevron-up",
+            "clear",
+            "close",
+            "critical",
+            "forward",
+            "informative",
+            "loading",
+            "positive",
+            "search",
+            "visibility-closed",
+            "visibility-open"
+          ]
+        },
+        "Size": {
+          "figmaProperty": "Size (Icon Frame 418:51)",
+          "strategy": "data",
+          "default": 24,
+          "emitAs": {
+            "data-ol8-icon-size": "<number>"
+          },
+          "values": [
+            9,
+            12,
+            18,
+            24,
+            30,
+            36,
+            48,
+            60,
+            72,
+            96,
+            108
+          ],
+          "scaling": "geometric",
+          "note": "The Icon Frame scales the complete source instance, so the 1.8-unit stroke scales with it (48px box => 3.6px rendered stroke). Achieved by fixing viewBox at 0 0 24 24 and sizing only the box."
+        },
+        "Direction": {
+          "figmaProperty": "semantic registry (documentation 84:13)",
+          "strategy": "data",
+          "emitAs": {
+            "data-ol8-icon-mirror": "true"
+          },
+          "appliesTo": [
+            "forward"
+          ],
+          "css": "[dir='rtl'] .ol8-icon[data-ol8-icon-mirror='true'] > svg { transform: scaleX(-1); }"
+        },
+        "Color": {
+          "strategy": "inherit",
+          "emit": null,
+          "note": "Never set on the icon. The glyph is neutral and inherits `color` from the consuming component; all strokes and fills are currentColor."
+        }
+      },
+      "a11y": {
+        "default": "decorative \u2014 aria-hidden=\"true\"",
+        "meaningful": "set data-ol8-icon-label; hydration promotes it to role=\"img\" + aria-label",
+        "invariants": [
+          "focusable=\"false\" on the svg keeps it out of the IE/Edge tab order.",
+          "An icon inside a labelled control stays decorative \u2014 the control owns the accessible name.",
+          "Never rely on color alone: status glyphs (critical/caution/positive/informative) have distinct silhouettes by design."
+        ]
+      },
+      "forbid": [
+        {
+          "pattern": "<img[^>]+ol8-icon",
+          "reason": "Breaks currentColor inheritance; the consumer can no longer supply semantic color."
+        },
+        {
+          "pattern": "vector-effect\\s*:\\s*non-scaling-stroke",
+          "reason": "Figma scales the source geometrically. A constant stroke contradicts the documented 1.8-unit optical stroke."
+        },
+        {
+          "pattern": "stroke=\"#",
+          "reason": "Masters are neutral. Use currentColor and set `color` on the consumer."
+        },
+        {
+          "pattern": "width=\"auto\"|height=\"auto\"",
+          "reason": "The leaf is fixed-size; both dimensions must be explicit."
+        },
+        {
+          "pattern": "data-ol8-icon-size=\"(?!9|12|18|24|30|36|48|60|72|96|108\\b)",
+          "reason": "Only the eleven Icon Frame universal sizes exist."
+        }
+      ],
+      "examples": [
+        {
+          "figma": {
+            "component": "Icon / Action / Add",
+            "Size": 24
+          },
+          "html": "<span class=\"ol8-icon\" data-ol8-icon=\"add\" data-ol8-icon-size=\"24\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" fill=\"none\" focusable=\"false\"><path d=\"M12 5V19M5 12H19\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></span>"
+        },
+        {
+          "figma": {
+            "component": "Icon / Navigation / Forward",
+            "Size": 18
+          },
+          "note": "mirrors under [dir=rtl] via the semantic registry",
+          "html": "<span class=\"ol8-icon\" data-ol8-icon=\"forward\" data-ol8-icon-size=\"18\" data-ol8-icon-mirror=\"true\" aria-hidden=\"true\">\u2026</span>"
+        },
+        {
+          "figma": {
+            "component": "Icon / Action / Close",
+            "Size": 24,
+            "usage": "sole carrier of meaning"
+          },
+          "html": "<span data-ol8-icon=\"close\" data-ol8-icon-label=\"Dismiss\"></span>",
+          "note": "declarative placeholder; hydrateIcons() upgrades it to role=\"img\" + aria-label"
+        }
+      ]
+    },
+    "ol8-btn": {
+      "figma": {
+        "section": "1034:9968",
+        "sets": {
+          "primary": "15:823",
+          "secondary": "15:824",
+          "quiet": "15:825",
+          "destructive": "15:826"
+        },
+        "componentCount": 96,
+        "description": "Oneli8 canonical Button molecule. Figma maps Size -> size, State -> deterministic visual evidence, Label -> children, Show Leading/Trailing Icon -> icon presence. Runtime-only native button semantics, disabled, loading, pressed, fullWidth and iconMotion remain implemented and tested in code; they must not become fake visual axes."
+      },
+      "code": {
+        "package": "@oneli8/core",
+        "entry": "packages/core/src/button/button.js",
+        "styles": "packages/core/src/button/button.css",
+        "baseClass": "ol8-btn"
+      },
+      "footprint": {
+        "element": "button",
+        "requiredAttributes": {
+          "type": "button"
+        },
+        "elementRules": [
+          {
+            "when": "navigation target",
+            "element": "a",
+            "note": "class ol8-btn, no type attribute; cannot be natively disabled"
+          }
+        ],
+        "content": [
+          {
+            "slot": "leading-icon",
+            "optional": true,
+            "note": "suppressed while loading; the spinner takes this slot"
+          },
+          {
+            "slot": "label",
+            "optional": false,
+            "element": "span",
+            "attributes": {
+              "class": "ol8-btn__label"
+            }
+          },
+          {
+            "slot": "trailing-icon",
+            "optional": true
+          }
+        ]
+      },
+      "variants": {
+        "Variant": {
+          "figmaProperty": "component set name",
+          "strategy": "class",
+          "default": "primary",
+          "values": {
+            "primary": {
+              "emit": "ol8-btn--primary"
+            },
+            "secondary": {
+              "emit": "ol8-btn--secondary"
+            },
+            "quiet": {
+              "emit": "ol8-btn--quiet"
+            },
+            "destructive": {
+              "emit": "ol8-btn--destructive"
+            }
+          },
+          "note": "Secondary and Quiet share byte-identical color roles. The ONLY differentiator is --ol8-component-button-secondaryboundary (2px stroke tracking the content color); Quiet binds no boundary token. Verified on nodes 15:824 vs 15:825."
+        },
+        "Size": {
+          "figmaProperty": "Size",
+          "strategy": "data",
+          "default": "standard",
+          "emitAs": {
+            "data-ol8-size": "<value>"
+          },
+          "values": {
+            "compact": {
+              "height": "36px",
+              "paddingInline": "12px",
+              "radius": "6px",
+              "gap": "6px",
+              "icon": 18
+            },
+            "standard": {
+              "height": "42px",
+              "paddingInline": "15px",
+              "radius": "9px",
+              "gap": "6px",
+              "icon": 18
+            },
+            "comfortable": {
+              "height": "48px",
+              "paddingInline": "18px",
+              "radius": "12px",
+              "gap": "9px",
+              "icon": 24
+            },
+            "large": {
+              "height": "60px",
+              "paddingInline": "24px",
+              "radius": "12px",
+              "gap": "9px",
+              "icon": 24
+            }
+          },
+          "note": "Only two gap tokens exist: Compact+Standard share 6px, Comfortable+Large share 9px. Button size governs icon size; never set a size on the glyph."
+        },
+        "State": {
+          "figmaProperty": "State",
+          "note": "Six Figma States are visual evidence for review, NOT six markup variants.",
+          "values": {
+            "Default": {
+              "strategy": "none",
+              "emit": null
+            },
+            "Hover": {
+              "strategy": "pseudo",
+              "emit": null,
+              "css": ":hover:not(:disabled):not([data-ol8-loading])"
+            },
+            "Pressed": {
+              "strategy": "pseudo",
+              "emit": null,
+              "css": ":active",
+              "alsoAttribute": "aria-pressed=\"true\" for toggle buttons"
+            },
+            "Focus": {
+              "strategy": "pseudo",
+              "emit": null,
+              "css": ":focus-visible",
+              "implementation": "inset box-shadow of --ol8-focus-ring-innerwidth in --ol8-color-focus-outer. Figma draws the ring as an INSIDE stroke, so focused and unfocused variants measure identically; `outline` would sit outside and change the box."
+            },
+            "Disabled": {
+              "strategy": "conditional-attribute",
+              "byElement": {
+                "button": {
+                  "emit": {
+                    "disabled": ""
+                  }
+                },
+                "a": {
+                  "emit": {
+                    "aria-disabled": "true",
+                    "tabindex": "-1"
+                  },
+                  "remove": [
+                    "href"
+                  ]
+                }
+              }
+            },
+            "Loading": {
+              "strategy": "conditional-attribute",
+              "byElement": {
+                "button": {
+                  "emit": {
+                    "data-ol8-loading": "true",
+                    "aria-busy": "true",
+                    "disabled": ""
+                  }
+                }
+              },
+              "note": "Spinner occupies the leading slot. Rotation is opt-in and guarded by prefers-reduced-motion: Figma 379:7 says Reduced Motion keeps the static busy mark."
+            }
+          }
+        }
+      },
+      "a11y": {
+        "invariants": [
+          "<button> always carries an explicit type; never rely on the implicit submit.",
+          "Label lives in .ol8-btn__label and stays in the DOM while loading so the accessible name is stable.",
+          "aria-busy accompanies every loading button.",
+          "A link styled as a button cannot be natively disabled: use aria-disabled + tabindex=-1 and swallow activation.",
+          "Focus ring is never removed without replacement; it is drawn inside so it cannot be clipped by an overflow parent."
+        ]
+      },
+      "forbid": [
+        {
+          "pattern": "ol8-btn--(hover|pressed|focus|disabled|loading)",
+          "reason": "States are CSS pseudo-classes or attributes, never modifier classes. The Figma description forbids fake visual axes explicitly."
+        },
+        {
+          "pattern": "<div[^>]*class=\"[^\"]*ol8-btn",
+          "reason": "Never a div. Use <button>, or <a> for navigation."
+        },
+        {
+          "pattern": "outline:[^;]*focus",
+          "reason": "Figma's focus ring is an inside stroke; outline sits outside and changes the measured box."
+        },
+        {
+          "pattern": "data-ol8-icon-size=",
+          "reason": "Inside a button the size is governed by data-ol8-size; never set it on the glyph."
+        },
+        {
+          "pattern": "style=\"[^\"]*#[0-9a-fA-F]{3,8}",
+          "reason": "No literal colors. Bind --ol8-* semantic roles."
+        }
+      ],
+      "examples": [
+        {
+          "figma": {
+            "set": "Button / Primary",
+            "Size": "Standard",
+            "State": "Default"
+          },
+          "html": "<button type=\"button\" class=\"ol8-btn ol8-btn--primary\" data-ol8-size=\"standard\"><span class=\"ol8-btn__label\">Button</span></button>"
+        },
+        {
+          "figma": {
+            "set": "Button / Primary",
+            "Size": "Standard",
+            "State": "Disabled"
+          },
+          "html": "<button type=\"button\" class=\"ol8-btn ol8-btn--primary\" data-ol8-size=\"standard\" disabled><span class=\"ol8-btn__label\">Button</span></button>"
+        },
+        {
+          "figma": {
+            "set": "Button / Secondary",
+            "Size": "Large",
+            "State": "Default",
+            "showLeadingIcon": true
+          },
+          "html": "<button type=\"button\" class=\"ol8-btn ol8-btn--secondary\" data-ol8-size=\"large\"><span class=\"ol8-icon\" data-ol8-icon=\"add\" aria-hidden=\"true\">\u2026</span><span class=\"ol8-btn__label\">Button</span></button>"
+        }
+      ],
+      "verification": {
+        "method": "in-browser measurement against Figma node geometry",
+        "heights": "36/42/48/60 exact at all four sizes",
+        "widths": "constant -0.67px vs Figma's stored integer widths \u2014 Figma rounds its hug width up (label advance 52.33 -> 53); padding, gap and icon geometry are exact",
+        "focusRing": "keyboard focus produces inset 0 0 0 3px rgb(16,27,58) with unchanged box"
+      }
+    },
+    "ol8-icon-btn": {
+      "figma": {
+        "section": "1034:10546",
+        "componentCount": 192,
+        "sets": {
+          "primary": "86:2",
+          "secondary": "87:26",
+          "quiet": "88:50",
+          "destructive": "89:74",
+          "primary-circle": "94:98",
+          "secondary-circle": "94:309",
+          "quiet-circle": "94:406",
+          "destructive-circle": "94:503"
+        },
+        "documentation": "85:9"
+      },
+      "code": {
+        "package": "@oneli8/core",
+        "entry": "packages/core/src/icon-button/icon-button.js",
+        "styles": "packages/core/src/icon-button/icon-button.css",
+        "baseClass": "ol8-icon-btn"
+      },
+      "footprint": {
+        "element": "button",
+        "requiredAttributes": {
+          "type": "button"
+        },
+        "structure": "TWO boxes: .ol8-icon-btn is the transparent protected TARGET; .ol8-icon-btn__surface is the painted VISIBLE box inside it.",
+        "note": "Collapsing them into one element shrinks the touch target from 48px to 36px at Compact. The split is the component."
+      },
+      "variants": {
+        "Size": {
+          "strategy": "data",
+          "emitAs": {
+            "data-ol8-size": "<value>"
+          },
+          "default": "standard",
+          "values": {
+            "compact": {
+              "target": "48px",
+              "box": "36px",
+              "radius": "9px",
+              "artwork": 18
+            },
+            "standard": {
+              "target": "48px",
+              "box": "42px",
+              "radius": "12px",
+              "artwork": 18
+            },
+            "comfortable": {
+              "target": "48px",
+              "box": "48px",
+              "radius": "12px",
+              "artwork": 24
+            },
+            "large": {
+              "target": "60px",
+              "box": "60px",
+              "radius": "18px",
+              "artwork": 24
+            }
+          }
+        },
+        "Shape": {
+          "strategy": "data",
+          "default": "rounded",
+          "emitAs": {
+            "data-ol8-shape": "circle"
+          },
+          "note": "Rounded Square is the canonical base; Circle is a governed presentation extension (radius-full)."
+        },
+        "Variant": {
+          "strategy": "class",
+          "values": [
+            "primary",
+            "secondary",
+            "quiet",
+            "destructive"
+          ]
+        },
+        "State": {
+          "note": "Same rule as ol8-btn: pseudo-classes and attributes, never modifier classes.",
+          "values": {
+            "Hover": ":hover",
+            "Pressed": ":active / [aria-pressed] plus a 3px inset scrim",
+            "Focus": ":focus-visible, OUTSIDE ring (contrast with ol8-btn's inside stroke)",
+            "Disabled": "[disabled]",
+            "Loading": "[data-ol8-loading] \u2014 paints with the HOVER colors in Figma, not the default ones"
+          }
+        }
+      },
+      "a11y": {
+        "mandatory": "Accessible name. renderIconButton throws without one; hydrateIconButtons reports any unnamed button.",
+        "invariants": [
+          "The symbol never translates, rotates or scales \u2014 hover changes the container only.",
+          "The protected target stays >= 48px even when the visible box is 36px."
+        ]
+      },
+      "forbid": [
+        {
+          "pattern": "ol8-icon-btn(?![-_])[^>]*>\\s*<span class=\"ol8-icon\"",
+          "reason": "The glyph must sit inside .ol8-icon-btn__surface, not directly in the target."
+        },
+        {
+          "pattern": "transform:[^;]*(scale|rotate|translate)[^;]*ol8-icon-btn",
+          "reason": "The symbol never moves; hover changes the container only."
+        }
+      ],
+      "verification": {
+        "geometry": "target 48/48/48/60, box 36/42/48/60, artwork 18/18/24/24 \u2014 all exact in-browser",
+        "circle": "radius resolves to 999px",
+        "iconContrast": {
+          "primary": 1.94,
+          "destructive": 2.17,
+          "secondary": 8.81,
+          "quiet": 8.81,
+          "note": "Primary and Destructive fail WCAG 1.4.11 (3:1 for graphical objects). Reproduced as designed; see README."
+        }
+      }
+    }
+  },
+  "foundations": {
+    "source": {
+      "page": "Foundations",
+      "root": "9:7",
+      "sections": {
+        "color": "10:3",
+        "typography": "13:2",
+        "dimension": "13:43",
+        "shape": "13:97",
+        "elevation": "13:101"
+      }
+    },
+    "compiled": {
+      "source": "packages/tokens/src/tokens.json",
+      "css": "packages/tokens/dist/tokens.css",
+      "js": "packages/tokens/dist/tokens.js"
+    },
+    "counts": {
+      "primitives": 99,
+      "semanticRoles": 123,
+      "dimensionSteps": 17,
+      "radii": 9,
+      "typographyRoles": 9,
+      "elevations": 5,
+      "cssCustomProperties": 337
+    },
+    "rules": [
+      "Components consume SEMANTIC roles only. Primitives (color-<family>-<step>) are hidden from pickers in Figma and must not appear in component code.",
+      "color-primary-* is an alias ramp onto color-blue-* \u2014 identical values, distinct names. Prefer the semantic role over either.",
+      "Dimension scale is 3px-atomic. Even multiples for structural layout; odd multiples are deliberate optical or micro-gap choices.",
+      "Elevation ink is cyan-840 rgb(22,63,75) \u2014 never default black.",
+      "Typography roles are composite. Use the .ol8-type-<role> class, not the individual font vars.",
+      "shape-radius-full (999px) is reserved for pills and circles. Soft hexagons are component-specific recipes, not a radius token."
+    ],
+    "typographyRoles": [
+      "display-large",
+      "display-medium",
+      "display-small",
+      "title-large",
+      "title-medium",
+      "title-small",
+      "body-large",
+      "body-medium",
+      "body-small"
+    ],
+    "semanticGroups": [
+      "background",
+      "surface",
+      "text",
+      "icon",
+      "border",
+      "focus",
+      "actionprimary",
+      "actionsecondary",
+      "actionquiet",
+      "actiondestructive",
+      "feedbackinformative",
+      "feedbackpositive",
+      "feedbackcaution",
+      "feedbackcritical",
+      "selection",
+      "primary",
+      "material-gem"
+    ],
+    "verification": {
+      "method": "in-browser computed-style diff against Figma get_variable_defs",
+      "unresolved": 0,
+      "mismatches": 0
+    }
+  },
+  "materials": {
+    "gem": {
+      "figma": {
+        "section": "1034:9969",
+        "componentCount": 144,
+        "sets": {
+          "button-primary": "100:3",
+          "button-secondary": "100:208",
+          "iconbutton-primary": "102:78",
+          "iconbutton-secondary": "102:151",
+          "iconbutton-primary-circle": "119:202",
+          "iconbutton-secondary-circle": "119:299"
+        },
+        "description": "Material adapter \u2014 NOT a fifth semantic variant. Geometry, meaning, accessibility, protected target, Size, State, content and native behavior are inherited from the regular molecule. Material changes only the token-bound surface and inner focus edge. Reduced Transparency resolves to the regular opaque equivalent. Quiet and Destructive use the regular material until a distinct Gem treatment is explicitly approved."
+      },
+      "code": {
+        "styles": "packages/core/src/material-gem/gem.css"
+      },
+      "strategy": "attribute",
+      "emitAs": {
+        "data-ol8-material": "gem"
+      },
+      "appliesTo": {
+        "ol8-btn": [
+          "primary",
+          "secondary"
+        ],
+        "ol8-icon-btn": [
+          "primary",
+          "secondary"
+        ]
+      },
+      "note": "Gem is an attribute on an existing button, never a new class or variant. renderButton/renderIconButton throw for quiet and destructive.",
+      "layers": {
+        "::before": "three-stop body + backdrop-filter blur(12px)",
+        "::after": "rim: specular top edge + integrated light rim"
+      },
+      "gradient": {
+        "stops": [
+          "14.639%",
+          "48.586%",
+          "85.361%"
+        ],
+        "angleRule": "theta = 90deg + atan(W/H)",
+        "figmaBaked": {
+          "standard 83x42": 153.1594904667868,
+          "comfortable 89x48": 151.6608679641041,
+          "large 101x60": 149.28717228484115
+        },
+        "cssEquivalent": "to bottom right",
+        "why": "All three baked angles satisfy the rule to 4 decimal places, which is exactly CSS's corner keyword (gradient line perpendicular to the opposite diagonal). The keyword reproduces Figma at any size AND any label width; a baked degree value is only correct for the single instance it was measured on.",
+        "verified": "mix-blend-mode:difference overlay of baked-angle vs to-bottom-right renders pure black at all three sizes"
+      },
+      "stateMap": {
+        "Default": "primary-start/mid/end",
+        "Hover": "primary-hover-* + rim-hover",
+        "Pressed": "reuses the HOVER stops, adds drop-shadow(0 9px 12px cutedge-shadow) and rim-hover",
+        "Loading": "primary-loading-*",
+        "Disabled": "gem layers suppressed; regular opaque treatment shows through"
+      },
+      "reducedTransparency": {
+        "query": "@media (prefers-reduced-transparency: reduce)",
+        "behavior": "::before and ::after are hidden, revealing the regular molecule's own background, which is never removed. Secondary also regains its 2px boundary."
+      },
+      "verification": {
+        "primaryDefault": "#3854ae -> #2c438b -> #23366f at 14.639/48.586/85.361%, blur(12px)",
+        "rim": "inset 0 2px 1px rgba(252,250,243,.54) + inset 0 0 0 0 rgba(252,250,243,.24)",
+        "secondary": "rgba(252,250,243,.22/.05/.12), border 0",
+        "disabled": "gem layers display:none, opaque #e7e0d1 shows through"
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+# Oneli8 Design System — 1.0.0-beta.1
+
+Headless, vanilla HTML/CSS/JS design system synced from Figma.
+Figma file: 0wRnp6ulIEA8PCV6wqGmAJ ("Oneli8 Design System — 1.0.0-beta.1")
+
+## Rules for AI agents
+
+1. Token prefix is `--ol8-`. Never emit a literal color, size, or font value.
+2. Read `ai-context.json` before generating any component markup.
+3. Resolve a component in this order:
+   a. pick `footprint.element`
+   b. apply `baseClass` + `footprint` required attributes
+   c. for each Figma variant axis, look up the value and apply `emit` per its `strategy`
+      - `strategy: "pseudo"` and `strategy: "inherit"` emit NOTHING
+      - `strategy: "conditional-attribute"` branches on the element from (a)
+   d. apply `a11y.invariants`
+   e. self-check the result against every `forbid` pattern before returning
+4. Never invent a variant value. The values in `ai-context.json` are the complete set.
+
+## Figma property -> code attribute
+
+| Figma                       | Code                                    |
+|-----------------------------|-----------------------------------------|
+| Component name `Icon / X / Y` | `data-ol8-icon="<kebab y>"`           |
+| `Size` (Icon Frame)         | `data-ol8-icon-size="<9…108>"`          |
+| Semantic color              | inherited `color` — never set on icon   |
+| RTL mirroring registry      | `data-ol8-icon-mirror="true"`           |
+
+## Packages
+
+- `packages/tokens` — `src/tokens.json` -> `dist/tokens.css` (`--ol8-*`) + `dist/tokens.js`
+- `packages/core`   — headless atoms; buildless ESM + `.d.ts`, no bundler required
+- `packages/sync`   — Figma extraction / normalization scripts
+
+## Foundations (page 9:7) — complete
+
+337 CSS custom properties in `packages/tokens/dist/tokens.css`:
+99 primitives, 123 semantic roles, 17 dimension steps (3px-atomic),
+9 radii, 9 typography roles, 5 elevations.
+
+- Consume SEMANTIC roles only. Primitives are hidden from Figma pickers.
+- `--ol8-color-primary-*` aliases `--ol8-color-blue-*`; prefer the semantic role.
+- Typography roles are composite — use `.ol8-type-<role>`, not the raw font vars.
+- Elevation ink is cyan-840 `rgb(22,63,75)`, never black.
+
+## Status
+
+- [x] Foundations — 337 tokens. Verified in-browser, 0 unresolved, 0 mismatches.
+- [x] `ol8-icon` — 14 masters, 11 universal sizes. Verified in-browser.
+- [x] `ol8-btn` — 4 families x 4 sizes, all 6 states. Verified in-browser.
+- [x] `ol8-icon-btn` — 4 families x 2 shapes x 4 sizes, all 6 states.
+- [x] Gem material — Primary + Secondary, Button and Icon Button.
+
+## Gem material
+
+`data-ol8-material="gem"` on an existing button. NOT a variant, NOT a class.
+Approved for primary and secondary only; quiet and destructive stay regular.
+Gradient is `to bottom right` — that is exactly Figma's baked per-size angle
+(theta = 90deg + atan(W/H)), and unlike a baked degree it stays correct at any
+label width. Reduced Transparency hides the gem layers and the regular opaque
+button shows through.
+
+## Button rules
+
+The six Figma States are NOT six markup variants:
+Default -> base | Hover -> :hover | Pressed -> :active / [aria-pressed]
+Focus -> :focus-visible | Disabled -> [disabled] | Loading -> [data-ol8-loading]
+
+`.ol8-btn--hover` and friends are bugs. Secondary vs Quiet differ ONLY by
+`--ol8-component-button-secondaryboundary` (2px); their colors are identical.

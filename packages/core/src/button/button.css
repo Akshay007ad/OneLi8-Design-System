@@ -1,0 +1,193 @@
+/**
+ * Oneli8 · Button
+ * Figma: section "Button" (1034:9968) — Primary 15:823, Secondary 15:824,
+ *        Quiet 15:825, Destructive 15:826. 4 families × 4 sizes × 6 states.
+ *
+ * The governing rule comes from the Figma component description itself:
+ *
+ *   "State → deterministic visual evidence … Runtime-only native button
+ *    semantics, disabled, loading, pressed, fullWidth and iconMotion remain
+ *    implemented and tested in code; they must not become fake visual axes."
+ *
+ * So the six Figma States are NOT six markup variants:
+ *   Default  → the base rule
+ *   Hover    → :hover
+ *   Pressed  → :active  (and [aria-pressed="true"] for toggles)
+ *   Focus    → :focus-visible
+ *   Disabled → [disabled]           (native, not a class)
+ *   Loading  → [data-ol8-loading]   (which also implies disabled + aria-busy)
+ *
+ * There is no .ol8-btn--hover. Emitting one is a bug.
+ */
+
+.ol8-btn {
+  /* Per-variant channels. Families set these; the base rule never hardcodes. */
+  --_bg: transparent;
+  --_fg: currentColor;
+  --_bd: transparent;
+  --_bw: 0px;
+
+  /* Size channels, defaulted to Standard. */
+  --_h:    var(--ol8-component-button-height-standard);
+  --_px:   var(--ol8-component-button-paddinginline-standard);
+  --_r:    var(--ol8-component-button-radius-standard);
+  --_gap:  var(--ol8-component-button-gap-compact);
+  --_icon: var(--ol8-size-icon-small);
+
+  box-sizing: border-box;          /* Figma strokes are inside the frame */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--_gap);
+  block-size: var(--_h);
+  padding-inline: var(--_px);
+  padding-block: 0;
+  border: var(--_bw) solid var(--_bd);
+  border-radius: var(--_r);
+  background: var(--_bg);
+  color: var(--_fg);
+
+  font-family: var(--ol8-font-family-functional);
+  font-size: var(--ol8-font-size-016);
+  line-height: var(--ol8-font-line-024);
+  font-weight: var(--ol8-font-weight-regular);
+  letter-spacing: 0;
+  /* AR One Sans variable axis. Figma sets this on every functional text node;
+     omitting it shifts glyph advances and the button measures narrow. */
+  font-variation-settings: var(--ol8-font-variation-functional);
+
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  text-decoration: none;           /* when rendered as <a class="ol8-btn"> */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.ol8-btn__label { white-space: nowrap; }
+
+/* Button size governs icon size — the Figma Icon Frame is driven by the
+   button, never set on the glyph. Higher specificity than .ol8-icon's own
+   [data-ol8-icon-size] rule, deliberately. */
+.ol8-btn .ol8-icon { --_ol8-icon-size: var(--_icon); }
+
+/* ---- Size (Figma: Size variant axis) --------------------------------- */
+.ol8-btn[data-ol8-size="compact"] {
+  --_h: var(--ol8-component-button-height-compact);
+  --_px: var(--ol8-component-button-paddinginline-compact);
+  --_r: var(--ol8-component-button-radius-compact);
+  --_gap: var(--ol8-component-button-gap-compact);
+  --_icon: var(--ol8-size-icon-small);
+}
+.ol8-btn[data-ol8-size="standard"] {
+  --_h: var(--ol8-component-button-height-standard);
+  --_px: var(--ol8-component-button-paddinginline-standard);
+  --_r: var(--ol8-component-button-radius-standard);
+  --_gap: var(--ol8-component-button-gap-compact);      /* shared, by design */
+  --_icon: var(--ol8-size-icon-small);
+}
+.ol8-btn[data-ol8-size="comfortable"] {
+  --_h: var(--ol8-component-button-height-comfortable);
+  --_px: var(--ol8-component-button-paddinginline-comfortable);
+  --_r: var(--ol8-component-button-radius-comfortable);
+  --_gap: var(--ol8-component-button-gap-comfortable);
+  --_icon: var(--ol8-size-icon-standard);
+}
+.ol8-btn[data-ol8-size="large"] {
+  --_h: var(--ol8-component-button-height-large);
+  --_px: var(--ol8-component-button-paddinginline-large);
+  --_r: var(--ol8-component-button-radius-large);
+  --_gap: var(--ol8-component-button-gap-comfortable);  /* shared, by design */
+  --_icon: var(--ol8-size-icon-standard);
+}
+
+/* ---- Family: Primary ------------------------------------------------- */
+.ol8-btn--primary { --_bg: var(--ol8-color-actionprimary-default); --_fg: var(--ol8-color-actionprimary-content); }
+.ol8-btn--primary:hover:not(:disabled):not([data-ol8-loading]) { --_bg: var(--ol8-color-actionprimary-hover); }
+.ol8-btn--primary:active:not(:disabled):not([data-ol8-loading]),
+.ol8-btn--primary[aria-pressed="true"]:not(:disabled)          { --_bg: var(--ol8-color-actionprimary-pressed); }
+.ol8-btn--primary:disabled, .ol8-btn--primary[data-ol8-loading] {
+  --_bg: var(--ol8-color-actionprimary-disabled);
+  --_fg: var(--ol8-color-actionprimary-disabledcontent);
+}
+
+/* ---- Family: Destructive (same shape as Primary) --------------------- */
+.ol8-btn--destructive { --_bg: var(--ol8-color-actiondestructive-default); --_fg: var(--ol8-color-actiondestructive-content); }
+.ol8-btn--destructive:hover:not(:disabled):not([data-ol8-loading]) { --_bg: var(--ol8-color-actiondestructive-hover); }
+.ol8-btn--destructive:active:not(:disabled):not([data-ol8-loading]),
+.ol8-btn--destructive[aria-pressed="true"]:not(:disabled)          { --_bg: var(--ol8-color-actiondestructive-pressed); }
+.ol8-btn--destructive:disabled, .ol8-btn--destructive[data-ol8-loading] {
+  --_bg: var(--ol8-color-actiondestructive-disabled);
+  --_fg: var(--ol8-color-actiondestructive-disabledcontent);
+}
+
+/* ---- Family: Secondary ----------------------------------------------
+   Secondary and Quiet carry byte-identical color roles in Figma. The ONLY
+   differentiator is this boundary: Secondary has a 2px stroke whose color
+   tracks the content color; Quiet has none. Verified — Quiet's node binds no
+   --ol8-component-button-secondaryboundary at all.                        */
+.ol8-btn--secondary {
+  --_bw: var(--ol8-component-button-secondaryboundary);
+  --_bg: var(--ol8-color-actionsecondary-surfacedefault);
+  --_fg: var(--ol8-color-actionsecondary-contentdefault);
+  --_bd: var(--ol8-color-actionsecondary-contentdefault);
+}
+.ol8-btn--secondary:hover:not(:disabled):not([data-ol8-loading]) {
+  --_bg: var(--ol8-color-actionsecondary-surfacehover);
+  --_fg: var(--ol8-color-actionsecondary-contenthover);
+  --_bd: var(--ol8-color-actionsecondary-contenthover);
+}
+.ol8-btn--secondary:active:not(:disabled):not([data-ol8-loading]),
+.ol8-btn--secondary[aria-pressed="true"]:not(:disabled) {
+  --_bg: var(--ol8-color-actionsecondary-surfacepressed);
+  --_fg: var(--ol8-color-actionsecondary-contentpressed);
+  --_bd: var(--ol8-color-actionsecondary-contentpressed);
+}
+.ol8-btn--secondary:disabled, .ol8-btn--secondary[data-ol8-loading] {
+  --_bg: var(--ol8-color-actionsecondary-surfacedisabled);
+  --_fg: var(--ol8-color-actionsecondary-contentdisabled);
+  --_bd: var(--ol8-color-actionsecondary-contentdisabled);
+}
+
+/* ---- Family: Quiet (identical colors, no boundary) ------------------- */
+.ol8-btn--quiet {
+  --_bg: var(--ol8-color-actionquiet-surfacedefault);
+  --_fg: var(--ol8-color-actionquiet-contentdefault);
+}
+.ol8-btn--quiet:hover:not(:disabled):not([data-ol8-loading]) {
+  --_bg: var(--ol8-color-actionquiet-surfacehover);
+  --_fg: var(--ol8-color-actionquiet-contenthover);
+}
+.ol8-btn--quiet:active:not(:disabled):not([data-ol8-loading]),
+.ol8-btn--quiet[aria-pressed="true"]:not(:disabled) {
+  --_bg: var(--ol8-color-actionquiet-surfacepressed);
+  --_fg: var(--ol8-color-actionquiet-contentpressed);
+}
+.ol8-btn--quiet:disabled, .ol8-btn--quiet[data-ol8-loading] {
+  --_bg: var(--ol8-color-actionquiet-surfacedisabled);
+  --_fg: var(--ol8-color-actionquiet-contentdisabled);
+}
+
+/* ---- Focus ----------------------------------------------------------
+   Figma draws the focus ring as an INSIDE stroke, so the focused variant is
+   exactly the same size as the unfocused one (83×42 either way, Standard).
+   An inset box-shadow reproduces that without disturbing layout or fighting
+   Secondary's own 2px boundary — `outline` would sit outside and grow it.  */
+.ol8-btn:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 var(--ol8-focus-ring-innerwidth) var(--ol8-color-focus-outer);
+}
+
+/* ---- Disabled / Loading --------------------------------------------- */
+.ol8-btn:disabled, .ol8-btn[data-ol8-loading] { cursor: not-allowed; }
+.ol8-btn[data-ol8-loading] { cursor: progress; }
+
+/* "Platform motion adapters may rotate it; Reduced Motion keeps the static
+   busy mark." — Figma 379:7. Rotation is opt-in and motion-guarded. */
+@media (prefers-reduced-motion: no-preference) {
+  .ol8-btn[data-ol8-loading] .ol8-btn__spinner > svg { animation: ol8-spin 900ms linear infinite; }
+}
+@keyframes ol8-spin { to { transform: rotate(360deg); } }
+
+/* ---- fullWidth (runtime-only, per the Figma description) ------------- */
+.ol8-btn[data-ol8-fullwidth] { display: flex; inline-size: 100%; }

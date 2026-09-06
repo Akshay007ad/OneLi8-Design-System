@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Oneli8 · Icon atom proof</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=AR+One+Sans:wght@400..700&display=swap">
+<link rel="stylesheet" href="../packages/tokens/dist/tokens.css">
+<link rel="stylesheet" href="../packages/core/src/icon/icon.css">
+<style>
+  body { margin:0; padding:24px; background:var(--ol8-color-surface-default);
+         color:var(--ol8-color-text-primary); font-family:system-ui,sans-serif; }
+  h2 { font-size:14px; letter-spacing:.04em; text-transform:uppercase; opacity:.6; margin:32px 0 12px; }
+  .masters { display:flex; gap:var(--ol8-spacing-stack-grouped); flex-wrap:wrap;
+             background:var(--ol8-color-surface-sunken); padding:18px;
+             border:1px solid var(--ol8-color-border-subtle); }
+  .sizes { display:flex; align-items:flex-end; gap:12px; flex-wrap:wrap; }
+  .cell { display:flex; flex-direction:column; align-items:center; gap:6px; font-size:10px; opacity:.55; }
+  .ink { display:flex; gap:24px; align-items:center; }
+  .ink > * { color: var(--_c); }
+  [dir=rtl] { border-top:1px dashed var(--ol8-color-border-subtle); padding-top:16px; margin-top:16px; }
+</style>
+</head>
+<body>
+  <h2>All 14 masters · 24px (Figma 426:55)</h2>
+  <div class="masters" id="masters"></div>
+
+  <h2>Icon Frame universal sizes · geometric stroke scaling (Figma 418:51)</h2>
+  <div class="sizes" id="sizes"></div>
+
+  <h2>Semantic color supplied by consumer (currentColor)</h2>
+  <div class="ink" id="ink"></div>
+
+  <h2>RTL mirroring via semantic registry</h2>
+  <div class="ink"><span data-ol8-icon="forward" data-ol8-icon-size="36"></span><span>ltr</span></div>
+  <div dir="rtl" class="ink"><span data-ol8-icon="forward" data-ol8-icon-size="36"></span><span>rtl — mirrored</span></div>
+
+<script type="module">
+import { renderIcon, hydrateIcons, OL8_ICONS, OL8_ICON_SIZES } from '../packages/core/src/icon/icon.js';
+
+const order = ['add','forward','critical','visibility-open','loading','caution','positive',
+               'informative','visibility-closed','chevron-down','chevron-up','search','clear','close'];
+document.getElementById('masters').innerHTML =
+  order.map(n => `<div class="cell">${renderIcon(n, { size: 24 })}<span>${n}</span></div>`).join('');
+
+document.getElementById('sizes').innerHTML =
+  OL8_ICON_SIZES.map(s => `<div class="cell">${renderIcon('add', { size: s })}<span>${s}</span></div>`).join('');
+
+document.getElementById('ink').innerHTML =
+  [['#151817','primary'],['#b3261e','critical'],['#7a5901','caution'],['#1b6b3a','positive']]
+    .map(([c,l]) => `<div class="cell" style="--_c:${c}">${renderIcon(l==='primary'?'add':l, { size: 36 })}<span>${l}</span></div>`).join('');
+
+hydrateIcons();
+console.log('[proof] registry size', Object.keys(OL8_ICONS).length);
+</script>
+</body>
+</html>

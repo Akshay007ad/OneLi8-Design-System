@@ -1,0 +1,191 @@
+/**
+ * Oneli8 · Icon Button
+ * Figma: section "Icon Button" (1034:10546) — Primary 86:2, Secondary 87:26,
+ *        Quiet 88:50, Destructive 89:74, plus the four Circle sets.
+ *        4 families × 2 shapes × 4 sizes × 6 states = 192 components.
+ *
+ * Documentation (85:9):
+ *   "Visible boxes: 36/42/48/60px · protected targets: 48/48/48/60px
+ *    Artwork: 18/18/24/36px
+ *    Hover changes the container only; the symbol never translates, rotates
+ *    or scales. Accessible name is mandatory. Rounded Square is the canonical
+ *    base; Circle is a governed presentation extension."
+ *
+ * The component is TWO boxes, and that is the whole point:
+ *   .ol8-icon-btn           — the protected TARGET. Transparent, no paint.
+ *                             Never smaller than 48px even when the visible
+ *                             box is 36px, so the hit area stays compliant.
+ *   .ol8-icon-btn__surface  — the VISIBLE box. Carries bg, 2px border, radius.
+ *
+ * Collapsing these into one element would silently shrink the touch target
+ * to 36px at Compact. Don't.
+ */
+
+.ol8-icon-btn {
+  --_target:  var(--ol8-component-iconbutton-target-standard);
+  --_box:     var(--ol8-component-iconbutton-box-standard);
+  --_radius:  var(--ol8-component-iconbutton-radius-standard);
+  --_artwork: var(--ol8-component-iconbutton-artwork-standard);
+
+  --_bg: transparent;
+  --_bd: transparent;
+  --_ink: var(--ol8-color-icon-primary);
+
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--_target);
+  block-size: var(--_target);
+  padding: 0;
+  border: 0;
+  background: none;          /* the target paints nothing */
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.ol8-icon-btn__surface {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--_box);
+  block-size: var(--_box);
+  border: var(--ol8-border-width-standard) solid var(--_bd);
+  border-radius: var(--_radius);
+  background: var(--_bg);
+  color: var(--_ink);
+}
+
+/* The surface governs artwork size — never set a size on the glyph. */
+.ol8-icon-btn .ol8-icon { --_ol8-icon-size: var(--_artwork); }
+
+/* "the symbol never translates, rotates, or scales" — no transform on the
+   glyph in any state. Hover changes the container only. */
+
+/* ---- Size ------------------------------------------------------------ */
+.ol8-icon-btn[data-ol8-size="compact"] {
+  --_target: var(--ol8-component-iconbutton-target-compact);
+  --_box: var(--ol8-component-iconbutton-box-compact);
+  --_radius: var(--ol8-component-iconbutton-radius-compact);
+  --_artwork: var(--ol8-component-iconbutton-artwork-compact);
+}
+.ol8-icon-btn[data-ol8-size="standard"] {
+  --_target: var(--ol8-component-iconbutton-target-standard);
+  --_box: var(--ol8-component-iconbutton-box-standard);
+  --_radius: var(--ol8-component-iconbutton-radius-standard);
+  --_artwork: var(--ol8-component-iconbutton-artwork-standard);
+}
+.ol8-icon-btn[data-ol8-size="comfortable"] {
+  --_target: var(--ol8-component-iconbutton-target-comfortable);
+  --_box: var(--ol8-component-iconbutton-box-comfortable);
+  --_radius: var(--ol8-component-iconbutton-radius-comfortable);
+  --_artwork: var(--ol8-component-iconbutton-artwork-comfortable);
+}
+.ol8-icon-btn[data-ol8-size="large"] {
+  --_target: var(--ol8-component-iconbutton-target-large);
+  --_box: var(--ol8-component-iconbutton-box-large);
+  --_radius: var(--ol8-component-iconbutton-radius-large);
+  --_artwork: var(--ol8-component-iconbutton-artwork-large);
+}
+
+/* ---- Shape: Circle is a governed presentation extension -------------- */
+.ol8-icon-btn[data-ol8-shape="circle"] { --_radius: var(--ol8-shape-radius-full); }
+
+/* ---- Family: Primary ------------------------------------------------- */
+.ol8-icon-btn--primary { --_bg: var(--ol8-color-actionprimary-default); --_bd: var(--ol8-color-actionprimary-default); }
+.ol8-icon-btn--primary:hover:not(:disabled):not([data-ol8-loading]) > .ol8-icon-btn__surface,
+.ol8-icon-btn--primary[data-ol8-loading] > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actionprimary-hover); --_bd: var(--ol8-color-actionprimary-hover);
+}
+.ol8-icon-btn--primary:active:not(:disabled) > .ol8-icon-btn__surface,
+.ol8-icon-btn--primary[aria-pressed="true"]:not(:disabled) > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actionprimary-pressed); --_bd: var(--ol8-color-actionprimary-pressed);
+}
+.ol8-icon-btn--primary:disabled > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actionprimary-disabled); --_bd: var(--ol8-color-border-disabled);
+}
+
+/* ---- Family: Destructive --------------------------------------------- */
+.ol8-icon-btn--destructive { --_bg: var(--ol8-color-actiondestructive-default); --_bd: var(--ol8-color-actiondestructive-default); }
+.ol8-icon-btn--destructive:hover:not(:disabled):not([data-ol8-loading]) > .ol8-icon-btn__surface,
+.ol8-icon-btn--destructive[data-ol8-loading] > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actiondestructive-hover); --_bd: var(--ol8-color-actiondestructive-hover);
+}
+.ol8-icon-btn--destructive:active:not(:disabled) > .ol8-icon-btn__surface,
+.ol8-icon-btn--destructive[aria-pressed="true"]:not(:disabled) > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actiondestructive-pressed); --_bd: var(--ol8-color-actiondestructive-pressed);
+}
+.ol8-icon-btn--destructive:disabled > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actiondestructive-disabled); --_bd: var(--ol8-color-border-disabled);
+}
+
+/* ---- Family: Secondary (bordered, transparent) ----------------------- */
+.ol8-icon-btn--secondary {
+  --_bg: var(--ol8-color-actionsecondary-surfacedefault);
+  --_bd: var(--ol8-color-actionsecondary-contentdefault);
+  --_ink: var(--ol8-color-actionsecondary-contentdefault);
+}
+.ol8-icon-btn--secondary:hover:not(:disabled):not([data-ol8-loading]) > .ol8-icon-btn__surface,
+.ol8-icon-btn--secondary[data-ol8-loading] > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actionsecondary-surfacehover);
+  --_bd: var(--ol8-color-actionsecondary-contenthover);
+  --_ink: var(--ol8-color-actionsecondary-contenthover);
+}
+.ol8-icon-btn--secondary:active:not(:disabled) > .ol8-icon-btn__surface,
+.ol8-icon-btn--secondary[aria-pressed="true"]:not(:disabled) > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actionsecondary-surfacepressed);
+  --_bd: var(--ol8-color-actionsecondary-contentpressed);
+  --_ink: var(--ol8-color-actionsecondary-contentpressed);
+}
+.ol8-icon-btn--secondary:disabled > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actionsecondary-surfacedisabled);
+  --_bd: var(--ol8-color-border-disabled);
+  --_ink: var(--ol8-color-actionsecondary-contentdisabled);
+}
+
+/* ---- Family: Quiet (no boundary) ------------------------------------- */
+.ol8-icon-btn--quiet {
+  --_bg: var(--ol8-color-actionquiet-surfacedefault);
+  --_bd: transparent;
+  --_ink: var(--ol8-color-actionquiet-contentdefault);
+}
+.ol8-icon-btn--quiet:hover:not(:disabled):not([data-ol8-loading]) > .ol8-icon-btn__surface,
+.ol8-icon-btn--quiet[data-ol8-loading] > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actionquiet-surfacehover); --_ink: var(--ol8-color-actionquiet-contenthover);
+}
+.ol8-icon-btn--quiet:active:not(:disabled) > .ol8-icon-btn__surface,
+.ol8-icon-btn--quiet[aria-pressed="true"]:not(:disabled) > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actionquiet-surfacepressed); --_ink: var(--ol8-color-actionquiet-contentpressed);
+}
+.ol8-icon-btn--quiet:disabled > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actionquiet-surfacedisabled); --_ink: var(--ol8-color-actionquiet-contentdisabled);
+}
+
+/* ---- Pressed scrim ---------------------------------------------------
+   Figma layers a 3px inset scrim over the pressed surface, in addition to
+   the darker fill. Reproduced as an inset shadow rather than an extra node. */
+.ol8-icon-btn:active:not(:disabled) > .ol8-icon-btn__surface,
+.ol8-icon-btn[aria-pressed="true"]:not(:disabled) > .ol8-icon-btn__surface {
+  box-shadow: inset 0 0 0 3px var(--ol8-component-iconbutton-pressedscrim);
+}
+
+/* ---- Focus -----------------------------------------------------------
+   OUTSIDE two-tone ring, unlike the labelled Button's inside stroke.
+   Shadow order is Figma's own: the 6px outer is declared first and therefore
+   paints over the 3px inner, which is why only the dark band is visible in
+   the design. See README — the inner ring is currently occluded. */
+.ol8-icon-btn:focus-visible { outline: none; }
+.ol8-icon-btn:focus-visible > .ol8-icon-btn__surface {
+  box-shadow:
+    0 0 0 var(--ol8-focus-ring-outerwidth) var(--ol8-color-focus-outer),
+    0 0 0 var(--ol8-focus-ring-innerwidth) var(--ol8-color-focus-inner);
+}
+
+/* ---- Disabled / Loading ---------------------------------------------- */
+.ol8-icon-btn:disabled { cursor: not-allowed; }
+.ol8-icon-btn[data-ol8-loading] { cursor: progress; }
+@media (prefers-reduced-motion: no-preference) {
+  .ol8-icon-btn[data-ol8-loading] .ol8-icon > svg { animation: ol8-spin 900ms linear infinite; }
+}

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Oneli8 · Icon Button proof</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=AR+One+Sans:wght@400..700&display=swap">
+<link rel="stylesheet" href="../packages/tokens/dist/tokens.css">
+<link rel="stylesheet" href="../packages/core/src/icon/icon.css">
+<link rel="stylesheet" href="../packages/core/src/icon-button/icon-button.css">
+<style>
+  body { margin:0; padding:36px; background:var(--ol8-color-background-canvas);
+         color:var(--ol8-color-text-primary); font-family:var(--ol8-font-family-functional); }
+  h2 { margin:30px 0 9px; }
+  .grid { display:grid; grid-template-columns:repeat(6,max-content); gap:12px 24px; align-items:center; }
+  .hd { font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--ol8-color-text-muted); }
+  .target { outline:1px dashed rgba(150,0,0,.35); }
+</style>
+</head>
+<body>
+  <div id="out"></div>
+<script type="module">
+import { renderIconButton, hydrateIconButtons, OL8_ICON_BUTTON_VARIANTS, OL8_ICON_BUTTON_SIZES } from '../packages/core/src/icon-button/icon-button.js';
+const STATES=['Default','Hover','Pressed','Focus','Disabled','Loading'];
+out.innerHTML = ['rounded','circle'].map(shape =>
+  OL8_ICON_BUTTON_VARIANTS.map(v => `
+  <h2 class="ol8-type-title-small">Icon Button / ${v[0].toUpperCase()+v.slice(1)}${shape==='circle'?' / Circle':''}</h2>
+  <div class="grid">
+    ${STATES.map(s=>`<div class="hd">${s}</div>`).join('')}
+    ${OL8_ICON_BUTTON_SIZES.map(size => STATES.map(state => {
+      const o={variant:v,size,shape};
+      if(state==='Disabled')o.disabled=true;
+      if(state==='Loading')o.loading=true;
+      if(state==='Pressed')o.pressed=true;
+      return `<span data-shape="${shape}" data-variant="${v}" data-size="${size}" data-state="${state}">${renderIconButton('add','Add item',o)}</span>`;
+    }).join('')).join('')}
+  </div>`).join('')).join('');
+hydrateIconButtons();
+</script>
+</body>
+</html>

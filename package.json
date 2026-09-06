@@ -1,0 +1,12 @@
+{
+  "name": "oneli8",
+  "private": true,
+  "version": "1.0.0-beta.1",
+  "type": "module",
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "sync:icons": "node packages/sync/src/build-icons.mjs",
+    "sync:tokens": "node packages/sync/src/build-tokens.mjs",
+    "build": "npm run sync:tokens && npm run sync:icons"
+  }
+}

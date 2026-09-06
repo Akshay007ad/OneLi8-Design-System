@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Oneli8 · Gem material proof</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=AR+One+Sans:wght@400..700&display=swap">
+<link rel="stylesheet" href="../packages/tokens/dist/tokens.css">
+<link rel="stylesheet" href="../packages/core/src/icon/icon.css">
+<link rel="stylesheet" href="../packages/core/src/button/button.css">
+<link rel="stylesheet" href="../packages/core/src/icon-button/icon-button.css">
+<link rel="stylesheet" href="../packages/core/src/material-gem/gem.css">
+<style>
+  body { margin:0; padding:28px; background:var(--ol8-color-background-inverse);
+         color:var(--ol8-color-text-inverse); font-family:var(--ol8-font-family-functional); }
+  h2 { margin:24px 0 8px; font-size:15px; }
+  .grid { display:grid; grid-template-columns:repeat(6,max-content); gap:12px 20px; align-items:center; }
+  .hd { font-size:10px; text-transform:uppercase; letter-spacing:.06em; opacity:.55; }
+  /* ---- gradient-angle equivalence test ---- */
+  .diff { position:relative; isolation:isolate; display:inline-block; margin-right:16px;
+          background:#000; outline:1px solid #444; }
+  .diff > i { position:absolute; inset:0; display:block; }
+  .diff > i.b { mix-blend-mode:difference; }
+  .cap { font-size:10px; opacity:.6; display:block; margin-top:4px; }
+</style>
+</head>
+<body>
+  <h2>Gradient angle · Figma baked degrees vs CSS <code>to bottom right</code></h2>
+  <p style="font-size:12px;opacity:.7;max-width:70ch;margin:0 0 12px">
+    Each tile overlays the two with <code>mix-blend-mode:difference</code>.
+    Identical output renders pure black. Any visible colour is a mismatch.</p>
+  <div id="difftest"></div>
+
+  <div id="out"></div>
+<script type="module">
+import { renderButton, OL8_BUTTON_SIZES } from '../packages/core/src/button/button.js';
+import { renderIconButton } from '../packages/core/src/icon-button/icon-button.js';
+
+const STOPS = 'var(--ol8-material-control-gem--primary-start) 14.639%, var(--ol8-material-control-gem--primary-mid) 48.586%, var(--ol8-material-control-gem--primary-end) 85.361%';
+const CASES = [
+  { name:'Standard 83x42',    w:83,  h:42, deg:153.1594904667868 },
+  { name:'Comfortable 89x48', w:89,  h:48, deg:151.6608679641041 },
+  { name:'Large 101x60',      w:101, h:60, deg:149.28717228484115 },
+];
+difftest.innerHTML = CASES.map(c => `
+  <span>
+    <span class="diff" style="width:${c.w*3}px;height:${c.h*3}px">
+      <i style="background-image:linear-gradient(${c.deg}deg, ${STOPS})"></i>
+      <i class="b" style="background-image:linear-gradient(to bottom right, ${STOPS})"></i>
+    </span>
+    <span class="cap">${c.name} · θ=${c.deg.toFixed(4)}°</span>
+  </span>`).join('');
+
+const STATES=['Default','Hover','Pressed','Focus','Disabled','Loading'];
+out.innerHTML = ['primary','secondary'].map(v => `
+  <h2>Button / ${v[0].toUpperCase()+v.slice(1)} / Gem</h2>
+  <div class="grid">
+    ${STATES.map(s=>`<div class="hd">${s}</div>`).join('')}
+    ${OL8_BUTTON_SIZES.map(size => STATES.map(state => {
+      const o={variant:v,size,material:'gem'};
+      if(state==='Disabled')o.disabled=true;
+      if(state==='Loading')o.loading=true;
+      if(state==='Pressed')o.pressed=true;
+      return `<span data-variant="${v}" data-size="${size}" data-state="${state}">${renderButton('Button',o)}</span>`;
+    }).join('')).join('')}
+  </div>`).join('') + `
+  <h2>Icon Button / Gem · rounded + circle</h2>
+  <div style="display:flex;gap:16px;align-items:center">
+    ${['primary','secondary'].flatMap(v=>['rounded','circle'].map(shape=>
+      renderIconButton('add','Add item',{variant:v,shape,size:'comfortable',material:'gem'}))).join('')}
+  </div>`;
+</script>
+</body>
+</html>

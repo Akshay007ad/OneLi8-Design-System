@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Oneli8 · Button proof</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=AR+One+Sans:wght@400..700&display=swap">
+<link rel="stylesheet" href="../packages/tokens/dist/tokens.css">
+<link rel="stylesheet" href="../packages/core/src/icon/icon.css">
+<link rel="stylesheet" href="../packages/core/src/button/button.css">
+<style>
+  body { margin:0; padding:36px; background:var(--ol8-color-background-canvas);
+         color:var(--ol8-color-text-primary); font-family:var(--ol8-font-family-functional); }
+  h2 { margin:36px 0 12px; }
+  .grid { display:grid; grid-template-columns:repeat(6,max-content); gap:18px 24px; align-items:center; }
+  .hd { font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--ol8-color-text-muted); }
+</style>
+</head>
+<body>
+  <div id="out"></div>
+<script type="module">
+import { renderButton, hydrateButtons, OL8_BUTTON_VARIANTS, OL8_BUTTON_SIZES } from '../packages/core/src/button/button.js';
+
+const STATES = ['Default','Hover','Pressed','Focus','Disabled','Loading'];
+out.innerHTML = OL8_BUTTON_VARIANTS.map(v => `
+  <h2 class="ol8-type-title-small">Button / ${v[0].toUpperCase()+v.slice(1)}</h2>
+  <div class="grid">
+    ${STATES.map(s=>`<div class="hd">${s}</div>`).join('')}
+    ${OL8_BUTTON_SIZES.map(size => STATES.map(state => {
+        const o = { variant:v, size };
+        if (state==='Disabled') o.disabled = true;
+        if (state==='Loading')  o.loading  = true;
+        if (state==='Pressed')  o.pressed  = true;
+        return `<span data-state="${state}" data-size="${size}" data-variant="${v}">${renderButton('Button', o)}</span>`;
+      }).join('')).join('')}
+  </div>`).join('');
+hydrateButtons();
+</script>
+</body>
+</html>

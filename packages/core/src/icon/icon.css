@@ -1,0 +1,54 @@
+/**
+ * Oneli8 · Icon atom
+ * Figma: page "Iconography" — masters "Icon Library / Masters" (426:55),
+ *        sizing from "Icon Frame" (418:51).
+ *
+ * Contract, straight from the Figma component descriptions:
+ *   - one canonical 24px source per glyph
+ *   - the Icon Frame *geometrically* scales the complete source instance, so
+ *     the 1.8-unit stroke scales with the artwork (48px icon => 3.6px stroke).
+ *     This is why the SVG keeps viewBox="0 0 24 24" and we size the box only —
+ *     never `vector-effect: non-scaling-stroke`.
+ *   - the source is neutral; the consumer supplies semantic color, which is
+ *     why every stroke/fill is `currentColor`.
+ */
+
+.ol8-icon {
+  /* The outer asset box. Defaults to the canonical 24px source size. */
+  --_ol8-icon-size: var(--ol8-icon-size-024);
+
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--_ol8-icon-size);
+  block-size: var(--_ol8-icon-size);
+  /* Inherit ink from the consuming component (semantic color lives there). */
+  color: inherit;
+}
+
+/* The inner leaf. Both dimensions are explicit — never `auto`. */
+.ol8-icon > svg {
+  display: block;
+  inline-size: var(--_ol8-icon-size);
+  block-size: var(--_ol8-icon-size);
+  overflow: visible; /* matches the Figma export; round caps may kiss the edge */
+}
+
+/* ---- Icon Frame · universal sizes (Figma 418:51) ---------------------- */
+.ol8-icon[data-ol8-icon-size="9"]   { --_ol8-icon-size: var(--ol8-icon-size-009); }
+.ol8-icon[data-ol8-icon-size="12"]  { --_ol8-icon-size: var(--ol8-icon-size-012); }
+.ol8-icon[data-ol8-icon-size="18"]  { --_ol8-icon-size: var(--ol8-icon-size-018); }
+.ol8-icon[data-ol8-icon-size="24"]  { --_ol8-icon-size: var(--ol8-icon-size-024); }
+.ol8-icon[data-ol8-icon-size="30"]  { --_ol8-icon-size: var(--ol8-icon-size-030); }
+.ol8-icon[data-ol8-icon-size="36"]  { --_ol8-icon-size: var(--ol8-icon-size-036); }
+.ol8-icon[data-ol8-icon-size="48"]  { --_ol8-icon-size: var(--ol8-icon-size-048); }
+.ol8-icon[data-ol8-icon-size="60"]  { --_ol8-icon-size: var(--ol8-icon-size-060); }
+.ol8-icon[data-ol8-icon-size="72"]  { --_ol8-icon-size: var(--ol8-icon-size-072); }
+.ol8-icon[data-ol8-icon-size="96"]  { --_ol8-icon-size: var(--ol8-icon-size-096); }
+.ol8-icon[data-ol8-icon-size="108"] { --_ol8-icon-size: var(--ol8-icon-size-108); }
+
+/* ---- Direction ------------------------------------------------------- */
+/* "Direction: semantic registry controls RTL mirroring" (Iconography doc 84:13).
+   The registry sets data-ol8-icon-mirror; CSS only obeys it. */
+[dir="rtl"] .ol8-icon[data-ol8-icon-mirror="true"] > svg { transform: scaleX(-1); }

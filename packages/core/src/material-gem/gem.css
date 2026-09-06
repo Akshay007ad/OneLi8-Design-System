@@ -1,0 +1,171 @@
+/**
+ * Oneli8 · Gem material adapter
+ * Figma: section "Gem Button" (1034:9969) — 144 components across
+ *   Button/Primary/Gem 100:3, Button/Secondary/Gem 100:208,
+ *   Icon Button ±Circle Primary/Secondary Gem 102:78, 102:151, 119:202, 119:299.
+ *
+ * From the Figma description (100:3):
+ *   "Material adapter — NOT a fifth semantic variant. Geometry, meaning,
+ *    accessibility, protected target, Size, State, label/icon content and
+ *    native behavior are inherited from the regular molecule. Material changes
+ *    only the token-bound surface and inner focus edge. Reduced Transparency
+ *    resolves to the regular opaque equivalent. Quiet and Destructive use the
+ *    regular material treatment until a distinct Gem treatment is explicitly
+ *    approved."
+ *
+ * So Gem is an ATTRIBUTE on an existing button, never a new class:
+ *   <button class="ol8-btn ol8-btn--primary" data-ol8-material="gem">
+ *
+ * It adds exactly two painted layers and touches nothing else:
+ *   ::before  the three-stop body + backdrop blur
+ *   ::after   the rim (specular top edge + integrated light rim)
+ *
+ * THE GRADIENT ANGLE
+ * Figma bakes a per-instance angle: 153.1595deg at Standard (83x42),
+ * 151.6609 at Comfortable (89x48), 149.2872 at Large (101x60). Those are not
+ * three different designs — every one satisfies
+ *       theta = 90deg + atan(W / H)
+ * to four decimal places, which is exactly CSS's `to bottom right` corner
+ * keyword (gradient line perpendicular to the other diagonal). Using the
+ * keyword reproduces Figma at every size AND at any label width, where a baked
+ * degree value would only be correct for the one instance it was measured on.
+ */
+
+.ol8-btn[data-ol8-material="gem"],
+.ol8-icon-btn[data-ol8-material="gem"] > .ol8-icon-btn__surface {
+  position: relative;
+  isolation: isolate;
+  --_rim: var(--ol8-material-control-gem--rim-default);
+}
+
+/* The regular opaque background stays underneath on purpose — it is what
+   shows through when the gem layer is suppressed for Reduced Transparency. */
+.ol8-btn[data-ol8-material="gem"]::before,
+.ol8-icon-btn[data-ol8-material="gem"] > .ol8-icon-btn__surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  backdrop-filter: blur(var(--ol8-material-control-gem--blur));
+  -webkit-backdrop-filter: blur(var(--ol8-material-control-gem--blur));
+  background-image: linear-gradient(
+    to bottom right,
+    var(--_g1) var(--ol8-material-control-gem--stop-1),
+    var(--_g2) var(--ol8-material-control-gem--stop-2),
+    var(--_g3) var(--ol8-material-control-gem--stop-3));
+}
+
+.ol8-btn[data-ol8-material="gem"]::after,
+.ol8-icon-btn[data-ol8-material="gem"] > .ol8-icon-btn__surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    inset 0 2px 1px 0 var(--ol8-material-control-gem--rim-specular),
+    inset 0 0 0 0 var(--_rim);
+}
+
+/* ---- Primary · three-stop same-hue body ------------------------------ */
+.ol8-btn--primary[data-ol8-material="gem"],
+.ol8-icon-btn--primary[data-ol8-material="gem"] > .ol8-icon-btn__surface {
+  --_g1: var(--ol8-material-control-gem--primary-start);
+  --_g2: var(--ol8-material-control-gem--primary-mid);
+  --_g3: var(--ol8-material-control-gem--primary-end);
+  --_fg: var(--ol8-material-control-gem--primary-content);
+  --_ink: var(--ol8-material-control-gem--primary-content);
+}
+.ol8-btn--primary[data-ol8-material="gem"]:hover:not(:disabled):not([data-ol8-loading]),
+.ol8-icon-btn--primary[data-ol8-material="gem"]:hover:not(:disabled):not([data-ol8-loading]) > .ol8-icon-btn__surface {
+  --_g1: var(--ol8-material-control-gem--primary-hover-start);
+  --_g2: var(--ol8-material-control-gem--primary-hover-mid);
+  --_g3: var(--ol8-material-control-gem--primary-hover-end);
+  --_rim: var(--ol8-material-control-gem--rim-hover);
+}
+/* Pressed reuses the HOVER stops and adds the cut-edge drop shadow. */
+.ol8-btn--primary[data-ol8-material="gem"]:active:not(:disabled),
+.ol8-btn--primary[data-ol8-material="gem"][aria-pressed="true"]:not(:disabled),
+.ol8-icon-btn--primary[data-ol8-material="gem"]:active:not(:disabled) > .ol8-icon-btn__surface,
+.ol8-icon-btn--primary[data-ol8-material="gem"][aria-pressed="true"]:not(:disabled) > .ol8-icon-btn__surface {
+  --_g1: var(--ol8-material-control-gem--primary-hover-start);
+  --_g2: var(--ol8-material-control-gem--primary-hover-mid);
+  --_g3: var(--ol8-material-control-gem--primary-hover-end);
+  --_rim: var(--ol8-material-control-gem--rim-hover);
+}
+.ol8-btn--primary[data-ol8-material="gem"]:active:not(:disabled),
+.ol8-btn--primary[data-ol8-material="gem"][aria-pressed="true"]:not(:disabled) {
+  filter: drop-shadow(0 9px 12px var(--ol8-material-gem-color-cutedge-shadow));
+}
+.ol8-btn--primary[data-ol8-material="gem"][data-ol8-loading],
+.ol8-icon-btn--primary[data-ol8-material="gem"][data-ol8-loading] > .ol8-icon-btn__surface {
+  --_g1: var(--ol8-material-control-gem--primary-loading-start);
+  --_g2: var(--ol8-material-control-gem--primary-loading-mid);
+  --_g3: var(--ol8-material-control-gem--primary-loading-end);
+}
+
+/* ---- Secondary · transparent body with an integrated light rim -------
+   The regular Secondary's 2px boundary is dropped in Gem; the rim replaces
+   it. Reduced Transparency restores the boundary along with the opaque body. */
+.ol8-btn--secondary[data-ol8-material="gem"] { --_bw: 0px; }
+.ol8-btn--secondary[data-ol8-material="gem"],
+.ol8-icon-btn--secondary[data-ol8-material="gem"] > .ol8-icon-btn__surface {
+  --_g1: var(--ol8-material-control-gem--secondary-high);
+  --_g2: var(--ol8-material-control-gem--secondary-mid);
+  --_g3: var(--ol8-material-control-gem--secondary-low);
+  --_fg: var(--ol8-material-control-gem--secondary-content);
+  --_ink: var(--ol8-material-control-gem--secondary-content);
+  --_bd: transparent;
+}
+.ol8-btn--secondary[data-ol8-material="gem"]:hover:not(:disabled):not([data-ol8-loading]),
+.ol8-icon-btn--secondary[data-ol8-material="gem"]:hover:not(:disabled):not([data-ol8-loading]) > .ol8-icon-btn__surface {
+  --_g1: var(--ol8-material-control-gem--secondary-hover-high);
+  --_g2: var(--ol8-material-control-gem--secondary-hover-mid);
+  --_g3: var(--ol8-material-control-gem--secondary-hover-low);
+  --_rim: var(--ol8-material-control-gem--rim-hover);
+  --_fg: var(--ol8-material-control-gem--secondary-content);
+}
+.ol8-btn--secondary[data-ol8-material="gem"]:active:not(:disabled),
+.ol8-btn--secondary[data-ol8-material="gem"][aria-pressed="true"]:not(:disabled),
+.ol8-icon-btn--secondary[data-ol8-material="gem"]:active:not(:disabled) > .ol8-icon-btn__surface {
+  --_g1: var(--ol8-material-control-gem--secondary-hover-high);
+  --_g2: var(--ol8-material-control-gem--secondary-hover-mid);
+  --_g3: var(--ol8-material-control-gem--secondary-hover-low);
+  --_rim: var(--ol8-material-control-gem--rim-hover);
+  --_fg: var(--ol8-material-control-gem--secondary-content);
+}
+.ol8-btn--secondary[data-ol8-material="gem"][data-ol8-loading],
+.ol8-icon-btn--secondary[data-ol8-material="gem"][data-ol8-loading] > .ol8-icon-btn__surface {
+  --_g1: var(--ol8-material-control-gem--secondary-loading-high);
+  --_g2: var(--ol8-material-control-gem--secondary-loading-mid);
+  --_g3: var(--ol8-material-control-gem--secondary-loading-low);
+}
+
+/* Content must sit above the ::before body. */
+.ol8-btn[data-ol8-material="gem"] > *,
+.ol8-icon-btn[data-ol8-material="gem"] .ol8-icon { position: relative; z-index: 0; }
+
+/* ---- Disabled inherits the regular opaque treatment ------------------ */
+.ol8-btn[data-ol8-material="gem"]:disabled::before,
+.ol8-btn[data-ol8-material="gem"]:disabled::after,
+.ol8-icon-btn[data-ol8-material="gem"]:disabled > .ol8-icon-btn__surface::before,
+.ol8-icon-btn[data-ol8-material="gem"]:disabled > .ol8-icon-btn__surface::after { display: none; }
+
+/* ---- Reduced Transparency -> the regular opaque equivalent -----------
+   Explicitly required by the Figma description. Hiding the gem layers
+   reveals the regular molecule's own background, which was never removed. */
+@media (prefers-reduced-transparency: reduce) {
+  .ol8-btn[data-ol8-material="gem"]::before,
+  .ol8-btn[data-ol8-material="gem"]::after,
+  .ol8-icon-btn[data-ol8-material="gem"] > .ol8-icon-btn__surface::before,
+  .ol8-icon-btn[data-ol8-material="gem"] > .ol8-icon-btn__surface::after { display: none; }
+  .ol8-btn--secondary[data-ol8-material="gem"] {
+    --_bw: var(--ol8-component-button-secondaryboundary);
+    --_bd: var(--ol8-color-actionsecondary-contentdefault);
+    --_fg: var(--ol8-color-actionsecondary-contentdefault);
+  }
+  .ol8-btn--primary[data-ol8-material="gem"] { --_fg: var(--ol8-color-actionprimary-content); }
+  .ol8-btn[data-ol8-material="gem"]:active { filter: none; }
+}

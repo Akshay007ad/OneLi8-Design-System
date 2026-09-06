@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Oneli8 · Foundations proof</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=AR+One+Sans:wght@400..700&display=swap">
+<link rel="stylesheet" href="../packages/tokens/dist/tokens.css">
+<style>
+  body { margin:0; padding:36px; background:var(--ol8-color-background-canvas);
+         color:var(--ol8-color-text-primary); font-family:var(--ol8-font-family-functional),system-ui,sans-serif; }
+  h2 { margin:48px 0 6px; }
+  .note { color:var(--ol8-color-text-muted); margin:0 0 18px; }
+  .ramp { display:grid; grid-template-columns:96px repeat(11,1fr); gap:3px; align-items:center; margin-bottom:3px; }
+  .ramp b { font-size:12px; font-weight:600; }
+  .sw { height:36px; border-radius:var(--ol8-shape-radius-subtle); }
+  .steps { display:grid; grid-template-columns:96px repeat(11,1fr); gap:3px; font-size:10px;
+           color:var(--ol8-color-text-muted); margin-bottom:9px; text-align:center; }
+  .roles { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:9px; }
+  .role { border:1px solid var(--ol8-color-border-subtle); border-radius:var(--ol8-shape-radius-compact); overflow:hidden; }
+  .role .chip { height:42px; }
+  .role .lbl { padding:6px 9px; font-size:11px; }
+  .radii, .elev { display:flex; gap:18px; flex-wrap:wrap; }
+  .radii div, .elev div { width:150px; height:96px; background:var(--ol8-color-surface-default);
+    border:1px solid var(--ol8-color-border-subtle); display:flex; align-items:center; justify-content:center; font-size:11px; }
+  .elev div { border:none; border-radius:var(--ol8-shape-radius-standard); }
+  .elev { background:var(--ol8-color-background-subtle); padding:36px 24px 54px; gap:30px; }
+</style>
+</head>
+<body>
+  <h2 class="ol8-type-title-large">Primitive palette · 99</h2>
+  <p class="ol8-type-body-small note">9 families × 11 steps</p>
+  <div class="steps"><span></span><span>030</span><span>060</span><span>090</span><span>120</span><span>240</span><span>360</span><span>480</span><span>600</span><span>720</span><span>840</span><span>930</span></div>
+  <div id="ramps"></div>
+
+  <h2 class="ol8-type-title-large">Semantic roles · 123</h2>
+  <p class="ol8-type-body-small note">components consume these; primitives stay hidden from pickers</p>
+  <div class="roles" id="roles"></div>
+
+  <h2 class="ol8-type-title-large">Typography · 9 roles</h2>
+  <div id="type"></div>
+
+  <h2 class="ol8-type-title-large">Shape and Radius</h2>
+  <div class="radii" id="radii"></div>
+
+  <h2 class="ol8-type-title-large">Elevation</h2>
+  <div class="elev" id="elev"></div>
+
+<script type="module">
+import { tokens } from '../packages/tokens/dist/tokens.js';
+const S = ['030','060','090','120','240','360','480','600','720','840','930'];
+const FAM = ['neutral','blue','cyan','green','yellow','orange','pink','violet','red'];
+
+ramps.innerHTML = FAM.map(f =>
+  `<div class="ramp"><b>${f}</b>${S.map(s =>
+    `<div class="sw" style="background:var(--ol8-color-${f}-${s})" title="${f}-${s}"></div>`).join('')}</div>`).join('');
+
+const roleKeys = Object.keys(tokens).filter(k => k.startsWith('color-') &&
+  !FAM.some(f => k.startsWith(`color-${f}-`)) && !k.startsWith('color-primary-'));
+roles.innerHTML = roleKeys.map(k =>
+  `<div class="role"><div class="chip" style="background:var(--ol8-${k})"></div>
+   <div class="lbl">${k.replace('color-','')}<br><code style="opacity:.5">${tokens[k]}</code></div></div>`).join('');
+
+type.innerHTML = ['display-large','display-medium','display-small','title-large','title-medium',
+                  'title-small','body-large','body-medium','body-small']
+  .map(r => `<div class="ol8-type-${r}">${r} — Oneli8</div>`).join('');
+
+radii.innerHTML = ['none','subtle','compact','medium','standard','comfortable','container','display','full']
+  .map(r => `<div style="border-radius:var(--ol8-shape-radius-${r})">${r}</div>`).join('');
+
+elev.innerHTML = ['flat','raised','floating','overlay','blocking']
+  .map(r => `<div style="box-shadow:var(--ol8-elevation-${r})">${r}</div>`).join('');
+
+console.log('[proof] tokens', Object.keys(tokens).length, 'roles', roleKeys.length);
+</script>
+</body>
+</html>
