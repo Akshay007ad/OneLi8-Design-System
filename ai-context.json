@@ -511,13 +511,23 @@
         "geometry": "target 48/48/48/60, box 36/42/48/60, artwork 18/18/24/24 \u2014 all exact in-browser",
         "circle": "radius resolves to 999px",
         "iconContrast": {
-          "primary": 1.94,
-          "destructive": 2.17,
+          "primary": 8.81,
+          "destructive": 7.88,
           "secondary": 8.81,
           "quiet": 8.81,
-          "note": "Primary and Destructive fail WCAG 1.4.11 (3:1 for graphical objects). Reproduced as designed; see README."
+          "disabled": "4.86 primary/destructive, 6.11 secondary/quiet",
+          "note": "All families now pass WCAG 1.4.11 (3:1). Figma binds --ol8-color-icon-primary for every family, which measured 1.94:1 on Primary and 2.17:1 on Destructive; the glyph is bound to the action content role instead. This is a deliberate deviation from the source \u2014 see README."
         }
-      }
+      },
+      "deviations": [
+        {
+          "id": "icon-glyph-contrast",
+          "figma": "glyph bound to --ol8-color-icon-primary for all families",
+          "here": "glyph bound to --ol8-color-action<family>-content on Primary and Destructive",
+          "reason": "WCAG 1.4.11 \u2014 1.94:1 and 2.17:1 measured against a 3:1 minimum",
+          "commit": "see git history"
+        }
+      ]
     }
   },
   "foundations": {

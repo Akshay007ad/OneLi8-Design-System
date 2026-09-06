@@ -100,6 +100,28 @@ The three-stop body uses `to bottom right`. Figma bakes a per-instance angle
 satisfies `θ = 90° + atan(W/H)` — precisely CSS's corner keyword. The keyword
 holds at any label width; a baked degree would not.
 
+## Deliberate deviations from the Figma source
+
+These are the only places the code does not mirror Figma. Each is a defect in
+the source, fixed here and recorded in git history.
+
+### Icon Button glyph contrast — WCAG 1.4.11
+
+Figma binds the Icon Button glyph to `--ol8-color-icon-primary` (`#151817`)
+for every family. On the dark Primary and Destructive surfaces that measures
+**1.94:1** and **2.17:1**, against the 3:1 minimum for graphical objects.
+
+The glyph now binds to the action's own content role:
+
+| | Figma | here |
+|---|---|---|
+| primary | 1.94:1 | **8.81:1** |
+| destructive | 2.17:1 | **7.88:1** |
+
+Disabled keeps dark ink — its surface is light — and still passes at 4.86:1.
+To restore the Figma-exact behaviour, drop the `--_ink` declarations from
+`.ol8-icon-btn--primary` and `.ol8-icon-btn--destructive`.
+
 ## Known Figma-source issues
 
 Reproduced faithfully, **not** silently corrected:
@@ -111,14 +133,6 @@ Reproduced faithfully, **not** silently corrected:
 - `Icon / Action / Visibility Closed` (440:15) — ink centre y = 13.65. Likely
   intentional (a closed lid sits low), flagged for confirmation.
 
-- **Icon Button / Primary and / Destructive fail WCAG 1.4.11.** The glyph is
-  bound to `--ol8-color-icon-primary` (`#151817`) and sits on
-  `actionprimary-default` (`#2c438b`) or `actiondestructive-default`
-  (`#922824`) — measured **1.94:1** and **2.17:1** against the 3:1 minimum for
-  graphical objects. Secondary and Quiet are fine at 8.81:1. The one-token fix
-  is to bind the glyph to `--ol8-color-actionprimary-content` / 
-  `--ol8-color-actiondestructive-content` (`#fcfaf3`), which measures ~8.7:1.
-  Reproduced as designed pending your call.
 - **Icon Button focus ring: the inner band never shows.** Figma emits
   `0 0 0 6px focus-outer, 0 0 0 3px focus-inner`; the 6px dark spread is
   declared first and paints over the 3px light one, so only the dark band
