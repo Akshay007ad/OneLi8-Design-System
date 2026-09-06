@@ -159,16 +159,6 @@
     }
   },
   "pending": {
-    "Choice Item": {
-      "tier": "molecule",
-      "nodes": {
-        "checkbox": "252:301",
-        "radio": "331:1309",
-        "switch": "825:1591"
-      },
-      "componentCount": 56,
-      "note": "Consumes ol8-selection; adds the native input, label, 48px target and validation."
-    },
     "Choice Group": {
       "tier": "organism",
       "nodes": {
@@ -176,7 +166,7 @@
         "radio": "859:5180"
       },
       "componentCount": 7,
-      "note": "Checkbox group Aggregate=None|Some|All (indeterminate parent); Radio group Behavior=Safe Default|No Default|Horizontal|Invalid."
+      "note": "Checkbox group Aggregate=None|Some|All drives an indeterminate parent from its children; Radio group Behavior=Safe Default|No Default|Horizontal|Invalid adds roving focus, fieldset/legend and group validation."
     }
   },
   "architecture": {
@@ -858,6 +848,150 @@
           "radioSelectedRingOnCanvas": 1.16,
           "note": "The radio's selected ring and dot both bind --ol8-color-selection-surface. 'surface' is the MATERIAL layer (regular or gem), so this reads as intended on a gem/dark backdrop. On the regular light canvas (#fcfaf3) the ring measures 1.16:1. Reproduced as designed; flagged for the light-material case only."
         }
+      }
+    },
+    "ol8-choice": {
+      "tier": "molecule",
+      "figma": {
+        "page": "Choice Controls (246:3)",
+        "sets": {
+          "checkbox": "252:301",
+          "radio": "331:1309",
+          "switch": "825:1591"
+        },
+        "componentCount": 56,
+        "description": "Selection maps Unchecked/Checked/Mixed to checked/indeterminate; Availability maps enabled/disabled. The indicator is a shared selection atom, not local artwork. Native input, name/value, required, reset, form submission and onCheckedChange live in code."
+      },
+      "code": {
+        "package": "@oneli8/core",
+        "entry": "packages/core/src/molecules/choice-item/choice-item.js",
+        "styles": "packages/core/src/molecules/choice-item/choice-item.css",
+        "baseClass": "ol8-choice"
+      },
+      "composes": [
+        "ol8-selection (atom)"
+      ],
+      "footprint": {
+        "element": "label",
+        "children": [
+          "input.ol8-choice__input (real, visually hidden, focusable)",
+          "span.ol8-choice__surface (hover/pressed/focus/gem wash)",
+          "span.ol8-choice__indicator (slot)",
+          "span.ol8-choice__content (label + description)"
+        ],
+        "note": "The whole row is the target and it is a <label>, so clicking anywhere toggles natively."
+      },
+      "sizeMatrix": {
+        "compact": {
+          "gap": "6px",
+          "paddingBlock": "15px",
+          "indicator": "18px",
+          "slotHeight": "18px",
+          "label": "Body/Small 12/18"
+        },
+        "standard": {
+          "gap": "9px",
+          "paddingBlock": "12px",
+          "indicator": "18px",
+          "slotHeight": "24px",
+          "label": "Body/Medium 16/24"
+        },
+        "comfortable": {
+          "gap": "9px",
+          "paddingBlock": "12px",
+          "indicator": "24px",
+          "slotHeight": "24px",
+          "label": "Body/Medium 16/24"
+        },
+        "large": {
+          "gap": "9px",
+          "paddingBlock": "9px",
+          "indicator": "24px",
+          "slotHeight": "30px",
+          "label": "Body/Large 21/30"
+        },
+        "rule": "slot height = label line-height; padding-block = (48 - slot height) / 2. Every size resolves to the same 48px minimum row."
+      },
+      "variants": {
+        "Kind": {
+          "strategy": "class",
+          "values": [
+            "checkbox",
+            "radio",
+            "switch"
+          ],
+          "inputType": {
+            "checkbox": "checkbox",
+            "radio": "radio",
+            "switch": "checkbox + role=switch"
+          }
+        },
+        "Size": {
+          "strategy": "data",
+          "emitAs": {
+            "data-ol8-size": "compact|standard|comfortable|large"
+          },
+          "note": "The molecule's four sizes map onto the atom's two: compact+standard -> indicator compact; comfortable+large -> indicator comfortable."
+        },
+        "Selection": {
+          "strategy": "native",
+          "note": "Derived from the input, never authored on the row. checked -> checked/selected/on; indeterminate -> mixed. indeterminate is a JS-only property, which is the one thing hydration must apply."
+        },
+        "Availability": {
+          "strategy": "conditional-attribute",
+          "emitAs": {
+            "disabled": "",
+            "data-ol8-availability": "disabled"
+          }
+        },
+        "Invalid": {
+          "strategy": "data",
+          "emitAs": {
+            "data-ol8-invalid": "true",
+            "aria-invalid": "true"
+          },
+          "visual": "an extra boundary over the indicator in feedbackcritical-inlinecontent"
+        },
+        "Material": {
+          "strategy": "data",
+          "emitAs": {
+            "data-ol8-material": "gem"
+          },
+          "note": "Gem is one Boolean adapter over the SAME anatomy; Regular is default."
+        },
+        "Hover/Pressed/Focus": {
+          "strategy": "pseudo",
+          "emit": null,
+          "note": "Figma booleans for review only. Focus draws two nested visible rings (3px outer, 3px inner at 2px inset) \u2014 the same two-tone ring the focus tokens describe."
+        }
+      },
+      "a11y": {
+        "invariants": [
+          "A real <input> owns state, focus and form participation. Never reimplement toggling.",
+          "The row is a <label for=id>, so the entire 48px target is clickable natively.",
+          "Descriptions are wired with aria-describedby.",
+          "Mixed sets input.indeterminate; any interaction resolves it, matching browser behaviour.",
+          "Selecting a radio repaints its whole name group, since the browser clears siblings silently."
+        ]
+      },
+      "forbid": [
+        {
+          "pattern": "role=\"checkbox\"|role=\"radio\"",
+          "reason": "Use the native input type; only switch adds role=\"switch\"."
+        },
+        {
+          "pattern": "onclick=",
+          "reason": "The label/input pair already toggles. Listen to change if you need to react."
+        },
+        {
+          "pattern": "data-ol8-selection=",
+          "reason": "Selection is derived from the input, never authored on the row."
+        }
+      ],
+      "verification": {
+        "rowHeight": "exactly 48px at all four sizes; grows to 69px with a description",
+        "geometry": "gap 6/9/9/9, padding-block 15/12/12/9, indicator 18/18/24/24, slot height 18/24/24/30 \u2014 all exact",
+        "semantics": "label[for] wraps a real input; switch carries role=switch; indeterminate applied and reflected as Selection=mixed"
       }
     }
   }

@@ -321,7 +321,6 @@
   --ol8-component-choice-chip-height-standard: 36px;
   --ol8-component-choice-chip-target-standard: 48px;
   --ol8-component-choice-chip-rail-inset-standard: 12px;
-  --ol8-component-choice-chip-gap-standard: 9px;
   --ol8-component-button-gap-compact: 6px;
   --ol8-component-button-gap-comfortable: 9px;
   --ol8-component-button-paddinginline-compact: 12px;
@@ -371,6 +370,9 @@
   --ol8-component-choice-optical-stroke: 1.8px;
   --ol8-component-choice-mixed-bar-width: 9px;
   --ol8-component-choice-mixed-bar-height: 1.8px;
+  --ol8-component-choice-gap-compact: 6px;
+  --ol8-component-choice-gap-standard: 9px;
+  --ol8-component-choice-rowminimum: 48px;
   --ol8-focus-ring-innerwidth: 3px;
   --ol8-focus-ring-outerwidth: 6px;
   --ol8-size-icon-small: 18px;

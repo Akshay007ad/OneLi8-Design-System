@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Oneli8 · Choice Item proof</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=AR+One+Sans:wght@400..700&display=swap">
+<link rel="stylesheet" href="../packages/tokens/dist/tokens.css">
+<link rel="stylesheet" href="../packages/core/src/atoms/icon/icon.css">
+<link rel="stylesheet" href="../packages/core/src/atoms/selection-indicator/selection-indicator.css">
+<link rel="stylesheet" href="../packages/core/src/molecules/choice-item/choice-item.css">
+<style>
+  body { margin:0; padding:36px; background:var(--ol8-color-background-canvas);
+         color:var(--ol8-color-text-primary); font-family:var(--ol8-font-family-functional); }
+  h2 { margin:30px 0 6px; font-size:15px; }
+  .col { flex:0 0 360px; width:360px; }
+  .grid { display:flex; gap:48px; flex-wrap:wrap; }
+  .hd { font-size:10px; text-transform:uppercase; letter-spacing:.06em;
+        color:var(--ol8-color-text-muted); margin:12px 0 2px; }
+</style>
+</head>
+<body><div id="out"></div>
+<script type="module">
+import { renderChoiceItem, hydrateChoiceItems } from '../packages/core/src/molecules/choice-item/choice-item.js';
+const SIZES=['compact','standard','comfortable','large'];
+const html=[];
+for (const kind of ['checkbox','radio','switch']) {
+  html.push(`<h2>Choice Item / ${kind[0].toUpperCase()+kind.slice(1)}</h2><div class="grid">`);
+  for (const size of SIZES) {
+    html.push(`<div class="col"><div class="hd">${size}</div>`);
+    const cases = kind==='checkbox'
+      ? [{},{checked:true},{mixed:true},{disabled:true},{checked:true,disabled:true},{invalid:true}]
+      : [{},{checked:true},{disabled:true},{checked:true,disabled:true},{invalid:true}];
+    cases.forEach((o,i)=>html.push(
+      renderChoiceItem(kind, `${kind} label`, {size, name:`${kind}-${size}`, id:`${kind}-${size}-${i}`,
+        description: i===1 ? 'Optional supporting description' : undefined, ...o})));
+    html.push('</div>');
+  }
+  html.push('</div>');
+}
+html.push('<h2>Gem material · on a dark field</h2><div style="background:var(--ol8-color-background-inverse);padding:24px;width:408px">');
+['checkbox','radio','switch'].forEach((k,i)=>html.push(
+  renderChoiceItem(k,`Gem ${k}`,{size:'standard',material:'gem',checked:i>0,id:`gem-${k}`,name:`gem-${k}`})));
+html.push('</div>');
+out.innerHTML = html.join('');
+console.log('[proof] hydrated', hydrateChoiceItems(), 'rows');
+</script>
+</body></html>
