@@ -1,0 +1,1299 @@
+{
+  "$schema": "../schema/token-file.schema.json",
+  "$description": "Approved Oneli8 semantic roles consumed by products and components.",
+  "color": {
+    "primary": {
+      "120": {
+        "$type": "color",
+        "$value": "{color.blue.120}",
+        "$description": "Active Primary-family 120 alias; overridden only by the independent Primary Family axis."
+      },
+      "240": {
+        "$type": "color",
+        "$value": "{color.blue.240}",
+        "$description": "Active Primary-family 240 alias; overridden only by the independent Primary Family axis."
+      },
+      "360": {
+        "$type": "color",
+        "$value": "{color.blue.360}",
+        "$description": "Active Primary-family 360 alias; overridden only by the independent Primary Family axis."
+      },
+      "480": {
+        "$type": "color",
+        "$value": "{color.blue.480}",
+        "$description": "Active Primary-family 480 alias; overridden only by the independent Primary Family axis."
+      },
+      "600": {
+        "$type": "color",
+        "$value": "{color.blue.600}",
+        "$description": "Active Primary-family 600 alias; overridden only by the independent Primary Family axis."
+      },
+      "720": {
+        "$type": "color",
+        "$value": "{color.blue.720}",
+        "$description": "Active Primary-family 720 alias; overridden only by the independent Primary Family axis."
+      },
+      "840": {
+        "$type": "color",
+        "$value": "{color.blue.840}",
+        "$description": "Active Primary-family 840 alias; overridden only by the independent Primary Family axis."
+      },
+      "930": {
+        "$type": "color",
+        "$value": "{color.blue.930}",
+        "$description": "Active Primary-family 930 alias; overridden only by the independent Primary Family axis."
+      },
+      "030": {
+        "$type": "color",
+        "$value": "{color.blue.030}",
+        "$description": "Active Primary-family 030 alias; overridden only by the independent Primary Family axis."
+      },
+      "060": {
+        "$type": "color",
+        "$value": "{color.blue.060}",
+        "$description": "Active Primary-family 060 alias; overridden only by the independent Primary Family axis."
+      },
+      "090": {
+        "$type": "color",
+        "$value": "{color.blue.090}",
+        "$description": "Active Primary-family 090 alias; overridden only by the independent Primary Family axis."
+      }
+    },
+    "background": {
+      "canvas": {
+        "$type": "color",
+        "$value": "{color.neutral.030}",
+        "$description": "Root page or application background."
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": "{color.neutral.060}",
+        "$description": "Quiet section differentiation."
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{color.blue.930}",
+        "$description": "Intentionally inverted region."
+      }
+    },
+    "surface": {
+      "default": {
+        "$type": "color",
+        "$value": "{color.neutral.030}",
+        "$description": "Cards, menus, controls, and panels."
+      },
+      "raised": {
+        "$type": "color",
+        "$value": "{color.neutral.030}",
+        "$description": "Popovers, dialogs, and floating surfaces."
+      },
+      "sunken": {
+        "$type": "color",
+        "$value": "{color.neutral.060}",
+        "$description": "Wells, grouped fields, and recessed regions."
+      },
+      "selected": {
+        "$type": "color",
+        "$value": "{color.primary.060}",
+        "$description": "Persistent selection surface qualified by the active Primary family."
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.neutral.090}",
+        "$description": "Unavailable interactive surface."
+      }
+    },
+    "text": {
+      "primary": {
+        "$type": "color",
+        "$value": "{color.neutral.930}",
+        "$description": "Essential content and sustained reading."
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{color.neutral.720}",
+        "$description": "Supporting content."
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{color.neutral.600}",
+        "$description": "Metadata and low-emphasis content."
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.neutral.480}",
+        "$description": "Disabled labels; never the only disabled cue."
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{color.neutral.030}",
+        "$description": "Content on inverse regions."
+      },
+      "link": {
+        "default": {
+          "$type": "color",
+          "$value": "{color.primary.600}",
+          "$description": "Navigational text at rest; underline by default."
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{color.primary.720}",
+          "$description": "Navigational text on Hover."
+        },
+        "pressed": {
+          "$type": "color",
+          "$value": "{color.primary.840}",
+          "$description": "Navigational text while Pressed."
+        },
+        "visited": {
+          "$type": "color",
+          "$value": "{color.violet.600}",
+          "$description": "Optional privacy-safe Visited orientation cue for content and reference contexts."
+        }
+      }
+    },
+    "icon": {
+      "primary": {
+        "$type": "color",
+        "$value": "{color.neutral.930}",
+        "$description": "Essential icons."
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{color.neutral.480}",
+        "$description": "Supporting icons."
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{color.neutral.360}",
+        "$description": "Quiet nonessential icons."
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.neutral.240}",
+        "$description": "Inactive redundant icon cue."
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{color.neutral.030}",
+        "$description": "Icons on inverse regions."
+      },
+      "onGem": {
+        "$type": "color",
+        "$value": "{color.neutral.030}",
+        "$description": "High-contrast near-white icon artwork on translucent or saturated Gem controls; remains stable across Light and Dark appearances."
+      }
+    },
+    "control": {
+      "thumb": {
+        "$type": "color",
+        "$value": "{color.neutral.030}",
+        "$description": "Stable near-white moving thumb surface for Switch across Light and Dark appearances."
+      }
+    },
+    "border": {
+      "subtle": {
+        "$type": "color",
+        "$value": "{color.neutral.090}",
+        "$description": "Decorative separation only."
+      },
+      "default": {
+        "$type": "color",
+        "$value": "{color.neutral.360}",
+        "$description": "Essential standard boundary."
+      },
+      "strong": {
+        "$type": "color",
+        "$value": "{color.neutral.480}",
+        "$description": "Emphasized essential boundary."
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.neutral.480}",
+        "$description": "Disabled control boundary."
+      }
+    },
+    "focus": {
+      "inner": {
+        "$type": "color",
+        "$value": "{color.primary.030}",
+        "$description": "Light appearance focus highlight from the active qualified family."
+      },
+      "outer": {
+        "$type": "color",
+        "$value": "{color.primary.930}",
+        "$description": "Light appearance focus shadow from the active qualified family."
+      }
+    },
+    "actionPrimary": {
+      "default": {
+        "$type": "color",
+        "$value": "{color.primary.600}",
+        "$description": "Primary action default surface."
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{color.primary.720}",
+        "$description": "Primary action hover surface."
+      },
+      "pressed": {
+        "$type": "color",
+        "$value": "{color.primary.840}",
+        "$description": "Primary action pressed surface."
+      },
+      "content": {
+        "$type": "color",
+        "$value": "{color.neutral.030}",
+        "$description": "Primary action foreground."
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.neutral.090}",
+        "$description": "Primary action disabled surface."
+      },
+      "disabledContent": {
+        "$type": "color",
+        "$value": "{color.neutral.480}",
+        "$description": "Primary action disabled foreground."
+      }
+    },
+    "actionSecondary": {
+      "surfaceDefault": {
+        "$type": "color",
+        "$value": "transparent",
+        "$description": "Secondary action default surface inherits its permitted adjacent surface."
+      },
+      "surfaceHover": {
+        "$type": "color",
+        "$value": "{color.primary.030}",
+        "$description": "Secondary action hover surface."
+      },
+      "surfacePressed": {
+        "$type": "color",
+        "$value": "{color.primary.060}",
+        "$description": "Secondary action pressed surface."
+      },
+      "surfaceDisabled": {
+        "$type": "color",
+        "$value": "transparent",
+        "$description": "Secondary action disabled surface inherits its permitted adjacent surface."
+      },
+      "contentDefault": {
+        "$type": "color",
+        "$value": "{color.primary.600}",
+        "$description": "Secondary action default content and border."
+      },
+      "contentHover": {
+        "$type": "color",
+        "$value": "{color.primary.720}",
+        "$description": "Secondary action hover content and border."
+      },
+      "contentPressed": {
+        "$type": "color",
+        "$value": "{color.primary.840}",
+        "$description": "Secondary action pressed content and border."
+      },
+      "contentDisabled": {
+        "$type": "color",
+        "$value": "{color.neutral.480}",
+        "$description": "Secondary action disabled content and border."
+      }
+    },
+    "actionQuiet": {
+      "surfaceDefault": {
+        "$type": "color",
+        "$value": "transparent",
+        "$description": "Quiet action default surface."
+      },
+      "surfaceHover": {
+        "$type": "color",
+        "$value": "{color.primary.030}",
+        "$description": "Quiet action hover surface."
+      },
+      "surfacePressed": {
+        "$type": "color",
+        "$value": "{color.primary.060}",
+        "$description": "Quiet action pressed surface."
+      },
+      "surfaceDisabled": {
+        "$type": "color",
+        "$value": "transparent",
+        "$description": "Quiet action disabled surface."
+      },
+      "contentDefault": {
+        "$type": "color",
+        "$value": "{color.primary.600}",
+        "$description": "Quiet action default content."
+      },
+      "contentHover": {
+        "$type": "color",
+        "$value": "{color.primary.720}",
+        "$description": "Quiet action hover content."
+      },
+      "contentPressed": {
+        "$type": "color",
+        "$value": "{color.primary.840}",
+        "$description": "Quiet action pressed content."
+      },
+      "contentDisabled": {
+        "$type": "color",
+        "$value": "{color.neutral.480}",
+        "$description": "Quiet action disabled content."
+      }
+    },
+    "iconButton": {
+      "secondaryHoverSurface": {
+        "$type": "color",
+        "$value": "{color.primary.060}",
+        "$description": "Icon Button Secondary hover surface with sufficient visible separation from the surrounding canvas."
+      },
+      "quietHoverSurface": {
+        "$type": "color",
+        "$value": "{color.primary.060}",
+        "$description": "Icon Button Quiet hover surface with sufficient visible separation from the surrounding canvas."
+      }
+    },
+    "navigationBadge": {
+      "surfaceDefault": {
+        "$type": "color",
+        "$value": "{color.surface.raised}",
+        "$description": "Neutral Navigation Badge surface; resolves through the active color scheme."
+      },
+      "contentDefault": {
+        "$type": "color",
+        "$value": "{color.text.secondary}",
+        "$description": "Neutral Navigation Badge content; resolves through the active color scheme."
+      },
+      "surfaceSelected": {
+        "$type": "color",
+        "$value": "{color.selection.content}",
+        "$description": "Navigation Badge surface when its destination is selected."
+      },
+      "contentSelected": {
+        "$type": "color",
+        "$value": "{color.selection.surface}",
+        "$description": "Navigation Badge content when its destination is selected."
+      },
+      "surfaceGem": {
+        "$type": "color",
+        "$value": "{material.gem.color.cutEdge.high}",
+        "$description": "Navigation Badge surface on an unselected Gem navigation destination."
+      },
+      "contentGem": {
+        "$type": "color",
+        "$value": "{color.text.primary}",
+        "$description": "Navigation Badge content on an unselected Gem navigation destination."
+      }
+    },
+    "actionDestructive": {
+      "default": {
+        "$type": "color",
+        "$value": "{color.red.600}",
+        "$description": "Destructive action default surface."
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{color.red.720}",
+        "$description": "Destructive action hover surface."
+      },
+      "pressed": {
+        "$type": "color",
+        "$value": "{color.red.840}",
+        "$description": "Destructive action pressed surface."
+      },
+      "content": {
+        "$type": "color",
+        "$value": "{color.neutral.030}",
+        "$description": "Destructive action foreground."
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.neutral.090}",
+        "$description": "Destructive action disabled surface."
+      },
+      "disabledContent": {
+        "$type": "color",
+        "$value": "{color.neutral.480}",
+        "$description": "Destructive action disabled foreground."
+      }
+    },
+    "feedbackInformative": {
+      "surface": {
+        "$type": "color",
+        "$value": "{color.cyan.720}",
+        "$description": "Filled informative feedback surface."
+      },
+      "content": {
+        "$type": "color",
+        "$value": "{color.neutral.030}",
+        "$description": "Content on filled informative feedback."
+      },
+      "inlineContent": {
+        "$type": "color",
+        "$value": "{color.blue.600}",
+        "$description": "Informative icon and text on neutral surfaces."
+      }
+    },
+    "feedbackPositive": {
+      "surface": {
+        "$type": "color",
+        "$value": "{color.green.600}",
+        "$description": "Filled positive feedback surface."
+      },
+      "content": {
+        "$type": "color",
+        "$value": "{color.neutral.030}",
+        "$description": "Content on filled positive feedback."
+      },
+      "inlineContent": {
+        "$type": "color",
+        "$value": "{color.green.600}",
+        "$description": "Positive icon and text on neutral surfaces."
+      }
+    },
+    "feedbackCaution": {
+      "surface": {
+        "$type": "color",
+        "$value": "{color.yellow.090}",
+        "$description": "Filled caution feedback surface."
+      },
+      "content": {
+        "$type": "color",
+        "$value": "{color.neutral.840}",
+        "$description": "Content on filled caution feedback."
+      },
+      "inlineContent": {
+        "$type": "color",
+        "$value": "{color.yellow.600}",
+        "$description": "Caution icon and text on neutral surfaces."
+      }
+    },
+    "feedbackCritical": {
+      "surface": {
+        "$type": "color",
+        "$value": "{color.red.600}",
+        "$description": "Filled critical feedback surface."
+      },
+      "content": {
+        "$type": "color",
+        "$value": "{color.neutral.030}",
+        "$description": "Content on filled critical feedback."
+      },
+      "inlineContent": {
+        "$type": "color",
+        "$value": "{color.red.480}",
+        "$description": "Light Critical icon, text, and essential boundaries on neutral surfaces; the brighter existing Red 480 preserves a recognizably red signal while meeting AA contrast."
+      }
+    },
+    "selection": {
+      "surface": {
+        "$type": "color",
+        "$value": "{color.primary.060}",
+        "$description": "Persistent selected surface qualified by the active Primary family."
+      },
+      "content": {
+        "$type": "color",
+        "$value": "{color.primary.840}",
+        "$description": "Content on a persistent selected surface qualified by the active Primary family."
+      }
+    }
+  },
+  "elevation": {
+    "surface": {
+      "flat": {
+        "$type": "shadow",
+        "$value": [],
+        "$description": "No visual elevation."
+      },
+      "raised": {
+        "$type": "shadow",
+        "$value": [
+          {
+            "color": "{color.cyan.840}",
+            "offsetX": "{dimension.scale.000}",
+            "offsetY": "{dimension.scale.003}",
+            "blur": "{dimension.scale.006}",
+            "spread": "{dimension.scale.000}",
+            "alpha": 0.12
+          }
+        ],
+        "$description": "Lifted card, toolbar, or sticky-region depth."
+      },
+      "floating": {
+        "$type": "shadow",
+        "$value": [
+          {
+            "color": "{color.cyan.840}",
+            "offsetX": "{dimension.scale.000}",
+            "offsetY": "{dimension.scale.006}",
+            "blur": "{dimension.scale.018}",
+            "spread": {
+              "value": -3,
+              "unit": "px"
+            },
+            "alpha": 0.18
+          },
+          {
+            "color": "{color.cyan.840}",
+            "offsetX": "{dimension.scale.000}",
+            "offsetY": "{dimension.scale.003}",
+            "blur": "{dimension.scale.006}",
+            "spread": "{dimension.scale.000}",
+            "alpha": 0.12
+          }
+        ],
+        "$description": "Menu, popover, picker, or transient-panel depth."
+      },
+      "overlay": {
+        "$type": "shadow",
+        "$value": [
+          {
+            "color": "{color.cyan.840}",
+            "offsetX": "{dimension.scale.000}",
+            "offsetY": "{dimension.scale.012}",
+            "blur": "{dimension.scale.036}",
+            "spread": {
+              "value": -6,
+              "unit": "px"
+            },
+            "alpha": 0.24
+          },
+          {
+            "color": "{color.cyan.840}",
+            "offsetX": "{dimension.scale.000}",
+            "offsetY": "{dimension.scale.006}",
+            "blur": "{dimension.scale.012}",
+            "spread": "{dimension.scale.000}",
+            "alpha": 0.18
+          }
+        ],
+        "$description": "Drawer, dialog, or command-surface depth."
+      },
+      "blocking": {
+        "$type": "shadow",
+        "$value": [
+          {
+            "color": "{color.cyan.840}",
+            "offsetX": "{dimension.scale.000}",
+            "offsetY": "{dimension.scale.024}",
+            "blur": "{dimension.scale.072}",
+            "spread": {
+              "value": -12,
+              "unit": "px"
+            },
+            "alpha": 0.36
+          },
+          {
+            "color": "{color.cyan.840}",
+            "offsetX": "{dimension.scale.000}",
+            "offsetY": "{dimension.scale.012}",
+            "blur": "{dimension.scale.024}",
+            "spread": "{dimension.scale.000}",
+            "alpha": 0.24
+          }
+        ],
+        "$description": "Rare high-attention blocking depth."
+      }
+    }
+  },
+  "layer": {
+    "stack": {
+      "base": {
+        "$type": "number",
+        "$value": 0,
+        "$description": "Normal content and ordinary surfaces."
+      },
+      "sticky": {
+        "$type": "number",
+        "$value": 300,
+        "$description": "Sticky headers and local pinned controls."
+      },
+      "overlay": {
+        "$type": "number",
+        "$value": 600,
+        "$description": "Menus, popovers, tooltips, and nonmodal overlays."
+      },
+      "modal": {
+        "$type": "number",
+        "$value": 900,
+        "$description": "Dialogs, drawers, and modal backdrops."
+      },
+      "notification": {
+        "$type": "number",
+        "$value": 1200,
+        "$description": "Toasts and urgent transient notices."
+      }
+    }
+  },
+  "material": {
+    "control": {
+      "gem": {
+        "primary": {
+          "start": {"$type":"color","$value":"{color.primary.480}","$description":"Gem Primary leading tonal stop in Light appearance."},
+          "mid": {"$type":"color","$value":"{color.primary.600}","$description":"Gem Primary middle tonal stop in Light appearance."},
+          "end": {"$type":"color","$value":"{color.primary.720}","$description":"Gem Primary trailing tonal stop in Light appearance."},
+          "hoverStart": {"$type":"color","$value":"{color.primary.600}","$description":"Gem Primary Hover leading tonal stop in Light appearance."},
+          "hoverMid": {"$type":"color","$value":"{color.primary.720}","$description":"Gem Primary Hover middle tonal stop in Light appearance."},
+          "hoverEnd": {"$type":"color","$value":"{color.primary.840}","$description":"Gem Primary Hover trailing tonal stop in Light appearance."},
+          "loadingStart": {"$type":"color","$value":"{color.primary.720}","$description":"Shared Button and Icon Button Gem Loading leading stop; visibly busy without implying Hover."},
+          "loadingMid": {"$type":"color","$value":"{color.primary.840}","$description":"Shared Button and Icon Button Gem Loading middle stop."},
+          "loadingEnd": {"$type":"color","$value":"{color.primary.930}","$description":"Shared Button and Icon Button Gem Loading trailing stop."},
+          "content": {"$type":"color","$value":"{color.neutral.030}","$description":"Stable foreground on the qualified Gem Primary ramp."}
+        },
+        "secondary": {
+          "high": {"$type":"color","$value":{"color":"{color.neutral.030}","alpha":0.22},"$extensions":{"oneli8.composite":"color-alpha"},"$description":"Gem Secondary leading transparent highlight."},
+          "mid": {"$type":"color","$value":{"color":"{color.neutral.030}","alpha":0.05},"$extensions":{"oneli8.composite":"color-alpha"},"$description":"Gem Secondary quiet middle transparency."},
+          "low": {"$type":"color","$value":{"color":"{color.neutral.030}","alpha":0.12},"$extensions":{"oneli8.composite":"color-alpha"},"$description":"Gem Secondary trailing transparent tint."},
+          "hoverHigh": {"$type":"color","$value":{"color":"{color.neutral.030}","alpha":0.30},"$extensions":{"oneli8.composite":"color-alpha"},"$description":"Gem Secondary Hover leading transparent highlight."},
+          "hoverMid": {"$type":"color","$value":{"color":"{color.neutral.030}","alpha":0.09},"$extensions":{"oneli8.composite":"color-alpha"},"$description":"Gem Secondary Hover middle transparency."},
+          "hoverLow": {"$type":"color","$value":{"color":"{color.neutral.030}","alpha":0.18},"$extensions":{"oneli8.composite":"color-alpha"},"$description":"Gem Secondary Hover trailing transparent tint."},
+          "loadingHigh": {"$type":"color","$value":{"color":"{color.neutral.030}","alpha":0.39},"$extensions":{"oneli8.composite":"color-alpha"},"$description":"Shared Button and Icon Button Gem Secondary Loading highlight."},
+          "loadingMid": {"$type":"color","$value":{"color":"{color.neutral.030}","alpha":0.12},"$extensions":{"oneli8.composite":"color-alpha"},"$description":"Shared Button and Icon Button Gem Secondary Loading middle transparency."},
+          "loadingLow": {"$type":"color","$value":{"color":"{color.neutral.030}","alpha":0.24},"$extensions":{"oneli8.composite":"color-alpha"},"$description":"Shared Button and Icon Button Gem Secondary Loading trailing tint."},
+          "content": {"$type":"color","$value":"{color.neutral.030}","$description":"Approved stable near-white Gem Secondary content in Light and Dark. Text and icons share this role; qualify backing contrast separately."}
+        },
+        "rim": {
+          "default": {"$type":"color","$value":{"color":"{color.neutral.030}","alpha":0.24},"$extensions":{"oneli8.composite":"color-alpha"},"$description":"One-pixel inset Gem control rim; never an external border."},
+          "hover": {"$type":"color","$value":{"color":"{color.neutral.030}","alpha":0.36},"$extensions":{"oneli8.composite":"color-alpha"},"$description":"Raised inset Gem control rim for Hover."},
+          "specular": {"$type":"color","$value":{"color":"{color.neutral.030}","alpha":0.54},"$extensions":{"oneli8.composite":"color-alpha"},"$description":"Restrained integrated Gem control highlight."}
+        },
+        "blur": {"$type":"dimension","$value":"{dimension.scale.012}","$description":"Backdrop blur candidate for transparent Gem controls."}
+      }
+    },
+    "gem": {
+      "color": {
+        "quiet": {
+          "environmentalFace": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.neutral.030}",
+              "alpha": 0.48
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Quiet Light Gem environmental face; transparent canonical slab material."
+          },
+          "stabilizedFace": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.neutral.060}",
+              "alpha": 0.72
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Quiet Light Gem stabilized content plane."
+          },
+          "opaqueEquivalent": {
+            "$type": "color",
+            "$value": "{color.neutral.030}",
+            "$description": "Quiet Light Gem reduced-transparency equivalent."
+          }
+        },
+        "cutEdge": {
+          "outerHigh": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.neutral.060}",
+              "alpha": 0.93
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Bright outer cut-edge stop."
+          },
+          "outerMid": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.blue.120}",
+              "alpha": 0.48
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Cool outer cut-edge middle stop."
+          },
+          "outerLow": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.neutral.060}",
+              "alpha": 0.03
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Fading outer cut-edge stop."
+          },
+          "outerAccent": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.cyan.360}",
+              "alpha": 0.36
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Restrained chromatic outer cut-edge accent."
+          },
+          "high": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.neutral.060}",
+              "alpha": 0.72
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Light directional bevel high stop."
+          },
+          "mid": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.blue.060}",
+              "alpha": 0.36
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Light directional bevel middle stop."
+          },
+          "low": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.neutral.060}",
+              "alpha": 0.03
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Light directional bevel fade."
+          },
+          "shadow": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.blue.930}",
+              "alpha": 0.16
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Light directional bevel shadow."
+          }
+        },
+        "innerThinCut": {
+          "face": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.neutral.060}",
+              "alpha": 0.72
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Quiet inner information-plane face."
+          },
+          "high": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.neutral.060}",
+              "alpha": 0.54
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Quiet inner Thin-Cut highlight."
+          },
+          "mid": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.blue.120}",
+              "alpha": 0.18
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Quiet inner Thin-Cut middle tint."
+          },
+          "low": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.neutral.060}",
+              "alpha": 0.03
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Quiet inner Thin-Cut fade."
+          }
+        },
+        "facet": {
+          "cool": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.blue.600}",
+              "alpha": 0.18
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Optional cool decorative facet tint."
+          },
+          "warm": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.orange.240}",
+              "alpha": 0.12
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Optional warm decorative facet tint."
+          }
+        },
+        "family": {
+          "emerald": {
+            "environmentalFace": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.green.930}",
+                "alpha": 0.48
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Emerald environmental face."
+            },
+            "stabilizedFace": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.green.930}",
+                "alpha": 0.27
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Emerald stabilized plane."
+            },
+            "edge": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.green.240}",
+                "alpha": 0.66
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Emerald family edge."
+            },
+            "innerHigh": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.green.090}",
+                "alpha": 0.36
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Emerald inner highlight."
+            },
+            "innerMid": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.green.240}",
+                "alpha": 0.18
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Emerald inner middle tint."
+            },
+            "innerLow": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.green.090}",
+                "alpha": 0.03
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Emerald inner fade."
+            },
+            "opaqueEquivalent": {
+              "$type": "color",
+              "$value": "{color.green.930}",
+              "$description": "Approved Emerald opaque equivalent."
+            }
+          },
+          "ruby": {
+            "environmentalFace": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.red.930}",
+                "alpha": 0.48
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Ruby environmental face."
+            },
+            "stabilizedFace": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.red.930}",
+                "alpha": 0.27
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Ruby stabilized plane."
+            },
+            "edge": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.red.240}",
+                "alpha": 0.66
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Ruby family edge."
+            },
+            "innerHigh": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.red.090}",
+                "alpha": 0.36
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Ruby inner highlight."
+            },
+            "innerMid": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.red.240}",
+                "alpha": 0.18
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Ruby inner middle tint."
+            },
+            "innerLow": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.red.090}",
+                "alpha": 0.03
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Ruby inner fade."
+            },
+            "opaqueEquivalent": {
+              "$type": "color",
+              "$value": "{color.red.930}",
+              "$description": "Approved Ruby opaque equivalent."
+            }
+          },
+          "sapphire": {
+            "environmentalFace": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.blue.930}",
+                "alpha": 0.48
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Sapphire environmental face."
+            },
+            "stabilizedFace": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.blue.930}",
+                "alpha": 0.3
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Sapphire stabilized plane."
+            },
+            "edge": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.blue.240}",
+                "alpha": 0.66
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Sapphire family edge."
+            },
+            "innerHigh": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.blue.060}",
+                "alpha": 0.39
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Sapphire inner highlight cap."
+            },
+            "innerMid": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.blue.240}",
+                "alpha": 0.18
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Sapphire inner middle tint."
+            },
+            "innerLow": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.blue.060}",
+                "alpha": 0.03
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Sapphire inner fade."
+            },
+            "opaqueEquivalent": {
+              "$type": "color",
+              "$value": "{color.blue.930}",
+              "$description": "Approved Sapphire opaque equivalent."
+            }
+          },
+          "amethyst": {
+            "environmentalFace": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.violet.930}",
+                "alpha": 0.48
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Amethyst environmental face."
+            },
+            "stabilizedFace": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.violet.930}",
+                "alpha": 0.27
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Amethyst stabilized plane."
+            },
+            "edge": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.violet.240}",
+                "alpha": 0.66
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Amethyst family edge."
+            },
+            "innerHigh": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.violet.090}",
+                "alpha": 0.36
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Amethyst inner highlight."
+            },
+            "innerMid": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.violet.240}",
+                "alpha": 0.18
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Amethyst inner middle tint."
+            },
+            "innerLow": {
+              "$type": "color",
+              "$value": {
+                "color": "{color.violet.090}",
+                "alpha": 0.03
+              },
+              "$extensions": {
+                "oneli8.composite": "color-alpha"
+              },
+              "$description": "Approved Amethyst inner fade."
+            },
+            "opaqueEquivalent": {
+              "$type": "color",
+              "$value": "{color.violet.930}",
+              "$description": "Approved Amethyst opaque equivalent."
+            }
+          }
+        }
+      },
+      "blur": {
+        "environmental":{"$type":"dimension","$value":"{dimension.scale.018}","$description":"Approved candidate environmental backdrop blur."},
+        "stabilized":{"$type":"dimension","$value":"{dimension.scale.012}","$description":"Local stabilized information-plane blur."}
+      },
+      "opacity": {
+        "environmental":{"$type":"number","$value":0.48,"$description":"Current high-variance specimen family-tint floor."},
+        "edgeHigh":{"$type":"number","$value":0.93,"$description":"Gem edge highlight maximum."},
+        "edgeLow":{"$type":"number","$value":0.03,"$description":"Gem edge highlight minimum."},
+        "cutLight":{"$type":"number","$value":0.72,"$description":"Light directional bevel layer strength."},
+        "cutDark":{"$type":"number","$value":0.54,"$description":"Dark directional bevel layer strength."}
+      },
+      "spacing": {
+        "slabInset":{"$type":"dimension","$value":"{dimension.scale.030}","$description":"Desktop Gem slab content inset."},
+        "clusterGap":{"$type":"dimension","$value":"{dimension.scale.024}","$description":"Desktop related Gem slab gap."},
+        "innerSeparation":{"$type":"dimension","$value":"{dimension.scale.024}","$description":"Separation before a stabilized inner tile."}
+      }
+    }
+  },
+  "spacing": {
+    "none":{"$type":"dimension","$value":"{dimension.scale.000}","$description":"Flush adjoining items with no additional separation."},
+    "inline": {
+      "minimal":{"$type":"dimension","$value":"{dimension.scale.003}","$description":"Tight icon-to-text or micro relationship."},
+      "related":{"$type":"dimension","$value":"{dimension.scale.006}","$description":"Related inline content."},
+      "standard":{"$type":"dimension","$value":"{dimension.scale.012}","$description":"Default inline separation."}
+    },
+    "stack": {
+      "tight":{"$type":"dimension","$value":"{dimension.scale.006}","$description":"Tight vertical stack."},
+      "related":{"$type":"dimension","$value":"{dimension.scale.012}","$description":"Related stacked content."},
+      "grouped":{"$type":"dimension","$value":"{dimension.scale.018}","$description":"Grouped component stack."},
+      "separated":{"$type":"dimension","$value":"{dimension.scale.024}","$description":"Separated content groups."}
+    },
+    "inset": {
+      "compact":{"$type":"dimension","$value":"{dimension.scale.012}","$description":"Compact component inset."},
+      "standard":{"$type":"dimension","$value":"{dimension.scale.018}","$description":"Standard component inset."},
+      "comfortable":{"$type":"dimension","$value":"{dimension.scale.024}","$description":"Comfortable component inset."},
+      "spacious":{"$type":"dimension","$value":"{dimension.scale.036}","$description":"Spacious container inset."}
+    },
+    "layout": {
+      "margin":{"$type":"dimension","$value":"{dimension.scale.024}","$description":"Default page margin."},
+      "gutter":{"$type":"dimension","$value":"{dimension.scale.024}","$description":"Default layout gutter."},
+      "region":{"$type":"dimension","$value":"{dimension.scale.036}","$description":"Region separation."}
+    },
+    "section": {
+      "compact":{"$type":"dimension","$value":"{dimension.scale.036}","$description":"Compact section separation."},
+      "standard":{"$type":"dimension","$value":"{dimension.scale.048}","$description":"Standard section separation."},
+      "spacious":{"$type":"dimension","$value":"{dimension.scale.072}","$description":"Spacious section separation."},
+      "expansive":{"$type":"dimension","$value":"{dimension.scale.108}","$description":"Expansive display section separation."}
+    }
+  },
+  "size": {
+    "control": {
+      "compact":{"$type":"dimension","$value":"{dimension.scale.036}","$description":"Dense visible control height."},
+      "standard":{"$type":"dimension","$value":"{dimension.scale.042}","$description":"General visible control height."},
+      "comfortable":{"$type":"dimension","$value":"{dimension.scale.048}","$description":"Default cross-platform control height."},
+      "large":{"$type":"dimension","$value":"{dimension.scale.060}","$description":"Prominent or accessibility-forward control height."}
+    },
+    "target": {
+      "minimum":{"$type":"dimension","$value":"{dimension.scale.048}","$description":"Minimum standalone interaction target."},
+      "comfortable":{"$type":"dimension","$value":"{dimension.scale.060}","$description":"Touch-led comfortable target."},
+      "spacious":{"$type":"dimension","$value":"{dimension.scale.072}","$description":"Kiosk or generous target."}
+    },
+    "icon": {
+      "micro":{"$type":"dimension","$value":"{dimension.scale.009}","$description":"Micro icon presentation for tightly bounded internal indicators."},
+      "compact":{"$type":"dimension","$value":"{dimension.scale.012}","$description":"Compact icon presentation for small internal indicators."},
+      "small":{"$type":"dimension","$value":"{dimension.scale.018}","$description":"Compact supporting icon artwork box."},
+      "standard":{"$type":"dimension","$value":"{dimension.scale.024}","$description":"Default icon artwork box."},
+      "medium":{"$type":"dimension","$value":"{dimension.scale.030}","$description":"Intermediate icon artwork box."},
+      "large":{"$type":"dimension","$value":"{dimension.scale.036}","$description":"Emphasized icon artwork box."},
+      "xlarge":{"$type":"dimension","$value":"{dimension.scale.048}","$description":"Expressive icon artwork box."},
+      "spacious":{"$type":"dimension","$value":"{dimension.scale.060}","$description":"Spacious icon artwork box."},
+      "display":{"$type":"dimension","$value":"{dimension.scale.072}","$description":"Display icon artwork box."},
+      "hero":{"$type":"dimension","$value":"{dimension.scale.096}","$description":"Hero icon artwork box."},
+      "landmark":{"$type":"dimension","$value":"{dimension.scale.108}","$description":"Largest governed icon presentation for landmarks and spatial use."}
+    },
+    "avatar": {
+      "micro":{"$type":"dimension","$value":"{dimension.scale.018}","$description":"Micro avatar."},
+      "small":{"$type":"dimension","$value":"{dimension.scale.024}","$description":"Small avatar."},
+      "standard":{"$type":"dimension","$value":"{dimension.scale.036}","$description":"Standard avatar."},
+      "large":{"$type":"dimension","$value":"{dimension.scale.048}","$description":"Large avatar."},
+      "xlarge":{"$type":"dimension","$value":"{dimension.scale.072}","$description":"Extra-large avatar."},
+      "display":{"$type":"dimension","$value":"{dimension.scale.096}","$description":"Display avatar."}
+    },
+    "indicator": {
+      "micro":{"$type":"dimension","$value":"{dimension.scale.006}","$description":"Micro indicator."},
+      "small":{"$type":"dimension","$value":"{dimension.scale.012}","$description":"Small indicator."},
+      "standard":{"$type":"dimension","$value":"{dimension.scale.018}","$description":"Standard indicator."},
+      "large":{"$type":"dimension","$value":"{dimension.scale.024}","$description":"Large indicator."}
+    },
+    "loader": {
+      "small":{"$type":"dimension","$value":"{dimension.scale.018}","$description":"Small loader."},
+      "standard":{"$type":"dimension","$value":"{dimension.scale.024}","$description":"Standard loader."},
+      "large":{"$type":"dimension","$value":"{dimension.scale.036}","$description":"Large loader."},
+      "display":{"$type":"dimension","$value":"{dimension.scale.048}","$description":"Display loader."}
+    }
+  },
+  "shape":{"radius":{
+    "none":{"$type":"dimension","$value":"{dimension.scale.000}","$description":"Flush regions and hard edges."},
+    "subtle":{"$type":"dimension","$value":"{dimension.scale.003}","$description":"Tiny internal radius."},
+    "compact":{"$type":"dimension","$value":"{dimension.scale.006}","$description":"Dense control radius."},
+    "medium":{"$type":"dimension","$value":"{dimension.scale.009}","$description":"Intermediate nested radius."},
+    "standard":{"$type":"dimension","$value":"{dimension.scale.012}","$description":"Default control and small-card radius."},
+    "comfortable":{"$type":"dimension","$value":"{dimension.scale.018}","$description":"Spacious card and menu radius."},
+    "container":{"$type":"dimension","$value":"{dimension.scale.024}","$description":"Dialog and major-container radius."},
+    "display":{"$type":"dimension","$value":"{dimension.scale.036}","$description":"Expressive surface radius."},
+    "full":{"$type":"dimension","$value":{"value":999,"unit":"px"},"$extensions":{"oneli8.exception":"categorical-full-radius"},"$description":"Fully rounded categorical shape."}
+  }},
+  "border":{"width":{
+    "none":{"$type":"dimension","$value":"{dimension.scale.000}","$description":"No visible boundary."},
+    "hairline":{"$type":"dimension","$value":{"value":1,"unit":"px"},"$extensions":{"oneli8.exception":"decorative-optical-boundary"},"$description":"Decorative nonessential separation."},
+    "standard":{"$type":"dimension","$value":{"value":2,"unit":"px"},"$extensions":{"oneli8.exception":"essential-optical-boundary"},"$description":"Standard essential boundary."},
+    "strong":{"$type":"dimension","$value":"{dimension.scale.003}","$description":"Selected or emphasized boundary."}
+  }},
+  "focus":{"ring":{
+    "innerWidth":{"$type":"dimension","$value":"{dimension.scale.003}","$description":"First focus band width."},
+    "outerWidth":{"$type":"dimension","$value":"{dimension.scale.003}","$description":"Second focus band width."},
+    "totalWidth":{"$type":"dimension","$value":"{dimension.scale.006}","$description":"Combined focus treatment width."},
+    "offset":{"$type":"dimension","$value":"{dimension.scale.003}","$description":"Focus separation when geometry requires it."}
+  }},
+  "typography": {
+    "display": {
+      "large":{"$type":"typography","$value":{"fontFamily":"{font.family.display}","fontSize":"{font.size.066}","fontWeight":"{font.weight.bold}","letterSpacing":"{font.tracking.snug}","lineHeight":"{font.line.072}"},"$description":"Compact Display Large."},
+      "medium":{"$type":"typography","$value":{"fontFamily":"{font.family.display}","fontSize":"{font.size.051}","fontWeight":"{font.weight.bold}","letterSpacing":"{font.tracking.displaySoft}","lineHeight":"{font.line.060}"},"$description":"Compact Display Medium."},
+      "small":{"$type":"typography","$value":{"fontFamily":"{font.family.display}","fontSize":"{font.size.039}","fontWeight":"{font.weight.semibold}","letterSpacing":"{font.tracking.titleTight}","lineHeight":"{font.line.048}"},"$description":"Compact Display Small."}
+    },
+    "title": {
+      "large":{"$type":"typography","$value":{"fontFamily":"{font.family.functional}","fontSize":"{font.size.039}","fontWeight":"{font.weight.semibold}","letterSpacing":"{font.tracking.titleSoft}","lineHeight":"{font.line.048}"},"$description":"Compact Title Large."},
+      "medium":{"$type":"typography","$value":{"fontFamily":"{font.family.functional}","fontSize":"{font.size.030}","fontWeight":"{font.weight.semibold}","letterSpacing":"{font.tracking.normal}","lineHeight":"{font.line.039}"},"$description":"Compact Title Medium."},
+      "small":{"$type":"typography","$value":{"fontFamily":"{font.family.functional}","fontSize":"{font.size.021}","fontWeight":"{font.weight.semibold}","letterSpacing":"{font.tracking.normal}","lineHeight":"{font.line.030}"},"$description":"Compact Title Small."}
+    },
+    "body": {
+      "large":{"$type":"typography","$value":{"fontFamily":"{font.family.functional}","fontSize":"{font.size.021}","fontWeight":"{font.weight.regular}","letterSpacing":"{font.tracking.normal}","lineHeight":"{font.line.030}"},"$description":"Body Large."},
+      "medium":{"$type":"typography","$value":{"fontFamily":"{font.family.functional}","fontSize":"{font.size.016}","fontWeight":"{font.weight.regular}","letterSpacing":"{font.tracking.normal}","lineHeight":"{font.line.024}"},"$description":"Default sustained-reading role."},
+      "small":{"$type":"typography","$value":{"fontFamily":"{font.family.functional}","fontSize":"{font.size.012}","fontWeight":"{font.weight.regular}","letterSpacing":"{font.tracking.open}","lineHeight":"{font.line.018}"},"$description":"Supporting text role."}
+    }
+  },
+  "motion": {
+    "distance": {
+      "minimal":{"$type":"dimension","$value":"{dimension.scale.003}","$description":"Tiny press or emphasis travel."},
+      "short":{"$type":"dimension","$value":"{dimension.scale.006}","$description":"Compact reveal travel."},
+      "standard":{"$type":"dimension","$value":"{dimension.scale.012}","$description":"Popover or local-panel travel."},
+      "large":{"$type":"dimension","$value":"{dimension.scale.024}","$description":"Major panel travel."},
+      "expansive":{"$type":"dimension","$value":"{dimension.scale.048}","$description":"Rare route travel."}
+    },
+    "interaction": {
+      "press":{"$type":"transition","$value":{"duration":"{motion.duration.quick}","delay":"{motion.duration.instant}","timingFunction":"{motion.easing.standard}"},"$extensions":{"oneli8.maximumDistance":"{dimension.scale.003}"},"$description":"Press feedback recipe."},
+      "hover":{"$type":"transition","$value":{"duration":"{motion.duration.fast}","delay":"{motion.duration.instant}","timingFunction":"{motion.easing.standard}"},"$extensions":{"oneli8.maximumDistance":"icon-only-purposeful-motion"},"$description":"Stable-body hover recipe."},
+      "focus":{"$type":"transition","$value":{"duration":"{motion.duration.fast}","delay":"{motion.duration.instant}","timingFunction":"{motion.easing.standard}"},"$extensions":{"oneli8.maximumDistance":"{dimension.scale.000}"},"$description":"Focus appearance recipe."}
+    },
+    "state":{"change":{"$type":"transition","$value":{"duration":"{motion.duration.standard}","delay":"{motion.duration.instant}","timingFunction":"{motion.easing.standard}"},"$extensions":{"oneli8.maximumDistance":"{dimension.scale.006}"},"$description":"Local state-change recipe."}}
+  }
+}

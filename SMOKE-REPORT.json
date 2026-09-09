@@ -1,0 +1,12 @@
+{
+  "checks": 284,
+  "mappedPlansRendered": 159,
+  "react": "18.3.1",
+  "scope": "Package exports, static rendering, native attributes and synthetic property mapping. Not browser visual/interaction or screen-reader certification.",
+  "isolatedOfflineInstall": true,
+  "installedTokenRebuild": "Built 586 Oneli8 tokens for CSS, TypeScript, Tailwind, and Figma.\nPASS 69/69 canonical token package checks.",
+  "publicExportBoundary": true,
+  "relativeImports": true,
+  "sourceHashes": true,
+  "published": false
+}

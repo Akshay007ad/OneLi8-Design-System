@@ -1,0 +1,262 @@
+{
+  "$schema": "../schema/token-file.schema.json",
+  "$description": "Approved Oneli8 component recipes. Component tokens map Semantic roles and approved non-duplicative geometry; they never create private foundation scales.",
+  "$extensions": {"oneli8.status":"component-slice-01"},
+  "component": {
+    "opticalStroke":{"$type":"dimension","$value":{"value":1.8,"unit":"px"},"$extensions":{"oneli8.exception":"universal-optical-stroke"},"$description":"Universal 1.8-unit source stroke for canonical 24px outlined icons and direct 1.8px geometry for Checkbox, Radio, and Gem equivalents."},
+    "icon": {
+      "stroke":{"$type":"dimension","$value":"{component.opticalStroke}","$description":"Canonical 24px Icon Frame source stroke; the complete source geometry scales at presentation time."}
+    },
+    "button": {
+      "height": {
+        "compact":{"$type":"dimension","$value":"{size.control.compact}","$description":"Compact Button visible height."},
+        "standard":{"$type":"dimension","$value":"{size.control.standard}","$description":"Standard Button visible height."},
+        "comfortable":{"$type":"dimension","$value":"{size.control.comfortable}","$description":"Comfortable Button visible height."},
+        "large":{"$type":"dimension","$value":"{size.control.large}","$description":"Large Button visible height."}
+      },
+      "paddingInline": {
+        "compact":{"$type":"dimension","$value":"{spacing.inset.compact}","$description":"Compact Button inline padding."},
+        "standard":{"$type":"dimension","$value":{"value":15,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Standard Button inline padding."},
+        "comfortable":{"$type":"dimension","$value":"{spacing.inset.standard}","$description":"Comfortable Button inline padding."},
+        "large":{"$type":"dimension","$value":"{spacing.inset.comfortable}","$description":"Large Button inline padding."}
+      },
+      "gap": {
+        "compact":{"$type":"dimension","$value":"{spacing.inline.related}","$description":"Compact and Standard Button icon-label gap."},
+        "comfortable":{"$type":"dimension","$value":{"value":9,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Comfortable and Large Button icon-label gap."}
+      },
+      "icon": {
+        "compact":{"$type":"dimension","$value":"{size.icon.small}","$description":"Compact and Standard Button icon box."},
+        "comfortable":{"$type":"dimension","$value":"{size.icon.standard}","$description":"Comfortable and Large Button icon box."}
+      },
+      "target": {
+        "compact":{"$type":"dimension","$value":"{size.target.minimum}","$description":"Protected Compact Button target."},
+        "standard":{"$type":"dimension","$value":"{size.target.minimum}","$description":"Protected Standard Button target."},
+        "comfortable":{"$type":"dimension","$value":"{size.target.minimum}","$description":"Comfortable Button target."},
+        "large":{"$type":"dimension","$value":"{size.target.comfortable}","$description":"Large Button target."}
+      },
+      "radius": {
+        "compact":{"$type":"dimension","$value":"{shape.radius.compact}","$description":"Compact Button radius."},
+        "standard":{"$type":"dimension","$value":"{shape.radius.medium}","$description":"Standard Button radius."},
+        "comfortable":{"$type":"dimension","$value":"{shape.radius.standard}","$description":"Comfortable Button radius."},
+        "large":{"$type":"dimension","$value":"{shape.radius.standard}","$description":"Large Button radius."}
+      },
+      "secondaryBoundary":{"$type":"dimension","$value":"{border.width.standard}","$description":"Persistent Secondary Button boundary."}
+    },
+    "iconButton": {
+      "box": {
+        "compact":{"$type":"dimension","$value":"{size.control.compact}","$description":"Compact Icon Button visible box."},
+        "standard":{"$type":"dimension","$value":"{size.control.standard}","$description":"Standard Icon Button visible box."},
+        "comfortable":{"$type":"dimension","$value":"{size.control.comfortable}","$description":"Comfortable Icon Button visible box."},
+        "large":{"$type":"dimension","$value":"{size.control.large}","$description":"Large Icon Button visible box."}
+      },
+      "artwork": {
+        "compact":{"$type":"dimension","$value":"{size.icon.small}","$description":"Compact Icon Button artwork box."},
+        "standard":{"$type":"dimension","$value":"{size.icon.small}","$description":"Standard Icon Button artwork box."},
+        "comfortable":{"$type":"dimension","$value":"{size.icon.standard}","$description":"Comfortable Icon Button artwork box."},
+        "large":{"$type":"dimension","$value":"{size.icon.large}","$description":"Large Icon Button artwork box."}
+      },
+      "target": {
+        "compact":{"$type":"dimension","$value":"{size.target.minimum}","$description":"Protected Compact Icon Button target."},
+        "standard":{"$type":"dimension","$value":"{size.target.minimum}","$description":"Protected Standard Icon Button target."},
+        "comfortable":{"$type":"dimension","$value":"{size.target.minimum}","$description":"Comfortable Icon Button target."},
+        "large":{"$type":"dimension","$value":"{size.target.comfortable}","$description":"Large Icon Button target."}
+      },
+      "radius": {
+        "compact":{"$type":"dimension","$value":"{shape.radius.medium}","$description":"Compact Icon Button rounded-square radius."},
+        "standard":{"$type":"dimension","$value":"{shape.radius.standard}","$description":"Standard Icon Button rounded-square radius."},
+        "comfortable":{"$type":"dimension","$value":"{shape.radius.standard}","$description":"Comfortable Icon Button rounded-square radius."},
+        "large":{"$type":"dimension","$value":"{shape.radius.comfortable}","$description":"Large Icon Button rounded-square radius."},
+        "circle":{"$type":"dimension","$value":"{shape.radius.full}","$description":"Circular Icon Button radius."}
+      }
+    },
+    "link": {
+      "underline": {
+        "default":{"$type":"dimension","$value":"{border.width.hairline}","$description":"Persistent Inline and Standalone Link underline."},
+        "emphasis":{"$type":"dimension","$value":"{border.width.standard}","$description":"Hover and Pressed Link underline."},
+        "offset":{"$type":"dimension","$value":"{focus.ring.offset}","$description":"Governed Link underline offset."}
+      },
+      "gap": {
+        "small":{"$type":"dimension","$value":"{spacing.inline.related}","$description":"Small Link icon-label gap."},
+        "standard":{"$type":"dimension","$value":"{spacing.inline.related}","$description":"Standard Link icon-label gap."},
+        "large":{"$type":"dimension","$value":{"value":9,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Large Link icon-label gap."}
+      },
+      "targetNavigation":{"$type":"dimension","$value":"{size.target.minimum}","$description":"Minimum Navigation Link target."}
+    },
+    "textField": {
+      "height": {
+        "compact":{"$type":"dimension","$value":"{size.control.compact}","$description":"Compact Text Field minimum visible height."},
+        "standard":{"$type":"dimension","$value":"{size.control.standard}","$description":"Standard Text Field minimum visible height."},
+        "comfortable":{"$type":"dimension","$value":"{size.control.comfortable}","$description":"Comfortable Text Field minimum visible height."},
+        "large":{"$type":"dimension","$value":"{size.control.large}","$description":"Large Text Field minimum visible height."}
+      },
+      "inset": {
+        "compact":{"$type":"dimension","$value":"{spacing.inset.compact}","$description":"Compact Text Field inline inset."},
+        "standard":{"$type":"dimension","$value":{"value":15,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Standard Text Field inline inset."},
+        "comfortable":{"$type":"dimension","$value":"{spacing.inset.standard}","$description":"Comfortable Text Field inline inset."},
+        "large":{"$type":"dimension","$value":"{spacing.inset.comfortable}","$description":"Large Text Field inline inset."}
+      },
+      "radius": {
+        "compact":{"$type":"dimension","$value":"{shape.radius.compact}","$description":"Compact Text Field radius."},
+        "standard":{"$type":"dimension","$value":"{shape.radius.medium}","$description":"Standard Text Field radius."},
+        "comfortable":{"$type":"dimension","$value":"{shape.radius.standard}","$description":"Comfortable Text Field radius."},
+        "large":{"$type":"dimension","$value":"{shape.radius.comfortable}","$description":"Large Text Field radius."}
+      },
+      "boundary":{"$type":"dimension","$value":"{border.width.standard}","$description":"Preallocated essential Text Field boundary."},
+      "gap": {
+        "label":{"$type":"dimension","$value":"{spacing.stack.tight}","$description":"Label-to-control gap."},
+        "supporting":{"$type":"dimension","$value":"{spacing.stack.tight}","$description":"Control-to-supporting-region gap."},
+        "status":{"$type":"dimension","$value":"{spacing.inline.minimal}","$description":"Status-icon-to-message-text gap."},
+        "messageCounter":{"$type":"dimension","$value":"{spacing.inline.standard}","$description":"Message-to-counter inline gap."}
+      }
+    },
+    "choice": {
+      "indicator": {
+        "compact":{"$type":"dimension","$value":"{size.indicator.standard}","$description":"Compact and Standard Checkbox or Radio indicator."},
+        "comfortable":{"$type":"dimension","$value":"{size.indicator.large}","$description":"Comfortable and Large Checkbox or Radio indicator."}
+      },
+      "gap": {
+        "compact":{"$type":"dimension","$value":"{spacing.inline.related}","$description":"Compact indicator-to-label gap."},
+        "standard":{"$type":"dimension","$value":{"value":9,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Standard and Comfortable indicator-to-label gap."},
+        "large":{"$type":"dimension","$value":"{spacing.inline.standard}","$description":"Large indicator-to-label gap."}
+      },
+      "rowMinimum":{"$type":"dimension","$value":"{size.target.minimum}","$description":"Minimum Choice item interaction row."},
+      "opticalStroke":{"$type":"dimension","$value":"{component.opticalStroke}","$description":"Compatibility alias for Checkbox, Radio, Switch, and Gem-equivalent geometry."}
+    },
+    "checkbox": {
+      "radius": {
+        "compact":{"$type":"dimension","$value":"{shape.radius.subtle}","$description":"Compact and Standard Checkbox radius."},
+        "comfortable":{"$type":"dimension","$value":"{shape.radius.compact}","$description":"Comfortable and Large Checkbox radius."}
+      },
+      "boundary":{"$type":"dimension","$value":"{component.choice.opticalStroke}","$description":"Checkbox outer boundary aliases the shared Choice optical stroke."},
+      "mark": {
+        "stroke":{"$type":"dimension","$value":"{component.choice.opticalStroke}","$description":"Compatibility alias for the shared Choice optical stroke."},
+        "mixedWidth":{"$type":"dimension","$value":{"value":9,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Centered Mixed-state bar width."}
+      }
+    },
+    "radio": {
+      "boundary":{"$type":"dimension","$value":"{component.choice.opticalStroke}","$description":"Radio outer boundary aliases the shared Choice optical stroke."},
+      "dot": {
+        "compact":{"$type":"dimension","$value":{"value":9,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Compact and Standard selected Radio dot."},
+        "comfortable":{"$type":"dimension","$value":{"value":12,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Comfortable and Large selected Radio dot."}
+      }
+    },
+    "switch": {
+      "trackWidth": {
+        "compact":{"$type":"dimension","$value":"{size.control.compact}","$description":"Compact and Standard Switch track width."},
+        "comfortable":{"$type":"dimension","$value":"{size.control.comfortable}","$description":"Comfortable and Large Switch track width."}
+      },
+      "trackHeight": {
+        "compact":{"$type":"dimension","$value":"{size.indicator.standard}","$description":"Compact and Standard Switch track height."},
+        "comfortable":{"$type":"dimension","$value":"{size.indicator.large}","$description":"Comfortable and Large Switch track height."}
+      },
+      "thumb": {
+        "compact":{"$type":"dimension","$value":"{size.indicator.small}","$description":"Compact and Standard Switch thumb."},
+        "comfortable":{"$type":"dimension","$value":"{size.indicator.standard}","$description":"Comfortable and Large Switch thumb."}
+      },
+      "thumbIcon": {
+        "compact":{"$type":"dimension","$value":{"value":9,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Compact and Standard Switch thumb icon box."},
+        "comfortable":{"$type":"dimension","$value":"{size.indicator.small}","$description":"Comfortable and Large Switch thumb icon box."}
+      },
+      "inset":{"$type":"dimension","$value":"{shape.radius.subtle}","$description":"Switch thumb inset from the track edge."},
+      "travel": {
+        "compact":{"$type":"dimension","$value":"{size.indicator.standard}","$description":"Compact and Standard Switch logical travel."},
+        "comfortable":{"$type":"dimension","$value":"{size.indicator.large}","$description":"Comfortable and Large Switch logical travel."}
+      }
+    },
+    "selectionPopup": {
+      "gap":{"$type":"dimension","$value":"{spacing.stack.tight}","$description":"Closed-control-to-popup block gap."},
+      "paddingInline":{"$type":"dimension","$value":"{spacing.inline.minimal}","$description":"Selection popup outer inline inset; combines with the Option Rail inset to form the visible edge."},
+      "paddingBlock":{"$type":"dimension","$value":"{spacing.inline.related}","$description":"Selection popup block inset."},
+      "railInsetInline":{"$type":"dimension","$value":"{spacing.inline.minimal}","$description":"Option Rail inline inset; combines with popup inline padding to form the approved 6px visible edge."},
+      "maximumBlock": {
+        "standard":{"$type":"dimension","$value":{"value":288,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Suggested Standard maximum visible option region before scrolling."},
+        "large":{"$type":"dimension","$value":{"value":360,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Suggested Large maximum visible option region before scrolling."}
+      }
+    },
+    "selectionOption": {
+      "minimum": {
+        "standard":{"$type":"dimension","$value":"{size.target.minimum}","$description":"Standard option minimum row."},
+        "large":{"$type":"dimension","$value":"{size.target.comfortable}","$description":"Large option minimum row."}
+      },
+      "inset": {
+        "standard":{"$type":"dimension","$value":"{spacing.inset.compact}","$description":"Standard and Comfortable option inline inset."},
+        "large":{"$type":"dimension","$value":{"value":15,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Large option inline inset."}
+      },
+      "check":{"$type":"dimension","$value":"{size.icon.small}","$description":"Selected-option Check artwork box."}
+    },
+    "choiceChip": {
+      "height": {
+        "compact":{"$type":"dimension","$value":{"value":30,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Approved Compact Soft Hexagon visible height."},
+        "standard":{"$type":"dimension","$value":"{size.control.compact}","$description":"Approved Standard Soft Hexagon visible height."},
+        "comfortable":{"$type":"dimension","$value":"{size.control.standard}","$description":"Approved Comfortable Soft Hexagon visible height."},
+        "large":{"$type":"dimension","$value":"{size.control.standard}","$description":"Approved Large Soft Hexagon visible height inside a larger protected target."}
+      },
+      "target": {
+        "standard":{"$type":"dimension","$value":"{size.target.minimum}","$description":"Protected Compact, Standard, and Comfortable Choice Chip target."},
+        "large":{"$type":"dimension","$value":"{size.target.comfortable}","$description":"Protected Large Choice Chip target."}
+      },
+      "terminal":{"$type":"dimension","$value":"{spacing.inline.standard}","$description":"Fixed Soft Hexagon terminal width; it never scales with label length."},
+      "innerTerminal":{"$type":"dimension","$value":{"value":11,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Fixed inset Soft Hexagon terminal width used by the private border construction."},
+      "centerCut":{"$type":"dimension","$value":"{size.icon.small}","$description":"Approved center-mask reduction that overlaps both terminals without exposing a rectangle."},
+      "innerCenterCut":{"$type":"dimension","$value":{"value":16,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Approved inset center-mask reduction that preserves the Soft Hexagon rather than forming an octagon."},
+      "bezelInset":{"$type":"dimension","$value":"{border.width.standard}","$description":"Thin inset between the Soft Hexagon cut edge and face."},
+      "inset": {
+        "compact":{"$type":"dimension","$value":{"value":21,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Compact Soft Hexagon content inset."},
+        "standard":{"$type":"dimension","$value":"{spacing.inset.comfortable}","$description":"Standard Soft Hexagon content inset."},
+        "comfortable":{"$type":"dimension","$value":{"value":27,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Comfortable Soft Hexagon content inset."},
+        "large":{"$type":"dimension","$value":{"value":27,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Large Soft Hexagon content inset."}
+      },
+      "gap":{"$type":"dimension","$value":"{spacing.inline.related}","$description":"Token-to-token and wrapped-row gap."},
+      "markGap":{"$type":"dimension","$value":{"value":9,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Approved label-to-mark gap; absent when Mark is None."},
+      "mark":{"$type":"dimension","$value":"{size.icon.small}","$description":"Canonical Icon Frame presentation for Check or Remove artwork."}
+    },
+    "tokenField": {
+      "minimumInput":{"$type":"dimension","$value":{"value":96,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Minimum editable input measure before wrapping to the next row."},
+      "gap":{"$type":"dimension","$value":"{component.choiceChip.gap}","$description":"Shared token, input, and wrapped-row gap."},
+      "paddingBlock":{"$type":"dimension","$value":"{spacing.inline.minimal}","$description":"Block inset that preserves the Field Shell while tokens wrap."}
+    },
+    "suggestionRail": {
+      "gap":{"$type":"dimension","$value":"{component.choiceChip.gap}","$description":"Shared gap between Suggested Value chips."},
+      "fieldSeparation":{"$type":"dimension","$value":"{spacing.stack.tight}","$description":"Separation between the optional Suggested Values rail and its owning field control."}
+    },
+    "navigation": {
+      "itemGap":{"$type":"dimension","$value":"{spacing.inline.related}","$description":"Canonical icon, label, and badge gap inside navigation molecules."},
+      "icon":{"$type":"dimension","$value":"{size.icon.small}","$description":"Canonical navigation Icon Frame presentation."},
+      "target":{"$type":"dimension","$value":"{size.target.minimum}","$description":"Minimum protected navigation target."},
+      "focusInset":{"$type":"dimension","$value":"{focus.ring.innerWidth}","$description":"Inward focus treatment that does not change or escape measured bounds."}
+    },
+    "tabItem": {
+      "height": {
+        "compact":{"$type":"dimension","$value":"{size.control.compact}","$description":"Compact Tab Item visible height."},
+        "standard":{"$type":"dimension","$value":"{size.control.standard}","$description":"Standard Tab Item visible height."},
+        "comfortable":{"$type":"dimension","$value":"{size.control.comfortable}","$description":"Comfortable Tab Item visible height."},
+        "large":{"$type":"dimension","$value":"{size.control.large}","$description":"Large Tab Item visible height."}
+      },
+      "inset": {
+        "compact":{"$type":"dimension","$value":"{spacing.inset.compact}","$description":"Compact Tab Item inline inset."},
+        "standard":{"$type":"dimension","$value":{"value":15,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Standard Tab Item inline inset."},
+        "comfortable":{"$type":"dimension","$value":"{spacing.inset.standard}","$description":"Comfortable Tab Item inline inset."},
+        "large":{"$type":"dimension","$value":"{spacing.inset.comfortable}","$description":"Large Tab Item inline inset."}
+      },
+      "radius":{"$type":"dimension","$value":"{shape.radius.medium}","$description":"Tab Item state-surface radius."},
+      "indicatorThickness":{"$type":"dimension","$value":"{border.width.strong}","$description":"Selected Tab Item indicator thickness."},
+      "indicatorInset":{"$type":"dimension","$value":{"value":15,"unit":"px"},"$extensions":{"oneli8.geometry":"approved-component-recipe"},"$description":"Selected indicator logical inset."},
+      "rail":{"$type":"dimension","$value":"{border.width.hairline}","$description":"Adaptive secondary rail thickness."}
+    },
+    "segmentedControl": {
+      "trackInset":{"$type":"dimension","$value":"{spacing.inline.minimal}","$description":"Protected inset between track and Segment molecules."},
+      "outlinedGap":{"$type":"dimension","$value":"{spacing.inline.related}","$description":"Deliberate gap between outlined Segment molecules."},
+      "trackRadius":{"$type":"dimension","$value":"{shape.radius.standard}","$description":"Connected Segmented Control track radius."},
+      "itemRadius":{"$type":"dimension","$value":"{shape.radius.medium}","$description":"Nested Segment state-surface radius."},
+      "line":{"$type":"dimension","$value":"{border.width.strong}","$description":"Line-presentation active indicator."},
+      "boundary":{"$type":"dimension","$value":"{border.width.hairline}","$description":"Outlined Segment boundary."}
+    },
+    "tabBar": {
+      "inset":{"$type":"dimension","$value":"{spacing.inline.related}","$description":"Tab Bar protection; Inline uses inlineInset on its horizontal edges."},
+      "inlineInset":{"$type":"dimension","$value":"{spacing.inline.minimal}","$description":"Inline Tab Bar horizontal inset, measured from the canonical Figma owner."},
+      "gap":{"$type":"dimension","$value":"{spacing.none}","$description":"Canonical destinations meet without additional inter-item spacing; outer protection belongs to inset."},
+      "radius":{"$type":"dimension","$value":"{shape.radius.comfortable}","$description":"Tab Bar outer radius."},
+      "itemRadius":{"$type":"dimension","$value":"{shape.radius.standard}","$description":"Destination Item nested radius after the canonical inset subtraction."}
+    }
+  }
+}

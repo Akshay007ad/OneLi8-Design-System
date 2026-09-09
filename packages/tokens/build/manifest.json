@@ -1,0 +1,22 @@
+{
+  "generated": true,
+  "version": "1.0.0-beta.1",
+  "counts": {
+    "primitive": 169,
+    "semantic": 266,
+    "component": 151,
+    "componentStatuses": 10,
+    "figmaVariables": 572,
+    "figmaTypographyStyles": 9,
+    "figmaElevationStyles": 5
+  },
+  "outputs": [
+    "css/tokens.css",
+    "typescript/index.js",
+    "typescript/index.d.ts",
+    "tailwind/preset.mjs",
+    "tailwind/theme.css",
+    "figma/variables.json",
+    "status/components.json"
+  ]
+}

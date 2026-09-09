@@ -1,0 +1,235 @@
+{
+  "$schema": "https://oneli8.org/schema/component-status.schema.json",
+  "version": "1.0.0-beta.1",
+  "components": [
+    {
+      "name": "Button",
+      "status": "Candidate",
+      "designerApproved": true,
+      "implementationCertified": false,
+      "contractPath": "oneli8-drafts/button-contract.md",
+      "implementationPath": "packages/react/src/molecules/Button.js",
+      "figmaComponentKey": "15:823;15:824;15:825;15:826;100:3;100:208",
+      "knownEvidence": [
+        "247/247 structural invariants",
+        "Light/Dark and qualified Primary visual approval",
+        "Token-only React reference implementation",
+        "Verified Code ↔ Figma owner identities and runtime descriptions"
+      ],
+      "missingEvidence": [
+        "Assistive-technology and responsive implementation matrix",
+        "Cross-platform certification"
+      ]
+    },
+    {
+      "name": "Icon Button",
+      "status": "Candidate",
+      "designerApproved": true,
+      "implementationCertified": false,
+      "contractPath": "oneli8-drafts/icon-button-contract.md",
+      "implementationPath": "packages/react/src/molecules/IconButton.js",
+      "figmaComponentKey": "86:2;87:26;88:50;89:74;94:98;94:309;94:406;94:503;102:78;102:151;119:202;119:299",
+      "knownEvidence": [
+        "310/310 structural invariants",
+        "Solid and Tonal Glass visual approval",
+        "Modular React reference using shared Button Control, Busy Indicator, and Icon Frame atoms",
+        "Verified Code ↔ Figma owner identities, icon atom contract, and runtime descriptions"
+      ],
+      "missingEvidence": [
+        "Accessible-name and tooltip AT matrix",
+        "Cross-platform certification"
+      ]
+    },
+    {
+      "name": "Link",
+      "status": "Candidate",
+      "designerApproved": true,
+      "implementationCertified": false,
+      "contractPath": "oneli8-drafts/link-contract.md",
+      "implementationPath": "packages/react/src/molecules/Link.js",
+      "figmaComponentKey": "138:260",
+      "knownEvidence": [
+        "417/417 structural invariants",
+        "Six-tier navigation visual approval",
+        "Canonical Figma Inline, Standalone, and Navigation sets validated at 90/90 variants",
+        "Modular native-anchor React reference with nested Navigation List organism"
+      ],
+      "missingEvidence": [
+        "Keyboard and screen-reader matrix",
+        "Canonical Figma visual approval",
+        "Optional supporting icon treatment intentionally parked",
+        "Cross-platform certification"
+      ]
+    },
+    {
+      "name": "Text Field",
+      "status": "Candidate",
+      "designerApproved": true,
+      "implementationCertified": false,
+      "contractPath": "oneli8-drafts/text-field-contract.md",
+      "implementationPath": "packages/react/src/molecules/TextField.js",
+      "figmaComponentKey": "175:2;177:13;182:33;186:53;211:36;215:226",
+      "knownEvidence": [
+        "311/311 structural invariants",
+        "Form messaging and responsive visual approval",
+        "Modular native-input React reference with Regular/Gem material equivalence",
+        "Deterministic IME-safe grapheme limiting, native autofill forwarding, and pending-validation semantics",
+        "Verified Code ↔ Figma regular/Gem owner identities and runtime descriptions"
+      ],
+      "missingEvidence": [
+        "IME, autofill and secure-entry platform matrix",
+        "Cross-platform certification"
+      ]
+    },
+    {
+      "name": "Choice Controls",
+      "status": "Candidate",
+      "designerApproved": true,
+      "implementationCertified": false,
+      "contractPath": "oneli8-drafts/choice-controls-contract.md",
+      "implementationPath": "packages/react/src/ChoiceControls.js",
+      "figmaComponentKey": "252:301;331:1309;273:603;824:1304;825:1591;859:5180",
+      "knownEvidence": [
+        "345/345 current structural invariants",
+        "Checkbox, Radio, Capsule Switch and optional Soft Hexagon visual approval",
+        "Shared Primary-family selection semantics",
+        "Canonical Figma uses connected private Checkbox, Radio, and Switch indicator sets",
+        "Token-only modular React reference for Checkbox, Radio Group, Switch, and Checkbox hierarchy",
+        "Deterministic native reset, recursive hierarchy, required-group, and localized synchronization evidence",
+        "Checkbox, Radio, Checkbox Hierarchy, Radio Group, Switch Indicator, and Choice Item / Switch Code ↔ Figma identities verified",
+        "Canonical public Radio Group owner composes 12 exposed Radio molecule instances across four approved behavior proofs",
+        "Radio and Switch reuse the single 24px icon pool through the approved 9px and 12px Icon Frame presentations"
+      ],
+      "missingEvidence": [
+        "Input-method and Forced Colors platform matrix",
+        "Cross-platform certification"
+      ]
+    },
+    {
+      "name": "Select and Combobox",
+      "status": "Candidate",
+      "designerApproved": true,
+      "implementationCertified": false,
+      "contractPath": "oneli8-drafts/select-combobox-contract.md",
+      "implementationPath": "packages/react/src/SelectCombobox.js",
+      "figmaComponentKey": "570:122;574:534;583:338;875:1778;883:2159",
+      "knownEvidence": [
+        "142/142 contract invariants",
+        "54/54 specimen invariants",
+        "Designer visual approval",
+        "Zero raw vectors, zero broken instances, connected Light/Dark + Blue/Orange/Green + Standard/Gem proof",
+        "Modular native Select and single-value Combobox React reference using shared Field Shell and Selection Option foundations",
+        "Shared Suggested Values rail with deterministic and AI assistance states",
+        "Deterministic keyboard and screen-reader semantic gate with named Listbox, active descendant, busy state, and live announcements",
+        "Composite keyboard, IME, screen-reader semantics, focus restoration, async-source, and Forced Colors evidence recorded",
+        "Selection Option, Popup, and Select Trigger Code ↔ Figma identities verified after the research reset",
+        "Canonical public Select and Combobox Figma owners reuse Regular/Gem field molecules, one shared opaque Popup organism, Selection Option molecules, and icon-pool atoms",
+        "Material and Size remain the only visual variant axes; Expanded is a Boolean property to prevent anatomy forks",
+        "Canonical public Select and Combobox Figma owners visually approved"
+      ],
+      "missingEvidence": [
+        "Manual VoiceOver, NVDA/JAWS, TalkBack, and Switch Access matrix",
+        "Cross-platform certification"
+      ]
+    },
+    {
+      "name": "Multi Combobox and Token Field",
+      "status": "Candidate",
+      "designerApproved": true,
+      "implementationCertified": false,
+      "contractPath": "oneli8-drafts/multi-combobox-token-field-contract.md",
+      "implementationPath": "packages/react/src/MultiCombobox.js",
+      "figmaComponentKey": "636:847;897:2106;904:2507;978:4472;906:2898",
+      "knownEvidence": [
+        "98/98 contract invariants",
+        "54/54 specimen invariants",
+        "70/70 deterministic interaction invariants",
+        "Soft Hexagon geometry visual approval",
+        "Approved Compact, Standard, Comfortable, and Large token contract",
+        "Atomic React implementation with shared Field Shell, Popup, Button, Text Field, and Icon Frame foundations",
+        "Shared Suggested Values rail across inline and Choice Picker presentations",
+        "Soft Hexagon only: rejected Neutral oval owners removed 2026-09-08; full parity certification remains pending",
+        "Public documentation uses Multi-select Field; MultiCombobox and TokenField remain behavioral code aliases",
+        "Canonical public Token owners reuse the approved Choice Chips and canonical Check/Close atoms",
+        "Canonical public Multi-select Field owners reuse full-width Regular/Gem Text Field, Token, Text Field Content, and shared aligned opaque Selection Popup owners across Outline/Filled and Soft Hexagon appearance",
+        "Canonical public Choice Picker owners promote the approved composition with Material, Commitment, Size, and appearance parity",
+        "Choice Picker async source exposes busy, loading, retrieval-error, retry, and localizable result-announcement semantics",
+        "Composite keyboard, IME, screen-reader semantics, focus restoration, async-source, and Forced Colors evidence recorded"
+      ],
+      "missingEvidence": [
+        "Manual VoiceOver, NVDA/JAWS, TalkBack, and Switch Access matrix",
+        "Cross-platform certification"
+      ]
+    },
+    {
+      "name": "Tabs",
+      "status": "Candidate",
+      "designerApproved": true,
+      "implementationCertified": false,
+      "contractPath": "oneli8-drafts/navigation-component-contract.md",
+      "implementationPath": "packages/react/src/organisms/Tabs.js",
+      "figmaComponentKey": "693:171",
+      "knownEvidence": [
+        "51/51 navigation specimen invariants",
+        "73/73 React navigation invariants",
+        "Regular and Gem Figma approval",
+        "Compact, Standard, Comfortable, and Large Figma/code parity",
+        "Optional badge reuse through one canonical atom",
+        "React reference implementation with automatic and manual activation",
+        "Deterministic RTL-aware keys, resilient roving focus, required region naming, and owned-panel evidence",
+        "Verified portable Code ↔ Figma owner manifest and repository gate"
+      ],
+      "missingEvidence": [
+        "Assistive-technology matrix",
+        "Browser and cross-platform certification"
+      ]
+    },
+    {
+      "name": "Segmented Control",
+      "status": "Candidate",
+      "designerApproved": true,
+      "implementationCertified": false,
+      "contractPath": "oneli8-drafts/navigation-component-contract.md",
+      "implementationPath": "packages/react/src/organisms/SegmentedControl.js",
+      "figmaComponentKey": "698:4792",
+      "knownEvidence": [
+        "Six approved presentations",
+        "Compact, Standard, Comfortable, and Large Figma/code parity",
+        "Optional badge reuse through one canonical atom",
+        "Single, multi, and momentary behavior separation",
+        "73/73 React navigation invariants",
+        "React reference implementation",
+        "Deterministic RTL-aware keys, resilient roving focus, and required region naming evidence",
+        "Verified portable Code ↔ Figma owner manifest and repository gate"
+      ],
+      "missingEvidence": [
+        "Assistive-technology matrix",
+        "Browser and cross-platform certification"
+      ]
+    },
+    {
+      "name": "Tab Bar",
+      "status": "Candidate",
+      "designerApproved": true,
+      "implementationCertified": false,
+      "contractPath": "oneli8-drafts/navigation-component-contract.md",
+      "implementationPath": "packages/react/src/organisms/TabBar.js",
+      "figmaComponentKey": "701:460",
+      "knownEvidence": [
+        "Bottom, inline, sidebar, and spatial presentations approved",
+        "Compact, Standard, Comfortable, and Large Figma/code parity",
+        "Optional badge reuse through one canonical atom",
+        "Regular and Gem geometry equivalence",
+        "73/73 React navigation invariants",
+        "React reference implementation with native links",
+        "Deterministic RTL-aware navigation foundation, single-current resolution, and required region naming evidence",
+        "Verified portable Code ↔ Figma owner manifest and repository gate"
+      ],
+      "missingEvidence": [
+        "Responsive destination-state dogfooding",
+        "Browser and cross-platform certification"
+      ]
+    }
+  ],
+  "generated": true
+}

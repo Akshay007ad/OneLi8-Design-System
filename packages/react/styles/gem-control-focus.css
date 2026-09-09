@@ -1,0 +1,33 @@
+/* Shared private material treatment for ButtonControl consumers.
+   Figma angular stroke: 3px INSIDE, stops 0/18/39/60/81/100%.
+   The mask removes the centre without adding an opaque inner surface. */
+.ol8-IconButton__surface{position:relative}
+.ol8-Button[data-ol8-material="gem"]:focus-visible,
+.ol8-IconButton[data-ol8-material="gem"]:focus-visible .ol8-IconButton__surface{
+  box-shadow:var(--ol8-elevation-surface-raised);
+}
+.ol8-Button[data-ol8-material="gem"]:focus-visible::after,
+.ol8-IconButton[data-ol8-material="gem"]:focus-visible .ol8-IconButton__surface::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  box-sizing:border-box;
+  padding:var(--ol8-focus-ring-inner-width);
+  border-radius:inherit;
+  pointer-events:none;
+  background:conic-gradient(from 90deg,var(--ol8-color-focus-outer) 0%,var(--ol8-color-focus-inner) 18%,var(--ol8-color-focus-outer) 39%,var(--ol8-color-focus-inner) 60%,var(--ol8-color-focus-outer) 81%,var(--ol8-color-focus-outer) 100%);
+  -webkit-mask:linear-gradient(currentColor,currentColor) content-box,linear-gradient(currentColor,currentColor);
+  mask:linear-gradient(currentColor,currentColor) content-box,linear-gradient(currentColor,currentColor);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+}
+@media (forced-colors:active){
+  .ol8-Button[data-ol8-material="gem"]:focus-visible,
+  .ol8-IconButton[data-ol8-material="gem"]:focus-visible .ol8-IconButton__surface{
+    outline:var(--ol8-focus-ring-inner-width) solid Highlight;
+    outline-offset:calc(var(--ol8-focus-ring-inner-width) * -1);
+    box-shadow:none;
+  }
+  .ol8-Button[data-ol8-material="gem"]:focus-visible::after,
+  .ol8-IconButton[data-ol8-material="gem"]:focus-visible .ol8-IconButton__surface::after{display:none}
+}

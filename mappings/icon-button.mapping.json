@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "observedAt": "2026-09-07",
+  "publicImport": "@oneli8/react",
+  "export": "IconButton",
+  "sharedRules": "button.mapping.json",
+  "figmaOwners": [
+    {
+      "id": "102:151",
+      "name": "Icon Button / Secondary / Gem",
+      "propertyKeys": {
+        "label": "Accessible Name#87:0",
+        "icon": "Icon#39:25"
+      },
+      "props": {
+        "variant": "secondary",
+        "material": "gem",
+        "shape": "rounded"
+      }
+    },
+    {
+      "id": "102:78",
+      "name": "Icon Button / Primary / Gem",
+      "propertyKeys": {
+        "label": "Accessible Name#86:0",
+        "icon": "Icon#39:0"
+      },
+      "props": {
+        "variant": "primary",
+        "material": "gem",
+        "shape": "rounded"
+      }
+    },
+    {
+      "id": "119:202",
+      "name": "Icon Button / Primary / Circle / Gem",
+      "propertyKeys": {
+        "label": "Accessible Name#86:0",
+        "icon": "Icon#39:0"
+      },
+      "props": {
+        "variant": "primary",
+        "material": "gem",
+        "shape": "circle"
+      }
+    },
+    {
+      "id": "119:299",
+      "name": "Icon Button / Secondary / Circle / Gem",
+      "propertyKeys": {
+        "label": "Accessible Name#87:0",
+        "icon": "Icon#39:25"
+      },
+      "props": {
+        "variant": "secondary",
+        "material": "gem",
+        "shape": "circle"
+      }
+    },
+    {
+      "id": "86:2",
+      "name": "Icon Button / Primary",
+      "propertyKeys": {
+        "label": "Accessible Name#86:0",
+        "icon": "Icon#39:0"
+      },
+      "props": {
+        "variant": "primary",
+        "material": "regular",
+        "shape": "rounded"
+      }
+    },
+    {
+      "id": "87:26",
+      "name": "Icon Button / Secondary",
+      "propertyKeys": {
+        "label": "Accessible Name#87:0",
+        "icon": "Icon#39:25"
+      },
+      "props": {
+        "variant": "secondary",
+        "material": "regular",
+        "shape": "rounded"
+      }
+    },
+    {
+      "id": "88:50",
+      "name": "Icon Button / Quiet",
+      "propertyKeys": {
+        "label": "Accessible Name#88:0",
+        "icon": "Icon#39:50"
+      },
+      "props": {
+        "variant": "quiet",
+        "material": "regular",
+        "shape": "rounded"
+      }
+    },
+    {
+      "id": "89:74",
+      "name": "Icon Button / Destructive",
+      "propertyKeys": {
+        "label": "Accessible Name#89:0",
+        "icon": "Icon#39:75"
+      },
+      "props": {
+        "variant": "destructive",
+        "material": "regular",
+        "shape": "rounded"
+      }
+    },
+    {
+      "id": "94:309",
+      "name": "Icon Button / Secondary / Circle",
+      "propertyKeys": {
+        "label": "Accessible Name#87:0",
+        "icon": "Icon#39:25"
+      },
+      "props": {
+        "variant": "secondary",
+        "material": "regular",
+        "shape": "circle"
+      }
+    },
+    {
+      "id": "94:406",
+      "name": "Icon Button / Quiet / Circle",
+      "propertyKeys": {
+        "label": "Accessible Name#88:0",
+        "icon": "Icon#39:50"
+      },
+      "props": {
+        "variant": "quiet",
+        "material": "regular",
+        "shape": "circle"
+      }
+    },
+    {
+      "id": "94:503",
+      "name": "Icon Button / Destructive / Circle",
+      "propertyKeys": {
+        "label": "Accessible Name#89:0",
+        "icon": "Icon#39:75"
+      },
+      "props": {
+        "variant": "destructive",
+        "material": "regular",
+        "shape": "circle"
+      }
+    },
+    {
+      "id": "94:98",
+      "name": "Icon Button / Primary / Circle",
+      "propertyKeys": {
+        "label": "Accessible Name#86:0",
+        "icon": "Icon#39:0"
+      },
+      "props": {
+        "variant": "primary",
+        "material": "regular",
+        "shape": "circle"
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "name": "@oneli8/react",
+  "version": "1.0.0-beta.1",
+  "type": "module",
+  "files": [
+    "src",
+    "styles",
+    "styles.css",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "./styles.css",
+    "./styles/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
+    },
+    "./styles.css": "./styles.css",
+    "./styles/accessibility.css": "./styles/accessibility.css",
+    "./styles/icon-frame.css": "./styles/icon-frame.css",
+    "./styles/button.css": "./styles/button.css",
+    "./styles/icon-button.css": "./styles/icon-button.css",
+    "./styles/gem-control-focus.css": "./styles/gem-control-focus.css",
+    "./styles/link.css": "./styles/link.css"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "dependencies": {
+    "@oneli8/tokens": "1.0.0-beta.1"
+  },
+  "private": true,
+  "license": "MIT"
+}

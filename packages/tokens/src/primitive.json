@@ -1,0 +1,211 @@
+{
+  "$schema": "../schema/token-file.schema.json",
+  "$description": "Approved Oneli8 primitive values. Product code should prefer Semantic or Component tokens.",
+  "color": {
+    "blue": {
+      "030": {"$type":"color","$value":"#F2F5FF","$description":"Approved Candidate 03 Blue 030; ordinal index, not arithmetic."},
+      "060": {"$type":"color","$value":"#E2E9FF","$description":"Approved Candidate 03 Blue 060; ordinal index, not arithmetic."},
+      "090": {"$type":"color","$value":"#C4D2FF","$description":"Approved Candidate 03 Blue 090; ordinal index, not arithmetic."},
+      "120": {"$type":"color","$value":"#9BB3FF","$description":"Approved Candidate 03 Blue 120; ordinal index, not arithmetic."},
+      "240": {"$type":"color","$value":"#6E8FEF","$description":"Approved Candidate 03 Blue 240; ordinal index, not arithmetic."},
+      "360": {"$type":"color","$value":"#4D6DD1","$description":"Approved Candidate 03 Blue 360; ordinal index, not arithmetic."},
+      "480": {"$type":"color","$value":"#3854AE","$description":"Approved Candidate 03 Blue 480; ordinal index, not arithmetic."},
+      "600": {"$type":"color","$value":"#2C438B","$description":"Approved Candidate 03 Blue 600; ordinal index, not arithmetic."},
+      "720": {"$type":"color","$value":"#23366F","$description":"Approved Candidate 03 Blue 720; ordinal index, not arithmetic."},
+      "840": {"$type":"color","$value":"#1A2A59","$description":"Approved Candidate 03 Blue 840; ordinal index, not arithmetic."},
+      "930": {"$type":"color","$value":"#101B3A","$description":"Approved Candidate 03 Blue 930; ordinal index, not arithmetic."}
+    },
+    "cyan": {
+      "030": {"$type":"color","$value":"#EFFBFC","$description":"Approved Candidate 03 Cyan 030; ordinal index, not arithmetic."},
+      "060": {"$type":"color","$value":"#D5F4F6","$description":"Approved Candidate 03 Cyan 060; ordinal index, not arithmetic."},
+      "090": {"$type":"color","$value":"#AAE7EC","$description":"Approved Candidate 03 Cyan 090; ordinal index, not arithmetic."},
+      "120": {"$type":"color","$value":"#75D3DD","$description":"Approved Candidate 03 Cyan 120; ordinal index, not arithmetic."},
+      "240": {"$type":"color","$value":"#3AB7C5","$description":"Approved Candidate 03 Cyan 240; ordinal index, not arithmetic."},
+      "360": {"$type":"color","$value":"#2096A7","$description":"Approved Candidate 03 Cyan 360; ordinal index, not arithmetic."},
+      "480": {"$type":"color","$value":"#187789","$description":"Approved Candidate 03 Cyan 480; ordinal index, not arithmetic."},
+      "600": {"$type":"color","$value":"#175F70","$description":"Approved Candidate 03 Cyan 600; ordinal index, not arithmetic."},
+      "720": {"$type":"color","$value":"#174D5B","$description":"Approved Candidate 03 Cyan 720; ordinal index, not arithmetic."},
+      "840": {"$type":"color","$value":"#163F4B","$description":"Approved Candidate 03 Cyan 840; ordinal index, not arithmetic."},
+      "930": {"$type":"color","$value":"#0A252D","$description":"Approved Candidate 03 Cyan 930; ordinal index, not arithmetic."}
+    },
+    "green": {
+      "030": {"$type":"color","$value":"#F1FAF5","$description":"Approved Candidate 03 Green 030; ordinal index, not arithmetic."},
+      "060": {"$type":"color","$value":"#DCF3E5","$description":"Approved Candidate 03 Green 060; ordinal index, not arithmetic."},
+      "090": {"$type":"color","$value":"#BCE6CE","$description":"Approved Candidate 03 Green 090; ordinal index, not arithmetic."},
+      "120": {"$type":"color","$value":"#8CD2AA","$description":"Approved Candidate 03 Green 120; ordinal index, not arithmetic."},
+      "240": {"$type":"color","$value":"#58B982","$description":"Approved Candidate 03 Green 240; ordinal index, not arithmetic."},
+      "360": {"$type":"color","$value":"#349A65","$description":"Approved Candidate 03 Green 360; ordinal index, not arithmetic."},
+      "480": {"$type":"color","$value":"#267B50","$description":"Approved Candidate 03 Green 480; ordinal index, not arithmetic."},
+      "600": {"$type":"color","$value":"#216240","$description":"Approved Candidate 03 Green 600; ordinal index, not arithmetic."},
+      "720": {"$type":"color","$value":"#1D4F35","$description":"Approved Candidate 03 Green 720; ordinal index, not arithmetic."},
+      "840": {"$type":"color","$value":"#193F2C","$description":"Approved Candidate 03 Green 840; ordinal index, not arithmetic."},
+      "930": {"$type":"color","$value":"#0C2418","$description":"Approved Candidate 03 Green 930; ordinal index, not arithmetic."}
+    },
+    "yellow": {
+      "030": {"$type":"color","$value":"#FFF9E8","$description":"Approved Candidate 03 Yellow 030; ordinal index, not arithmetic."},
+      "060": {"$type":"color","$value":"#FFF0BE","$description":"Approved Candidate 03 Yellow 060; ordinal index, not arithmetic."},
+      "090": {"$type":"color","$value":"#FFE27D","$description":"Approved Candidate 03 Yellow 090; ordinal index, not arithmetic."},
+      "120": {"$type":"color","$value":"#FFD13D","$description":"Approved Candidate 03 Yellow 120; ordinal index, not arithmetic."},
+      "240": {"$type":"color","$value":"#F0B90B","$description":"Approved Candidate 03 Yellow 240; ordinal index, not arithmetic."},
+      "360": {"$type":"color","$value":"#CE9500","$description":"Approved Candidate 03 Yellow 360; ordinal index, not arithmetic."},
+      "480": {"$type":"color","$value":"#A76F00","$description":"Approved Candidate 03 Yellow 480; ordinal index, not arithmetic."},
+      "600": {"$type":"color","$value":"#825100","$description":"Approved Candidate 03 Yellow 600; ordinal index, not arithmetic."},
+      "720": {"$type":"color","$value":"#613B09","$description":"Approved Candidate 03 Yellow 720; ordinal index, not arithmetic."},
+      "840": {"$type":"color","$value":"#4B2F0D","$description":"Approved Candidate 03 Yellow 840; ordinal index, not arithmetic."},
+      "930": {"$type":"color","$value":"#2B1A08","$description":"Approved Candidate 03 Yellow 930; ordinal index, not arithmetic."}
+    },
+    "orange": {
+      "030": {"$type":"color","$value":"#FFF5EA","$description":"Approved Candidate 03 Orange 030; ordinal index, not arithmetic."},
+      "060": {"$type":"color","$value":"#FFE7CB","$description":"Approved Candidate 03 Orange 060; ordinal index, not arithmetic."},
+      "090": {"$type":"color","$value":"#FFC98F","$description":"Approved Candidate 03 Orange 090; ordinal index, not arithmetic."},
+      "120": {"$type":"color","$value":"#FFA54D","$description":"Approved Candidate 03 Orange 120; ordinal index, not arithmetic."},
+      "240": {"$type":"color","$value":"#F47B20","$description":"Approved Candidate 03 Orange 240; ordinal index, not arithmetic."},
+      "360": {"$type":"color","$value":"#D95C0B","$description":"Approved Candidate 03 Orange 360; ordinal index, not arithmetic."},
+      "480": {"$type":"color","$value":"#B74406","$description":"Approved Candidate 03 Orange 480; ordinal index, not arithmetic."},
+      "600": {"$type":"color","$value":"#913408","$description":"Approved Candidate 03 Orange 600; ordinal index, not arithmetic."},
+      "720": {"$type":"color","$value":"#70290D","$description":"Approved Candidate 03 Orange 720; ordinal index, not arithmetic."},
+      "840": {"$type":"color","$value":"#57230F","$description":"Approved Candidate 03 Orange 840; ordinal index, not arithmetic."},
+      "930": {"$type":"color","$value":"#321207","$description":"Approved Candidate 03 Orange 930; ordinal index, not arithmetic."}
+    },
+    "pink": {
+      "030": {"$type":"color","$value":"#FFF1F8","$description":"Approved Candidate 03 Pink 030; ordinal index, not arithmetic."},
+      "060": {"$type":"color","$value":"#FFE1F0","$description":"Approved Candidate 03 Pink 060; ordinal index, not arithmetic."},
+      "090": {"$type":"color","$value":"#FFC3E0","$description":"Approved Candidate 03 Pink 090; ordinal index, not arithmetic."},
+      "120": {"$type":"color","$value":"#FF94C4","$description":"Approved Candidate 03 Pink 120; ordinal index, not arithmetic."},
+      "240": {"$type":"color","$value":"#F45A9D","$description":"Approved Candidate 03 Pink 240; ordinal index, not arithmetic."},
+      "360": {"$type":"color","$value":"#D9367E","$description":"Approved Candidate 03 Pink 360; ordinal index, not arithmetic."},
+      "480": {"$type":"color","$value":"#B62364","$description":"Approved Candidate 03 Pink 480; ordinal index, not arithmetic."},
+      "600": {"$type":"color","$value":"#931D51","$description":"Approved Candidate 03 Pink 600; ordinal index, not arithmetic."},
+      "720": {"$type":"color","$value":"#771A43","$description":"Approved Candidate 03 Pink 720; ordinal index, not arithmetic."},
+      "840": {"$type":"color","$value":"#62183A","$description":"Approved Candidate 03 Pink 840; ordinal index, not arithmetic."},
+      "930": {"$type":"color","$value":"#3B0920","$description":"Approved Candidate 03 Pink 930; ordinal index, not arithmetic."}
+    },
+    "violet": {
+      "030": {"$type":"color","$value":"#F8F4FF","$description":"Approved Candidate 03 Violet 030; ordinal index, not arithmetic."},
+      "060": {"$type":"color","$value":"#EFE6FF","$description":"Approved Candidate 03 Violet 060; ordinal index, not arithmetic."},
+      "090": {"$type":"color","$value":"#DFCDFF","$description":"Approved Candidate 03 Violet 090; ordinal index, not arithmetic."},
+      "120": {"$type":"color","$value":"#C5A4FF","$description":"Approved Candidate 03 Violet 120; ordinal index, not arithmetic."},
+      "240": {"$type":"color","$value":"#A574F2","$description":"Approved Candidate 03 Violet 240; ordinal index, not arithmetic."},
+      "360": {"$type":"color","$value":"#864FD6","$description":"Approved Candidate 03 Violet 360; ordinal index, not arithmetic."},
+      "480": {"$type":"color","$value":"#6C37B2","$description":"Approved Candidate 03 Violet 480; ordinal index, not arithmetic."},
+      "600": {"$type":"color","$value":"#572D8E","$description":"Approved Candidate 03 Violet 600; ordinal index, not arithmetic."},
+      "720": {"$type":"color","$value":"#472671","$description":"Approved Candidate 03 Violet 720; ordinal index, not arithmetic."},
+      "840": {"$type":"color","$value":"#3A225B","$description":"Approved Candidate 03 Violet 840; ordinal index, not arithmetic."},
+      "930": {"$type":"color","$value":"#241238","$description":"Approved Candidate 03 Violet 930; ordinal index, not arithmetic."}
+    },
+    "red": {
+      "030": {"$type":"color","$value":"#FFF2F1","$description":"Approved Candidate 03 Red 030; ordinal index, not arithmetic."},
+      "060": {"$type":"color","$value":"#FFE2E0","$description":"Approved Candidate 03 Red 060; ordinal index, not arithmetic."},
+      "090": {"$type":"color","$value":"#FFC8C4","$description":"Approved Candidate 03 Red 090; ordinal index, not arithmetic."},
+      "120": {"$type":"color","$value":"#F99A92","$description":"Approved Candidate 03 Red 120; ordinal index, not arithmetic."},
+      "240": {"$type":"color","$value":"#ED6A61","$description":"Approved Candidate 03 Red 240; ordinal index, not arithmetic."},
+      "360": {"$type":"color","$value":"#D6473F","$description":"Approved Candidate 03 Red 360; ordinal index, not arithmetic."},
+      "480": {"$type":"color","$value":"#B6332E","$description":"Approved Candidate 03 Red 480; ordinal index, not arithmetic."},
+      "600": {"$type":"color","$value":"#922824","$description":"Approved Candidate 03 Red 600; ordinal index, not arithmetic."},
+      "720": {"$type":"color","$value":"#772421","$description":"Approved Candidate 03 Red 720; ordinal index, not arithmetic."},
+      "840": {"$type":"color","$value":"#64231F","$description":"Approved Candidate 03 Red 840; ordinal index, not arithmetic."},
+      "930": {"$type":"color","$value":"#380F0D","$description":"Approved Candidate 03 Red 930; ordinal index, not arithmetic."}
+    },
+    "neutral": {
+      "030": {"$type":"color","$value":"#FCFAF3","$description":"Approved Candidate 03 Neutral 030; ordinal index, not arithmetic."},
+      "060": {"$type":"color","$value":"#F5F1E6","$description":"Approved Candidate 03 Neutral 060; ordinal index, not arithmetic."},
+      "090": {"$type":"color","$value":"#E7E0D1","$description":"Approved Candidate 03 Neutral 090; ordinal index, not arithmetic."},
+      "120": {"$type":"color","$value":"#D2C8B6","$description":"Approved Candidate 03 Neutral 120; ordinal index, not arithmetic."},
+      "240": {"$type":"color","$value":"#B0A593","$description":"Approved Candidate 03 Neutral 240; ordinal index, not arithmetic."},
+      "360": {"$type":"color","$value":"#897F70","$description":"Approved Candidate 03 Neutral 360; ordinal index, not arithmetic."},
+      "480": {"$type":"color","$value":"#665E53","$description":"Approved Candidate 03 Neutral 480; ordinal index, not arithmetic."},
+      "600": {"$type":"color","$value":"#4A443D","$description":"Approved Candidate 03 Neutral 600; ordinal index, not arithmetic."},
+      "720": {"$type":"color","$value":"#302D29","$description":"Approved Candidate 03 Neutral 720; ordinal index, not arithmetic."},
+      "840": {"$type":"color","$value":"#20201E","$description":"Approved Candidate 03 Neutral 840; ordinal index, not arithmetic."},
+      "930": {"$type":"color","$value":"#151817","$description":"Approved Candidate 03 Neutral 930; ordinal index, not arithmetic."}
+    }
+  },
+  "dimension": {
+    "scale": {
+      "000": {"$type":"dimension","$value":{"value":0,"unit":"px"},"$description":"Zero dimension."},
+      "003": {"$type":"dimension","$value":{"value":3,"unit":"px"},"$description":"Atomic micro unit."},
+      "006": {"$type":"dimension","$value":{"value":6,"unit":"px"},"$description":"Tight micro and structural unit."},
+      "009": {"$type":"dimension","$value":{"value":9,"unit":"px"},"$description":"Precision dimension."},
+      "012": {"$type":"dimension","$value":{"value":12,"unit":"px"},"$description":"Base component spacing."},
+      "015": {"$type":"dimension","$value":{"value":15,"unit":"px"},"$description":"Precision dimension."},
+      "018": {"$type":"dimension","$value":{"value":18,"unit":"px"},"$description":"Grouped component spacing."},
+      "024": {"$type":"dimension","$value":{"value":24,"unit":"px"},"$description":"Global and comfortable spacing."},
+      "030": {"$type":"dimension","$value":{"value":30,"unit":"px"},"$description":"Large component inset and type size."},
+      "036": {"$type":"dimension","$value":{"value":36,"unit":"px"},"$description":"Region spacing and compact control size."},
+      "042": {"$type":"dimension","$value":{"value":42,"unit":"px"},"$description":"Standard control size."},
+      "048": {"$type":"dimension","$value":{"value":48,"unit":"px"},"$description":"Comfortable control and minimum target."},
+      "060": {"$type":"dimension","$value":{"value":60,"unit":"px"},"$description":"Large control and comfortable target."},
+      "072": {"$type":"dimension","$value":{"value":72,"unit":"px"},"$description":"Spacious target and section spacing."},
+      "084": {"$type":"dimension","$value":{"value":84,"unit":"px"},"$description":"Extended scale value."},
+      "096": {"$type":"dimension","$value":{"value":96,"unit":"px"},"$description":"Display media size."},
+      "108": {"$type":"dimension","$value":{"value":108,"unit":"px"},"$description":"Expansive section spacing."}
+    }
+  },
+  "font": {
+    "family": {
+      "display":{"$type":"fontFamily","$value":"Syne","$description":"Display-only family."},
+      "functional":{"$type":"fontFamily","$value":"AR One Sans","$description":"Title, body, controls, and data family."}
+    },
+    "weight": {
+      "regular":{"$type":"fontWeight","$value":450,"$description":"Approved regular variable weight."},
+      "semibold":{"$type":"fontWeight","$value":600,"$description":"Approved semibold weight."},
+      "bold":{"$type":"fontWeight","$value":690,"$description":"Approved bold variable weight."}
+    },
+    "size": {
+      "012":{"$type":"dimension","$value":{"value":12,"unit":"px"},"$description":"Small supporting type."},
+      "016":{"$type":"dimension","$value":{"value":16,"unit":"px"},"$description":"Body readability exception."},
+      "021":{"$type":"dimension","$value":{"value":21,"unit":"px"},"$description":"Large body and small title."},
+      "030":{"$type":"dimension","$value":{"value":30,"unit":"px"},"$description":"Medium title."},
+      "039":{"$type":"dimension","$value":{"value":39,"unit":"px"},"$description":"Harmonic title or display size."},
+      "051":{"$type":"dimension","$value":{"value":51,"unit":"px"},"$description":"Harmonic display size."},
+      "066":{"$type":"dimension","$value":{"value":66,"unit":"px"},"$description":"Harmonic display size."},
+      "090":{"$type":"dimension","$value":{"value":90,"unit":"px"},"$description":"Large display size."},
+      "120":{"$type":"dimension","$value":{"value":120,"unit":"px"},"$description":"Expanded display size."}
+    },
+    "line": {
+      "018":{"$type":"dimension","$value":{"value":18,"unit":"px"},"$description":"Small line height."},
+      "024":{"$type":"dimension","$value":{"value":24,"unit":"px"},"$description":"Body line height."},
+      "030":{"$type":"dimension","$value":{"value":30,"unit":"px"},"$description":"Large body line height."},
+      "039":{"$type":"dimension","$value":{"value":39,"unit":"px"},"$description":"Title line height."},
+      "048":{"$type":"dimension","$value":{"value":48,"unit":"px"},"$description":"Title and display line height."},
+      "060":{"$type":"dimension","$value":{"value":60,"unit":"px"},"$description":"Display line height."},
+      "072":{"$type":"dimension","$value":{"value":72,"unit":"px"},"$description":"Display line height."},
+      "096":{"$type":"dimension","$value":{"value":96,"unit":"px"},"$description":"Large display line height."},
+      "126":{"$type":"dimension","$value":{"value":126,"unit":"px"},"$description":"Expanded display line height."}
+    },
+    "tracking": {
+      "tighter":{"$type":"number","$value":-0.03,"$extensions":{"oneli8.unit":"em"},"$description":"Minus three percent tracking."},
+      "tight":{"$type":"number","$value":-0.025,"$extensions":{"oneli8.unit":"em"},"$description":"Minus two-and-a-half percent tracking."},
+      "snug":{"$type":"number","$value":-0.02,"$extensions":{"oneli8.unit":"em"},"$description":"Minus two percent tracking."},
+      "displaySoft":{"$type":"number","$value":-0.015,"$extensions":{"oneli8.unit":"em"},"$description":"Minus one-and-a-half percent tracking."},
+      "titleTight":{"$type":"number","$value":-0.01,"$extensions":{"oneli8.unit":"em"},"$description":"Minus one percent tracking."},
+      "titleSoft":{"$type":"number","$value":-0.005,"$extensions":{"oneli8.unit":"em"},"$description":"Minus one-half percent tracking."},
+      "normal":{"$type":"number","$value":0,"$extensions":{"oneli8.unit":"em"},"$description":"Neutral tracking."},
+      "open":{"$type":"number","$value":0.01,"$extensions":{"oneli8.unit":"em"},"$description":"Plus one percent tracking."}
+    },
+    "axis":{"arrr":{"baseline":{"$type":"number","$value":10,"$description":"AR One Sans default ARRR axis."}}}
+  },
+  "motion": {
+    "duration": {
+      "instant":{"$type":"duration","$value":{"value":0,"unit":"ms"},"$description":"Immediate replacement."},
+      "quick":{"$type":"duration","$value":{"value":90,"unit":"ms"},"$description":"Press and tiny feedback."},
+      "fast":{"$type":"duration","$value":{"value":120,"unit":"ms"},"$description":"Hover and compact state change."},
+      "standard":{"$type":"duration","$value":{"value":180,"unit":"ms"},"$description":"Selection and local transition."},
+      "measured":{"$type":"duration","$value":{"value":240,"unit":"ms"},"$description":"Popover and small reveal."},
+      "slow":{"$type":"duration","$value":{"value":360,"unit":"ms"},"$description":"Dialog or meaningful reflow."},
+      "deliberate":{"$type":"duration","$value":{"value":480,"unit":"ms"},"$description":"Major spatial transition."},
+      "extended":{"$type":"duration","$value":{"value":720,"unit":"ms"},"$description":"Rare explanatory sequence."}
+    },
+    "easing": {
+      "standard":{"$type":"cubicBezier","$value":[0.39,0,0,1],"$description":"Standard purposeful easing."},
+      "enter":{"$type":"cubicBezier","$value":[0.12,0,0,1],"$description":"Arrival easing."},
+      "exit":{"$type":"cubicBezier","$value":[0.48,0,1,1],"$description":"Departure easing."},
+      "linear":{"$type":"cubicBezier","$value":[0,0,1,1],"$description":"Continuous determinate motion."}
+    },
+    "spring": {
+      "interactive":{"response":{"$type":"duration","$value":{"value":240,"unit":"ms"},"$description":"Interactive spring response."},"damping":{"$type":"number","$value":0.9,"$description":"Interactive spring damping ratio."},"blend":{"$type":"duration","$value":{"value":120,"unit":"ms"},"$description":"Interactive spring blend duration."}},
+      "standard":{"response":{"$type":"duration","$value":{"value":360,"unit":"ms"},"$description":"Standard spring response."},"damping":{"$type":"number","$value":0.93,"$description":"Standard spring damping ratio."},"blend":{"$type":"duration","$value":{"value":120,"unit":"ms"},"$description":"Standard spring blend duration."}},
+      "gentle":{"response":{"$type":"duration","$value":{"value":480,"unit":"ms"},"$description":"Gentle spring response."},"damping":{"$type":"number","$value":1,"$description":"Gentle critically damped ratio."},"blend":{"$type":"duration","$value":{"value":180,"unit":"ms"},"$description":"Gentle spring blend duration."}}
+    }
+  }
+}

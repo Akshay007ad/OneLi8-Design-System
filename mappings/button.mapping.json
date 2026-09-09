@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "component": "Button",
+  "atomicLevel": "molecule",
+  "publicImport": "@oneli8/react",
+  "export": "Button",
+  "status": "partial",
+  "observedAt": "2026-09-06",
+  "iconIdentities": {"418:14":"add","418:16":"forward","418:18":"critical","418:21":"visibility-open","440:2":"loading","440:4":"caution","440:8":"positive","440:11":"informative","440:15":"visibility-closed","521:106":"chevron-down","521:108":"chevron-up","557:2":"search","557:4":"clear","894:123":"close"},
+  "figmaOwners": [
+    {
+      "id": "15:823",
+      "name": "Button / Primary",
+      "props": {
+        "variant": "primary",
+        "material": "regular"
+      }
+    },
+    {
+      "id": "100:3",
+      "name": "Button / Primary / Gem",
+      "props": {
+        "variant": "primary",
+        "material": "gem"
+      }
+    },
+    {"id":"15:824","name":"Button / Secondary","props":{"variant":"secondary","material":"regular"},"propertyKeys":{"label":"Label#15:75","leading":"Show Leading Icon#15:100","trailing":"Show Trailing Icon#15:125"}},
+    {"id":"15:825","name":"Button / Quiet","props":{"variant":"quiet","material":"regular"},"propertyKeys":{"label":"Label#15:150","leading":"Show Leading Icon#15:175","trailing":"Show Trailing Icon#15:200"}},
+    {"id":"15:826","name":"Button / Destructive","props":{"variant":"destructive","material":"regular"},"propertyKeys":{"label":"Label#15:225","leading":"Show Leading Icon#15:250","trailing":"Show Trailing Icon#15:275"}},
+    {"id":"100:208","name":"Button / Secondary / Gem","props":{"variant":"secondary","material":"gem"},"propertyKeys":{"label":"Label#15:75","leading":"Show Leading Icon#15:100","trailing":"Show Trailing Icon#15:125"}}
+  ],
+  "propertyKeyRule": "Owner propertyKeys override the Primary property identifiers below; Primary owners use Label#15:0, Show Leading Icon#15:25, Show Trailing Icon#15:50. Never apply Primary internal property IDs to another owner.",
+  "properties": {
+    "Size": {
+      "prop": "size",
+      "values": {
+        "Compact": "compact",
+        "Standard": "standard",
+        "Comfortable": "comfortable",
+        "Large": "large"
+      }
+    },
+    "Label#15:0": {
+      "prop": "children",
+      "type": "text"
+    },
+    "Show Leading Icon#15:25": {
+      "prop": "leadingIcon",
+      "type": "slotPresence",
+      "requires": "Resolve visible nested instance to canonical Icon identity; Boolean alone is not artwork."
+    },
+    "Show Trailing Icon#15:50": {
+      "prop": "trailingIcon",
+      "type": "slotPresence",
+      "requires": "Resolve visible nested instance to canonical Icon identity; Boolean alone is not artwork."
+    }
+  },
+  "states": {
+    "Default": {
+      "props": {
+        "disabled": false,
+        "loading": false
+      }
+    },
+    "Disabled": {
+      "props": {
+        "disabled": true,
+        "loading": false
+      },
+      "html": {
+        "tag": "button",
+        "attributes": {
+          "type": "button",
+          "disabled": true
+        }
+      }
+    },
+    "Loading": {
+      "props": {
+        "loading": true,
+        "disabled": false
+      },
+      "html": {
+        "attributes": {
+          "aria-busy": true,
+          "aria-disabled": true
+        }
+      },
+      "runtime": "ButtonControl suppresses click while loading; do not equate loading with native disabled."
+    },
+    "Hover": {
+      "interaction": ":hover"
+    },
+    "Pressed": {
+      "interaction": ":active",
+      "note": "Do not infer toggle pressed=true from the visual Pressed state."
+    },
+    "Focus": {
+      "interaction": ":focus-visible"
+    }
+  },
+  "missing": [
+    "Arbitrary icon swaps may lose Figma color overrides; identity translation does not repair that behavior",
+    "Versioned visual and token comparison across modes, states and materials"
+  ],
+  "sourceHashes": {
+    "packages/react/src/atoms/ButtonControl.js": "5c48a9c37214ca4a72b0f62473660b555da87d1557d0a27d7f830ffcd3a1cc58",
+    "packages/react/src/molecules/Button.js": "0c9b06587888dac6d7130e46058f4dd4410e78f9809e93e63122fb1f08ed929d",
+    "packages/react/styles/button.css": "dd23190849e72946ebbc35c13ee303f56a46d4ed1c27fadf3470f691e7a0a588",
+    "packages/tokens/src/semantic.json": "6c8df8e0a1307d3e499be2470ba5a8ee46a38bd073b427b6e79cde7096cdd68c",
+    "packages/tokens/src/themes.json": "acdcacda186842dfc18e4bf40801ae92bf145ac0d24c37c8268c45ad38fb78ff"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "@oneli8/tokens",
+  "version": "1.0.0-beta.1",
+  "private": true,
+  "type": "module",
+  "files": [
+    "build",
+    "schema",
+    "scripts",
+    "src",
+    "status",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs --standalone",
+    "test": "node scripts/test.mjs --standalone"
+  },
+  "exports": {
+    ".": "./build/typescript/index.js",
+    "./css": "./build/css/tokens.css",
+    "./tailwind": "./build/tailwind/preset.mjs",
+    "./tailwind.css": "./build/tailwind/theme.css",
+    "./figma": "./build/figma/variables.json",
+    "./status": "./build/status/components.json"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,176 @@
+
+.ol8-Button{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:var(--ol8-component-button-gap-comfortable);
+  min-inline-size:var(--ol8-component-button-target-comfortable);
+  border-style:solid;
+  border-color:transparent;
+  font-family:var(--ol8-font-family-functional);
+  font-weight:var(--ol8-font-weight-semibold);
+  text-align:center;
+  text-decoration:none;
+  white-space:nowrap;
+  cursor:pointer;
+  box-shadow:var(--ol8-elevation-surface-flat);
+  transition-property:background-color,border-color,color,box-shadow;
+  transition-duration:var(--ol8-motion-interaction-hover-duration);
+  transition-timing-function:var(--ol8-motion-interaction-hover-timing-function);
+}
+
+.ol8-Button::before{
+  content:"";
+  position:absolute;
+  inset-block-start:50%;
+  inset-inline-start:50%;
+  inline-size:max(100%,var(--ol8-component-button-target-comfortable));
+  block-size:max(100%,var(--ol8-component-button-target-comfortable));
+  transform:translate(-50%,-50%);
+}
+
+.ol8-Button[data-ol8-size="compact"]{
+  min-block-size:var(--ol8-component-button-height-compact);
+  padding-inline:var(--ol8-component-button-padding-inline-compact);
+  border-radius:var(--ol8-component-button-radius-compact);
+  gap:var(--ol8-component-button-gap-compact);
+  font-size:var(--ol8-typography-body-small-font-size);
+  line-height:var(--ol8-typography-body-small-line-height);
+  letter-spacing:var(--ol8-typography-body-small-letter-spacing);
+}
+
+.ol8-Button[data-ol8-size="standard"]{
+  gap:var(--ol8-component-button-gap-compact);
+  min-block-size:var(--ol8-component-button-height-standard);
+  padding-inline:var(--ol8-component-button-padding-inline-standard);
+  border-radius:var(--ol8-component-button-radius-standard);
+  font-size:var(--ol8-typography-body-medium-font-size);
+  line-height:var(--ol8-typography-body-medium-line-height);
+  letter-spacing:var(--ol8-typography-body-medium-letter-spacing);
+}
+
+.ol8-Button[data-ol8-size="comfortable"]{
+  min-block-size:var(--ol8-component-button-height-comfortable);
+  padding-inline:var(--ol8-component-button-padding-inline-comfortable);
+  border-radius:var(--ol8-component-button-radius-comfortable);
+  font-size:var(--ol8-typography-body-medium-font-size);
+  line-height:var(--ol8-typography-body-medium-line-height);
+  letter-spacing:var(--ol8-typography-body-medium-letter-spacing);
+}
+
+.ol8-Button[data-ol8-size="large"]{
+  min-block-size:var(--ol8-component-button-height-large);
+  min-inline-size:var(--ol8-component-button-target-large);
+  padding-inline:var(--ol8-component-button-padding-inline-large);
+  border-radius:var(--ol8-component-button-radius-large);
+  font-size:var(--ol8-typography-body-large-font-size);
+  line-height:var(--ol8-typography-body-large-line-height);
+  letter-spacing:var(--ol8-typography-body-large-letter-spacing);
+}
+
+.ol8-Button[data-ol8-size="large"]::before{
+  inline-size:max(100%,var(--ol8-component-button-target-large));
+  block-size:max(100%,var(--ol8-component-button-target-large));
+}
+
+.ol8-Button[data-ol8-full-width="true"]{inline-size:100%}
+
+.ol8-Button[data-ol8-variant="primary"]{
+  border-width:var(--ol8-border-width-none);
+  background:var(--ol8-color-action-primary-default);
+  color:var(--ol8-color-action-primary-content);
+}
+.ol8-Button[data-ol8-variant="secondary"]{
+  border-width:var(--ol8-component-button-secondary-boundary);
+  background:var(--ol8-color-action-secondary-surface-default);
+  border-color:var(--ol8-color-action-secondary-content-default);
+  color:var(--ol8-color-action-secondary-content-default);
+}
+.ol8-Button[data-ol8-variant="quiet"]{
+  border-width:var(--ol8-border-width-none);
+  background:var(--ol8-color-action-quiet-surface-default);
+  color:var(--ol8-color-action-quiet-content-default);
+}
+.ol8-Button[data-ol8-variant="destructive"]{
+  border-width:var(--ol8-border-width-none);
+  background:var(--ol8-color-action-destructive-default);
+  color:var(--ol8-color-action-destructive-content);
+}
+
+.ol8-Button[data-ol8-variant="primary"]:hover:not(:disabled):not([aria-busy="true"]){background:var(--ol8-color-action-primary-hover);box-shadow:var(--ol8-elevation-surface-raised)}
+.ol8-Button[data-ol8-variant="secondary"]:hover:not(:disabled):not([aria-busy="true"]){background:var(--ol8-color-action-secondary-surface-hover);border-color:var(--ol8-color-action-secondary-content-hover);color:var(--ol8-color-action-secondary-content-hover);box-shadow:var(--ol8-elevation-surface-raised)}
+.ol8-Button[data-ol8-variant="quiet"]:hover:not(:disabled):not([aria-busy="true"]){background:var(--ol8-color-action-quiet-surface-hover);color:var(--ol8-color-action-quiet-content-hover)}
+.ol8-Button[data-ol8-variant="destructive"]:hover:not(:disabled):not([aria-busy="true"]){background:var(--ol8-color-action-destructive-hover);box-shadow:var(--ol8-elevation-surface-raised)}
+
+.ol8-Button[data-ol8-variant="primary"]:active:not(:disabled):not([aria-busy="true"]){background:var(--ol8-color-action-primary-pressed);box-shadow:var(--ol8-elevation-surface-flat)}
+.ol8-Button[data-ol8-variant="secondary"]:active:not(:disabled):not([aria-busy="true"]){background:var(--ol8-color-action-secondary-surface-pressed);border-color:var(--ol8-color-action-secondary-content-pressed);color:var(--ol8-color-action-secondary-content-pressed);box-shadow:var(--ol8-elevation-surface-flat)}
+.ol8-Button[data-ol8-variant="quiet"]:active:not(:disabled):not([aria-busy="true"]){background:var(--ol8-color-action-quiet-surface-pressed);color:var(--ol8-color-action-quiet-content-pressed)}
+.ol8-Button[data-ol8-variant="destructive"]:active:not(:disabled):not([aria-busy="true"]){background:var(--ol8-color-action-destructive-pressed);box-shadow:var(--ol8-elevation-surface-flat)}
+
+.ol8-Button:focus-visible{
+  outline:none;
+  box-shadow:inset 0 0 0 var(--ol8-focus-ring-inner-width) var(--ol8-color-focus-inner),inset 0 0 0 var(--ol8-focus-ring-total-width) var(--ol8-color-focus-outer);
+}
+
+.ol8-Button[data-ol8-material="gem"][data-ol8-variant="primary"]{border-width:0;background:linear-gradient(135deg,var(--ol8-material-control-gem-primary-start),var(--ol8-material-control-gem-primary-mid),var(--ol8-material-control-gem-primary-end));color:var(--ol8-material-control-gem-primary-content);box-shadow:inset 0 0 0 var(--ol8-component-choice-optical-stroke) var(--ol8-material-control-gem-rim-default),var(--ol8-elevation-surface-raised);backdrop-filter:blur(var(--ol8-material-control-gem-blur))}
+.ol8-Button[data-ol8-material="gem"][data-ol8-variant="secondary"]{border-width:0;background:linear-gradient(135deg,var(--ol8-material-control-gem-secondary-high),var(--ol8-material-control-gem-secondary-mid),var(--ol8-material-control-gem-secondary-low));color:var(--ol8-material-control-gem-secondary-content);box-shadow:inset 0 0 0 var(--ol8-component-choice-optical-stroke) var(--ol8-material-control-gem-rim-default),var(--ol8-elevation-surface-raised);backdrop-filter:blur(var(--ol8-material-control-gem-blur))}
+.ol8-Button[data-ol8-material="gem"][data-ol8-variant="primary"]:hover:not(:disabled):not([aria-busy="true"]){background:linear-gradient(135deg,var(--ol8-material-control-gem-primary-hover-start),var(--ol8-material-control-gem-primary-hover-mid),var(--ol8-material-control-gem-primary-hover-end))}
+.ol8-Button[data-ol8-material="gem"][data-ol8-variant="secondary"]:hover:not(:disabled):not([aria-busy="true"]){background:linear-gradient(135deg,var(--ol8-material-control-gem-secondary-hover-high),var(--ol8-material-control-gem-secondary-hover-mid),var(--ol8-material-control-gem-secondary-hover-low));color:var(--ol8-material-control-gem-secondary-content)}
+.ol8-Button[data-ol8-material="gem"][data-ol8-variant="primary"][aria-busy="true"]{background:linear-gradient(135deg,var(--ol8-material-control-gem-primary-loading-start),var(--ol8-material-control-gem-primary-loading-mid),var(--ol8-material-control-gem-primary-loading-end));color:var(--ol8-material-control-gem-primary-content)}
+.ol8-Button[data-ol8-material="gem"][data-ol8-variant="secondary"][aria-busy="true"]{background:linear-gradient(135deg,var(--ol8-material-control-gem-secondary-loading-high),var(--ol8-material-control-gem-secondary-loading-mid),var(--ol8-material-control-gem-secondary-loading-low));color:var(--ol8-material-control-gem-secondary-content)}
+
+.ol8-Button:disabled,.ol8-Button[aria-busy="true"]{cursor:not-allowed;box-shadow:var(--ol8-elevation-surface-flat)}
+.ol8-Button[aria-busy="true"]{cursor:wait}
+.ol8-Button[data-ol8-variant="primary"]:disabled,.ol8-Button[data-ol8-variant="primary"][aria-busy="true"]{background:var(--ol8-color-action-primary-disabled);color:var(--ol8-color-action-primary-disabled-content)}
+.ol8-Button[data-ol8-variant="secondary"]:disabled,.ol8-Button[data-ol8-variant="secondary"][aria-busy="true"]{background:var(--ol8-color-action-secondary-surface-disabled);border-color:var(--ol8-color-action-secondary-content-disabled);color:var(--ol8-color-action-secondary-content-disabled)}
+.ol8-Button[data-ol8-variant="quiet"]:disabled,.ol8-Button[data-ol8-variant="quiet"][aria-busy="true"]{background:var(--ol8-color-action-quiet-surface-disabled);color:var(--ol8-color-action-quiet-content-disabled)}
+.ol8-Button[data-ol8-variant="destructive"]:disabled,.ol8-Button[data-ol8-variant="destructive"][aria-busy="true"]{background:var(--ol8-color-action-destructive-disabled);color:var(--ol8-color-action-destructive-disabled-content)}
+
+/* Canonical Gem masters use the hover recipe for Pressed, including keyboard
+   activation without pointer hover. Disabled wins over material and loading. */
+.ol8-Button[data-ol8-material="gem"][data-ol8-variant="primary"]:active:not(:disabled):not([aria-busy="true"]){background:linear-gradient(135deg,var(--ol8-material-control-gem-primary-hover-start),var(--ol8-material-control-gem-primary-hover-mid),var(--ol8-material-control-gem-primary-hover-end))}
+.ol8-Button[data-ol8-material="gem"][data-ol8-variant="secondary"]:active:not(:disabled):not([aria-busy="true"]){background:linear-gradient(135deg,var(--ol8-material-control-gem-secondary-hover-high),var(--ol8-material-control-gem-secondary-hover-mid),var(--ol8-material-control-gem-secondary-hover-low))}
+.ol8-Button[data-ol8-material="gem"][data-ol8-variant="primary"]:disabled{background:var(--ol8-color-action-primary-disabled);color:var(--ol8-color-action-primary-disabled-content);box-shadow:var(--ol8-elevation-surface-flat);backdrop-filter:none}
+.ol8-Button[data-ol8-material="gem"][data-ol8-variant="secondary"]:disabled{background:var(--ol8-color-action-secondary-surface-disabled);color:var(--ol8-color-action-secondary-content-disabled);box-shadow:var(--ol8-elevation-surface-flat);backdrop-filter:none}
+
+.ol8-Button__icon{
+  display:inline-grid;
+  place-items:center;
+  flex:none;
+  inline-size:var(--ol8-component-button-icon-compact);
+  block-size:var(--ol8-component-button-icon-compact);
+  transition:transform var(--ol8-motion-interaction-hover-duration) var(--ol8-motion-interaction-hover-timing-function);
+}
+.ol8-Button[data-ol8-size="comfortable"] .ol8-Button__icon,.ol8-Button[data-ol8-size="large"] .ol8-Button__icon{inline-size:var(--ol8-component-button-icon-comfortable);block-size:var(--ol8-component-button-icon-comfortable)}
+.ol8-Button__icon>svg{inline-size:100%;block-size:100%}
+.ol8-Button[data-ol8-icon-motion="rotate"]:hover:not(:disabled):not([aria-busy="true"]) .ol8-Button__icon{transform:rotate(-30deg)}
+.ol8-Button[data-ol8-icon-motion="forward"]:hover:not(:disabled):not([aria-busy="true"]) .ol8-Button__icon{transform:translateX(var(--ol8-motion-distance-minimal))}
+.ol8-Button[data-ol8-icon-motion="backward"]:hover:not(:disabled):not([aria-busy="true"]) .ol8-Button__icon{transform:translateX(calc(var(--ol8-motion-distance-minimal) * -1))}
+.ol8-Button:dir(rtl)[data-ol8-icon-motion="forward"]:hover:not(:disabled):not([aria-busy="true"]) .ol8-Button__icon{transform:translateX(calc(var(--ol8-motion-distance-minimal) * -1))}
+.ol8-Button:dir(rtl)[data-ol8-icon-motion="backward"]:hover:not(:disabled):not([aria-busy="true"]) .ol8-Button__icon{transform:translateX(var(--ol8-motion-distance-minimal))}
+
+.ol8-Button__status{
+  flex:none;
+  inline-size:var(--ol8-component-button-icon-compact);
+  block-size:var(--ol8-component-button-icon-compact);
+  animation:ol8-Button-spin var(--ol8-motion-duration-deliberate) var(--ol8-motion-easing-linear) infinite;
+}
+
+@keyframes ol8-Button-spin{to{transform:rotate(1turn)}}
+.ol8-Button[data-ol8-size="comfortable"] .ol8-Button__status,.ol8-Button[data-ol8-size="large"] .ol8-Button__status{inline-size:var(--ol8-component-button-icon-comfortable);block-size:var(--ol8-component-button-icon-comfortable)}
+
+@media (prefers-reduced-motion:reduce){
+  .ol8-Button,.ol8-Button__icon{transition-duration:var(--ol8-motion-duration-instant)}
+  .ol8-Button__status{animation:none}
+}
+
+@media (prefers-reduced-transparency:reduce){
+  .ol8-Button[data-ol8-material="gem"][data-ol8-variant="primary"]{background:var(--ol8-color-action-primary-default);backdrop-filter:none}
+  .ol8-Button[data-ol8-material="gem"][data-ol8-variant="secondary"]{background:var(--ol8-color-surface-raised);border:var(--ol8-component-button-secondary-boundary) solid var(--ol8-color-action-secondary-content-default);color:var(--ol8-color-action-secondary-content-default);backdrop-filter:none}
+}
+
+@media (forced-colors:active){
+  .ol8-Button{forced-color-adjust:auto}
+  .ol8-Button:focus-visible{outline:var(--ol8-focus-ring-inner-width) solid Highlight;outline-offset:var(--ol8-focus-ring-offset);box-shadow:none}
+}
