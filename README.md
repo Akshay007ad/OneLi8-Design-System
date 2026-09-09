@@ -1,6 +1,6 @@
 # OneLi8 Design System
 
-September 9, 2026 · MIT · `1.0.0-beta.1`
+September 9, 2026 · Apache-2.0 · `1.0.0-beta.2`
 
 OneLi8 means One Light: a modular design system created by Akshay Dhore,
 inspired by Guruji Shrii Arnav and the 9×12 Way. This is a deliberately small
@@ -24,7 +24,7 @@ Requires Node 20+ and React 18+. React 18.3.1 is the tested version.
 Unzip this bundle, then use the two local archives in `tarballs/`:
 
 ```sh
-npm install /absolute/path/to/tarballs/oneli8-tokens-1.0.0-beta.1.tgz /absolute/path/to/tarballs/oneli8-react-1.0.0-beta.1.tgz
+npm install /absolute/path/to/tarballs/oneli8-tokens-1.0.0-beta.2.tgz /absolute/path/to/tarballs/oneli8-react-1.0.0-beta.2.tgz
 ```
 
 These are local packages, not a claim that this version is on npm.
@@ -92,7 +92,10 @@ recreating components. This bundle has no backend, analytics, or credentials.
 ## Ownership and evolution
 
 Akshay Dhore is currently the sole creator and approver of canonical OneLi8
-components. MIT permits reuse and forks; upstream design approval is separate.
+components. Apache-2.0 permits reuse and forks; upstream design approval is separate.
 Feedback and proposals are welcome, but no contribution process or additional
 maintainer is implied. Future releases can add fixed families incrementally.
-See `PRINCIPLES.md` and `LICENSE`.
+See `PRINCIPLES.md`, `LICENSE` and `NOTICE`. Preserve applicable copyright and
+attribution notices when redistributing under Apache-2.0. This does not require
+a visible badge in your product or imply OneLi8 endorsement. Earlier MIT releases
+retain their original permissions. This license update changes no component designs.

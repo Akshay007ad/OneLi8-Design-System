@@ -1,13 +1,15 @@
 {
   "name": "@oneli8/react",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "type": "module",
+  "license": "Apache-2.0",
   "files": [
     "src",
     "styles",
     "styles.css",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "NOTICE"
   ],
   "sideEffects": [
     "./styles.css",
@@ -30,8 +32,7 @@
     "react": ">=18"
   },
   "dependencies": {
-    "@oneli8/tokens": "1.0.0-beta.1"
+    "@oneli8/tokens": "1.0.0-beta.2"
   },
-  "private": true,
-  "license": "MIT"
+  "private": true
 }

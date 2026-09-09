@@ -1,7 +1,8 @@
 {
   "name": "@oneli8/tokens",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "private": true,
+  "license": "Apache-2.0",
   "type": "module",
   "files": [
     "build",
@@ -10,7 +11,8 @@
     "src",
     "status",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "NOTICE"
   ],
   "scripts": {
     "build": "node scripts/build.mjs --standalone",
@@ -23,6 +25,5 @@
     "./tailwind.css": "./build/tailwind/theme.css",
     "./figma": "./build/figma/variables.json",
     "./status": "./build/status/components.json"
-  },
-  "license": "MIT"
+  }
 }

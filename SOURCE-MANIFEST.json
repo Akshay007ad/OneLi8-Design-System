@@ -2,7 +2,10 @@
   "algorithm": "sha256",
   "files": {
     "LICENSE": {
-      "sha256": "8711ce48c0df390bd2a12a8cb0479e405c5508310b5cca237b5adfc92057bc43"
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "NOTICE": {
+      "sha256": "faee8520ed0c1980bff94180f141c39d04b9f73f3f5424d9204fc6d4e70dabe1"
     },
     "packages/react/src/molecules/Button.js": {
       "sha256": "6b2df94b1fdd43e06108be19fb085cdd00eacbe041daec7b61562c2cb7bfdaa6"
@@ -74,7 +77,10 @@
       "sha256": "d669da1c94cbef997c2ce19d2acee95b873759644627e5a0cbba4441dfeda599"
     },
     "packages/react/LICENSE": {
-      "sha256": "8711ce48c0df390bd2a12a8cb0479e405c5508310b5cca237b5adfc92057bc43"
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "packages/react/NOTICE": {
+      "sha256": "faee8520ed0c1980bff94180f141c39d04b9f73f3f5424d9204fc6d4e70dabe1"
     },
     "packages/tokens/src/component.json": {
       "sha256": "df235a58e2f9b9be6b0bbb7974b94058202163e54d922aede08adedea5f76eee"
@@ -107,7 +113,10 @@
       "sha256": "31f6388b653447dce6fcbde20cd3f3c954d349ae29fa46252c3d379c04eef04b"
     },
     "packages/tokens/LICENSE": {
-      "sha256": "8711ce48c0df390bd2a12a8cb0479e405c5508310b5cca237b5adfc92057bc43"
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "packages/tokens/NOTICE": {
+      "sha256": "faee8520ed0c1980bff94180f141c39d04b9f73f3f5424d9204fc6d4e70dabe1"
     },
     "mappings/button.mapping.json": {
       "sha256": "242364d8461adef00e874b9fde0b03eb883d22069768feef5aa851f886833ab6"

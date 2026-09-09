@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "canonicalOwnersCopiedUnchanged": true,
   "scope": [
     "Button",
@@ -7,21 +7,21 @@
     "Link",
     "Icon"
   ],
-  "license": "MIT",
+  "license": "Apache-2.0",
   "tokenChecks": "Built 586 Oneli8 tokens for CSS, TypeScript, Tailwind, and Figma.\nPASS 69/69 canonical token package checks.",
   "privacy": "Explicit file selection plus local-path, private-file-key and common credential-pattern scan; not a universal secret audit.",
   "artifacts": [
     {
       "name": "@oneli8/tokens",
-      "filename": "oneli8-tokens-1.0.0-beta.1.tgz",
-      "size": 78895,
-      "sha256": "a7b108e7b02cf29dff91ce361a766ca56a78d8503dcabb3df8259f6360a52641"
+      "filename": "oneli8-tokens-1.0.0-beta.2.tgz",
+      "size": 82503,
+      "sha256": "668f2605acef443d3258ba8721225e523a775858601c41ae1c1318d8616253a8"
     },
     {
       "name": "@oneli8/react",
-      "filename": "oneli8-react-1.0.0-beta.1.tgz",
-      "size": 11852,
-      "sha256": "eb65e97604219fe6bf56cc326f097b746b1ea232c428c622ac0a506d8eb80e6a"
+      "filename": "oneli8-react-1.0.0-beta.2.tgz",
+      "size": 15405,
+      "sha256": "c4651cc7e8776e37d2caab33fb958a4584b6f90099e6c19a6006979d3c7e0b9d"
     }
   ],
   "published": false,
