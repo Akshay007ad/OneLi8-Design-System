@@ -1,0 +1,53 @@
+/* OneLi8 override surface.
+   Copy what you need into your own stylesheet, after importing the tokens.
+   Nothing here is required. Every value below is already set by the system;
+   these are the supported places to change it. */
+
+:root {
+  /* ---- Type ------------------------------------------------------------
+     Two brand faces and one shared fallback. Replace a face and the fallback
+     still applies, because the fallback is referenced rather than inlined.
+     Drop the @oneli8/tokens/fonts.css import if you are supplying your own. */
+
+  /* --ol8-font-family-display: "Your Display Face", var(--ol8-font-family-fallback); */
+  /* --ol8-font-family-functional: "Your Text Face", var(--ol8-font-family-fallback); */
+  /* --ol8-font-family-fallback: ui-sans-serif, system-ui, sans-serif; */
+
+  /* ---- Colour ----------------------------------------------------------
+     data-ol8-primary switches between the three built families. For any other
+     hue, repoint the eleven primary steps here instead. 47 semantic roles read
+     this ramp, so buttons, links, focus, selection and the Gem material all
+     follow without touching a component.
+
+     Keep the tonal relationships: 030 lightest through 930 darkest, with 600
+     carrying the default action surface and 120 doing the same job in dark. */
+
+  /* --ol8-color-primary-030: #f6f2ff; */
+  /* --ol8-color-primary-060: #ece4ff; */
+  /* --ol8-color-primary-090: #d9c9ff; */
+  /* --ol8-color-primary-120: #c0a6ff; */
+  /* --ol8-color-primary-240: #a077f2; */
+  /* --ol8-color-primary-360: #8250d6; */
+  /* --ol8-color-primary-480: #6838b2; */
+  /* --ol8-color-primary-600: #542e8e; */
+  /* --ol8-color-primary-720: #452771; */
+  /* --ol8-color-primary-840: #38225b; */
+  /* --ol8-color-primary-930: #221238; */
+}
+
+/* Override at :root, not on a subtree.
+   A role such as --ol8-color-action-primary-default is declared as
+   var(--ol8-color-primary-600) on :root, so CSS substitutes it there and
+   descendants inherit an already resolved colour. Re-pointing the ramp deeper
+   in the tree changes the ramp but not the roles that read it.
+
+   Verified: overriding --ol8-color-primary-600 on :root repaints the primary
+   action surface. The same override on a wrapper element does nothing.
+
+   To theme one region, re-declare the roles you want on that region:
+
+   .marketing-section {
+     --ol8-color-action-primary-default: #0f766e;
+     --ol8-color-action-primary-hover: #115e59;
+   }
+*/

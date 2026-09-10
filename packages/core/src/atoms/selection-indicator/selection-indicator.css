@@ -22,8 +22,8 @@
   --_box:      var(--ol8-size-icon-small);          /* 18px compact */
   --_radius:   var(--ol8-component-checkbox-radius-compact);
   --_dot:      var(--ol8-component-radio-dot-compact);
-  --_track-w:  var(--ol8-component-switch-trackwidth-compact);
-  --_track-h:  var(--ol8-component-switch-trackheight-compact);
+  --_track-w:  var(--ol8-component-switch-track-width-compact);
+  --_track-h:  var(--ol8-component-switch-track-height-compact);
   --_thumb:    var(--ol8-component-switch-thumb-compact);
 
   --_surface: transparent;
@@ -46,8 +46,8 @@
   --_box:     var(--ol8-size-icon-standard);        /* 24px */
   --_radius:  var(--ol8-component-checkbox-radius-comfortable);
   --_dot:     var(--ol8-component-radio-dot-comfortable);
-  --_track-w: var(--ol8-component-switch-trackwidth-comfortable);
-  --_track-h: var(--ol8-component-switch-trackheight-comfortable);
+  --_track-w: var(--ol8-component-switch-track-width-comfortable);
+  --_track-h: var(--ol8-component-switch-track-height-comfortable);
   --_thumb:   var(--ol8-component-switch-thumb-comfortable);
 }
 
@@ -82,9 +82,9 @@
    9 x 1.8px bar — an approved optical exception — so it is a fixed-size rule
    here rather than a scaled glyph. */
 .ol8-selection--checkbox[data-ol8-selection="mixed"] > .ol8-selection__mark {
-  inline-size: var(--ol8-component-choice-mixed-bar-width);
-  block-size: var(--ol8-component-choice-mixed-bar-height);
-  border-radius: calc(var(--ol8-component-choice-mixed-bar-height) / 2);
+  inline-size: var(--ol8-component-checkbox-mark-mixed-width);
+  block-size: var(--ol8-component-checkbox-mark-stroke);
+  border-radius: calc(var(--ol8-component-checkbox-mark-stroke) / 2);
   background: currentColor;
 }
 

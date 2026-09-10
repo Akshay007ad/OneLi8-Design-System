@@ -52,26 +52,15 @@ for (const file of walk(SRC)) {
   }
 }
 
-// --- rule 3: the 3px atomic grid ---------------------------------------
-const tokens = JSON.parse(readFileSync(join(ROOT, 'packages/tokens/src/tokens.json'), 'utf8'));
-(function walkTokens(node, path) {
-  if (node && typeof node === 'object' && 'value' in node) {
-    const m = /^(-?\d+(?:\.\d+)?)px$/.exec(String(node.value));
-    if (m && Number(m[1]) % 3 !== 0 && !node.gridException) {
-      failures.push(`token --ol8-${path.join('-')} = ${node.value} is off the 3px grid with no gridException`);
-    }
-    return;
-  }
-  for (const [k, v] of Object.entries(node)) {
-    if (k.startsWith('$')) continue;
-    if (path.length === 0 && (k === 'source' || k === 'typography')) continue;
-    if (v && typeof v === 'object') walkTokens(v, [...path, k]);
-  }
-})(tokens, []);
+// --- rule 3: the 3px atomic grid -----------------------------------------
+// Enforced by packages/tokens/scripts/build.mjs, which rejects an off-scale
+// primitive outright and demands an approval record for literal Component
+// geometry. Re-checking it here would be a weaker second opinion on the same
+// question, so `npm run check` runs that suite instead.
 
 if (failures.length) {
   console.error('\u2717 structure check failed:');
   for (const f of failures) console.error('  \u00b7 ' + f);
   process.exit(1);
 }
-console.log('\u2713 structure check: margins deferred to parents, atoms compose nothing, all px tokens on the 3px grid (7 governed exceptions)');
+console.log('\u2713 structure check: margins deferred to parents, atoms compose nothing');

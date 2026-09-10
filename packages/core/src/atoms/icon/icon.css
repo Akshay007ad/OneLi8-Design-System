@@ -15,7 +15,7 @@
 
 .ol8-icon {
   /* The outer asset box. Defaults to the canonical 24px source size. */
-  --_ol8-icon-size: var(--ol8-icon-size-024);
+  --_ol8-icon-size: var(--ol8-size-icon-standard);
 
   display: inline-flex;
   flex: none;
@@ -36,17 +36,17 @@
 }
 
 /* ---- Icon Frame · universal sizes (Figma 418:51) ---------------------- */
-.ol8-icon[data-ol8-icon-size="9"]   { --_ol8-icon-size: var(--ol8-icon-size-009); }
-.ol8-icon[data-ol8-icon-size="12"]  { --_ol8-icon-size: var(--ol8-icon-size-012); }
-.ol8-icon[data-ol8-icon-size="18"]  { --_ol8-icon-size: var(--ol8-icon-size-018); }
-.ol8-icon[data-ol8-icon-size="24"]  { --_ol8-icon-size: var(--ol8-icon-size-024); }
-.ol8-icon[data-ol8-icon-size="30"]  { --_ol8-icon-size: var(--ol8-icon-size-030); }
-.ol8-icon[data-ol8-icon-size="36"]  { --_ol8-icon-size: var(--ol8-icon-size-036); }
-.ol8-icon[data-ol8-icon-size="48"]  { --_ol8-icon-size: var(--ol8-icon-size-048); }
-.ol8-icon[data-ol8-icon-size="60"]  { --_ol8-icon-size: var(--ol8-icon-size-060); }
-.ol8-icon[data-ol8-icon-size="72"]  { --_ol8-icon-size: var(--ol8-icon-size-072); }
-.ol8-icon[data-ol8-icon-size="96"]  { --_ol8-icon-size: var(--ol8-icon-size-096); }
-.ol8-icon[data-ol8-icon-size="108"] { --_ol8-icon-size: var(--ol8-icon-size-108); }
+.ol8-icon[data-ol8-icon-size="9"]   { --_ol8-icon-size: var(--ol8-size-icon-micro); }
+.ol8-icon[data-ol8-icon-size="12"]  { --_ol8-icon-size: var(--ol8-size-icon-compact); }
+.ol8-icon[data-ol8-icon-size="18"]  { --_ol8-icon-size: var(--ol8-size-icon-small); }
+.ol8-icon[data-ol8-icon-size="24"]  { --_ol8-icon-size: var(--ol8-size-icon-standard); }
+.ol8-icon[data-ol8-icon-size="30"]  { --_ol8-icon-size: var(--ol8-size-icon-medium); }
+.ol8-icon[data-ol8-icon-size="36"]  { --_ol8-icon-size: var(--ol8-size-icon-large); }
+.ol8-icon[data-ol8-icon-size="48"]  { --_ol8-icon-size: var(--ol8-size-icon-xlarge); }
+.ol8-icon[data-ol8-icon-size="60"]  { --_ol8-icon-size: var(--ol8-size-icon-spacious); }
+.ol8-icon[data-ol8-icon-size="72"]  { --_ol8-icon-size: var(--ol8-size-icon-display); }
+.ol8-icon[data-ol8-icon-size="96"]  { --_ol8-icon-size: var(--ol8-size-icon-hero); }
+.ol8-icon[data-ol8-icon-size="108"] { --_ol8-icon-size: var(--ol8-size-icon-landmark); }
 
 /* ---- Direction ------------------------------------------------------- */
 /* "Direction: semantic registry controls RTL mirroring" (Iconography doc 84:13).

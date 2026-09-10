@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "observedAt": "2026-09-07",
+  "publicImport": "@oneli8/react",
+  "sizes": {
+    "Small": "small",
+    "Standard": "standard",
+    "Large": "large"
+  },
+  "owners": [
+    {
+      "id": "138:260",
+      "labelKey": "Label#140:0",
+      "form": "inline",
+      "states": [
+        "Default",
+        "Hover",
+        "Focus",
+        "Pressed",
+        "Visited"
+      ]
+    },
+    {
+      "id": "139:260",
+      "labelKey": "Label#140:93",
+      "form": "standalone",
+      "states": [
+        "Default",
+        "Hover",
+        "Focus",
+        "Pressed",
+        "Visited"
+      ]
+    },
+    {
+      "id": "139:453",
+      "labelKey": "Label#140:186",
+      "form": "navigation",
+      "states": [
+        "Default",
+        "Hover",
+        "Focus",
+        "Pressed",
+        "Current"
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "name": "@oneli8/tokens",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0-beta.4",
   "description": "OneLi8 Design System \u2014 design tokens compiled from Figma. CSS custom properties and a flat JS object.",
   "keywords": [
     "design-tokens",
@@ -23,29 +23,40 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/tokens.d.ts",
-      "import": "./dist/tokens.js",
-      "default": "./dist/tokens.js"
+      "types": "./build/typescript/index.d.ts",
+      "import": "./build/typescript/index.js",
+      "default": "./build/typescript/index.js"
     },
-    "./css": "./dist/tokens.css",
-    "./tokens.css": "./dist/tokens.css",
-    "./tailwind": "./dist/tailwind/preset.mjs",
-    "./tailwind.css": "./dist/tailwind/theme.css",
-    "./figma": "./dist/figma/variables.json",
-    "./status": "./dist/status/components.json",
-    "./source": "./src/tokens.json",
+    "./css": "./build/css/tokens.css",
+    "./fonts.css": "./fonts.css",
+    "./fonts/*": "./fonts/*",
+    "./overrides.example.css": "./overrides.example.css",
+    "./tailwind": "./build/tailwind/preset.mjs",
+    "./tailwind.css": "./build/tailwind/theme.css",
+    "./figma": "./build/figma/variables.json",
+    "./status": "./build/status/components.json",
+    "./source": "./src/semantic.json",
     "./package.json": "./package.json"
   },
-  "types": "./dist/tokens.d.ts",
+  "types": "./build/typescript/index.d.ts",
   "sideEffects": [
-    "./dist/tokens.css"
+    "./build/css/tokens.css",
+    "./fonts.css"
   ],
   "files": [
     "dist",
+    "build",
     "src",
+    "status",
+    "schema",
+    "scripts",
+    "fonts",
+    "fonts.css",
+    "overrides.example.css",
     "README.md",
     "LICENSE",
-    "NOTICE"
+    "NOTICE",
+    "FONTS-LICENSE.txt"
   ],
   "engines": {
     "node": ">=20"

@@ -29,7 +29,7 @@
 
   /* Size channels, defaulted to Standard. */
   --_h:    var(--ol8-component-button-height-standard);
-  --_px:   var(--ol8-component-button-paddinginline-standard);
+  --_px:   var(--ol8-component-button-padding-inline-standard);
   --_r:    var(--ol8-component-button-radius-standard);
   --_gap:  var(--ol8-component-button-gap-compact);
   --_icon: var(--ol8-size-icon-small);
@@ -54,7 +54,7 @@
   letter-spacing: 0;
   /* AR One Sans variable axis. Figma sets this on every functional text node;
      omitting it shifts glyph advances and the button measures narrow. */
-  font-variation-settings: var(--ol8-font-variation-functional);
+  font-variation-settings: "ARRR" var(--ol8-font-axis-arrr-baseline);
 
   cursor: pointer;
   user-select: none;
@@ -74,98 +74,98 @@
 /* ---- Size (Figma: Size variant axis) --------------------------------- */
 .ol8-btn[data-ol8-size="compact"] {
   --_h: var(--ol8-component-button-height-compact);
-  --_px: var(--ol8-component-button-paddinginline-compact);
+  --_px: var(--ol8-component-button-padding-inline-compact);
   --_r: var(--ol8-component-button-radius-compact);
   --_gap: var(--ol8-component-button-gap-compact);
   --_icon: var(--ol8-size-icon-small);
 }
 .ol8-btn[data-ol8-size="standard"] {
   --_h: var(--ol8-component-button-height-standard);
-  --_px: var(--ol8-component-button-paddinginline-standard);
+  --_px: var(--ol8-component-button-padding-inline-standard);
   --_r: var(--ol8-component-button-radius-standard);
   --_gap: var(--ol8-component-button-gap-compact);      /* shared, by design */
   --_icon: var(--ol8-size-icon-small);
 }
 .ol8-btn[data-ol8-size="comfortable"] {
   --_h: var(--ol8-component-button-height-comfortable);
-  --_px: var(--ol8-component-button-paddinginline-comfortable);
+  --_px: var(--ol8-component-button-padding-inline-comfortable);
   --_r: var(--ol8-component-button-radius-comfortable);
   --_gap: var(--ol8-component-button-gap-comfortable);
   --_icon: var(--ol8-size-icon-standard);
 }
 .ol8-btn[data-ol8-size="large"] {
   --_h: var(--ol8-component-button-height-large);
-  --_px: var(--ol8-component-button-paddinginline-large);
+  --_px: var(--ol8-component-button-padding-inline-large);
   --_r: var(--ol8-component-button-radius-large);
   --_gap: var(--ol8-component-button-gap-comfortable);  /* shared, by design */
   --_icon: var(--ol8-size-icon-standard);
 }
 
 /* ---- Family: Primary ------------------------------------------------- */
-.ol8-btn--primary { --_bg: var(--ol8-color-actionprimary-default); --_fg: var(--ol8-color-actionprimary-content); }
-.ol8-btn--primary:hover:not(:disabled):not([data-ol8-loading]) { --_bg: var(--ol8-color-actionprimary-hover); }
+.ol8-btn--primary { --_bg: var(--ol8-color-action-primary-default); --_fg: var(--ol8-color-action-primary-content); }
+.ol8-btn--primary:hover:not(:disabled):not([data-ol8-loading]) { --_bg: var(--ol8-color-action-primary-hover); }
 .ol8-btn--primary:active:not(:disabled):not([data-ol8-loading]),
-.ol8-btn--primary[aria-pressed="true"]:not(:disabled)          { --_bg: var(--ol8-color-actionprimary-pressed); }
+.ol8-btn--primary[aria-pressed="true"]:not(:disabled)          { --_bg: var(--ol8-color-action-primary-pressed); }
 .ol8-btn--primary:disabled, .ol8-btn--primary[data-ol8-loading] {
-  --_bg: var(--ol8-color-actionprimary-disabled);
-  --_fg: var(--ol8-color-actionprimary-disabledcontent);
+  --_bg: var(--ol8-color-action-primary-disabled);
+  --_fg: var(--ol8-color-action-primary-disabled-content);
 }
 
 /* ---- Family: Destructive (same shape as Primary) --------------------- */
-.ol8-btn--destructive { --_bg: var(--ol8-color-actiondestructive-default); --_fg: var(--ol8-color-actiondestructive-content); }
-.ol8-btn--destructive:hover:not(:disabled):not([data-ol8-loading]) { --_bg: var(--ol8-color-actiondestructive-hover); }
+.ol8-btn--destructive { --_bg: var(--ol8-color-action-destructive-default); --_fg: var(--ol8-color-action-destructive-content); }
+.ol8-btn--destructive:hover:not(:disabled):not([data-ol8-loading]) { --_bg: var(--ol8-color-action-destructive-hover); }
 .ol8-btn--destructive:active:not(:disabled):not([data-ol8-loading]),
-.ol8-btn--destructive[aria-pressed="true"]:not(:disabled)          { --_bg: var(--ol8-color-actiondestructive-pressed); }
+.ol8-btn--destructive[aria-pressed="true"]:not(:disabled)          { --_bg: var(--ol8-color-action-destructive-pressed); }
 .ol8-btn--destructive:disabled, .ol8-btn--destructive[data-ol8-loading] {
-  --_bg: var(--ol8-color-actiondestructive-disabled);
-  --_fg: var(--ol8-color-actiondestructive-disabledcontent);
+  --_bg: var(--ol8-color-action-destructive-disabled);
+  --_fg: var(--ol8-color-action-destructive-disabled-content);
 }
 
 /* ---- Family: Secondary ----------------------------------------------
    Secondary and Quiet carry byte-identical color roles in Figma. The ONLY
    differentiator is this boundary: Secondary has a 2px stroke whose color
    tracks the content color; Quiet has none. Verified — Quiet's node binds no
-   --ol8-component-button-secondaryboundary at all.                        */
+   --ol8-component-button-secondary-boundary at all.                        */
 .ol8-btn--secondary {
-  --_bw: var(--ol8-component-button-secondaryboundary);
-  --_bg: var(--ol8-color-actionsecondary-surfacedefault);
-  --_fg: var(--ol8-color-actionsecondary-contentdefault);
-  --_bd: var(--ol8-color-actionsecondary-contentdefault);
+  --_bw: var(--ol8-component-button-secondary-boundary);
+  --_bg: var(--ol8-color-action-secondary-surface-default);
+  --_fg: var(--ol8-color-action-secondary-content-default);
+  --_bd: var(--ol8-color-action-secondary-content-default);
 }
 .ol8-btn--secondary:hover:not(:disabled):not([data-ol8-loading]) {
-  --_bg: var(--ol8-color-actionsecondary-surfacehover);
-  --_fg: var(--ol8-color-actionsecondary-contenthover);
-  --_bd: var(--ol8-color-actionsecondary-contenthover);
+  --_bg: var(--ol8-color-action-secondary-surface-hover);
+  --_fg: var(--ol8-color-action-secondary-content-hover);
+  --_bd: var(--ol8-color-action-secondary-content-hover);
 }
 .ol8-btn--secondary:active:not(:disabled):not([data-ol8-loading]),
 .ol8-btn--secondary[aria-pressed="true"]:not(:disabled) {
-  --_bg: var(--ol8-color-actionsecondary-surfacepressed);
-  --_fg: var(--ol8-color-actionsecondary-contentpressed);
-  --_bd: var(--ol8-color-actionsecondary-contentpressed);
+  --_bg: var(--ol8-color-action-secondary-surface-pressed);
+  --_fg: var(--ol8-color-action-secondary-content-pressed);
+  --_bd: var(--ol8-color-action-secondary-content-pressed);
 }
 .ol8-btn--secondary:disabled, .ol8-btn--secondary[data-ol8-loading] {
-  --_bg: var(--ol8-color-actionsecondary-surfacedisabled);
-  --_fg: var(--ol8-color-actionsecondary-contentdisabled);
-  --_bd: var(--ol8-color-actionsecondary-contentdisabled);
+  --_bg: var(--ol8-color-action-secondary-surface-disabled);
+  --_fg: var(--ol8-color-action-secondary-content-disabled);
+  --_bd: var(--ol8-color-action-secondary-content-disabled);
 }
 
 /* ---- Family: Quiet (identical colors, no boundary) ------------------- */
 .ol8-btn--quiet {
-  --_bg: var(--ol8-color-actionquiet-surfacedefault);
-  --_fg: var(--ol8-color-actionquiet-contentdefault);
+  --_bg: var(--ol8-color-action-quiet-surface-default);
+  --_fg: var(--ol8-color-action-quiet-content-default);
 }
 .ol8-btn--quiet:hover:not(:disabled):not([data-ol8-loading]) {
-  --_bg: var(--ol8-color-actionquiet-surfacehover);
-  --_fg: var(--ol8-color-actionquiet-contenthover);
+  --_bg: var(--ol8-color-action-quiet-surface-hover);
+  --_fg: var(--ol8-color-action-quiet-content-hover);
 }
 .ol8-btn--quiet:active:not(:disabled):not([data-ol8-loading]),
 .ol8-btn--quiet[aria-pressed="true"]:not(:disabled) {
-  --_bg: var(--ol8-color-actionquiet-surfacepressed);
-  --_fg: var(--ol8-color-actionquiet-contentpressed);
+  --_bg: var(--ol8-color-action-quiet-surface-pressed);
+  --_fg: var(--ol8-color-action-quiet-content-pressed);
 }
 .ol8-btn--quiet:disabled, .ol8-btn--quiet[data-ol8-loading] {
-  --_bg: var(--ol8-color-actionquiet-surfacedisabled);
-  --_fg: var(--ol8-color-actionquiet-contentdisabled);
+  --_bg: var(--ol8-color-action-quiet-surface-disabled);
+  --_fg: var(--ol8-color-action-quiet-content-disabled);
 }
 
 /* ---- Focus ----------------------------------------------------------
@@ -175,7 +175,7 @@
    Secondary's own 2px boundary — `outline` would sit outside and grow it.  */
 .ol8-btn:focus-visible {
   outline: none;
-  box-shadow: inset 0 0 0 var(--ol8-focus-ring-innerwidth) var(--ol8-color-focus-outer);
+  box-shadow: inset 0 0 0 var(--ol8-focus-ring-inner-width) var(--ol8-color-focus-outer);
 }
 
 /* ---- Disabled / Loading --------------------------------------------- */

@@ -31,7 +31,7 @@
 .ol8-choice {
   --_gap:    var(--ol8-component-choice-gap-standard);
   --_slot-h: var(--ol8-font-line-024);
-  --_pad:    calc((var(--ol8-component-choice-rowminimum) - var(--_slot-h)) / 2);
+  --_pad:    calc((var(--ol8-component-choice-row-minimum) - var(--_slot-h)) / 2);
   --_label-size: var(--ol8-font-size-016);
   --_label-line: var(--ol8-font-line-024);
   --_indicator: var(--ol8-size-icon-small);
@@ -43,10 +43,10 @@
   display: flex;
   align-items: flex-start;
   gap: var(--_gap);
-  min-block-size: var(--ol8-component-choice-rowminimum);
+  min-block-size: var(--ol8-component-choice-row-minimum);
   padding-block: var(--_pad);
   font-family: var(--ol8-font-family-functional);
-  font-variation-settings: var(--ol8-font-variation-functional);
+  font-variation-settings: "ARRR" var(--ol8-font-axis-arrr-baseline);
   cursor: pointer;
 }
 .ol8-choice[data-ol8-availability="disabled"] { cursor: not-allowed; }
@@ -107,13 +107,13 @@
 /* Two nested rings, both visible — outer 3px, inner 3px at a 2px inset.
    This is the same two-tone ring the Icon Button focus tokens describe. */
 .ol8-choice:has(> .ol8-choice__input:focus-visible) > .ol8-choice__surface {
-  border: var(--ol8-focus-ring-outerwidth) solid var(--ol8-color-focus-outer);
+  border: var(--ol8-focus-ring-outer-width) solid var(--ol8-color-focus-outer);
 }
 .ol8-choice:has(> .ol8-choice__input:focus-visible) > .ol8-choice__surface::after {
   content: "";
   position: absolute;
   inset: 2px;
-  border: var(--ol8-focus-ring-innerwidth) solid var(--ol8-color-focus-inner);
+  border: var(--ol8-focus-ring-inner-width) solid var(--ol8-color-focus-inner);
   border-radius: 7px;
 }
 
@@ -134,7 +134,7 @@
   position: absolute;
   inline-size: var(--_indicator);
   block-size: var(--_indicator);
-  border: var(--ol8-component-checkbox-boundary) solid var(--ol8-color-feedbackcritical-inlinecontent);
+  border: var(--ol8-component-checkbox-boundary) solid var(--ol8-color-feedback-critical-inline-content);
   border-radius: var(--ol8-component-checkbox-radius-compact);
   pointer-events: none;
 }
@@ -178,13 +178,13 @@
    "Gem is one Boolean material adapter over the same anatomy; Regular
    remains the default." A wash on the row, not a different component. */
 .ol8-choice[data-ol8-material="gem"] > .ol8-choice__surface {
-  background: var(--ol8-material-gem-color-quiet-environmentalface);
-  border: 1px solid var(--ol8-material-gem-color-cutedge-high);
+  background: var(--ol8-material-gem-color-quiet-environmental-face);
+  border: 1px solid var(--ol8-material-gem-color-cut-edge-high);
   border-radius: var(--ol8-shape-radius-standard);
   inset-inline: 0;
 }
 @media (prefers-reduced-transparency: reduce) {
   .ol8-choice[data-ol8-material="gem"] > .ol8-choice__surface {
-    background: var(--ol8-material-gem-color-quiet-opaqueequivalent);
+    background: var(--ol8-material-gem-color-quiet-opaque-equivalent);
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@oneli8/core",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0-beta.4",
   "description": "OneLi8 Design System \u2014 framework-agnostic components. Renders HTML strings and hydrates existing DOM; no framework required.",
   "keywords": [
     "design-system",
@@ -68,7 +68,7 @@
     "NOTICE"
   ],
   "dependencies": {
-    "@oneli8/tokens": "1.0.0-beta.3"
+    "@oneli8/tokens": "1.0.0-beta.4"
   },
   "engines": {
     "node": ">=20"

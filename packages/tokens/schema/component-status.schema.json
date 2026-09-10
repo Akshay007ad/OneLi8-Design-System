@@ -1,0 +1,32 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://oneli8.org/schema/component-status.schema.json",
+  "title":"Oneli8 component status registry",
+  "type":"object",
+  "required":["version","components"],
+  "properties":{
+    "$schema":{"type":"string"},
+    "generated":{"type":"boolean"},
+    "version":{"type":"string","minLength":1},
+    "components":{"type":"array","minItems":1,"items":{"$ref":"#/$defs/record"}}
+  },
+  "additionalProperties":false,
+  "$defs":{
+    "record":{
+      "type":"object",
+      "required":["name","status","designerApproved","implementationCertified","contractPath","knownEvidence","missingEvidence"],
+      "properties":{
+        "name":{"type":"string","minLength":1},
+        "status":{"enum":["Stable","Candidate","Labs","Experimental","Deprecated"]},
+        "designerApproved":{"type":"boolean"},
+        "implementationCertified":{"type":"boolean"},
+        "contractPath":{"type":"string","minLength":1},
+        "implementationPath":{"type":["string","null"]},
+        "figmaComponentKey":{"type":["string","null"]},
+        "knownEvidence":{"type":"array","items":{"type":"string"}},
+        "missingEvidence":{"type":"array","items":{"type":"string"}}
+      },
+      "additionalProperties":true
+    }
+  }
+}

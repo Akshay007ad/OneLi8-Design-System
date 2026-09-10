@@ -21,21 +21,21 @@
  */
 
 .ol8-option {
-  --_min:   var(--ol8-component-selectionoption-minimum-standard);
-  --_inset: var(--ol8-component-selectionoption-inset-standard);
+  --_min:   var(--ol8-component-selection-option-minimum-standard);
+  --_inset: var(--ol8-component-selection-option-inset-standard);
 
   box-sizing: border-box;
   display: flex;
   align-items: center;
   min-block-size: var(--_min);
   font-family: var(--ol8-font-family-functional);
-  font-variation-settings: var(--ol8-font-variation-functional);
+  font-variation-settings: "ARRR" var(--ol8-font-axis-arrr-baseline);
   list-style: none;
   cursor: pointer;
 }
 .ol8-option[data-ol8-size="large"] {
-  --_min:   var(--ol8-component-selectionoption-minimum-large);
-  --_inset: var(--ol8-component-selectionoption-inset-large);
+  --_min:   var(--ol8-component-selection-option-minimum-large);
+  --_inset: var(--ol8-component-selection-option-inset-large);
 }
 .ol8-option[aria-disabled="true"] { cursor: not-allowed; }
 
@@ -72,13 +72,13 @@
 /* Focus lives on the combobox input, never here — but the option still shows
    the active ring when a popup marks it, so the two-tone ring is reproduced. */
 .ol8-option[data-ol8-focus-ring="true"] > .ol8-option__surface {
-  border: var(--ol8-focus-ring-outerwidth) solid var(--ol8-color-focus-outer);
+  border: var(--ol8-focus-ring-outer-width) solid var(--ol8-color-focus-outer);
 }
 .ol8-option[data-ol8-focus-ring="true"] > .ol8-option__surface::after {
   content: "";
   position: absolute;
   inset: 2px;
-  border: var(--ol8-focus-ring-innerwidth) solid var(--ol8-color-focus-inner);
+  border: var(--ol8-focus-ring-inner-width) solid var(--ol8-color-focus-inner);
   border-radius: 7px;
   pointer-events: none;
 }

@@ -31,7 +31,7 @@
   border: 0;
   border-radius: var(--ol8-shape-radius-standard);
   font-family: var(--ol8-font-family-functional);
-  font-variation-settings: var(--ol8-font-variation-functional);
+  font-variation-settings: "ARRR" var(--ol8-font-axis-arrr-baseline);
   min-inline-size: 0;   /* fieldset defaults to min-content; this lets it shrink */
 }
 
@@ -89,5 +89,5 @@
   color: var(--ol8-color-text-secondary);
 }
 .ol8-choice-group[data-ol8-invalid="true"] > .ol8-choice-group__message {
-  color: var(--ol8-color-feedbackcritical-inlinecontent);
+  color: var(--ol8-color-feedback-critical-inline-content);
 }

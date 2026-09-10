@@ -1,0 +1,823 @@
+{
+  "$schema": "../schema/token-file.schema.json",
+  "$description": "Independent Oneli8 mode axes. Compact typography is the semantic default.",
+  "$extensions": {
+    "oneli8.axes": {
+      "colorScheme":["light","dark"],
+      "primaryFamily":["blue","orange","green"],
+      "typographyViewport":["compact","medium","expanded"],
+      "accessibilityPreferences":["reducedMotion","reducedTransparency","increasedContrast","largerText"],
+      "direction":["ltr","rtl"]
+    },
+    "oneli8.rule":"Axes remain independent; adapters must not author a Cartesian product of modes."
+  },
+  "colorScheme": {
+    "light": {
+      "$description": "Canonical Light values are the Semantic defaults.",
+      "overrides": {}
+    },
+    "dark": {
+      "$description": "Approved Dark semantic color mappings.",
+      "overrides": {
+        "color.background.canvas": {
+          "$type": "color",
+          "$value": "{color.neutral.930}",
+          "$description": "Dark root background."
+        },
+        "color.background.subtle": {
+          "$type": "color",
+          "$value": "{color.neutral.840}",
+          "$description": "Dark quiet background."
+        },
+        "color.background.inverse": {
+          "$type": "color",
+          "$value": "{color.neutral.030}",
+          "$description": "Dark-mode inverse region."
+        },
+        "color.surface.default": {
+          "$type": "color",
+          "$value": "{color.neutral.840}",
+          "$description": "Dark cards, menus, controls, and panels."
+        },
+        "color.surface.raised": {
+          "$type": "color",
+          "$value": "{color.neutral.720}",
+          "$description": "Dark floating surface."
+        },
+        "color.surface.sunken": {
+          "$type": "color",
+          "$value": "{color.neutral.930}",
+          "$description": "Dark recessed surface."
+        },
+        "color.surface.selected": {
+          "$type": "color",
+          "$value": "{color.primary.120}",
+          "$description": "Dark persistent selection surface qualified by the active Primary family."
+        },
+        "color.surface.disabled": {
+          "$type": "color",
+          "$value": "{color.blue.840}",
+          "$description": "Dark disabled surface."
+        },
+        "color.text.primary": {
+          "$type": "color",
+          "$value": "{color.neutral.030}",
+          "$description": "Dark essential content."
+        },
+        "color.text.secondary": {
+          "$type": "color",
+          "$value": "{color.neutral.120}",
+          "$description": "Dark supporting content."
+        },
+        "color.text.muted": {
+          "$type": "color",
+          "$value": "{color.neutral.240}",
+          "$description": "Dark low-emphasis content."
+        },
+        "color.text.disabled": {
+          "$type": "color",
+          "$value": "{color.neutral.240}",
+          "$description": "Dark disabled labels."
+        },
+        "color.text.inverse": {
+          "$type": "color",
+          "$value": "{color.neutral.930}",
+          "$description": "Content on a light inverse region."
+        },
+        "color.text.link.default": {
+          "$type": "color",
+          "$value": "{color.primary.120}",
+          "$description": "Dark navigational text at rest."
+        },
+        "color.text.link.hover": {
+          "$type": "color",
+          "$value": "{color.primary.090}",
+          "$description": "Dark navigational text on Hover."
+        },
+        "color.text.link.pressed": {
+          "$type": "color",
+          "$value": "{color.primary.060}",
+          "$description": "Dark navigational text while Pressed."
+        },
+        "color.text.link.visited": {
+          "$type": "color",
+          "$value": "{color.violet.120}",
+          "$description": "Dark optional Visited orientation cue."
+        },
+        "color.icon.primary": {
+          "$type": "color",
+          "$value": "{color.neutral.030}",
+          "$description": "Dark essential icons."
+        },
+        "color.icon.secondary": {
+          "$type": "color",
+          "$value": "{color.neutral.120}",
+          "$description": "Dark supporting icons."
+        },
+        "color.icon.muted": {
+          "$type": "color",
+          "$value": "{color.neutral.240}",
+          "$description": "Dark quiet icons."
+        },
+        "color.icon.disabled": {
+          "$type": "color",
+          "$value": "{color.neutral.360}",
+          "$description": "Dark inactive icon cue."
+        },
+        "color.icon.inverse": {
+          "$type": "color",
+          "$value": "{color.neutral.930}",
+          "$description": "Dark-mode inverse icon."
+        },
+        "color.border.subtle": {
+          "$type": "color",
+          "$value": "{color.neutral.720}",
+          "$description": "Dark decorative separation."
+        },
+        "color.border.default": {
+          "$type": "color",
+          "$value": "{color.neutral.240}",
+          "$description": "Dark essential boundary."
+        },
+        "color.border.strong": {
+          "$type": "color",
+          "$value": "{color.neutral.120}",
+          "$description": "Dark emphasized boundary."
+        },
+        "color.border.disabled": {
+          "$type": "color",
+          "$value": "{color.neutral.240}",
+          "$description": "Dark disabled boundary."
+        },
+        "color.focus.inner": {
+          "$type": "color",
+          "$value": "{color.primary.930}",
+          "$description": "Dark appearance focus shadow from the active qualified family."
+        },
+        "color.focus.outer": {
+          "$type": "color",
+          "$value": "{color.primary.030}",
+          "$description": "Dark appearance focus highlight from the active qualified family."
+        },
+        "color.actionPrimary.default": {
+          "$type": "color",
+          "$value": "{color.primary.120}",
+          "$description": "Dark Primary action default surface."
+        },
+        "color.actionPrimary.hover": {
+          "$type": "color",
+          "$value": "{color.primary.090}",
+          "$description": "Dark Primary action hover surface."
+        },
+        "color.actionPrimary.pressed": {
+          "$type": "color",
+          "$value": "{color.primary.060}",
+          "$description": "Dark Primary action pressed surface."
+        },
+        "color.actionPrimary.content": {
+          "$type": "color",
+          "$value": "{color.primary.930}",
+          "$description": "Dark Primary action foreground."
+        },
+        "color.actionPrimary.disabled": {
+          "$type": "color",
+          "$value": "{color.blue.840}",
+          "$description": "Dark Primary action disabled surface."
+        },
+        "color.actionPrimary.disabledContent": {
+          "$type": "color",
+          "$value": "{color.neutral.240}",
+          "$description": "Dark Primary action disabled foreground."
+        },
+        "color.actionSecondary.surfaceDefault": {
+          "$type": "color",
+          "$value": "transparent",
+          "$description": "Dark Secondary default surface."
+        },
+        "color.actionSecondary.surfaceHover": {
+          "$type": "color",
+          "$value": "{color.primary.930}",
+          "$description": "Dark Secondary hover surface."
+        },
+        "color.actionSecondary.surfacePressed": {
+          "$type": "color",
+          "$value": "{color.primary.840}",
+          "$description": "Dark Secondary pressed surface."
+        },
+        "color.actionSecondary.surfaceDisabled": {
+          "$type": "color",
+          "$value": "transparent",
+          "$description": "Dark Secondary disabled surface."
+        },
+        "color.actionSecondary.contentDefault": {
+          "$type": "color",
+          "$value": "{color.primary.120}",
+          "$description": "Dark Secondary default content and border."
+        },
+        "color.actionSecondary.contentHover": {
+          "$type": "color",
+          "$value": "{color.primary.120}",
+          "$description": "Dark Secondary hover content and border."
+        },
+        "color.actionSecondary.contentPressed": {
+          "$type": "color",
+          "$value": "{color.primary.090}",
+          "$description": "Dark Secondary pressed content and border."
+        },
+        "color.actionSecondary.contentDisabled": {
+          "$type": "color",
+          "$value": "{color.neutral.240}",
+          "$description": "Dark Secondary disabled content and border."
+        },
+        "color.actionQuiet.surfaceDefault": {
+          "$type": "color",
+          "$value": "transparent",
+          "$description": "Dark Quiet default surface."
+        },
+        "color.actionQuiet.surfaceHover": {
+          "$type": "color",
+          "$value": "{color.primary.930}",
+          "$description": "Dark Quiet hover surface."
+        },
+        "color.actionQuiet.surfacePressed": {
+          "$type": "color",
+          "$value": "{color.primary.840}",
+          "$description": "Dark Quiet pressed surface."
+        },
+        "color.actionQuiet.surfaceDisabled": {
+          "$type": "color",
+          "$value": "transparent",
+          "$description": "Dark Quiet disabled surface."
+        },
+        "color.actionQuiet.contentDefault": {
+          "$type": "color",
+          "$value": "{color.primary.120}",
+          "$description": "Dark Quiet default content."
+        },
+        "color.actionQuiet.contentHover": {
+          "$type": "color",
+          "$value": "{color.primary.120}",
+          "$description": "Dark Quiet hover content."
+        },
+        "color.actionQuiet.contentPressed": {
+          "$type": "color",
+          "$value": "{color.primary.090}",
+          "$description": "Dark Quiet pressed content."
+        },
+        "color.actionQuiet.contentDisabled": {
+          "$type": "color",
+          "$value": "{color.neutral.240}",
+          "$description": "Dark Quiet disabled content."
+        },
+        "color.iconButton.secondaryHoverSurface": {
+          "$type": "color",
+          "$value": "{color.primary.720}",
+          "$description": "Dark Icon Button Secondary hover surface with visible separation from the canvas."
+        },
+        "color.iconButton.quietHoverSurface": {
+          "$type": "color",
+          "$value": "{color.primary.720}",
+          "$description": "Dark Icon Button Quiet hover surface with visible separation from the canvas."
+        },
+        "color.actionDestructive.default": {
+          "$type": "color",
+          "$value": "{color.red.120}",
+          "$description": "Dark Destructive default surface."
+        },
+        "color.actionDestructive.hover": {
+          "$type": "color",
+          "$value": "{color.red.090}",
+          "$description": "Dark Destructive hover surface."
+        },
+        "color.actionDestructive.pressed": {
+          "$type": "color",
+          "$value": "{color.red.060}",
+          "$description": "Dark Destructive pressed surface."
+        },
+        "color.actionDestructive.content": {
+          "$type": "color",
+          "$value": "{color.red.930}",
+          "$description": "Dark Destructive foreground."
+        },
+        "color.actionDestructive.disabled": {
+          "$type": "color",
+          "$value": "{color.blue.840}",
+          "$description": "Dark Destructive disabled surface."
+        },
+        "color.actionDestructive.disabledContent": {
+          "$type": "color",
+          "$value": "{color.neutral.240}",
+          "$description": "Dark Destructive disabled foreground."
+        },
+        "color.feedbackInformative.surface": {
+          "$type": "color",
+          "$value": "{color.cyan.120}",
+          "$description": "Dark filled informative surface."
+        },
+        "color.feedbackInformative.content": {
+          "$type": "color",
+          "$value": "{color.cyan.930}",
+          "$description": "Dark filled informative foreground."
+        },
+        "color.feedbackInformative.inlineContent": {
+          "$type": "color",
+          "$value": "{color.blue.120}",
+          "$description": "Dark inline informative content."
+        },
+        "color.feedbackPositive.surface": {
+          "$type": "color",
+          "$value": "{color.green.120}",
+          "$description": "Dark filled positive surface."
+        },
+        "color.feedbackPositive.content": {
+          "$type": "color",
+          "$value": "{color.green.930}",
+          "$description": "Dark filled positive foreground."
+        },
+        "color.feedbackPositive.inlineContent": {
+          "$type": "color",
+          "$value": "{color.green.120}",
+          "$description": "Dark inline positive content."
+        },
+        "color.feedbackCaution.surface": {
+          "$type": "color",
+          "$value": "{color.yellow.120}",
+          "$description": "Dark filled caution surface."
+        },
+        "color.feedbackCaution.content": {
+          "$type": "color",
+          "$value": "{color.yellow.930}",
+          "$description": "Dark filled caution foreground."
+        },
+        "color.feedbackCaution.inlineContent": {
+          "$type": "color",
+          "$value": "{color.yellow.120}",
+          "$description": "Dark inline caution content."
+        },
+        "color.feedbackCritical.surface": {
+          "$type": "color",
+          "$value": "{color.red.120}",
+          "$description": "Dark filled critical surface."
+        },
+        "color.feedbackCritical.content": {
+          "$type": "color",
+          "$value": "{color.red.930}",
+          "$description": "Dark filled critical foreground."
+        },
+        "color.feedbackCritical.inlineContent": {
+          "$type": "color",
+          "$value": "{color.red.120}",
+          "$description": "Dark inline critical content."
+        },
+        "color.selection.surface": {
+          "$type": "color",
+          "$value": "{color.primary.120}",
+          "$description": "Dark persistent selected surface qualified by the active Primary family."
+        },
+        "color.selection.content": {
+          "$type": "color",
+          "$value": "{color.primary.930}",
+          "$description": "Dark selected content qualified by the active Primary family."
+        },
+          "elevation.surface.flat": {
+            "$type": "shadow",
+            "$value": [],
+            "$description": "Dark mode has no Flat shadow."
+          },
+          "elevation.surface.raised": {
+            "$type": "shadow",
+            "$value": [
+              {
+                "color": "{color.cyan.840}",
+                "offsetX": "{dimension.scale.000}",
+                "offsetY": "{dimension.scale.003}",
+                "blur": "{dimension.scale.006}",
+                "spread": "{dimension.scale.000}",
+                "alpha": 0.36
+              }
+            ],
+            "$description": "Dark Raised ambient-lift cue."
+          },
+          "elevation.surface.floating": {
+            "$type": "shadow",
+            "$value": [
+              {
+                "color": "{color.cyan.840}",
+                "offsetX": "{dimension.scale.000}",
+                "offsetY": "{dimension.scale.006}",
+                "blur": "{dimension.scale.018}",
+                "spread": {
+                  "value": -3,
+                  "unit": "px"
+                },
+                "alpha": 0.48
+              }
+            ],
+            "$description": "Dark Floating ambient-lift cue."
+          },
+          "elevation.surface.overlay": {
+            "$type": "shadow",
+            "$value": [
+              {
+                "color": "{color.cyan.840}",
+                "offsetX": "{dimension.scale.000}",
+                "offsetY": "{dimension.scale.012}",
+                "blur": "{dimension.scale.036}",
+                "spread": {
+                  "value": -6,
+                  "unit": "px"
+                },
+                "alpha": 0.6
+              }
+            ],
+            "$description": "Dark Overlay ambient-lift cue."
+          },
+          "elevation.surface.blocking": {
+            "$type": "shadow",
+            "$value": [
+              {
+                "color": "{color.cyan.840}",
+                "offsetX": "{dimension.scale.000}",
+                "offsetY": "{dimension.scale.024}",
+                "blur": "{dimension.scale.072}",
+                "spread": {
+                  "value": -12,
+                  "unit": "px"
+                },
+                "alpha": 0.72
+              }
+            ],
+            "$description": "Dark Blocking ambient-lift cue."
+          },
+        "material.control.gem.primary.start": {
+          "$type": "color",
+          "$value": "{color.primary.600}",
+          "$description": "Deep Gem Primary leading stop in Dark appearance."
+        },
+        "material.control.gem.primary.mid": {
+          "$type": "color",
+          "$value": "{color.primary.720}",
+          "$description": "Deep Gem Primary middle stop in Dark appearance."
+        },
+        "material.control.gem.primary.end": {
+          "$type": "color",
+          "$value": "{color.primary.840}",
+          "$description": "Deep Gem Primary trailing stop in Dark appearance."
+        },
+        "material.control.gem.primary.hoverStart": {
+          "$type": "color",
+          "$value": "{color.primary.720}",
+          "$description": "Deep Gem Primary Hover leading stop in Dark appearance."
+        },
+        "material.control.gem.primary.hoverMid": {
+          "$type": "color",
+          "$value": "{color.primary.840}",
+          "$description": "Deep Gem Primary Hover middle stop in Dark appearance."
+        },
+        "material.control.gem.primary.hoverEnd": {
+          "$type": "color",
+          "$value": "{color.primary.930}",
+          "$description": "Deep Gem Primary Hover trailing stop in Dark appearance."
+        },
+        "material.gem.color.quiet.environmentalFace": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.neutral.930}",
+              "alpha": 0.48
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Quiet Dark Gem environmental face; transparent canonical slab material."
+          },
+          "material.gem.color.quiet.stabilizedFace": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.neutral.840}",
+              "alpha": 0.72
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Quiet Dark Gem stabilized plane."
+          },
+          "material.gem.color.quiet.opaqueEquivalent": {
+            "$type": "color",
+            "$value": "{color.neutral.840}",
+            "$description": "Quiet Dark Gem opaque equivalent."
+          },
+          "material.gem.color.cutEdge.high": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.neutral.120}",
+              "alpha": 0.42
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Dark directional bevel high stop."
+          },
+          "material.gem.color.cutEdge.mid": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.blue.120}",
+              "alpha": 0.2
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Dark directional bevel middle stop."
+          },
+          "material.gem.color.cutEdge.low": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.neutral.120}",
+              "alpha": 0.03
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Dark directional bevel fade."
+          },
+          "material.gem.color.cutEdge.shadow": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.cyan.930}",
+              "alpha": 0.36
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Dark directional bevel shadow."
+          },
+          "material.gem.color.innerThinCut.face": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.neutral.840}",
+              "alpha": 0.72
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Dark quiet inner face."
+          },
+          "material.gem.color.innerThinCut.high": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.neutral.120}",
+              "alpha": 0.27
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Dark inner Thin-Cut highlight."
+          },
+          "material.gem.color.innerThinCut.mid": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.blue.120}",
+              "alpha": 0.12
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Dark inner Thin-Cut middle tint."
+          },
+          "material.gem.color.innerThinCut.low": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.neutral.120}",
+              "alpha": 0.03
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Dark inner Thin-Cut fade."
+          },
+          "material.gem.color.facet.cool": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.blue.120}",
+              "alpha": 0.14
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Dark optional cool facet tint."
+          },
+          "material.gem.color.facet.warm": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.orange.120}",
+              "alpha": 0.09
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Dark optional warm facet tint."
+          }
+      }
+    }
+  },
+  "primaryFamily": {
+    "blue": {
+      "$description": "Blue Primary family aliases; composes with Light or Dark.",
+      "overrides": {
+        "color.primary.030": {
+          "$type": "color",
+          "$value": "{color.blue.030}",
+          "$description": "blue Primary-family 030 alias."
+        },
+        "color.primary.060": {
+          "$type": "color",
+          "$value": "{color.blue.060}",
+          "$description": "blue Primary-family 060 alias."
+        },
+        "color.primary.090": {
+          "$type": "color",
+          "$value": "{color.blue.090}",
+          "$description": "blue Primary-family 090 alias."
+        },
+        "color.primary.120": {
+          "$type": "color",
+          "$value": "{color.blue.120}",
+          "$description": "blue Primary-family 120 alias."
+        },
+        "color.primary.240": {
+          "$type": "color",
+          "$value": "{color.blue.240}",
+          "$description": "blue Primary-family 240 alias."
+        },
+        "color.primary.360": {
+          "$type": "color",
+          "$value": "{color.blue.360}",
+          "$description": "blue Primary-family 360 alias."
+        },
+        "color.primary.480": {
+          "$type": "color",
+          "$value": "{color.blue.480}",
+          "$description": "blue Primary-family 480 alias."
+        },
+        "color.primary.600": {
+          "$type": "color",
+          "$value": "{color.blue.600}",
+          "$description": "blue Primary-family 600 alias."
+        },
+        "color.primary.720": {
+          "$type": "color",
+          "$value": "{color.blue.720}",
+          "$description": "blue Primary-family 720 alias."
+        },
+        "color.primary.840": {
+          "$type": "color",
+          "$value": "{color.blue.840}",
+          "$description": "blue Primary-family 840 alias."
+        },
+        "color.primary.930": {
+          "$type": "color",
+          "$value": "{color.blue.930}",
+          "$description": "blue Primary-family 930 alias."
+        }
+      }
+    },
+    "orange": {
+      "$description": "Orange Primary family aliases; composes with Light or Dark.",
+      "overrides": {
+        "color.primary.030": {
+          "$type": "color",
+          "$value": "{color.orange.030}",
+          "$description": "orange Primary-family 030 alias."
+        },
+        "color.primary.060": {
+          "$type": "color",
+          "$value": "{color.orange.060}",
+          "$description": "orange Primary-family 060 alias."
+        },
+        "color.primary.090": {
+          "$type": "color",
+          "$value": "{color.orange.090}",
+          "$description": "orange Primary-family 090 alias."
+        },
+        "color.primary.120": {
+          "$type": "color",
+          "$value": "{color.orange.120}",
+          "$description": "orange Primary-family 120 alias."
+        },
+        "color.primary.240": {
+          "$type": "color",
+          "$value": "{color.orange.240}",
+          "$description": "orange Primary-family 240 alias."
+        },
+        "color.primary.360": {
+          "$type": "color",
+          "$value": "{color.orange.360}",
+          "$description": "orange Primary-family 360 alias."
+        },
+        "color.primary.480": {
+          "$type": "color",
+          "$value": "{color.orange.480}",
+          "$description": "orange Primary-family 480 alias."
+        },
+        "color.primary.600": {
+          "$type": "color",
+          "$value": "{color.orange.600}",
+          "$description": "orange Primary-family 600 alias."
+        },
+        "color.primary.720": {
+          "$type": "color",
+          "$value": "{color.orange.720}",
+          "$description": "orange Primary-family 720 alias."
+        },
+        "color.primary.840": {
+          "$type": "color",
+          "$value": "{color.orange.840}",
+          "$description": "orange Primary-family 840 alias."
+        },
+        "color.primary.930": {
+          "$type": "color",
+          "$value": "{color.orange.930}",
+          "$description": "orange Primary-family 930 alias."
+        }
+      }
+    },
+    "green": {
+      "$description": "Green Primary family aliases; composes with Light or Dark.",
+      "overrides": {
+        "color.primary.030": {
+          "$type": "color",
+          "$value": "{color.green.030}",
+          "$description": "green Primary-family 030 alias."
+        },
+        "color.primary.060": {
+          "$type": "color",
+          "$value": "{color.green.060}",
+          "$description": "green Primary-family 060 alias."
+        },
+        "color.primary.090": {
+          "$type": "color",
+          "$value": "{color.green.090}",
+          "$description": "green Primary-family 090 alias."
+        },
+        "color.primary.120": {
+          "$type": "color",
+          "$value": "{color.green.120}",
+          "$description": "green Primary-family 120 alias."
+        },
+        "color.primary.240": {
+          "$type": "color",
+          "$value": "{color.green.240}",
+          "$description": "green Primary-family 240 alias."
+        },
+        "color.primary.360": {
+          "$type": "color",
+          "$value": "{color.green.360}",
+          "$description": "green Primary-family 360 alias."
+        },
+        "color.primary.480": {
+          "$type": "color",
+          "$value": "{color.green.480}",
+          "$description": "green Primary-family 480 alias."
+        },
+        "color.primary.600": {
+          "$type": "color",
+          "$value": "{color.green.600}",
+          "$description": "green Primary-family 600 alias."
+        },
+        "color.primary.720": {
+          "$type": "color",
+          "$value": "{color.green.720}",
+          "$description": "green Primary-family 720 alias."
+        },
+        "color.primary.840": {
+          "$type": "color",
+          "$value": "{color.green.840}",
+          "$description": "green Primary-family 840 alias."
+        },
+        "color.primary.930": {
+          "$type": "color",
+          "$value": "{color.green.930}",
+          "$description": "green Primary-family 930 alias."
+        }
+      }
+    }
+  },
+  "typographyViewport": {
+    "compact":{"$description":"Default semantic typography values; no override required.","overrides":{}},
+    "medium":{"$description":"Medium viewport typography mapping selected by the consuming layout adapter.","overrides":{
+      "typography.display.large":{"$type":"typography","$value":{"fontFamily":"{font.family.display}","fontSize":"{font.size.090}","fontWeight":"{font.weight.bold}","letterSpacing":"{font.tracking.tight}","lineHeight":"{font.line.096}"}},
+      "typography.display.medium":{"$type":"typography","$value":{"fontFamily":"{font.family.display}","fontSize":"{font.size.066}","fontWeight":"{font.weight.bold}","letterSpacing":"{font.tracking.snug}","lineHeight":"{font.line.072}"}},
+      "typography.display.small":{"$type":"typography","$value":{"fontFamily":"{font.family.display}","fontSize":"{font.size.051}","fontWeight":"{font.weight.semibold}","letterSpacing":"{font.tracking.displaySoft}","lineHeight":"{font.line.060}"}},
+      "typography.title.large":{"$type":"typography","$value":{"fontFamily":"{font.family.functional}","fontSize":"{font.size.051}","fontWeight":"{font.weight.semibold}","letterSpacing":"{font.tracking.titleTight}","lineHeight":"{font.line.060}"}},
+      "typography.title.medium":{"$type":"typography","$value":{"fontFamily":"{font.family.functional}","fontSize":"{font.size.039}","fontWeight":"{font.weight.semibold}","letterSpacing":"{font.tracking.titleSoft}","lineHeight":"{font.line.048}"}},
+      "typography.title.small":{"$type":"typography","$value":{"fontFamily":"{font.family.functional}","fontSize":"{font.size.030}","fontWeight":"{font.weight.semibold}","letterSpacing":"{font.tracking.normal}","lineHeight":"{font.line.039}"}}
+    }},
+    "expanded":{"$description":"Expanded viewport typography mapping selected by the consuming layout adapter.","overrides":{
+      "typography.display.large":{"$type":"typography","$value":{"fontFamily":"{font.family.display}","fontSize":"{font.size.120}","fontWeight":"{font.weight.bold}","letterSpacing":"{font.tracking.tighter}","lineHeight":"{font.line.126}"}},
+      "typography.display.medium":{"$type":"typography","$value":{"fontFamily":"{font.family.display}","fontSize":"{font.size.090}","fontWeight":"{font.weight.bold}","letterSpacing":"{font.tracking.tight}","lineHeight":"{font.line.096}"}},
+      "typography.display.small":{"$type":"typography","$value":{"fontFamily":"{font.family.display}","fontSize":"{font.size.066}","fontWeight":"{font.weight.semibold}","letterSpacing":"{font.tracking.snug}","lineHeight":"{font.line.072}"}},
+      "typography.title.large":{"$type":"typography","$value":{"fontFamily":"{font.family.functional}","fontSize":"{font.size.051}","fontWeight":"{font.weight.semibold}","letterSpacing":"{font.tracking.titleTight}","lineHeight":"{font.line.060}"}},
+      "typography.title.medium":{"$type":"typography","$value":{"fontFamily":"{font.family.functional}","fontSize":"{font.size.039}","fontWeight":"{font.weight.semibold}","letterSpacing":"{font.tracking.titleSoft}","lineHeight":"{font.line.048}"}},
+      "typography.title.small":{"$type":"typography","$value":{"fontFamily":"{font.family.functional}","fontSize":"{font.size.030}","fontWeight":"{font.weight.semibold}","letterSpacing":"{font.tracking.normal}","lineHeight":"{font.line.039}"}}
+    }}
+  }
+}

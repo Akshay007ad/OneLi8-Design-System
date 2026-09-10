@@ -35,7 +35,7 @@
 .ol8-icon-btn[data-ol8-material="gem"] > .ol8-icon-btn__surface {
   position: relative;
   isolation: isolate;
-  --_rim: var(--ol8-material-control-gem--rim-default);
+  --_rim: var(--ol8-material-control-gem-rim-default);
 }
 
 /* The regular opaque background stays underneath on purpose — it is what
@@ -48,13 +48,13 @@
   z-index: -1;
   border-radius: inherit;
   pointer-events: none;
-  backdrop-filter: blur(var(--ol8-material-control-gem--blur));
-  -webkit-backdrop-filter: blur(var(--ol8-material-control-gem--blur));
+  backdrop-filter: blur(var(--ol8-material-control-gem-blur));
+  -webkit-backdrop-filter: blur(var(--ol8-material-control-gem-blur));
   background-image: linear-gradient(
     to bottom right,
-    var(--_g1) var(--ol8-material-control-gem--stop-1),
-    var(--_g2) var(--ol8-material-control-gem--stop-2),
-    var(--_g3) var(--ol8-material-control-gem--stop-3));
+    var(--_g1) var(--ol8-material-control-gem-gradient-start),
+    var(--_g2) var(--ol8-material-control-gem-gradient-mid),
+    var(--_g3) var(--ol8-material-control-gem-gradient-end));
 }
 
 .ol8-btn[data-ol8-material="gem"]::after,
@@ -65,45 +65,45 @@
   border-radius: inherit;
   pointer-events: none;
   box-shadow:
-    inset 0 2px 1px 0 var(--ol8-material-control-gem--rim-specular),
+    inset 0 2px 1px 0 var(--ol8-material-control-gem-rim-specular),
     inset 0 0 0 0 var(--_rim);
 }
 
 /* ---- Primary · three-stop same-hue body ------------------------------ */
 .ol8-btn--primary[data-ol8-material="gem"],
 .ol8-icon-btn--primary[data-ol8-material="gem"] > .ol8-icon-btn__surface {
-  --_g1: var(--ol8-material-control-gem--primary-start);
-  --_g2: var(--ol8-material-control-gem--primary-mid);
-  --_g3: var(--ol8-material-control-gem--primary-end);
-  --_fg: var(--ol8-material-control-gem--primary-content);
-  --_ink: var(--ol8-material-control-gem--primary-content);
+  --_g1: var(--ol8-material-control-gem-primary-start);
+  --_g2: var(--ol8-material-control-gem-primary-mid);
+  --_g3: var(--ol8-material-control-gem-primary-end);
+  --_fg: var(--ol8-material-control-gem-primary-content);
+  --_ink: var(--ol8-material-control-gem-primary-content);
 }
 .ol8-btn--primary[data-ol8-material="gem"]:hover:not(:disabled):not([data-ol8-loading]),
 .ol8-icon-btn--primary[data-ol8-material="gem"]:hover:not(:disabled):not([data-ol8-loading]) > .ol8-icon-btn__surface {
-  --_g1: var(--ol8-material-control-gem--primary-hover-start);
-  --_g2: var(--ol8-material-control-gem--primary-hover-mid);
-  --_g3: var(--ol8-material-control-gem--primary-hover-end);
-  --_rim: var(--ol8-material-control-gem--rim-hover);
+  --_g1: var(--ol8-material-control-gem-primary-hover-start);
+  --_g2: var(--ol8-material-control-gem-primary-hover-mid);
+  --_g3: var(--ol8-material-control-gem-primary-hover-end);
+  --_rim: var(--ol8-material-control-gem-rim-hover);
 }
 /* Pressed reuses the HOVER stops and adds the cut-edge drop shadow. */
 .ol8-btn--primary[data-ol8-material="gem"]:active:not(:disabled),
 .ol8-btn--primary[data-ol8-material="gem"][aria-pressed="true"]:not(:disabled),
 .ol8-icon-btn--primary[data-ol8-material="gem"]:active:not(:disabled) > .ol8-icon-btn__surface,
 .ol8-icon-btn--primary[data-ol8-material="gem"][aria-pressed="true"]:not(:disabled) > .ol8-icon-btn__surface {
-  --_g1: var(--ol8-material-control-gem--primary-hover-start);
-  --_g2: var(--ol8-material-control-gem--primary-hover-mid);
-  --_g3: var(--ol8-material-control-gem--primary-hover-end);
-  --_rim: var(--ol8-material-control-gem--rim-hover);
+  --_g1: var(--ol8-material-control-gem-primary-hover-start);
+  --_g2: var(--ol8-material-control-gem-primary-hover-mid);
+  --_g3: var(--ol8-material-control-gem-primary-hover-end);
+  --_rim: var(--ol8-material-control-gem-rim-hover);
 }
 .ol8-btn--primary[data-ol8-material="gem"]:active:not(:disabled),
 .ol8-btn--primary[data-ol8-material="gem"][aria-pressed="true"]:not(:disabled) {
-  filter: drop-shadow(0 9px 12px var(--ol8-material-gem-color-cutedge-shadow));
+  filter: drop-shadow(0 9px 12px var(--ol8-material-gem-color-cut-edge-shadow));
 }
 .ol8-btn--primary[data-ol8-material="gem"][data-ol8-loading],
 .ol8-icon-btn--primary[data-ol8-material="gem"][data-ol8-loading] > .ol8-icon-btn__surface {
-  --_g1: var(--ol8-material-control-gem--primary-loading-start);
-  --_g2: var(--ol8-material-control-gem--primary-loading-mid);
-  --_g3: var(--ol8-material-control-gem--primary-loading-end);
+  --_g1: var(--ol8-material-control-gem-primary-loading-start);
+  --_g2: var(--ol8-material-control-gem-primary-loading-mid);
+  --_g3: var(--ol8-material-control-gem-primary-loading-end);
 }
 
 /* ---- Secondary · transparent body with an integrated light rim -------
@@ -112,35 +112,35 @@
 .ol8-btn--secondary[data-ol8-material="gem"] { --_bw: 0px; }
 .ol8-btn--secondary[data-ol8-material="gem"],
 .ol8-icon-btn--secondary[data-ol8-material="gem"] > .ol8-icon-btn__surface {
-  --_g1: var(--ol8-material-control-gem--secondary-high);
-  --_g2: var(--ol8-material-control-gem--secondary-mid);
-  --_g3: var(--ol8-material-control-gem--secondary-low);
-  --_fg: var(--ol8-material-control-gem--secondary-content);
-  --_ink: var(--ol8-material-control-gem--secondary-content);
+  --_g1: var(--ol8-material-control-gem-secondary-high);
+  --_g2: var(--ol8-material-control-gem-secondary-mid);
+  --_g3: var(--ol8-material-control-gem-secondary-low);
+  --_fg: var(--ol8-material-control-gem-secondary-content);
+  --_ink: var(--ol8-material-control-gem-secondary-content);
   --_bd: transparent;
 }
 .ol8-btn--secondary[data-ol8-material="gem"]:hover:not(:disabled):not([data-ol8-loading]),
 .ol8-icon-btn--secondary[data-ol8-material="gem"]:hover:not(:disabled):not([data-ol8-loading]) > .ol8-icon-btn__surface {
-  --_g1: var(--ol8-material-control-gem--secondary-hover-high);
-  --_g2: var(--ol8-material-control-gem--secondary-hover-mid);
-  --_g3: var(--ol8-material-control-gem--secondary-hover-low);
-  --_rim: var(--ol8-material-control-gem--rim-hover);
-  --_fg: var(--ol8-material-control-gem--secondary-content);
+  --_g1: var(--ol8-material-control-gem-secondary-hover-high);
+  --_g2: var(--ol8-material-control-gem-secondary-hover-mid);
+  --_g3: var(--ol8-material-control-gem-secondary-hover-low);
+  --_rim: var(--ol8-material-control-gem-rim-hover);
+  --_fg: var(--ol8-material-control-gem-secondary-content);
 }
 .ol8-btn--secondary[data-ol8-material="gem"]:active:not(:disabled),
 .ol8-btn--secondary[data-ol8-material="gem"][aria-pressed="true"]:not(:disabled),
 .ol8-icon-btn--secondary[data-ol8-material="gem"]:active:not(:disabled) > .ol8-icon-btn__surface {
-  --_g1: var(--ol8-material-control-gem--secondary-hover-high);
-  --_g2: var(--ol8-material-control-gem--secondary-hover-mid);
-  --_g3: var(--ol8-material-control-gem--secondary-hover-low);
-  --_rim: var(--ol8-material-control-gem--rim-hover);
-  --_fg: var(--ol8-material-control-gem--secondary-content);
+  --_g1: var(--ol8-material-control-gem-secondary-hover-high);
+  --_g2: var(--ol8-material-control-gem-secondary-hover-mid);
+  --_g3: var(--ol8-material-control-gem-secondary-hover-low);
+  --_rim: var(--ol8-material-control-gem-rim-hover);
+  --_fg: var(--ol8-material-control-gem-secondary-content);
 }
 .ol8-btn--secondary[data-ol8-material="gem"][data-ol8-loading],
 .ol8-icon-btn--secondary[data-ol8-material="gem"][data-ol8-loading] > .ol8-icon-btn__surface {
-  --_g1: var(--ol8-material-control-gem--secondary-loading-high);
-  --_g2: var(--ol8-material-control-gem--secondary-loading-mid);
-  --_g3: var(--ol8-material-control-gem--secondary-loading-low);
+  --_g1: var(--ol8-material-control-gem-secondary-loading-high);
+  --_g2: var(--ol8-material-control-gem-secondary-loading-mid);
+  --_g3: var(--ol8-material-control-gem-secondary-loading-low);
 }
 
 /* Content must sit above the ::before body. */
@@ -162,10 +162,10 @@
   .ol8-icon-btn[data-ol8-material="gem"] > .ol8-icon-btn__surface::before,
   .ol8-icon-btn[data-ol8-material="gem"] > .ol8-icon-btn__surface::after { display: none; }
   .ol8-btn--secondary[data-ol8-material="gem"] {
-    --_bw: var(--ol8-component-button-secondaryboundary);
-    --_bd: var(--ol8-color-actionsecondary-contentdefault);
-    --_fg: var(--ol8-color-actionsecondary-contentdefault);
+    --_bw: var(--ol8-component-button-secondary-boundary);
+    --_bd: var(--ol8-color-action-secondary-content-default);
+    --_fg: var(--ol8-color-action-secondary-content-default);
   }
-  .ol8-btn--primary[data-ol8-material="gem"] { --_fg: var(--ol8-color-actionprimary-content); }
+  .ol8-btn--primary[data-ol8-material="gem"] { --_fg: var(--ol8-color-action-primary-content); }
   .ol8-btn[data-ol8-material="gem"]:active { filter: none; }
 }

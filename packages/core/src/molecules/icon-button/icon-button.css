@@ -22,10 +22,10 @@
  */
 
 .ol8-icon-btn {
-  --_target:  var(--ol8-component-iconbutton-target-standard);
-  --_box:     var(--ol8-component-iconbutton-box-standard);
-  --_radius:  var(--ol8-component-iconbutton-radius-standard);
-  --_artwork: var(--ol8-component-iconbutton-artwork-standard);
+  --_target:  var(--ol8-component-icon-button-target-standard);
+  --_box:     var(--ol8-component-icon-button-box-standard);
+  --_radius:  var(--ol8-component-icon-button-radius-standard);
+  --_artwork: var(--ol8-component-icon-button-artwork-standard);
 
   --_bg: transparent;
   --_bd: transparent;
@@ -66,28 +66,28 @@
 
 /* ---- Size ------------------------------------------------------------ */
 .ol8-icon-btn[data-ol8-size="compact"] {
-  --_target: var(--ol8-component-iconbutton-target-compact);
-  --_box: var(--ol8-component-iconbutton-box-compact);
-  --_radius: var(--ol8-component-iconbutton-radius-compact);
-  --_artwork: var(--ol8-component-iconbutton-artwork-compact);
+  --_target: var(--ol8-component-icon-button-target-compact);
+  --_box: var(--ol8-component-icon-button-box-compact);
+  --_radius: var(--ol8-component-icon-button-radius-compact);
+  --_artwork: var(--ol8-component-icon-button-artwork-compact);
 }
 .ol8-icon-btn[data-ol8-size="standard"] {
-  --_target: var(--ol8-component-iconbutton-target-standard);
-  --_box: var(--ol8-component-iconbutton-box-standard);
-  --_radius: var(--ol8-component-iconbutton-radius-standard);
-  --_artwork: var(--ol8-component-iconbutton-artwork-standard);
+  --_target: var(--ol8-component-icon-button-target-standard);
+  --_box: var(--ol8-component-icon-button-box-standard);
+  --_radius: var(--ol8-component-icon-button-radius-standard);
+  --_artwork: var(--ol8-component-icon-button-artwork-standard);
 }
 .ol8-icon-btn[data-ol8-size="comfortable"] {
-  --_target: var(--ol8-component-iconbutton-target-comfortable);
-  --_box: var(--ol8-component-iconbutton-box-comfortable);
-  --_radius: var(--ol8-component-iconbutton-radius-comfortable);
-  --_artwork: var(--ol8-component-iconbutton-artwork-comfortable);
+  --_target: var(--ol8-component-icon-button-target-comfortable);
+  --_box: var(--ol8-component-icon-button-box-comfortable);
+  --_radius: var(--ol8-component-icon-button-radius-comfortable);
+  --_artwork: var(--ol8-component-icon-button-artwork-comfortable);
 }
 .ol8-icon-btn[data-ol8-size="large"] {
-  --_target: var(--ol8-component-iconbutton-target-large);
-  --_box: var(--ol8-component-iconbutton-box-large);
-  --_radius: var(--ol8-component-iconbutton-radius-large);
-  --_artwork: var(--ol8-component-iconbutton-artwork-large);
+  --_target: var(--ol8-component-icon-button-target-large);
+  --_box: var(--ol8-component-icon-button-box-large);
+  --_radius: var(--ol8-component-icon-button-radius-large);
+  --_artwork: var(--ol8-component-icon-button-artwork-large);
 }
 
 /* ---- Shape: Circle is a governed presentation extension -------------- */
@@ -97,88 +97,88 @@
 /* The glyph binds to the action's CONTENT colour, not the neutral ink role.
    Figma binds --ol8-color-icon-primary (#151817) here, which lands a near-black
    glyph on a #2c438b surface: 1.94:1, against the 3:1 WCAG 1.4.11 minimum for
-   graphical objects. --ol8-color-actionprimary-content measures 8.81:1. */
+   graphical objects. --ol8-color-action-primary-content measures 8.81:1. */
 .ol8-icon-btn--primary {
-  --_bg: var(--ol8-color-actionprimary-default);
-  --_bd: var(--ol8-color-actionprimary-default);
-  --_ink: var(--ol8-color-actionprimary-content);
+  --_bg: var(--ol8-color-action-primary-default);
+  --_bd: var(--ol8-color-action-primary-default);
+  --_ink: var(--ol8-color-action-primary-content);
 }
 .ol8-icon-btn--primary:hover:not(:disabled):not([data-ol8-loading]) > .ol8-icon-btn__surface,
 .ol8-icon-btn--primary[data-ol8-loading] > .ol8-icon-btn__surface {
-  --_bg: var(--ol8-color-actionprimary-hover); --_bd: var(--ol8-color-actionprimary-hover);
+  --_bg: var(--ol8-color-action-primary-hover); --_bd: var(--ol8-color-action-primary-hover);
 }
 .ol8-icon-btn--primary:active:not(:disabled) > .ol8-icon-btn__surface,
 .ol8-icon-btn--primary[aria-pressed="true"]:not(:disabled) > .ol8-icon-btn__surface {
-  --_bg: var(--ol8-color-actionprimary-pressed); --_bd: var(--ol8-color-actionprimary-pressed);
+  --_bg: var(--ol8-color-action-primary-pressed); --_bd: var(--ol8-color-action-primary-pressed);
 }
 .ol8-icon-btn--primary:disabled > .ol8-icon-btn__surface {
-  --_bg: var(--ol8-color-actionprimary-disabled);
+  --_bg: var(--ol8-color-action-primary-disabled);
   --_bd: var(--ol8-color-border-disabled);
   /* Disabled flips to a LIGHT surface, so the glyph flips back to dark ink. */
-  --_ink: var(--ol8-color-actionprimary-disabledcontent);
+  --_ink: var(--ol8-color-action-primary-disabled-content);
 }
 
 /* ---- Family: Destructive --------------------------------------------- */
 /* Same defect as Primary: #151817 on #922824 measures 2.17:1. */
 .ol8-icon-btn--destructive {
-  --_bg: var(--ol8-color-actiondestructive-default);
-  --_bd: var(--ol8-color-actiondestructive-default);
-  --_ink: var(--ol8-color-actiondestructive-content);
+  --_bg: var(--ol8-color-action-destructive-default);
+  --_bd: var(--ol8-color-action-destructive-default);
+  --_ink: var(--ol8-color-action-destructive-content);
 }
 .ol8-icon-btn--destructive:hover:not(:disabled):not([data-ol8-loading]) > .ol8-icon-btn__surface,
 .ol8-icon-btn--destructive[data-ol8-loading] > .ol8-icon-btn__surface {
-  --_bg: var(--ol8-color-actiondestructive-hover); --_bd: var(--ol8-color-actiondestructive-hover);
+  --_bg: var(--ol8-color-action-destructive-hover); --_bd: var(--ol8-color-action-destructive-hover);
 }
 .ol8-icon-btn--destructive:active:not(:disabled) > .ol8-icon-btn__surface,
 .ol8-icon-btn--destructive[aria-pressed="true"]:not(:disabled) > .ol8-icon-btn__surface {
-  --_bg: var(--ol8-color-actiondestructive-pressed); --_bd: var(--ol8-color-actiondestructive-pressed);
+  --_bg: var(--ol8-color-action-destructive-pressed); --_bd: var(--ol8-color-action-destructive-pressed);
 }
 .ol8-icon-btn--destructive:disabled > .ol8-icon-btn__surface {
-  --_bg: var(--ol8-color-actiondestructive-disabled);
+  --_bg: var(--ol8-color-action-destructive-disabled);
   --_bd: var(--ol8-color-border-disabled);
-  --_ink: var(--ol8-color-actiondestructive-disabledcontent);
+  --_ink: var(--ol8-color-action-destructive-disabled-content);
 }
 
 /* ---- Family: Secondary (bordered, transparent) ----------------------- */
 .ol8-icon-btn--secondary {
-  --_bg: var(--ol8-color-actionsecondary-surfacedefault);
-  --_bd: var(--ol8-color-actionsecondary-contentdefault);
-  --_ink: var(--ol8-color-actionsecondary-contentdefault);
+  --_bg: var(--ol8-color-action-secondary-surface-default);
+  --_bd: var(--ol8-color-action-secondary-content-default);
+  --_ink: var(--ol8-color-action-secondary-content-default);
 }
 .ol8-icon-btn--secondary:hover:not(:disabled):not([data-ol8-loading]) > .ol8-icon-btn__surface,
 .ol8-icon-btn--secondary[data-ol8-loading] > .ol8-icon-btn__surface {
-  --_bg: var(--ol8-color-actionsecondary-surfacehover);
-  --_bd: var(--ol8-color-actionsecondary-contenthover);
-  --_ink: var(--ol8-color-actionsecondary-contenthover);
+  --_bg: var(--ol8-color-action-secondary-surface-hover);
+  --_bd: var(--ol8-color-action-secondary-content-hover);
+  --_ink: var(--ol8-color-action-secondary-content-hover);
 }
 .ol8-icon-btn--secondary:active:not(:disabled) > .ol8-icon-btn__surface,
 .ol8-icon-btn--secondary[aria-pressed="true"]:not(:disabled) > .ol8-icon-btn__surface {
-  --_bg: var(--ol8-color-actionsecondary-surfacepressed);
-  --_bd: var(--ol8-color-actionsecondary-contentpressed);
-  --_ink: var(--ol8-color-actionsecondary-contentpressed);
+  --_bg: var(--ol8-color-action-secondary-surface-pressed);
+  --_bd: var(--ol8-color-action-secondary-content-pressed);
+  --_ink: var(--ol8-color-action-secondary-content-pressed);
 }
 .ol8-icon-btn--secondary:disabled > .ol8-icon-btn__surface {
-  --_bg: var(--ol8-color-actionsecondary-surfacedisabled);
+  --_bg: var(--ol8-color-action-secondary-surface-disabled);
   --_bd: var(--ol8-color-border-disabled);
-  --_ink: var(--ol8-color-actionsecondary-contentdisabled);
+  --_ink: var(--ol8-color-action-secondary-content-disabled);
 }
 
 /* ---- Family: Quiet (no boundary) ------------------------------------- */
 .ol8-icon-btn--quiet {
-  --_bg: var(--ol8-color-actionquiet-surfacedefault);
+  --_bg: var(--ol8-color-action-quiet-surface-default);
   --_bd: transparent;
-  --_ink: var(--ol8-color-actionquiet-contentdefault);
+  --_ink: var(--ol8-color-action-quiet-content-default);
 }
 .ol8-icon-btn--quiet:hover:not(:disabled):not([data-ol8-loading]) > .ol8-icon-btn__surface,
 .ol8-icon-btn--quiet[data-ol8-loading] > .ol8-icon-btn__surface {
-  --_bg: var(--ol8-color-actionquiet-surfacehover); --_ink: var(--ol8-color-actionquiet-contenthover);
+  --_bg: var(--ol8-color-action-quiet-surface-hover); --_ink: var(--ol8-color-action-quiet-content-hover);
 }
 .ol8-icon-btn--quiet:active:not(:disabled) > .ol8-icon-btn__surface,
 .ol8-icon-btn--quiet[aria-pressed="true"]:not(:disabled) > .ol8-icon-btn__surface {
-  --_bg: var(--ol8-color-actionquiet-surfacepressed); --_ink: var(--ol8-color-actionquiet-contentpressed);
+  --_bg: var(--ol8-color-action-quiet-surface-pressed); --_ink: var(--ol8-color-action-quiet-content-pressed);
 }
 .ol8-icon-btn--quiet:disabled > .ol8-icon-btn__surface {
-  --_bg: var(--ol8-color-actionquiet-surfacedisabled); --_ink: var(--ol8-color-actionquiet-contentdisabled);
+  --_bg: var(--ol8-color-action-quiet-surface-disabled); --_ink: var(--ol8-color-action-quiet-content-disabled);
 }
 
 /* ---- Pressed scrim ---------------------------------------------------
@@ -186,7 +186,7 @@
    the darker fill. Reproduced as an inset shadow rather than an extra node. */
 .ol8-icon-btn:active:not(:disabled) > .ol8-icon-btn__surface,
 .ol8-icon-btn[aria-pressed="true"]:not(:disabled) > .ol8-icon-btn__surface {
-  box-shadow: inset 0 0 0 3px var(--ol8-component-iconbutton-pressedscrim);
+  box-shadow: inset 0 0 0 3px var(--ol8-component-icon-button-pressed-scrim);
 }
 
 /* ---- Focus -----------------------------------------------------------
@@ -205,13 +205,13 @@
    Both focus-ring tokens are BAND THICKNESSES (3px each). box-shadow spread is
    cumulative from the edge, so the outer band's spread is the sum of the two —
    3px light from the edge, then dark from 3px out to 6px. Do not pass
-   --ol8-focus-ring-outerwidth here on its own: that would paint the dark band
+   --ol8-focus-ring-outer-width here on its own: that would paint the dark band
    at the same 3px radius as the light one and hide it completely. */
 .ol8-icon-btn:focus-visible { outline: none; }
 .ol8-icon-btn:focus-visible > .ol8-icon-btn__surface {
   box-shadow:
-    0 0 0 var(--ol8-focus-ring-innerwidth) var(--ol8-color-focus-inner),
-    0 0 0 calc(var(--ol8-focus-ring-innerwidth) + var(--ol8-focus-ring-outerwidth)) var(--ol8-color-focus-outer);
+    0 0 0 var(--ol8-focus-ring-inner-width) var(--ol8-color-focus-inner),
+    0 0 0 calc(var(--ol8-focus-ring-inner-width) + var(--ol8-focus-ring-outer-width)) var(--ol8-color-focus-outer);
 }
 
 /* ---- Disabled / Loading ---------------------------------------------- */
