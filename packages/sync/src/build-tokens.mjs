@@ -71,5 +71,19 @@ ${typeRules.join('\n\n')}
 writeFileSync(join(ROOT, 'packages/tokens/dist/tokens.js'),
   `/* GENERATED from packages/tokens/src/tokens.json — do not edit. */\nexport const tokens = ${JSON.stringify(flat, null, 2)};\n`);
 
+// Literal key union rather than a string index signature, so a typo in a token
+// name is a compile error and editors can autocomplete the whole vocabulary.
+const keyUnion = Object.keys(flat).map(k => `  | '${k}'`).join('\n');
+writeFileSync(join(ROOT, 'packages/tokens/dist/tokens.d.ts'),
+`/* GENERATED from packages/tokens/src/tokens.json — do not edit. */
+
+/** Every token name emitted by this build, without the --ol8- prefix. */
+export type Ol8TokenName =
+${keyUnion};
+
+/** Flat map of token name to resolved CSS value. */
+export declare const tokens: Readonly<Record<Ol8TokenName, string>>;
+`);
+
 const n = Object.keys(flat).length;
-console.log(`✓ ${n} tokens (${Object.keys(src.typography).length - 1} typography roles) -> dist/tokens.{css,js}`);
+console.log(`✓ ${n} tokens (${Object.keys(src.typography).length - 1} typography roles) -> dist/tokens.{css,js,d.ts}`);
