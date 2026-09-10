@@ -34,7 +34,7 @@
       "js": "packages/tokens/dist/tokens.js"
     },
     "counts": {
-      "$comment": "Verified 2026-09-09 against Figma 0wRnp6ulIEA8PCV6wqGmAJ (get_variable_defs on 9:7, 1034:9969, 246:3) and packages/tokens/src/tokens.json. semanticRoles and cssCustomProperties were stale; each count now states what it counts.",
+      "$comment": "Verified 2026-09-09 against Figma 0wRnp6ulIEA8PCV6wqGmAJ (get_variable_defs on 9:7, 1034:9969, 246:3) and packages/tokens/src/tokens.json. semanticRoles and cssCustomProperties were stale; each count now states what it counts. cssCustomProperties dropped 435 -> 384 when the orphaned --ol8-typography-<role>-<prop> duplicates were retired; the .ol8-type-<role> classes are unchanged.",
       "primitives": 99,
       "semanticRoles": 68,
       "semanticRolesNote": "color.* roles excluding the 9 primitive ramps and the color-primary-* alias ramp. Figma exposes 69 — code omits color-icon-on-gem, which duplicates material-control-gem--*-content.",
@@ -44,7 +44,7 @@
       "radii": 9,
       "typographyRoles": 9,
       "elevations": 5,
-      "cssCustomProperties": 435
+      "cssCustomProperties": 384
     },
     "rules": [
       "Components consume SEMANTIC roles only. Primitives (color-<family>-<step>) are hidden from pickers in Figma and must not appear in component code.",

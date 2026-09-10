@@ -31,7 +31,11 @@ const flat = {};
 })(src, []);
 
 // ---- typography roles -------------------------------------------------
-const typeVars = [];
+// RETIRED 2026-09-09: the per-role --ol8-typography-<role>-<prop> custom
+// properties. They duplicated values that .ol8-type-<role> already applies;
+// the class reads the primitive font vars directly and never read them;
+// nothing in the system referenced them; and foundations rule 5 tells
+// consumers to use the class. 51 dead properties, 3.5KB of tokens.css.
 const typeRules = [];
 for (const [role, spec] of Object.entries(src.typography)) {
   if (role.startsWith('$')) continue;
@@ -43,11 +47,6 @@ for (const [role, spec] of Object.entries(src.typography)) {
     'letter-spacing': spec.letterSpacing,
     ...(spec.family === 'functional' ? { 'font-variation-settings': 'var(--ol8-font-variation-functional)' } : {}),
   };
-  for (const [prop, value] of Object.entries(props)) {
-    const name = `--ol8-typography-${role}-${prop.replace('font-', '').replace('-', '')}`;
-    typeVars.push(`  ${name}: ${value};`);
-    flat[`typography-${role}-${prop.replace('font-', '').replace('-', '')}`] = value;
-  }
   typeRules.push(
     `.ol8-type-${role} {\n` +
     Object.entries(props).map(([p, v]) => `  ${p}: ${v};`).join('\n') +
@@ -56,7 +55,6 @@ for (const [role, spec] of Object.entries(src.typography)) {
 }
 
 const decls = Object.entries(flat)
-  .filter(([k]) => !k.startsWith('typography-'))
   .map(([k, v]) => `  --ol8-${k}: ${v};`).join('\n');
 
 mkdirSync(join(ROOT, 'packages/tokens/dist'), { recursive: true });
@@ -65,9 +63,6 @@ writeFileSync(join(ROOT, 'packages/tokens/dist/tokens.css'),
    Source: Figma "Oneli8 Design System — 1.0.0-beta.1", page Foundations (9:7). */
 :root {
 ${decls}
-
-  /* typography roles (composite) */
-${typeVars.join('\n')}
 }
 
 ${typeRules.join('\n\n')}
