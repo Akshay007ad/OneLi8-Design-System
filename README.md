@@ -171,6 +171,15 @@ white cannot guarantee readable contrast on its own.
 
 ### Icon
 
+One 24 unit master serves every size. The Icon Frame Display Proof (418:52) shows
+a single `Add` rendered at all eleven: 9, 12, 18, 24, 30, 36, 48, 60, 72, 96 and
+108. The code matches it exactly, mapping each onto the named scale from
+`size-icon-micro` through `size-icon-landmark`.
+
+There are no per size masters and no per size stroke. The 1.8 stroke is shared,
+so a glyph drawn at 24 is correct at 9 and at 108 without being redrawn. That is
+the rule when adding an icon: draw one neutral 24 unit source, and nothing else.
+
 Colour is never set on an icon. Every stroke and fill is `currentColor`, and the
 component around it supplies the semantic colour.
 
@@ -306,7 +315,9 @@ Reproduced faithfully rather than silently corrected:
   rounded stroke. The built asset is an exact 0.75 scale of the 24px master:
   `M12 5V19M5 12H19` at 1.8 becomes `M9 3.75V14.25M3.75 9H14.25` at 1.35. That
   matches Icon Frame's own rule that no per size source or stroke tokens exist,
-  and the code follows the built asset.
+  and the code follows the built asset. The Icon Frame Display Proof (418:52)
+  settles it: one master is shown at all eleven sizes, so an independently drawn
+  18px master would contradict the system's own demonstration.
 * `--ol8-component-icon-stroke` reports `1.7999999523162842`, a float32 artifact
   of 1.8. It is normalised to `1.8` in `tokens.json`, matching the documented
   universal optical stroke.
