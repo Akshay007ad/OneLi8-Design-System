@@ -13,7 +13,7 @@ python3 -m http.server 8347   # then open /proof/icons.html
 
 ```html
 <link rel="stylesheet" href="packages/tokens/dist/tokens.css">
-<link rel="stylesheet" href="packages/core/src/icon/icon.css">
+<link rel="stylesheet" href="packages/core/src/atoms/icon/icon.css">
 
 <!-- decorative (default) -->
 <span data-ol8-icon="add" data-ol8-icon-size="24"></span>
@@ -22,7 +22,7 @@ python3 -m http.server 8347   # then open /proof/icons.html
 <span data-ol8-icon="close" data-ol8-icon-label="Dismiss"></span>
 
 <script type="module">
-  import { hydrateIcons } from './packages/core/src/icon/icon.js';
+  import { hydrateIcons } from './packages/core/src/atoms/icon/icon.js';
   hydrateIcons();
 </script>
 ```

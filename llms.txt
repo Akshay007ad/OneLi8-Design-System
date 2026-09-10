@@ -1,4 +1,4 @@
-# Oneli8 Design System — 1.0.0-beta.1
+# Oneli8 Design System — 1.0.0-beta.3
 
 Headless, vanilla HTML/CSS/JS design system synced from Figma.
 Figma file: 0wRnp6ulIEA8PCV6wqGmAJ ("Oneli8 Design System — 1.0.0-beta.1")
