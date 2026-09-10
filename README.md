@@ -157,27 +157,6 @@ Disabled keeps dark ink, because its surface is light, and still passes at
 4.86:1. To restore the Figma exact behaviour, drop the `--_ink` declarations
 from `.ol8-icon-btn--primary` and `.ol8-icon-btn--destructive`.
 
-### Selected radio was invisible, WCAG 1.4.11
-
-Figma binds both the ring and the dot of a selected radio to Selection Surface,
-`#e2e9ff`. On the canvas that measures **1.16:1**, against a 3:1 minimum for
-graphical objects. The selected state, the one carrying the meaning, was less
-visible than the disabled state beside it.
-
-| | Colour | Ratio |
-|---|---|---|
-| selected, as designed | `#e2e9ff` | 1.16:1 |
-| unselected | `#665e53` | 6.11:1 |
-| selected, here | `#1a2a59` | **13.23:1** |
-
-Both now take Selection Content, the role meant to be read against that surface.
-Swap the two declarations in `.ol8-selection--radio[data-ol8-selection="selected"]`
-back to `--ol8-color-selection-surface` for the Figma exact appearance.
-
-Surface stays a surface elsewhere: the checkbox fill, the switch track and the
-row wash all still use Selection Surface as a background, which is what it is
-for. The radio was the only place it was used as ink.
-
 ### Button loading with a leading icon
 
 Figma's codegen emits both the leading icon and the spinner while loading. The
@@ -218,6 +197,22 @@ the ring their own comments describe: 3px dark outside, 3px light inside.
 Figma also declares the outer shadow first, and `box-shadow` paints the first
 layer on top, so the dark spread would cover the light band entirely and only a
 flat dark ring would render. The order is reversed here so both bands show.
+
+## Corrected at the source
+
+Fixed in Figma and in code together, so nothing diverges:
+
+* **Selection controls did not share a language.** The checked Checkbox filled
+  its box, the selected Radio drew a ring, and both used Selection Surface for
+  every part. The Radio's ring and dot were the same pale colour, measuring
+  1.16:1 on the canvas against a 3:1 minimum for graphical objects, so a
+  selected Radio was less visible than a disabled one.
+
+  Both are now the primary action pairing, the same one the primary Button uses:
+  the boundary drops, the indicator fills with Action Primary Default at 8.81:1,
+  and the mark is Action Primary Content at 8.81:1 on that fill. A selected Radio
+  is a checked Checkbox in a circle. Six Figma variants were repointed and the
+  CSS follows; disabled states keep their own pairing and were not touched.
 
 ## Known issues in the Figma source
 

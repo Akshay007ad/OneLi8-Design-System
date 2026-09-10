@@ -63,7 +63,8 @@
 .ol8-selection--checkbox[data-ol8-selection="checked"],
 .ol8-selection--checkbox[data-ol8-selection="mixed"] {
   border-width: 0;
-  --_surface: var(--ol8-color-selection-surface);
+  --_surface: var(--ol8-color-actionprimary-default);
+  --_ink:     var(--ol8-color-actionprimary-content);
 }
 .ol8-selection--checkbox[data-ol8-availability="disabled"] { --_edge: var(--ol8-color-border-disabled); }
 .ol8-selection--checkbox[data-ol8-availability="disabled"][data-ol8-selection="checked"],
@@ -95,21 +96,25 @@
   border: var(--ol8-component-radio-boundary) solid var(--_edge);
   border-radius: var(--ol8-shape-radius-full);
 }
-/* Figma binds both the ring and the dot to Selection Surface (#e2e9ff), which
-   measures 1.16:1 on the canvas against a 3:1 minimum for graphical objects.
-   A selected radio was harder to see than a disabled one. Both now take
-   Selection Content, the role meant to be read against that surface: 13.23:1.
-   To restore the Figma-exact appearance, swap these two back to
-   --ol8-color-selection-surface. */
+/* A selected radio is a checked checkbox in a circle, so it reads the same way:
+   the boundary drops and the whole indicator fills with the primary action
+   colour, carrying its own content role as the mark. Figma painted both the ring
+   and the dot in Selection Surface, which left the radio outlined where the
+   checkbox is filled and put the dot at 1.16:1 on the canvas against a 3:1
+   minimum. The fill is 8.81:1 and the mark 8.81:1 on the fill. */
 .ol8-selection--radio[data-ol8-selection="selected"] {
-  --_edge: var(--ol8-color-selection-content);
-  --_ink:  var(--ol8-color-selection-content);
+  border-width: 0;
+  --_surface: var(--ol8-color-actionprimary-default);
+  --_ink:     var(--ol8-color-actionprimary-content);
 }
 .ol8-selection--radio[data-ol8-availability="disabled"] { --_edge: var(--ol8-color-border-disabled); }
 .ol8-selection--radio[data-ol8-availability="disabled"][data-ol8-selection="selected"] {
-  --_ink: var(--ol8-color-icon-disabled);
+  border-width: 0;
+  --_surface: var(--ol8-color-surface-disabled);
+  --_ink:     var(--ol8-color-icon-disabled);
 }
 .ol8-selection--radio > .ol8-selection__mark {
+  flex: none;                    /* never let the flex row shrink it oval */
   inline-size: var(--_dot);
   block-size: var(--_dot);
   border-radius: var(--ol8-shape-radius-full);
