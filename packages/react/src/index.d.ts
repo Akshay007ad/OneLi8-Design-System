@@ -39,6 +39,22 @@ export declare const OL8_CHARACTER_LIMIT_BEHAVIORS: readonly Ol8CharacterLimitBe
 export declare const OL8_FORM_MESSAGE_TONES: readonly Ol8FormMessageTone[];
 export declare const OL8_FORM_MESSAGE_ICONS: Readonly<Record<Ol8FormMessageTone, string>>;
 
+export type Ol8NavigationSize = 'compact' | 'standard' | 'comfortable' | 'large';
+export type Ol8TabsHierarchy = 'primary' | 'secondary' | 'tertiary';
+export type Ol8TabsOrientation = 'horizontal' | 'vertical';
+export type Ol8TabsActivation = 'automatic' | 'manual';
+export type Ol8SegmentBehavior = 'single' | 'multi' | 'momentary';
+export type Ol8SegmentPresentation =
+  | 'inset-fill' | 'line-indicator' | 'outlined-selection'
+  | 'soft-pill' | 'icon-only' | 'stacked-label';
+export type Ol8TabBarPresentation = 'bottom' | 'inline' | 'sidebar' | 'spatial-rail';
+export declare const OL8_TABS_HIERARCHIES: readonly Ol8TabsHierarchy[];
+export declare const OL8_TABS_ORIENTATIONS: readonly Ol8TabsOrientation[];
+export declare const OL8_TABS_ACTIVATIONS: readonly Ol8TabsActivation[];
+export declare const OL8_SEGMENT_BEHAVIORS: readonly Ol8SegmentBehavior[];
+export declare const OL8_SEGMENT_PRESENTATIONS: readonly Ol8SegmentPresentation[];
+export declare const OL8_TAB_BAR_PRESENTATIONS: readonly Ol8TabBarPresentation[];
+
 export type Ol8OptionSize = 'standard' | 'large';
 export type Ol8Aggregate = 'none' | 'some' | 'all';
 
@@ -245,3 +261,90 @@ export interface CheckboxGroupProps extends Ol8GroupShell {
   onChange?: (state: Record<string, boolean>) => void;
 }
 export declare function CheckboxGroup(props: CheckboxGroupProps): ReactElement;
+
+/** ATOM. One badge serves all three navigation organisms. */
+export interface NavigationBadgeProps extends ComponentPropsWithoutRef<'span'> {
+  children: ReactNode;
+}
+export declare const NavigationBadge: ForwardRefExoticComponent<NavigationBadgeProps & RefAttributes<HTMLSpanElement>>;
+
+export interface Ol8TabItem {
+  /** Required: exactly one panel is paired with it. */
+  id: string;
+  label?: string;
+  icon?: string;
+  badge?: string | number;
+  disabled?: boolean;
+  /** Required when the item shows an icon and no label. */
+  ariaLabel?: string;
+}
+
+/** ORGANISM. Emits tablist, tab and tabpanel, and keeps one enabled tab stop. */
+export interface TabsProps extends Omit<ComponentPropsWithoutRef<'div'>, 'onChange'> {
+  /** Required. A region nobody can name is a region nobody can reach. */
+  label: string;
+  items: Ol8TabItem[];
+  value?: string;
+  defaultValue?: string;
+  onChange?: (id: string) => void;
+  hierarchy?: Ol8TabsHierarchy;
+  size?: Ol8NavigationSize;
+  material?: Ol8Material;
+  orientation?: Ol8TabsOrientation;
+  activation?: Ol8TabsActivation;
+  /** Supply it and Tabs renders the owned panel for each item. */
+  renderPanel?: (item: Ol8TabItem) => ReactNode;
+}
+export declare const Tabs: ForwardRefExoticComponent<TabsProps & RefAttributes<HTMLDivElement>>;
+
+export interface Ol8SegmentItem {
+  id: string;
+  label?: string;
+  icon?: string;
+  badge?: string | number;
+  disabled?: boolean;
+  /** Required when the item shows an icon and no label. */
+  ariaLabel?: string;
+}
+
+/** ORGANISM. Behaviour is declared, never inferred; presentation never changes it. */
+export interface SegmentedControlProps extends Omit<ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue'> {
+  /** Required accessible name. */
+  label: string;
+  /** Exactly one: single is a radio group, multi is toggle buttons, momentary stores nothing. */
+  behavior: Ol8SegmentBehavior;
+  items: Ol8SegmentItem[];
+  /** One value for single, an array for multi, nothing for momentary. */
+  value?: string | string[];
+  defaultValue?: string | string[];
+  onChange?: (value: string | string[]) => void;
+  presentation?: Ol8SegmentPresentation;
+  size?: Ol8NavigationSize;
+  material?: Ol8Material;
+}
+export declare const SegmentedControl: ForwardRefExoticComponent<SegmentedControlProps & RefAttributes<HTMLDivElement>>;
+
+export interface Ol8Destination {
+  /** Required. A tab bar navigates, so it uses real links. */
+  href: string;
+  label?: string;
+  icon?: string;
+  badge?: string | number;
+  /** Required when the destination shows an icon and no label. */
+  ariaLabel?: string;
+}
+
+/** ORGANISM. Native destination links, one current destination, no disabled pseudo destinations. */
+export interface TabBarProps extends ComponentPropsWithoutRef<'nav'> {
+  /** Required navigation name, so a person can tell one landmark from another. */
+  label: string;
+  items: Ol8Destination[];
+  /** The href of the destination a person is on. */
+  current?: string;
+  /** Routes an ordinary left click while the link stays a real link. */
+  onNavigate?: (href: string, event: MouseEvent) => void;
+  presentation?: Ol8TabBarPresentation;
+  size?: Ol8NavigationSize;
+  material?: Ol8Material;
+}
+export declare const TabBar: ForwardRefExoticComponent<TabBarProps & RefAttributes<HTMLElement>>;

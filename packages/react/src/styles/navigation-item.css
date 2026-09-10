@@ -1,0 +1,155 @@
+/* GENERATED from packages/core/src/molecules/navigation-item/navigation-item.css by packages/sync/src/build-styles.mjs — do not edit.
+   Edit the source in packages/core/src and re-run `npm run sync:styles`. */
+/**
+ * Oneli8 · Navigation Item (MOLECULE, internal)
+ * Figma: Tab Item 688:51, Segment Item 695:167, Destination Item 700:292.
+ *
+ * All three are one molecule. Read from Figma: a box at the size's control
+ * height with centred content, a horizontal content row at the canonical
+ * navigation gap, an eighteen unit icon, a Semibold label at the size's reading
+ * step, and an optional badge. States are identical across the three:
+ *
+ *   Hover     Action Quiet Surface Hover   + Action Quiet Content Hover
+ *   Pressed   Action Quiet Surface Pressed + Action Quiet Content Pressed
+ *   Focus     an inward Focus Inner edge, so a parent cannot crop it
+ *   Disabled  Text Disabled, no surface
+ *
+ * Only the selection language differs. Tab Item raises an indicator bar in the
+ * primary colour, inset by the governed amount. Segment Item and Destination
+ * Item take the selection surface and content instead.
+ */
+
+.ol8-nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  block-size: var(--_height);
+  border: 0;
+  border-radius: var(--_radius);
+  padding-inline: var(--_inset);
+  background: transparent;
+  color: var(--ol8-color-text-secondary);
+  font-family: var(--ol8-font-family-functional);
+  font-weight: var(--ol8-font-weight-semibold);
+  text-decoration: none;
+  cursor: pointer;
+  transition-property: background-color, color;
+  transition-duration: var(--ol8-motion-interaction-hover-duration);
+  transition-timing-function: var(--ol8-motion-interaction-hover-timing-function);
+}
+
+.ol8-nav-item__content {
+  display: flex;
+  align-items: center;
+  gap: var(--ol8-component-navigation-item-gap);
+  min-inline-size: 0;
+}
+
+/* "Labels do not wrap." A narrow list scrolls; it never grows a second line. */
+.ol8-nav-item__label {
+  white-space: nowrap;
+  font-size: var(--_label-size);
+  line-height: var(--_label-line);
+}
+
+.ol8-nav-item__icon { flex: none; }
+
+.ol8-nav-item[data-ol8-layout="stacked"] .ol8-nav-item__content {
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ---- Size ------------------------------------------------------------- */
+.ol8-nav-item[data-ol8-size="compact"] {
+  --_height: var(--ol8-component-tab-item-height-compact);
+  --_inset:  var(--ol8-component-tab-item-inset-compact);
+  --_label-size: var(--ol8-font-size-012);
+  --_label-line: var(--ol8-font-line-018);
+}
+.ol8-nav-item[data-ol8-size="standard"] {
+  --_height: var(--ol8-component-tab-item-height-standard);
+  --_inset:  var(--ol8-component-tab-item-inset-standard);
+  --_label-size: var(--ol8-font-size-016);
+  --_label-line: var(--ol8-font-line-024);
+}
+.ol8-nav-item[data-ol8-size="comfortable"] {
+  --_height: var(--ol8-component-tab-item-height-comfortable);
+  --_inset:  var(--ol8-component-tab-item-inset-comfortable);
+  --_label-size: var(--ol8-font-size-016);
+  --_label-line: var(--ol8-font-line-024);
+}
+.ol8-nav-item[data-ol8-size="large"] {
+  --_height: var(--ol8-component-tab-item-height-large);
+  --_inset:  var(--ol8-component-tab-item-inset-large);
+  --_label-size: var(--ol8-font-size-021);
+  --_label-line: var(--ol8-font-line-030);
+}
+
+.ol8-nav-item--tab,
+.ol8-nav-item--segment     { --_radius: var(--ol8-component-tab-item-radius); }
+.ol8-nav-item--destination { --_radius: var(--ol8-component-tab-bar-item-radius); }
+
+/* ---- State ------------------------------------------------------------ */
+@media (hover: hover) and (pointer: fine) {
+  .ol8-nav-item:hover:not(:disabled) {
+    background: var(--ol8-color-actionquiet-surfacehover);
+    color: var(--ol8-color-actionquiet-contenthover);
+  }
+}
+.ol8-nav-item:active:not(:disabled) {
+  background: var(--ol8-color-actionquiet-surfacepressed);
+  color: var(--ol8-color-actionquiet-contentpressed);
+}
+
+/* "Focus uses the approved inward treatment so parent clipping cannot crop it."
+   An outward ring would be cut by a scrolling tab list. */
+.ol8-nav-item:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 var(--ol8-component-navigation-focus-inset) var(--ol8-color-focus-inner);
+}
+
+.ol8-nav-item:disabled {
+  color: var(--ol8-color-text-disabled);
+  background: transparent;
+  cursor: not-allowed;
+}
+
+/* ---- Selection · Tab Item raises an indicator ------------------------- */
+.ol8-nav-item__indicator {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: var(--ol8-component-tab-item-indicator-inset);
+  block-size: var(--ol8-component-tab-item-indicator-thickness);
+  border-radius: var(--ol8-shape-radius-full);
+  background: transparent;
+}
+.ol8-nav-item--tab[aria-selected="true"] {
+  color: var(--ol8-color-actionprimary-default);
+}
+.ol8-nav-item--tab[aria-selected="true"] > .ol8-nav-item__indicator {
+  background: var(--ol8-color-actionprimary-default);
+}
+
+/* ---- Selection · Segment and Destination take the surface ------------- */
+.ol8-nav-item--segment[aria-pressed="true"],
+.ol8-nav-item--destination[aria-current] {
+  background: var(--ol8-color-selection-surface);
+  color: var(--ol8-color-selection-content);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ol8-nav-item { transition-duration: var(--ol8-motion-duration-instant); }
+}
+
+@media (forced-colors: active) {
+  .ol8-nav-item:focus-visible {
+    outline: var(--ol8-component-navigation-focus-inset) solid Highlight;
+    outline-offset: calc(var(--ol8-component-navigation-focus-inset) * -1);
+    box-shadow: none;
+  }
+  .ol8-nav-item--tab[aria-selected="true"] > .ol8-nav-item__indicator { background: Highlight; }
+  .ol8-nav-item--segment[aria-pressed="true"],
+  .ol8-nav-item--destination[aria-current] { background: Highlight; color: HighlightText; }
+}

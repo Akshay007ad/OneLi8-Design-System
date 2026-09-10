@@ -617,10 +617,10 @@
   --ol8-component-tokenfield-paddingblock: 3px;
   --ol8-component-suggestionrail-gap: 6px;
   --ol8-component-suggestionrail-fieldseparation: 6px;
-  --ol8-component-navigation-itemgap: 6px;
+  --ol8-component-navigation-item-gap: 6px;
   --ol8-component-navigation-icon: 18px;
   --ol8-component-navigation-target: 48px;
-  --ol8-component-navigation-focusinset: 3px;
+  --ol8-component-navigation-focus-inset: 3px;
   --ol8-component-tab-item-height-compact: 36px;
   --ol8-component-tab-item-height-standard: 42px;
   --ol8-component-tab-item-height-comfortable: 48px;
@@ -629,21 +629,21 @@
   --ol8-component-tab-item-inset-standard: 15px;
   --ol8-component-tab-item-inset-comfortable: 18px;
   --ol8-component-tab-item-inset-large: 24px;
-  --ol8-component-tabitem-radius: 9px;
+  --ol8-component-tab-item-radius: 9px;
   --ol8-component-tab-item-indicator-thickness: 3px;
-  --ol8-component-tabitem-indicatorinset: 15px;
-  --ol8-component-tabitem-rail: 1px;
-  --ol8-component-segmentedcontrol-trackinset: 3px;
-  --ol8-component-segmentedcontrol-outlinedgap: 6px;
-  --ol8-component-segmentedcontrol-trackradius: 12px;
-  --ol8-component-segmentedcontrol-itemradius: 9px;
-  --ol8-component-segmentedcontrol-line: 3px;
-  --ol8-component-segmentedcontrol-boundary: 1px;
-  --ol8-component-tabbar-inset: 6px;
-  --ol8-component-tabbar-inlineinset: 3px;
-  --ol8-component-tabbar-gap: 0px;
-  --ol8-component-tabbar-radius: 18px;
-  --ol8-component-tabbar-itemradius: 12px;
+  --ol8-component-tab-item-indicator-inset: 15px;
+  --ol8-component-tab-item-rail: 1px;
+  --ol8-component-segmented-control-track-inset: 3px;
+  --ol8-component-segmented-control-outlined-gap: 6px;
+  --ol8-component-segmented-control-track-radius: 12px;
+  --ol8-component-segmented-control-item-radius: 9px;
+  --ol8-component-segmented-control-line: 3px;
+  --ol8-component-segmented-control-boundary: 1px;
+  --ol8-component-tab-bar-inset: 6px;
+  --ol8-component-tab-bar-inline-inset: 3px;
+  --ol8-component-tab-bar-gap: 0px;
+  --ol8-component-tab-bar-radius: 18px;
+  --ol8-component-tab-bar-item-radius: 12px;
 }
 
 [data-ol8-color-scheme="dark"] {

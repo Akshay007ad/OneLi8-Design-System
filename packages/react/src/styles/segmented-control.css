@@ -1,0 +1,115 @@
+/* GENERATED from packages/core/src/organisms/segmented-control/segmented-control.css by packages/sync/src/build-styles.mjs — do not edit.
+   Edit the source in packages/core/src and re-run `npm run sync:styles`. */
+/**
+ * Oneli8 · Segmented Control (ORGANISM)
+ * Figma: Navigation / Segmented Control 698:4792 — six presentations.
+ *
+ * "Presentation never changes behavior." Every presentation below is a
+ * treatment of the same Segment molecule, and none of them touches which
+ * behaviour the consumer declared.
+ *
+ * Read from Figma at Standard, Regular:
+ *   Inset Fill          sunken track, Border Default at the standard boundary,
+ *                       segments inset by the track inset, selected takes the
+ *                       selection surface
+ *   Line Indicator      no track; an adaptive secondary rail with a separate
+ *                       indicator in the primary colour, inset like a tab
+ *   Outlined Selection  no track; each segment carries its own boundary, the
+ *                       selected one in the primary colour at the strong width,
+ *                       with a deliberate gap between segments
+ *   Soft Pill           raised track at full radius; segments at full radius
+ *   Icon-only           the Inset Fill track, with icon only segments
+ *   Stacked Label       no track; segments stack their icon over their label
+ */
+
+.ol8-segmented {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  gap: var(--ol8-component-tab-bar-gap);
+}
+
+.ol8-segmented > .ol8-nav-item { flex: 1 1 0; }
+
+/* ---- Inset Fill and Icon-only share one track ------------------------- */
+.ol8-segmented[data-ol8-presentation="inset-fill"],
+.ol8-segmented[data-ol8-presentation="icon-only"] {
+  padding: var(--ol8-component-segmented-control-track-inset);
+  border: var(--ol8-border-width-standard) solid var(--ol8-color-border-default);
+  border-radius: var(--ol8-component-segmented-control-track-radius);
+  background: var(--ol8-color-surface-sunken);
+}
+.ol8-segmented[data-ol8-presentation="inset-fill"] > .ol8-nav-item,
+.ol8-segmented[data-ol8-presentation="icon-only"] > .ol8-nav-item {
+  --_radius: var(--ol8-component-segmented-control-item-radius);
+}
+
+/* ---- Soft Pill -------------------------------------------------------- */
+.ol8-segmented[data-ol8-presentation="soft-pill"] {
+  padding: var(--ol8-component-segmented-control-track-inset);
+  border-radius: var(--ol8-shape-radius-full);
+  background: var(--ol8-color-surface-raised);
+}
+.ol8-segmented[data-ol8-presentation="soft-pill"] > .ol8-nav-item {
+  --_radius: var(--ol8-shape-radius-full);
+}
+
+/* ---- Line Indicator --------------------------------------------------- */
+.ol8-segmented[data-ol8-presentation="line-indicator"] {
+  position: relative;
+  gap: 0;
+}
+.ol8-segmented[data-ol8-presentation="line-indicator"]::after {
+  content: "";
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+  block-size: var(--ol8-component-tab-item-rail);
+  background: var(--ol8-color-text-secondary);
+}
+/* The active segment raises the line itself, so the indicator travels with the
+   selection rather than being positioned by script. */
+.ol8-segmented[data-ol8-presentation="line-indicator"] > .ol8-nav-item { --_radius: 0; }
+.ol8-segmented[data-ol8-presentation="line-indicator"] > .ol8-nav-item::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset-block-end: 0;
+  inset-inline: var(--ol8-component-tab-item-indicator-inset);
+  block-size: var(--ol8-component-segmented-control-line);
+  border-radius: var(--ol8-shape-radius-full);
+  background: transparent;
+}
+.ol8-segmented[data-ol8-presentation="line-indicator"] > .ol8-nav-item[aria-pressed="true"] {
+  background: transparent;
+  color: var(--ol8-color-actionprimary-default);
+}
+.ol8-segmented[data-ol8-presentation="line-indicator"] > .ol8-nav-item[aria-pressed="true"]::after {
+  background: var(--ol8-color-actionprimary-default);
+}
+
+/* ---- Outlined Selection ----------------------------------------------- */
+.ol8-segmented[data-ol8-presentation="outlined-selection"] {
+  gap: var(--ol8-component-segmented-control-outlined-gap);
+}
+.ol8-segmented[data-ol8-presentation="outlined-selection"] > .ol8-nav-item {
+  --_radius: var(--ol8-component-segmented-control-item-radius);
+  border: var(--ol8-component-segmented-control-boundary) solid var(--ol8-color-border-default);
+}
+.ol8-segmented[data-ol8-presentation="outlined-selection"] > .ol8-nav-item[aria-pressed="true"] {
+  border-width: var(--ol8-border-width-standard);
+  border-color: var(--ol8-color-actionprimary-default);
+  background: transparent;
+  color: var(--ol8-color-actionprimary-default);
+}
+
+/* ---- Stacked Label ---------------------------------------------------- */
+.ol8-segmented[data-ol8-presentation="stacked-label"] > .ol8-nav-item {
+  --_radius: var(--ol8-component-segmented-control-item-radius);
+}
+
+@media (forced-colors: active) {
+  .ol8-segmented[data-ol8-presentation="line-indicator"] > .ol8-nav-item[aria-pressed="true"]::after {
+    background: Highlight;
+  }
+}

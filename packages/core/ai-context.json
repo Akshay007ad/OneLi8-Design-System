@@ -48,6 +48,14 @@
     },
     {
       "tier": "atom",
+      "module": "atoms/navigation-badge/navigation-badge.js",
+      "exports": [
+        "renderNavigationBadge"
+      ],
+      "constraint": "Composes no other component. Native elements only."
+    },
+    {
+      "tier": "atom",
       "module": "atoms/selection-indicator/selection-indicator.js",
       "exports": [
         "OL8_SELECTION_KINDS",
@@ -160,6 +168,40 @@
         "renderRadioGroup",
         "renderCheckboxGroup",
         "hydrateChoiceGroups"
+      ],
+      "constraint": "Composed of atoms, molecules or organisms. May hold application state."
+    },
+    {
+      "tier": "organism",
+      "module": "organisms/segmented-control/segmented-control.js",
+      "exports": [
+        "OL8_SEGMENT_BEHAVIORS",
+        "OL8_SEGMENT_PRESENTATIONS",
+        "renderSegmentedControl",
+        "hydrateSegmentedControls"
+      ],
+      "constraint": "Composed of atoms, molecules or organisms. May hold application state."
+    },
+    {
+      "tier": "organism",
+      "module": "organisms/tab-bar/tab-bar.js",
+      "exports": [
+        "OL8_TAB_BAR_PRESENTATIONS",
+        "renderTabBar",
+        "hydrateTabBars"
+      ],
+      "constraint": "Composed of atoms, molecules or organisms. May hold application state."
+    },
+    {
+      "tier": "organism",
+      "module": "organisms/tabs/tabs.js",
+      "exports": [
+        "OL8_TABS_HIERARCHIES",
+        "OL8_TABS_ORIENTATIONS",
+        "OL8_TABS_ACTIVATIONS",
+        "renderTabs",
+        "renderTabPanel",
+        "hydrateTabs"
       ],
       "constraint": "Composed of atoms, molecules or organisms. May hold application state."
     }

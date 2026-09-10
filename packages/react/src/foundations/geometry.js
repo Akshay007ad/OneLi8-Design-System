@@ -53,6 +53,18 @@ export const OL8_FORM_MESSAGE_ICONS = {
   pending: 'loading',
 };
 
+export const OL8_NAVIGATION_SIZES = OL8_BUTTON_SIZES;
+export const OL8_TABS_HIERARCHIES = ['primary', 'secondary', 'tertiary'];
+export const OL8_TABS_ORIENTATIONS = ['horizontal', 'vertical'];
+export const OL8_TABS_ACTIVATIONS = ['automatic', 'manual'];
+/** "Declare exactly one behavior." */
+export const OL8_SEGMENT_BEHAVIORS = ['single', 'multi', 'momentary'];
+/** "Presentation never changes behavior." */
+export const OL8_SEGMENT_PRESENTATIONS = [
+  'inset-fill', 'line-indicator', 'outlined-selection', 'soft-pill', 'icon-only', 'stacked-label',
+];
+export const OL8_TAB_BAR_PRESENTATIONS = ['bottom', 'inline', 'sidebar', 'spatial-rail'];
+
 export const OL8_OPTION_SIZES = ['standard', 'large'];
 export const OL8_AGGREGATE = ['none', 'some', 'all'];
 

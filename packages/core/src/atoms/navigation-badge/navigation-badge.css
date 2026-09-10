@@ -1,0 +1,35 @@
+/**
+ * Oneli8 · Navigation Badge (ATOM)
+ * Figma: Atom / Navigation Badge 989:484 — a full radius pill at the standard
+ * indicator height, padded by the related inline step, whose surface and
+ * content are the only things that change when the item is selected or gem.
+ */
+
+.ol8-nav-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  block-size: var(--ol8-size-indicator-standard);
+  padding-inline: var(--ol8-spacing-inline-related);
+  border-radius: var(--ol8-shape-radius-full);
+  background: var(--ol8-color-navigation-badge-surface-default);
+  color: var(--ol8-color-navigation-badge-content-default);
+  font-family: var(--ol8-font-family-functional);
+  font-size: var(--ol8-font-size-012);
+  font-weight: var(--ol8-font-weight-semibold);
+  line-height: var(--ol8-font-line-018);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Selection and material reach the badge through the item that owns it. */
+[data-ol8-selected="true"] > * > .ol8-nav-badge,
+[aria-selected="true"] > * > .ol8-nav-badge,
+[aria-current] > * > .ol8-nav-badge {
+  background: var(--ol8-color-navigation-badge-surface-selected);
+  color: var(--ol8-color-navigation-badge-content-selected);
+}
+
+[data-ol8-material="gem"] .ol8-nav-badge {
+  background: var(--ol8-color-navigation-badge-surface-gem);
+  color: var(--ol8-color-navigation-badge-content-gem);
+}

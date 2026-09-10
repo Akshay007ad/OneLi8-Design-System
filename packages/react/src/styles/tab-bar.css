@@ -1,0 +1,47 @@
+/* GENERATED from packages/core/src/organisms/tab-bar/tab-bar.css by packages/sync/src/build-styles.mjs — do not edit.
+   Edit the source in packages/core/src and re-run `npm run sync:styles`. */
+/**
+ * Oneli8 · Tab Bar (ORGANISM)
+ * Figma: Navigation / Tab Bar 701:460 — Bottom, Inline, Sidebar, Spatial Rail.
+ *
+ * "Tab Bar contains destinations, never a central action disguised as a
+ * destination." Every presentation below keeps the same route identity and the
+ * same current destination; only the container changes.
+ *
+ * Read from Figma at Standard, Regular: Bottom, Sidebar and Spatial Rail all
+ * sit on a raised surface with a subtle border at the tab bar radius, protected
+ * by the tab bar inset. Inline has no surface and no border, and uses the
+ * tighter inline inset on its horizontal edges. Destinations meet with no gap.
+ */
+
+.ol8-tab-bar {
+  display: flex;
+  align-items: stretch;
+  box-sizing: border-box;
+  gap: var(--ol8-component-tab-bar-gap);
+  padding: var(--ol8-component-tab-bar-inset);
+  border: var(--ol8-border-width-hairline) solid var(--ol8-color-border-subtle);
+  border-radius: var(--ol8-component-tab-bar-radius);
+  background: var(--ol8-color-surface-raised);
+}
+
+.ol8-tab-bar > .ol8-nav-item { flex: 1 1 0; }
+
+/* Inline sits in the page rather than on it, so it drops the surface, the
+   border and the radius, and protects only its horizontal edges. */
+.ol8-tab-bar[data-ol8-presentation="inline"] {
+  padding-block: var(--ol8-component-tab-bar-inset);
+  padding-inline: var(--ol8-component-tab-bar-inline-inset);
+  border: 0;
+  border-radius: var(--ol8-shape-radius-none);
+  background: none;
+}
+
+.ol8-tab-bar[data-ol8-presentation="sidebar"],
+.ol8-tab-bar[data-ol8-presentation="spatial-rail"] {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* The spatial rail carries no labels, so its destinations are square targets. */
+.ol8-tab-bar[data-ol8-presentation="spatial-rail"] > .ol8-nav-item { flex: none; }

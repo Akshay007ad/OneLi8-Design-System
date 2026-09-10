@@ -44,6 +44,14 @@
     },
     {
       "tier": "atom",
+      "module": "atoms/NavigationBadge.js",
+      "exports": [
+        "NavigationBadge"
+      ],
+      "constraint": "Composes no other component. Native elements only."
+    },
+    {
+      "tier": "atom",
       "module": "atoms/SelectionIndicator.js",
       "exports": [
         "SelectionIndicator"
@@ -114,6 +122,30 @@
       "exports": [
         "RadioGroup",
         "CheckboxGroup"
+      ],
+      "constraint": "Composed of atoms, molecules or organisms. May hold application state."
+    },
+    {
+      "tier": "organism",
+      "module": "organisms/SegmentedControl.js",
+      "exports": [
+        "SegmentedControl"
+      ],
+      "constraint": "Composed of atoms, molecules or organisms. May hold application state."
+    },
+    {
+      "tier": "organism",
+      "module": "organisms/TabBar.js",
+      "exports": [
+        "TabBar"
+      ],
+      "constraint": "Composed of atoms, molecules or organisms. May hold application state."
+    },
+    {
+      "tier": "organism",
+      "module": "organisms/Tabs.js",
+      "exports": [
+        "Tabs"
       ],
       "constraint": "Composed of atoms, molecules or organisms. May hold application state."
     }

@@ -1,0 +1,55 @@
+/* GENERATED from packages/core/src/organisms/tabs/tabs.css by packages/sync/src/build-styles.mjs — do not edit.
+   Edit the source in packages/core/src and re-run `npm run sync:styles`. */
+/**
+ * Oneli8 · Tabs (ORGANISM)
+ * Figma: Navigation / Tabs 693:171 — Hierarchy, Material, Size.
+ *
+ * The organism owns sibling separation and the rail; the item owns its own
+ * inset. Read from Figma: tabs meet with no gap, and a Primary tab list carries
+ * an adaptive secondary rail behind them at the hairline thickness in the
+ * secondary text colour. Secondary and Tertiary carry no rail.
+ */
+
+.ol8-tabs {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  /* "Narrow Tab lists scroll or use an explicitly governed overflow policy;
+     labels never wrap into competing heights." */
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.ol8-tabs::-webkit-scrollbar { display: none; }
+
+.ol8-tabs[data-ol8-hierarchy="primary"]::after {
+  content: "";
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+  block-size: var(--ol8-component-tab-item-rail);
+  background: var(--ol8-color-text-secondary);
+}
+
+/* Vertical tabs turn the rail onto the logical inline edge and let each tab
+   fill the width, so the indicator reads as a column marker. */
+.ol8-tabs[data-ol8-orientation="vertical"] {
+  flex-direction: column;
+  overflow-x: visible;
+}
+.ol8-tabs[data-ol8-orientation="vertical"][data-ol8-hierarchy="primary"]::after {
+  inset-block: 0;
+  inset-inline: auto 0;
+  inline-size: var(--ol8-component-tab-item-rail);
+  block-size: auto;
+}
+.ol8-tabs[data-ol8-orientation="vertical"] .ol8-nav-item__indicator {
+  inset-block: var(--ol8-component-tab-item-indicator-inset);
+  inset-inline: auto 0;
+  inline-size: var(--ol8-component-tab-item-indicator-thickness);
+  block-size: auto;
+}
+
+.ol8-tabs__panel:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 var(--ol8-component-navigation-focus-inset) var(--ol8-color-focus-inner);
+}
