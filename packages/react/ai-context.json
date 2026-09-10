@@ -76,6 +76,14 @@
     },
     {
       "tier": "molecule",
+      "module": "molecules/Link.js",
+      "exports": [
+        "Link"
+      ],
+      "constraint": "Composed of atoms. Reusable and more specialised."
+    },
+    {
+      "tier": "molecule",
       "module": "molecules/SelectionOption.js",
       "exports": [
         "SelectionOption"

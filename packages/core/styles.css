@@ -7,6 +7,7 @@
 @import "./src/atoms/selection-indicator/selection-indicator.css";
 @import "./src/molecules/button/button.css";
 @import "./src/molecules/icon-button/icon-button.css";
+@import "./src/molecules/link/link.css";
 @import "./src/molecules/choice-item/choice-item.css";
 @import "./src/molecules/selection-option/selection-option.css";
 @import "./src/organisms/choice-group/choice-group.css";

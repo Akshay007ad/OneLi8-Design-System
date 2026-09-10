@@ -102,6 +102,18 @@
     },
     {
       "tier": "molecule",
+      "module": "molecules/link/link.js",
+      "exports": [
+        "OL8_LINK_FORMS",
+        "OL8_LINK_SIZES",
+        "OL8_LINK_MOTIONS",
+        "renderLink",
+        "hydrateLinks"
+      ],
+      "constraint": "Composed of atoms. Reusable and more specialised."
+    },
+    {
+      "tier": "molecule",
       "module": "molecules/selection-option/selection-option.js",
       "exports": [
         "OL8_OPTION_SIZES",

@@ -15,6 +15,14 @@ export type Ol8Selection =
   | 'unchecked' | 'checked' | 'mixed'
   | 'unselected' | 'selected'
   | 'off' | 'on';
+export type Ol8LinkForm = 'inline' | 'standalone' | 'navigation';
+/** Figma defines three. `inherit` is a code addition for links inside body copy. */
+export type Ol8LinkSize = 'small' | 'standard' | 'large' | 'inherit';
+export type Ol8LinkMotion = 'system' | 'none';
+export declare const OL8_LINK_FORMS: readonly Ol8LinkForm[];
+export declare const OL8_LINK_SIZES: readonly Ol8LinkSize[];
+export declare const OL8_LINK_MOTIONS: readonly Ol8LinkMotion[];
+
 export type Ol8OptionSize = 'standard' | 'large';
 export type Ol8Aggregate = 'none' | 'some' | 'all';
 
@@ -112,6 +120,18 @@ export interface ChoiceItemProps extends Omit<ComponentPropsWithoutRef<'input'>,
   material?: Ol8Material;
 }
 export declare const ChoiceItem: ForwardRefExoticComponent<ChoiceItemProps & RefAttributes<HTMLInputElement>>;
+
+/** MOLECULE. States are CSS, never props. Icons are intentionally parked. */
+export interface LinkProps extends Omit<ComponentPropsWithoutRef<'a'>, 'href'> {
+  children?: ReactNode;
+  href: string;
+  form?: Ol8LinkForm;
+  size?: Ol8LinkSize;
+  /** Navigation only. `true` emits aria-current="page"; a string names the kind. */
+  current?: boolean | string;
+  motion?: Ol8LinkMotion;
+}
+export declare const Link: ForwardRefExoticComponent<LinkProps & RefAttributes<HTMLAnchorElement>>;
 
 /** MOLECULE. Never focusable; a listbox moves a virtual cursor instead. */
 export interface SelectionOptionProps extends Omit<ComponentPropsWithoutRef<'li'>, 'children'> {

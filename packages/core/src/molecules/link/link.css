@@ -1,0 +1,120 @@
+/**
+ * Oneli8 · Link (MOLECULE)
+ *
+ * Figma (138:260, 139:260, 139:453): "Runtime href, native anchor behavior,
+ * visited resolution, aria-current, motion preference and navigation list
+ * hierarchy live in code." Figma's five States are visual evidence for review,
+ * not classes: they are :hover, :active, :focus-visible, :visited and
+ * [aria-current] here.
+ *
+ * "Icons remain intentionally parked and must not be added as local artwork."
+ */
+
+.ol8-link {
+  position: relative;
+  color: var(--ol8-color-text-link-default);
+  font-family: var(--ol8-font-family-functional);
+  font-weight: var(--ol8-font-weight-semibold);
+  text-decoration-line: underline;
+  text-decoration-thickness: var(--ol8-component-link-underline-default);
+  text-underline-offset: var(--ol8-component-link-underline-offset);
+  transition-property: color, text-decoration-thickness, background-color, box-shadow;
+  transition-duration: var(--ol8-motion-interaction-hover-duration);
+  transition-timing-function: var(--ol8-motion-interaction-hover-timing-function);
+}
+
+/* ---- Size ------------------------------------------------------------- */
+.ol8-link[data-ol8-size="small"] {
+  font-size: var(--ol8-typography-body-small-font-size);
+  line-height: var(--ol8-typography-body-small-line-height);
+  letter-spacing: var(--ol8-typography-body-small-letter-spacing);
+}
+.ol8-link[data-ol8-size="standard"] {
+  font-size: var(--ol8-typography-body-medium-font-size);
+  line-height: var(--ol8-typography-body-medium-line-height);
+  letter-spacing: var(--ol8-typography-body-medium-letter-spacing);
+}
+.ol8-link[data-ol8-size="large"] {
+  font-size: var(--ol8-typography-body-large-font-size);
+  line-height: var(--ol8-typography-body-large-line-height);
+  letter-spacing: var(--ol8-typography-body-large-letter-spacing);
+}
+/* Not a Figma size. An inline link inside body copy that does not follow its
+   surrounding type is broken, and Figma cannot express "inherit" as a variant.
+   Flagged for the design source rather than left undocumented. */
+.ol8-link[data-ol8-size="inherit"] {
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+}
+
+/* ---- State ------------------------------------------------------------ */
+.ol8-link:hover,
+.ol8-link:active {
+  text-decoration-thickness: var(--ol8-component-link-underline-emphasis);
+}
+.ol8-link:hover  { color: var(--ol8-color-text-link-hover); }
+.ol8-link:active { color: var(--ol8-color-text-link-pressed); }
+
+/* Navigation links live in a list where visited carries no meaning. */
+.ol8-link[data-ol8-form="inline"]:visited,
+.ol8-link[data-ol8-form="standalone"]:visited {
+  color: var(--ol8-color-text-link-visited);
+}
+
+.ol8-link:focus-visible {
+  outline: none;
+  color: var(--ol8-color-text-primary);
+  border-radius: var(--ol8-shape-radius-subtle);
+  box-shadow:
+    inset 0 0 0 var(--ol8-focus-ring-innerwidth) var(--ol8-color-focus-inner),
+    inset 0 0 0 var(--ol8-focus-ring-totalwidth) var(--ol8-color-focus-outer);
+}
+
+/* ---- Form ------------------------------------------------------------- */
+/* Standalone and navigation are targets in their own right, so they take the
+   protected minimum. Inline sits in a sentence and must not. */
+.ol8-link[data-ol8-form="standalone"],
+.ol8-link[data-ol8-form="navigation"] {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--ol8-component-link-targetnavigation);
+}
+
+.ol8-link[data-ol8-form="navigation"] {
+  inline-size: 100%;
+  padding-inline: var(--ol8-spacing-inline-standard);
+  text-decoration-color: transparent;
+}
+.ol8-link[data-ol8-form="navigation"]:hover,
+.ol8-link[data-ol8-form="navigation"]:focus-visible {
+  text-decoration-color: currentColor;
+}
+.ol8-link[data-ol8-form="navigation"][aria-current] {
+  color: var(--ol8-color-actionprimary-default);
+  text-decoration-color: currentColor;
+}
+.ol8-link[data-ol8-form="navigation"][aria-current]::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block: var(--ol8-spacing-stack-tight);
+  inline-size: var(--ol8-focus-ring-innerwidth);
+  border-radius: var(--ol8-shape-radius-full);
+  background: currentColor;
+}
+
+/* ---- Motion ----------------------------------------------------------- */
+.ol8-link[data-ol8-motion="none"] { transition-duration: var(--ol8-motion-duration-instant); }
+@media (prefers-reduced-motion: reduce) {
+  .ol8-link { transition-duration: var(--ol8-motion-duration-instant); }
+}
+@media (forced-colors: active) {
+  .ol8-link { forced-color-adjust: auto; }
+  .ol8-link:focus-visible {
+    outline: var(--ol8-focus-ring-innerwidth) solid Highlight;
+    outline-offset: calc(var(--ol8-focus-ring-innerwidth) * -1);
+    box-shadow: none;
+  }
+  .ol8-link[data-ol8-form="navigation"][aria-current]::before { background: Highlight; }
+}
