@@ -1,27 +1,100 @@
 # Oneli8 Design System
 
-A design system synced from Figma. The components are framework agnostic: each
-one renders an HTML string and hydrates markup that already exists, so there is
-no framework to adopt, no virtual DOM and no build step.
+OneLi8 means One Light.
+
+It is a design system created by Akshay Dhore, intended for broad human benefit
+and conceived as service to Guruji Shrii Arnav, whose teachings inspire it. The
+implementation specifications are OneLi8's own work. Service, clarity, harmony,
+proportion, restraint and evolution guide its decisions. `PRINCIPLES.md` sets
+those out in full.
+
+The practical intention is narrower and easier to check. Most design systems
+hand you components and hope you stay inside them. This one hands you the
+reasoning as well, so that when you need something it does not ship, you can
+build it and it still belongs. The rules travel inside the package, not in a
+wiki someone forgets to read.
+
+## Install
+
+Pick by what you are building. All three carry the same design decisions.
+
+```bash
+npm install @oneli8/react
+```
+
+React and Next.js.
 
 ```bash
 npm install @oneli8/core
 ```
 
+Anywhere HTML is produced as a string. Rails, Django, Laravel, Astro, Eleventy,
+a CMS theme, or hand written markup.
+
+```bash
+npm install @oneli8/tokens
+```
+
+Decisions only, no markup. This is also the Tailwind package: a v3 preset at
+`@oneli8/tokens/tailwind` and a v4 bridge at `@oneli8/tokens/tailwind.css`.
+
+```jsx
+import { Button } from '@oneli8/react';
+import '@oneli8/react/styles.css';
+
+<Button variant="primary" leadingIcon="add">Add item</Button>
+```
+
+The vanilla equivalent renders a string and then wires up what markup cannot
+express on its own.
+
 ```js
 import { renderButton, hydrateButtons } from '@oneli8/core';
 import '@oneli8/core/styles.css';
 
-document.querySelector('#toolbar').innerHTML = renderButton('Save', {
-  variant: 'primary',
-  leadingIcon: 'add',
-});
-
+element.innerHTML = renderButton('Save', { variant: 'primary', leadingIcon: 'add' });
 hydrateButtons();
 ```
 
-That is the whole pattern. `render*` builds markup, `hydrate*` wires up the
-parts that markup alone cannot express.
+Both produce byte identical DOM and read the same stylesheets.
+
+## Naming, and why it reads the way it does
+
+The naming is structural, and the structure is borrowed from Sanskrit grammar
+rather than from a CSS convention. Two rules follow from it, and together they
+explain every token name in the system.
+
+**A compound that names one thing is written as one word.** Sanskrit joins words
+into a compound when they name a single idea, and so does this:
+
+```
+--ol8-color-actionprimary-default
+--ol8-material-gem-color-cutedge-high
+--ol8-focus-ring-innerwidth
+```
+
+`actionprimary` is not action plus primary. It is one role. `cutedge` is one
+feature of the Gem material. Splitting them into `action-primary` would suggest
+two things where there is one.
+
+**A qualifier stays separate from what it qualifies.**
+
+```
+--ol8-material-control-gem--primary-hover-start
+```
+
+Here `hover` is a state applied to `start`. Two grammatical roles, so they stay
+apart. That is why `disabledcontent` is joined while `hover-start` is not, which
+looks inconsistent until you read it as grammar instead of formatting.
+
+The hyphens that remain separate levels of the hierarchy, never words inside a
+level. Words themselves stay readable: no abbreviations, no truncation, no `btn`
+where `button` will do.
+
+Figma is the authority on the result. Every variable there carries an explicit
+name for code, and `packages/tokens/src/figma-code-syntax.txt` records all 544
+of them verbatim. Nothing is derived from a rule, because a rule would have to
+guess, and guessing is how the two drifted apart before.
 
 ## What is included
 

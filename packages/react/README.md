@@ -48,6 +48,32 @@ Point your agent at them:
 Read @oneli8/react/ai-context.json and PRINCIPLES.md before writing any OneLi8 UI.
 ```
 
+## Why this exists
+
+OneLi8 means One Light. It was created by Akshay Dhore, intended for broad human
+benefit and conceived as service to Guruji Shrii Arnav, whose teachings inspire
+it. Service, clarity, harmony, proportion, restraint and evolution guide its
+decisions. `PRINCIPLES.md` ships inside this package and sets them out in full.
+
+The practical intention: most design systems hand you components and hope you
+stay inside them. This one hands you the reasoning too, so when you need
+something it does not ship you can build it and have it still belong.
+
+## Naming
+
+The structure is borrowed from Sanskrit grammar rather than a CSS convention.
+
+**A compound naming one thing is one word.** `actionprimary` is not action plus
+primary, it is a single role. `cutedge` is one feature of the Gem material.
+
+**A qualifier stays separate from what it qualifies.** In
+`--ol8-material-control-gem--primary-hover-start`, `hover` is a state applied to
+`start`, so it keeps its hyphen. That is why `disabledcontent` is joined and
+`hover-start` is not.
+
+Hyphens separate levels of the hierarchy, never words inside a level. The words
+themselves stay readable: no abbreviations and no truncation.
+
 ## Rules that matter most
 
 Reach for a **semantic** token, never a primitive and never a literal.
@@ -58,7 +84,7 @@ Every dimension sits on the **3px grid**. An exception needs an approval record.
 
 Icons come from the pool. `OL8_ICONS` is the whole set, an invented name throws.
 A new glyph is a 24px neutral source on the shared **1.8 stroke**, never a
-per-size stroke.
+per size stroke.
 
 Margins belong to the parent, never to the component.
 
