@@ -95,9 +95,15 @@
   border: var(--ol8-component-radio-boundary) solid var(--_edge);
   border-radius: var(--ol8-shape-radius-full);
 }
+/* Figma binds both the ring and the dot to Selection Surface (#e2e9ff), which
+   measures 1.16:1 on the canvas against a 3:1 minimum for graphical objects.
+   A selected radio was harder to see than a disabled one. Both now take
+   Selection Content, the role meant to be read against that surface: 13.23:1.
+   To restore the Figma-exact appearance, swap these two back to
+   --ol8-color-selection-surface. */
 .ol8-selection--radio[data-ol8-selection="selected"] {
-  --_edge: var(--ol8-color-selection-surface);
-  --_ink:  var(--ol8-color-selection-surface);
+  --_edge: var(--ol8-color-selection-content);
+  --_ink:  var(--ol8-color-selection-content);
 }
 .ol8-selection--radio[data-ol8-availability="disabled"] { --_edge: var(--ol8-color-border-disabled); }
 .ol8-selection--radio[data-ol8-availability="disabled"][data-ol8-selection="selected"] {

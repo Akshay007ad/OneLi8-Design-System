@@ -91,34 +91,22 @@ for(const axis of ["colorScheme","primaryFamily","typographyViewport"]){
 // split on the capital. Only the path separator becomes a hyphen. The authored
 // JSON keeps camelCase for readability; the emitted name matches Figma exactly.
 const kebab=value=>value.replace(/\./g,"-").toLowerCase();
-// Figma is the naming authority, and it is not perfectly regular. It runs most
-// compounds together but hyphenates these two, and it writes the control Gem
-// roles with a double dash. Encoding the exceptions here keeps the authored
-// JSON readable while the emitted names match the variables exactly.
-const FIGMA_EXACT={
-  "color.icon.onGem":"color-icon-on-gem",
-  "component.choice.opticalStroke":"component-choice-optical-stroke",
-};
-// A compound that names ONE thing stays joined: cutedge, innerhigh, actionprimary.
-// A state qualifier applied to something else stays separate: hover-start is
-// "start, while hovering", not a single noun. Figma draws that line too, so the
-// split is semantic rather than a spelling rule.
-// Only what the Figma variables actually show. "disabledcontent" is joined
-// there, so disabled is not on this list; adding qualifiers on a hunch is how
-// the names drift apart again.
-const STATE_QUALIFIERS=["hover","loading"];
-const splitStateQualifier=segment=>{
-  for(const state of STATE_QUALIFIERS){
-    if(segment.startsWith(state)&&segment.length>state.length)return `${state}-${segment.slice(state.length)}`;
-  }
-  return segment;
-};
+// Figma is the naming authority, and it says so explicitly: every variable
+// carries a codeSyntax.WEB field. src/figma-code-syntax.txt records that field
+// verbatim. Nothing here infers a name, because Figma is not internally regular
+// enough to infer from — it writes color-icon-button-quiet-hover-surface
+// hyphenated and component-iconbutton-box-compact joined.
+const CONTRACT=new Map(
+  fs.readFileSync(path.join(root,"src/figma-code-syntax.txt"),"utf8")
+    .split("\n").filter(l=>l && !l.startsWith("#"))
+    .map(l=>{const i=l.indexOf("|");return [l.slice(0,i), l.slice(i+1)];})
+);
+const uncontracted=new Set();
 const figmaVarName=tokenPath=>{
-  if(FIGMA_EXACT[tokenPath])return FIGMA_EXACT[tokenPath];
-  const name=kebab(tokenPath).split("-").map(splitStateQualifier).join("-");
-  return name.startsWith("material-control-gem-")
-    ?name.replace("material-control-gem-","material-control-gem--")
-    :name;
+  const contracted=CONTRACT.get(tokenPath);
+  if(contracted)return contracted.replace(/^--ol8-/,"");
+  uncontracted.add(tokenPath);
+  return kebab(tokenPath);
 };
 const cssName=tokenPath=>`--ol8-${figmaVarName(tokenPath)}`;
 // A composite role's sub key is a CSS property, not a Figma variable, so it
@@ -244,4 +232,15 @@ write("build/figma/variables.json",`${JSON.stringify(figma,null,2)}\n`);
 write("build/status/components.json",`${JSON.stringify({...status,$schema:"https://oneli8.org/schema/component-status.schema.json",generated:true},null,2)}\n`);
 write("build/manifest.json",`${JSON.stringify({generated:true,version:"1.0.0-beta.1",counts:{primitive:Object.keys(byTier.primitive).length,semantic:Object.keys(byTier.semantic).length,component:Object.keys(byTier.component).length,componentStatuses:status.components.length,figmaVariables:figma.collections.primitive.length+figma.collections.semantic.length+figma.collections.component.length,figmaTypographyStyles:figma.typographyStyles.length,figmaElevationStyles:figma.elevationStyles.length},outputs:["css/tokens.css","typescript/index.js","typescript/index.d.ts","tailwind/preset.mjs","tailwind/theme.css","figma/variables.json","status/components.json"]},null,2)}\n`);
 
+// Drift report, both directions. A token with no contract entry means the name
+// was invented here rather than agreed in Figma. A contract entry with no token
+// means Figma is ahead, which is a reference for what to build next.
+const contractPaths=new Set(CONTRACT.keys());
+const authoredPaths=new Set(Object.keys(all));
+const figmaAhead=[...contractPaths].filter(p=>!authoredPaths.has(p));
+if(uncontracted.size>0){
+  console.log(`\u26a0 ${uncontracted.size} token(s) have no Figma codeSyntax; their names are inferred, not agreed:`);
+  for(const p of [...uncontracted].sort().slice(0,10))console.log(`  \u00b7 ${p}`);
+}
+if(figmaAhead.length>0)console.log(`\u2139 Figma defines ${figmaAhead.length} variables this build does not emit yet (see src/figma-code-syntax.txt)`);
 console.log(`Built ${tokenPaths.length} Oneli8 tokens for CSS, TypeScript, Tailwind, and Figma.`);

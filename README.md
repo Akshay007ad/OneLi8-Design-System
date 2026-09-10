@@ -157,6 +157,27 @@ Disabled keeps dark ink, because its surface is light, and still passes at
 4.86:1. To restore the Figma exact behaviour, drop the `--_ink` declarations
 from `.ol8-icon-btn--primary` and `.ol8-icon-btn--destructive`.
 
+### Selected radio was invisible, WCAG 1.4.11
+
+Figma binds both the ring and the dot of a selected radio to Selection Surface,
+`#e2e9ff`. On the canvas that measures **1.16:1**, against a 3:1 minimum for
+graphical objects. The selected state, the one carrying the meaning, was less
+visible than the disabled state beside it.
+
+| | Colour | Ratio |
+|---|---|---|
+| selected, as designed | `#e2e9ff` | 1.16:1 |
+| unselected | `#665e53` | 6.11:1 |
+| selected, here | `#1a2a59` | **13.23:1** |
+
+Both now take Selection Content, the role meant to be read against that surface.
+Swap the two declarations in `.ol8-selection--radio[data-ol8-selection="selected"]`
+back to `--ol8-color-selection-surface` for the Figma exact appearance.
+
+Surface stays a surface elsewhere: the checkbox fill, the switch track and the
+row wash all still use Selection Surface as a background, which is what it is
+for. The radio was the only place it was used as ink.
+
 ### Button loading with a leading icon
 
 Figma's codegen emits both the leading icon and the spinner while loading. The
