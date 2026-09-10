@@ -34,13 +34,17 @@
       "js": "packages/tokens/dist/tokens.js"
     },
     "counts": {
+      "$comment": "Verified 2026-09-09 against Figma 0wRnp6ulIEA8PCV6wqGmAJ (get_variable_defs on 9:7, 1034:9969, 246:3) and packages/tokens/src/tokens.json. semanticRoles and cssCustomProperties were stale; each count now states what it counts.",
       "primitives": 99,
-      "semanticRoles": 123,
+      "semanticRoles": 68,
+      "semanticRolesNote": "color.* roles excluding the 9 primitive ramps and the color-primary-* alias ramp. Figma exposes 69 — code omits color-icon-on-gem, which duplicates material-control-gem--*-content.",
+      "materialGemRoles": 45,
+      "materialControlRoles": 27,
       "dimensionSteps": 17,
       "radii": 9,
       "typographyRoles": 9,
       "elevations": 5,
-      "cssCustomProperties": 337
+      "cssCustomProperties": 435
     },
     "rules": [
       "Components consume SEMANTIC roles only. Primitives (color-<family>-<step>) are hidden from pickers in Figma and must not appear in component code.",
@@ -205,9 +209,9 @@
       },
       "code": {
         "package": "@oneli8/core",
-        "entry": "packages/core/src/atoms/icon/icon.ts",
+        "entry": "packages/core/src/atoms/icon/icon.js",
         "styles": "packages/core/src/atoms/icon/icon.css",
-        "registry": "packages/core/src/atoms/icon/icons.generated.ts",
+        "registry": "packages/core/src/atoms/icon/icons.generated.js",
         "baseClass": "ol8-icon"
       },
       "footprint": {

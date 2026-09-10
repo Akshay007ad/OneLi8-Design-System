@@ -200,12 +200,18 @@
    The inner band is declared here first so both are visible: light from the
    edge out to 3px, dark from 3px to 6px. That is the ring the two tokens
    describe. To restore the Figma-exact single-band ring, swap these two
-   lines back. */
+   lines back.
+
+   Both focus-ring tokens are BAND THICKNESSES (3px each). box-shadow spread is
+   cumulative from the edge, so the outer band's spread is the sum of the two —
+   3px light from the edge, then dark from 3px out to 6px. Do not pass
+   --ol8-focus-ring-outerwidth here on its own: that would paint the dark band
+   at the same 3px radius as the light one and hide it completely. */
 .ol8-icon-btn:focus-visible { outline: none; }
 .ol8-icon-btn:focus-visible > .ol8-icon-btn__surface {
   box-shadow:
     0 0 0 var(--ol8-focus-ring-innerwidth) var(--ol8-color-focus-inner),
-    0 0 0 var(--ol8-focus-ring-outerwidth) var(--ol8-color-focus-outer);
+    0 0 0 calc(var(--ol8-focus-ring-innerwidth) + var(--ol8-focus-ring-outerwidth)) var(--ol8-color-focus-outer);
 }
 
 /* ---- Disabled / Loading ---------------------------------------------- */

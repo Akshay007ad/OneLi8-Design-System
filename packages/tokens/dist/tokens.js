@@ -379,7 +379,7 @@ export const tokens = {
   "component-selectionoption-minimum-standard": "48px",
   "component-selectionoption-minimum-large": "60px",
   "focus-ring-innerwidth": "3px",
-  "focus-ring-outerwidth": "6px",
+  "focus-ring-outerwidth": "3px",
   "size-icon-small": "18px",
   "size-icon-standard": "24px",
   "size-icon-micro": "9px",
