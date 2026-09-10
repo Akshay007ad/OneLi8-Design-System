@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 const src = JSON.parse(readFileSync(join(ROOT, 'packages/tokens/src/tokens.json'), 'utf8'));
 
-const SKIP_TOP = new Set(['source', 'typography']);
+const SKIP_TOP = new Set(['source', 'typography', 'themes']);
 const flat = {};
 
 (function walk(node, path) {
@@ -54,8 +54,44 @@ for (const [role, spec] of Object.entries(src.typography)) {
   );
 }
 
-const decls = Object.entries(flat)
+// ---- primary-ramp aliasing ------------------------------------------------
+// A semantic role that bakes the same hex as a color-primary-* step is emitted
+// as a reference to that step instead. Without this the primaryFamily axis is
+// inert: swapping the ramp would repaint nothing, because every role would still
+// carry a literal blue. Resolved values are unchanged either way.
+const primaryByValue = new Map();
+for (const [k, v] of Object.entries(flat)) {
+  if (/^color-primary-\d{3}$/.test(k)) primaryByValue.set(String(v).toLowerCase(), k);
+}
+const PRIMITIVE = /^color-(blue|cyan|green|yellow|orange|pink|violet|red|neutral|primary)-\d{3}$/;
+// CSS only. `flat` keeps resolved literals, because dist/tokens.js is read by
+// code that wants an actual colour — a var() string would be useless there.
+const cssFlat = { ...flat };
+let aliased = 0;
+for (const [k, v] of Object.entries(cssFlat)) {
+  if (!k.startsWith('color-') || PRIMITIVE.test(k)) continue;
+  const step = primaryByValue.get(String(v).toLowerCase());
+  if (step) { cssFlat[k] = `var(--ol8-${step})`; aliased++; }
+}
+
+const decls = Object.entries(cssFlat)
   .map(([k, v]) => `  --ol8-${k}: ${v};`).join('\n');
+
+// ---- theme axes ------------------------------------------------------------
+// Each axis is an independent attribute selector. They are never combined into a
+// Cartesian product of modes: dark x orange is two attributes, not one block.
+const ref = (v) => String(v).replace(/^\{(.+)\}$/, (_, n) => `var(--ol8-${n})`);
+const themeBlocks = [];
+for (const axis of Object.values(src.themes ?? {})) {
+  if (!axis || typeof axis !== 'object' || !('selector' in axis) && !Object.values(axis)[0]?.selector) continue;
+  const modes = 'selector' in axis ? [axis] : Object.values(axis);
+  for (const mode of modes) {
+    if (!mode?.selector) continue;
+    const body = Object.entries(mode.overrides)
+      .map(([k, v]) => `  --ol8-${k}: ${ref(v)};`).join('\n');
+    themeBlocks.push(`${mode.selector} {\n${body}\n}`);
+  }
+}
 
 mkdirSync(join(ROOT, 'packages/tokens/dist'), { recursive: true });
 writeFileSync(join(ROOT, 'packages/tokens/dist/tokens.css'),
@@ -64,6 +100,8 @@ writeFileSync(join(ROOT, 'packages/tokens/dist/tokens.css'),
 :root {
 ${decls}
 }
+
+${themeBlocks.join('\n\n')}
 
 ${typeRules.join('\n\n')}
 `);
@@ -86,4 +124,4 @@ export declare const tokens: Readonly<Record<Ol8TokenName, string>>;
 `);
 
 const n = Object.keys(flat).length;
-console.log(`✓ ${n} tokens (${Object.keys(src.typography).length - 1} typography roles) -> dist/tokens.{css,js,d.ts}`);
+console.log(`✓ ${n} tokens (${Object.keys(src.typography).length - 1} typography roles, ${aliased} aliased to the primary ramp, ${themeBlocks.length} theme blocks) -> dist/tokens.{css,js,d.ts}`);
