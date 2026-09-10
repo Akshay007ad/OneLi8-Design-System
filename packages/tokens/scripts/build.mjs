@@ -86,8 +86,45 @@ for(const axis of ["colorScheme","primaryFamily","typographyViewport"]){
   }
 }
 
-const kebab=value=>value.replace(/([a-z0-9])([A-Z])/g,"$1-$2").replace(/\./g,"-").toLowerCase();
-const cssName=tokenPath=>`--ol8-${kebab(tokenPath)}`;
+// Figma is the naming authority. Its variables run compound words together
+// (cutedge, innerwidth, actionprimary), so a camelCase source key must NOT be
+// split on the capital. Only the path separator becomes a hyphen. The authored
+// JSON keeps camelCase for readability; the emitted name matches Figma exactly.
+const kebab=value=>value.replace(/\./g,"-").toLowerCase();
+// Figma is the naming authority, and it is not perfectly regular. It runs most
+// compounds together but hyphenates these two, and it writes the control Gem
+// roles with a double dash. Encoding the exceptions here keeps the authored
+// JSON readable while the emitted names match the variables exactly.
+const FIGMA_EXACT={
+  "color.icon.onGem":"color-icon-on-gem",
+  "component.choice.opticalStroke":"component-choice-optical-stroke",
+};
+// A compound that names ONE thing stays joined: cutedge, innerhigh, actionprimary.
+// A state qualifier applied to something else stays separate: hover-start is
+// "start, while hovering", not a single noun. Figma draws that line too, so the
+// split is semantic rather than a spelling rule.
+// Only what the Figma variables actually show. "disabledcontent" is joined
+// there, so disabled is not on this list; adding qualifiers on a hunch is how
+// the names drift apart again.
+const STATE_QUALIFIERS=["hover","loading"];
+const splitStateQualifier=segment=>{
+  for(const state of STATE_QUALIFIERS){
+    if(segment.startsWith(state)&&segment.length>state.length)return `${state}-${segment.slice(state.length)}`;
+  }
+  return segment;
+};
+const figmaVarName=tokenPath=>{
+  if(FIGMA_EXACT[tokenPath])return FIGMA_EXACT[tokenPath];
+  const name=kebab(tokenPath).split("-").map(splitStateQualifier).join("-");
+  return name.startsWith("material-control-gem-")
+    ?name.replace("material-control-gem-","material-control-gem--")
+    :name;
+};
+const cssName=tokenPath=>`--ol8-${figmaVarName(tokenPath)}`;
+// A composite role's sub key is a CSS property, not a Figma variable, so it
+// keeps the hyphen: font-weight, line-height, letter-spacing.
+const cssProperty=key=>key.replace(/([a-z0-9])([A-Z])/g,"$1-$2").toLowerCase();
+const cssCompositeName=(tokenPath,key)=>`--ol8-${figmaVarName(tokenPath)}-${cssProperty(key)}`;
 const unitValue=value=>value&&typeof value==="object"&&typeof value.value==="number"&&value.unit?`${value.value}${value.unit}`:null;
 const hexRgb=value=>{
   const match=typeof value==="string"&&value.match(/^#([0-9a-f]{6})$/i);
@@ -140,9 +177,9 @@ const cssLinesFor=(tokenPath,token,{preserveColorReference=false}={})=>{
     // A composite role that inlines "AR One Sans" cannot follow a replaced
     // brand face; one that points at the family token can.
     if(preserveColorReference&&rawReference&&rawReference[1].startsWith("font.family."))
-      return [`  ${cssName(`${tokenPath}.${key}`)}: var(${cssName(rawReference[1])});`];
+      return [`  ${cssCompositeName(tokenPath,key)}: var(${cssName(rawReference[1])});`];
     const itemScalar=cssScalar(item,all[(rawReference||[])[1]]||token);
-    return itemScalar===null?[]:[`  ${cssName(`${tokenPath}.${key}`)}: ${itemScalar};`];
+    return itemScalar===null?[]:[`  ${cssCompositeName(tokenPath,key)}: ${itemScalar};`];
   });
   return [];
 };
@@ -176,7 +213,11 @@ const duration=Object.fromEntries(Object.entries(byTier.primitive).filter(([p])=
 const easing=Object.fromEntries(Object.entries(byTier.primitive).filter(([p])=>p.startsWith("motion.easing.")).map(([p,t])=>[p.split(".").at(-1),cssScalar(resolveValue(t.$value),t)]));
 const boxShadow=Object.fromEntries(Object.keys(byTier.semantic).filter(p=>p.startsWith("elevation.surface.")).map(p=>[p.split(".").at(-1),`var(${cssName(p)})`]));
 const zIndex=Object.fromEntries(Object.entries(byTier.semantic).filter(([p])=>p.startsWith("layer.stack.")).map(([p,t])=>[p.split(".").at(-1),String(resolveValue(t.$value))]));
-const semanticColors=Object.fromEntries(Object.keys(byTier.semantic).filter(p=>p.startsWith("color.")&&!p.startsWith("color.primary.")).map(p=>[kebab(p.slice(6)),`var(${cssName(p)})`]));
+// A Tailwind utility is something a person types, so it stays readable and
+// hyphenated: bg-ol8-action-primary-default. The variable it points at follows
+// Figma. Readable surface, exact underlying name.
+const utilityName=path=>path.replace(/([a-z0-9])([A-Z])/g,"$1-$2").replace(/\./g,"-").toLowerCase();
+const semanticColors=Object.fromEntries(Object.keys(byTier.semantic).filter(p=>p.startsWith("color.")&&!p.startsWith("color.primary.")).map(p=>[utilityName(p.slice(6)),`var(${cssName(p)})`]));
 const tailwind={theme:{extend:{colors:{ol8:semanticColors},spacing:dimensionScale,borderRadius:radii,borderWidth,boxShadow,zIndex,fontFamily:{display:["Syne","system-ui","sans-serif"],functional:["AR One Sans","system-ui","sans-serif"]},fontWeight:{regular:"450",semibold:"600",bold:"690"},fontSize,transitionDuration:duration,transitionTimingFunction:easing}}};
 
 const title=value=>value.replace(/([a-z0-9])([A-Z])/g,"$1 $2").replace(/^./,char=>char.toUpperCase());

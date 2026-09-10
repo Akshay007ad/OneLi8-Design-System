@@ -18,7 +18,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 const RAW = join(ROOT, 'assets', 'icons-raw');
-const OUT = join(ROOT, 'packages', 'core', 'src', 'atoms', 'icon');
+const OUT = join(ROOT, 'packages/react/src/foundations');
 
 /** Figma "Icon / <Category> / <Name>" -> registry metadata. */
 const REGISTRY = {
@@ -76,6 +76,33 @@ function extractBody(svg, name, ink) {
 
 
 /**
+ * The string `body` is what a plain innerHTML consumer wants. A React consumer
+ * cannot use it without dangerouslySetInnerHTML, so the same glyph is also
+ * emitted as structured elements with React attribute names. One source, two
+ * shapes, so neither consumer has to hand write a glyph and drift from Figma.
+ */
+const REACT_ATTR = {
+  'stroke-width': 'strokeWidth', 'stroke-linecap': 'strokeLinecap',
+  'stroke-linejoin': 'strokeLinejoin', 'fill-rule': 'fillRule',
+  'clip-rule': 'clipRule', 'stroke-dasharray': 'strokeDasharray',
+};
+function parseElements(body, name) {
+  const elements = [];
+  for (const tagMatch of body.matchAll(/<(\w+)([^>]*?)\/?>/g)) {
+    const [, tag, rawAttrs] = tagMatch;
+    const attrs = {};
+    for (const a of rawAttrs.matchAll(/([\w-]+)="([^"]*)"/g)) {
+      const [, key, value] = a;
+      if (key === 'id') continue; // duplicate ids across many icons on one page
+      attrs[REACT_ATTR[key] ?? key] = value;
+    }
+    elements.push({ tag, attrs });
+  }
+  if (elements.length === 0) throw new Error(`${name}: no drawable elements`);
+  return elements;
+}
+
+/**
  * Bounding box over the on-curve points of every absolute path in `body`.
  * Figma exports absolute commands only; control points are ignored, which is
  * the right call for an optical-centre check (the ink follows the anchors).
@@ -123,7 +150,7 @@ for (const file of readdirSync(RAW).filter(f => f.endsWith('.svg')).sort()) {
 
   const ink = sourceInkOf(raw, name);
   const body = extractBody(raw, name, ink);
-  icons[name] = { ...meta, sourceInk: ink, body };
+  icons[name] = { ...meta, sourceInk: ink, body, elements: parseElements(body, name) };
 
   // Optical-centre audit: report masters whose ink is off-centre in the 24 box.
   const box = pathBounds(body);

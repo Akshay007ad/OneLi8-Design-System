@@ -53,9 +53,9 @@ ok(semantic.color.focus.inner.$value==="{color.primary.030}"&&semantic.color.foc
 ok(themes.colorScheme.dark.overrides["color.focus.inner"].$value==="{color.primary.930}"&&themes.colorScheme.dark.overrides["color.focus.outer"].$value==="{color.primary.030}","Dark Focus must reverse the active family's 930 shadow and 030 highlight");
 ok(semantic.color.icon.onGem.$value==="{color.neutral.030}"&&!themes.colorScheme.dark.overrides["color.icon.onGem"],"On Gem icon artwork must remain near-white across Light and Dark appearances");
 ok(css.includes('[data-ol8-color-scheme="dark"]')&&css.includes('[data-ol8-primary="orange"]')&&css.includes('[data-ol8-primary="green"]'),"CSS must emit independent scheme and Primary-family axes");
-ok(css.includes("--ol8-color-action-primary-default: var(--ol8-color-primary-600)")&&css.includes("--ol8-color-primary-600: var(--ol8-color-orange-600)"),"CSS color aliases must remain reference-preserving and composable");
-ok(tw.includes('"background-canvas": "var(--ol8-color-background-canvas)"')&&tw.includes('"action-primary-default": "var(--ol8-color-action-primary-default)"'),"Tailwind v3 must expose Semantic colors rather than raw palette meaning");
-ok(tw4.includes("--color-ol8-background-canvas: var(--ol8-color-background-canvas)")&&tw4.includes("--color-ol8-action-primary-default: var(--ol8-color-action-primary-default)"),"Tailwind v4 must expose Semantic color utilities");
+ok(css.includes("--ol8-color-actionprimary-default: var(--ol8-color-primary-600)")&&css.includes("--ol8-color-primary-600: var(--ol8-color-orange-600)"),"CSS color aliases must remain reference-preserving and composable");
+ok(tw.includes('"background-canvas": "var(--ol8-color-background-canvas)"')&&tw.includes('"action-primary-default": "var(--ol8-color-actionprimary-default)"'),"Tailwind v3 must expose Semantic colors rather than raw palette meaning");
+ok(tw4.includes("--color-ol8-background-canvas: var(--ol8-color-background-canvas)")&&tw4.includes("--color-ol8-action-primary-default: var(--ol8-color-actionprimary-default)"),"Tailwind v4 must expose Semantic color utilities");
 ok(figma.modes.colorScheme.dark.length>60&&figma.modes.primaryFamily.orange.length===11&&figma.modes.primaryFamily.green.length===11,"Figma data must preserve independent color modes");
 ok(semantic.elevation.surface.floating.$value.length===2&&semantic.elevation.surface.floating.$value[0].alpha===0.18,"Light Floating elevation must retain its approved two-shadow recipe");
 ok(themes.colorScheme.dark.overrides["elevation.surface.blocking"].$value[0].alpha===0.72,"Dark Blocking elevation must retain its 72% Cyan 840 cue");
@@ -67,7 +67,7 @@ ok(semantic.material.control.gem.primary.start.$value==="{color.primary.480}"&&t
 ok(semantic.material.control.gem.secondary.high.$value.alpha===0.22&&semantic.material.control.gem.rim.default.$value.alpha===0.24,"Gem Secondary transparency and inset rim must retain the approved quiet material recipe");
 ok(semantic.material.control.gem.primary.loadingStart.$value==="{color.primary.720}"&&semantic.material.control.gem.primary.loadingEnd.$value==="{color.primary.930}","Gem Loading must use a distinct shared deep tonal state");
 ok(semantic.material.control.gem.secondary.loadingHigh.$value.alpha===0.39&&semantic.material.control.gem.secondary.loadingLow.$value.alpha===0.24,"Gem Secondary Loading must remain transparent but visibly distinct");
-ok(css.includes("--ol8-material-gem-color-family-amethyst-environmental-face: color-mix(in srgb, var(--ol8-color-violet-930) 48%, transparent)"),"Gem CSS colors must preserve Primitive references and approved alpha");
+ok(css.includes("--ol8-material-gem-color-family-amethyst-environmentalface: color-mix(in srgb, var(--ol8-color-violet-930) 48%, transparent)"),"Gem CSS colors must preserve Primitive references and approved alpha");
 ok(tw.includes('"overlay": "var(--ol8-elevation-surface-overlay)"')&&tw.includes('"notification": "1200"'),"Tailwind v3 must expose Elevation and stacking roles");
 ok(tw4.includes("--shadow-ol8-blocking: var(--ol8-elevation-surface-blocking)")&&tw4.includes("--z-ol8-modal: 900"),"Tailwind v4 must expose Elevation and stacking roles");
 ok(figma.elevationStyles.length===5,"Figma data must emit five Elevation styles");

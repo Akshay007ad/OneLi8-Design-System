@@ -10,7 +10,8 @@
     "sync:tokens": "node packages/tokens/scripts/build.mjs --standalone",
     "sync:icons": "node packages/sync/src/build-icons.mjs",
     "test:tokens": "node packages/tokens/scripts/test.mjs --standalone",
-    "build": "npm run sync:tokens && npm run sync:icons && npm run check",
-    "check": "node packages/sync/src/check-structure.mjs && npm run test:tokens"
+    "build": "npm run sync:tokens && npm run sync:styles && npm run sync:icons && npm run check",
+    "check": "node packages/sync/src/check-structure.mjs && npm run test:tokens",
+    "sync:styles": "node packages/sync/src/build-styles.mjs"
   }
 }
