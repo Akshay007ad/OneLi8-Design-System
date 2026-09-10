@@ -1,7 +1,8 @@
 {
   "name": "@oneli8/tokens",
   "version": "1.0.0-beta.2",
-  "private": true,
+  "publishConfig": {"access":"public","tag":"beta"},
+  "repository": {"type":"git","url":"git+https://github.com/Akshay007ad/OneLi8-Design-System.git","directory":"packages/tokens"},
   "license": "Apache-2.0",
   "type": "module",
   "files": [

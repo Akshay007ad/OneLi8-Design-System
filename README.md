@@ -1,101 +1,155 @@
 # OneLi8 Design System
 
-September 9, 2026 · Apache-2.0 · `1.0.0-beta.2`
+**One Light. Shared foundations. Your expression.**
 
-OneLi8 means One Light: a modular design system created by Akshay Dhore,
-inspired by Guruji Shrii Arnav and the 9×12 Way. This is a deliberately small
-public beta, not a completed SaaS suite or a claim of full Figma/code certification.
+A modular design system for students, independent developers and teams who want
+to build from intentional components—not repeatedly generate approximations.
+Created by **Akshay Dhore**, inspired by **Guruji Shrii Arnav** and the **9×12 Way**.
 
-## Included
+[Quick start](#quick-start) · [Components](docs/components.md) · [Themes and Gem](docs/theming.md) · [AI and Figma](docs/ai-and-figma.md) · [Philosophy](PRINCIPLES.md)
 
-- React `Icon`, `iconNames`, `Button`, `IconButton`, and `Link`.
-- Existing Regular and Gem button treatments, without redesigning their source.
-- Canonical editable tokens, CSS variables, JavaScript, and Tailwind adapters.
-- Three AI skills, design principles, and explicit Button/IconButton/Link property mappings.
+**Public Beta · Apache-2.0 · React 18+ · Node 20+**
 
-Other component families are not exported. The complete token vocabulary is
-retained so its reference graph stays intact; tokens for another family do not
-mean that family's component implementation is included. Internal shared helpers
-are implementation details, not additional public components.
+## Quick start
 
-## Install into an existing React project
-
-Requires Node 20+ and React 18+. React 18.3.1 is the tested version.
-Unzip this bundle, then use the two local archives in `tarballs/`:
+In your existing React project:
 
 ```sh
-npm install /absolute/path/to/tarballs/oneli8-tokens-1.0.0-beta.2.tgz /absolute/path/to/tarballs/oneli8-react-1.0.0-beta.2.tgz
+npm install @oneli8/react@beta
 ```
 
-These are local packages, not a claim that this version is on npm.
+This installs the React components **and their token dependency automatically**.
+No manual ZIP download, GitHub login or paid Figma Code Connect is needed.
+React and React DOM belong to your host application.
+
+Choose what your project needs:
+
+| Need | Command |
+| --- | --- |
+| Components, with tokens included automatically | `npm install @oneli8/react@beta` |
+| Only tokens; no React components | `npm install @oneli8/tokens@beta` |
+| Both as explicit project dependencies | `npm install @oneli8/react@beta @oneli8/tokens@beta` |
+
+Use the published lowercase package names above, not `npm install OneLi8`.
+If you import tokens directly in your own code, declare both explicitly.
+Package installation does not clone the repository or install AI skills.
+
+Import the stylesheet once in your application entry point:
+
+```jsx
+import '@oneli8/react/styles.css';
+```
+
+Then use the existing components:
 
 ```jsx
 import {Button, IconButton, Icon, Link} from '@oneli8/react';
-import '@oneli8/react/styles.css';
 
 export function Actions() {
-  return <div data-ol8-color-scheme="light" data-ol8-primary="blue">
-    <Button leadingIcon={<Icon name="add" />}>Add item</Button>
-    <IconButton accessibleName="Search" icon={<Icon name="search" />} />
-    <Link href="/help">Help</Link>
-  </div>;
+  return (
+    <section aria-label="Actions"
+      data-ol8-color-scheme="light" data-ol8-primary="blue">
+      <Button leadingIcon={<Icon name="add" />}>Add item</Button>
+      <IconButton accessibleName="Search" icon={<Icon name="search" />} />
+      <Link href="/help">Read the guide</Link>
+    </section>
+  );
 }
 ```
 
-This is a usage snippet, not an approved composed page. Use existing component
-properties and tokens when arranging your product. `material="gem"` is available
-on Button and IconButton, not Link. Test Gem content against its actual backdrop;
-near-white content alone cannot guarantee readable contrast.
+Wire action handlers to your application. The snippet demonstrates imports and
+composition; it is not a prebuilt application. [Read the component API →](docs/components.md)
 
-## API and tokens
+## What you can use today
 
-The declaration files in `packages/react/src/` describe the API. Button variants
-are primary/secondary/quiet/destructive; sizes are compact/standard/comfortable/large.
-IconButton supports rounded/circle and requires an accessible name. Icons are
-decorative; give meaning to their parent control. Do not pass an invented icon
-name: choose from `iconNames`. Buttons select their shared icon size internally.
+| Building block | Included in this beta |
+| --- | --- |
+| Button | Four variants, four sizes, optional leading/trailing icons, loading and disabled |
+| IconButton | Rounded and circular shapes, accessible names, Regular and Gem |
+| Link | Inline, standalone and navigation-form links |
+| Icon pool | 17 reusable neutral 24px identities with consumer-owned color |
+| Tokens | 586 shared tokens; CSS, JavaScript, Tailwind and Figma data outputs |
+| AI guidance | Three scoped skills and explicit Button/IconButton/Link property mappings |
 
-Read `packages/tokens/README.md` for theme attributes and Tailwind adapters.
-Change editable `packages/tokens/src/` values, then run:
+Other component families remain outside this beta's exports. Token vocabulary
+for those families is not a promise of an included implementation.
 
-```sh
-node packages/tokens/scripts/build.mjs --standalone
-node packages/tokens/scripts/test.mjs --standalone
+## Why OneLi8
+
+- **Atomic Design:** meaningful atoms compose molecules, organisms, templates and
+  pages. Small appearance does not automatically make something an atom.
+- **OneLi8 Modularity:** identity, size, color, material and behavior have shared
+  owners. Change a dependency instead of maintaining copies.
+- **Harmony:** a 3px construction rhythm, governed optical exceptions, intentional
+  spacing and semantic roles keep the system coherent.
+- **Freedom of expression:** theme and primary family are independent. The current
+  presets are a starting point; editable token sources support deliberate extension.
+- **Service and clarity:** beautiful material must still communicate state and meaning.
+
+[Explore the philosophy and operating principles →](PRINCIPLES.md)
+
+## Gem Morphism
+
+Gem is OneLi8's transparent material treatment, guided by **Cut, Color, Clarity
+and Carat/weight**. It is a skin on shared components—not a disconnected library.
+
+```jsx
+<Button material="gem">Continue</Button>
 ```
 
-This regenerates token files, not Figma. Repack/reinstall the packages after edits.
-Token status records describe development maturity, not public beta certification.
+Preserve the approved bezel and tint. Facets are restrained accents, not a default
+on every tile. Gem retains near-white content; it does not automatically sample
+the background or guarantee contrast on arbitrary scenery. Spatial computing is
+a direction for the system, not a claim of XR-device certification.
 
-## AI use and free Figma mapping
+[Use themes and Gem responsibly →](docs/theming.md)
 
-Start with `AGENTS.md` and choose a task-specific skill in `skills/`. AI tools
-that do not discover skills can read those Markdown instructions explicitly.
-Skills guide agents; they do not force arbitrary AI tools to comply automatically.
+## Work with AI, without Code Connect
 
-`mappings/` contains offline translators and dated canonical property tables.
-They accept inspected observations and return a component plan or explicit gaps.
-No Code Connect subscription, credentials, or network access is required to run
-them. They do not extract Figma automatically or certify visual parity. Copied
-Figma libraries can have different IDs: inspect and update mappings, never guess.
+The React install gives your application components and tokens. The repository
+also contains agent instructions and focused skills:
 
-## Validation and limits
+- **UI composition:** reuse canonical owners and semantic tokens.
+- **Icon creation:** extend one neutral source pool, not per-component copies.
+- **Figma-to-code:** translate explicit observations through the included mappings.
 
-See `BUILD-REPORT.json` and `SMOKE-REPORT.json` for this artifact's checks.
-`SOURCE-MANIFEST.json` records hashes of reused source files. The React source
-owners and CSS are copied unchanged; package entry points are scoped to this release.
+These mappings run offline. They do not automatically extract a Figma file or
+prove complete bidirectional parity. Agents need actual observations and must
+report missing mappings rather than invent them.
 
-Passing packaging, import, rendering, or mapping tests does not certify every
-browser state, screen-reader interaction, visual match, background, or XR device.
-Full-system synchronization remains incomplete. Report gaps rather than silently
-recreating components. This bundle has no backend, analytics, or credentials.
+[Set up your AI workflow →](docs/ai-and-figma.md)
 
-## Ownership and evolution
+## Editable source and local checks
 
-Akshay Dhore is currently the sole creator and approver of canonical OneLi8
-components. Apache-2.0 permits reuse and forks; upstream design approval is separate.
-Feedback and proposals are welcome, but no contribution process or additional
-maintainer is implied. Future releases can add fixed families incrementally.
-See `PRINCIPLES.md`, `LICENSE` and `NOTICE`. Preserve applicable copyright and
-attribution notices when redistributing under Apache-2.0. This does not require
-a visible badge in your product or imply OneLi8 endorsement. Earlier MIT releases
-retain their original permissions. This license update changes no component designs.
+```sh
+git clone https://github.com/Akshay007ad/OneLi8-Design-System.git
+cd OneLi8-Design-System
+npm install
+npm test
+npm run build
+```
+
+The root stays private as an npm package: publishable units are separate.
+Edit token source, rebuild, and test; don't patch installed dependencies or
+copy values into local component skins.
+
+## Beta evidence and boundaries
+
+The packaging baseline passed **284 smoke checks**, **159 synthetic mapping-plan
+renders**, and **69 token checks**. Reports distinguish what was tested.
+Full visual parity, cross-browser behavior and assistive-technology certification
+are not claimed. Test your real content, interactions and backgrounds.
+
+For reproducible installs, pin both packages to `1.0.0-beta.2`; `@beta` follows
+future beta releases. Keep your lockfile. Update intentionally and review release notes.
+
+## Ownership, feedback and license
+
+Akshay Dhore is the sole creator and approver of canonical OneLi8 components.
+Feedback, test reports and proposals are welcome through
+[GitHub Issues](https://github.com/Akshay007ad/OneLi8-Design-System/issues).
+A proposed addition is not automatically canonical.
+
+Licensed under [Apache-2.0](LICENSE), with attribution in [NOTICE](NOTICE).
+Preserve applicable notices when redistributing; no visible product badge is
+required. Earlier MIT releases retain their original permissions.
