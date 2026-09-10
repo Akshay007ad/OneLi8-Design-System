@@ -497,8 +497,10 @@ component.tabItem.inset.large|--ol8-component-tab-item-inset-large
 component.tabItem.inset.standard|--ol8-component-tab-item-inset-standard
 component.tabItem.paddingInline|--ol8-component-tab-item-paddinginline
 component.textField.boundary|--ol8-component-textfield-boundary
+component.textField.gap.inline|--ol8-component-textfield-gap-inline
 component.textField.gap.label|--ol8-component-textfield-gap-label
 component.textField.gap.messageCounter|--ol8-component-textfield-gap-messagecounter
+component.textField.gap.requirement|--ol8-component-textfield-gap-requirement
 component.textField.gap.status|--ol8-component-textfield-gap-status
 component.textField.gap.supporting|--ol8-component-textfield-gap-supporting
 component.textField.height.comfortable|--ol8-component-textfield-height-comfortable

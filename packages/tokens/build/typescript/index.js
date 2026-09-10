@@ -4094,6 +4094,15 @@ export const tokens = {
     "description": "Label-to-control gap.",
     "tier": "component"
   },
+  "component.textField.gap.requirement": {
+    "type": "dimension",
+    "value": {
+      "value": 3,
+      "unit": "px"
+    },
+    "description": "Gap between the label and the mark that says the field is required.",
+    "tier": "component"
+  },
   "component.textField.gap.supporting": {
     "type": "dimension",
     "value": {
@@ -4101,6 +4110,15 @@ export const tokens = {
       "unit": "px"
     },
     "description": "Control-to-supporting-region gap.",
+    "tier": "component"
+  },
+  "component.textField.gap.inline": {
+    "type": "dimension",
+    "value": {
+      "value": 6,
+      "unit": "px"
+    },
+    "description": "Gap between the slots inside the control: leading icon, prefix, value, suffix and trailing action.",
     "tier": "component"
   },
   "component.textField.gap.status": {
@@ -5285,8 +5303,10 @@ export const tokenPaths = [
   "component.tabItem.radius",
   "component.tabItem.rail",
   "component.textField.boundary",
+  "component.textField.gap.inline",
   "component.textField.gap.label",
   "component.textField.gap.messageCounter",
+  "component.textField.gap.requirement",
   "component.textField.gap.status",
   "component.textField.gap.supporting",
   "component.textField.height.comfortable",

@@ -5,6 +5,8 @@ export { IconButton } from './molecules/IconButton.js';
 export { Link } from './molecules/Link.js';
 export { ChoiceItem } from './molecules/ChoiceItem.js';
 export { SelectionOption } from './molecules/SelectionOption.js';
+export { FormMessage } from './molecules/FormMessage.js';
+export { TextField, countGraphemes, clipToGraphemes } from './molecules/TextField.js';
 export { RadioGroup, CheckboxGroup } from './organisms/ChoiceGroup.js';
 export * from './foundations/geometry.js';
 export { OL8_ICONS, OL8_ICON_VIEWBOX } from './foundations/icons.generated.js';

@@ -89,6 +89,17 @@
     },
     {
       "tier": "molecule",
+      "module": "molecules/form-message/form-message.js",
+      "exports": [
+        "OL8_FORM_MESSAGE_TONES",
+        "OL8_FORM_MESSAGE_ICONS",
+        "renderFormMessage",
+        "hydrateFormMessages"
+      ],
+      "constraint": "Composed of atoms. Reusable and more specialised."
+    },
+    {
+      "tier": "molecule",
       "module": "molecules/icon-button/icon-button.js",
       "exports": [
         "OL8_ICON_BUTTON_VARIANTS",
@@ -120,6 +131,23 @@
         "renderSelectionOption",
         "setOptionSelected",
         "setActiveOption"
+      ],
+      "constraint": "Composed of atoms. Reusable and more specialised."
+    },
+    {
+      "tier": "molecule",
+      "module": "molecules/text-field/text-field.js",
+      "exports": [
+        "OL8_TEXT_FIELD_SIZES",
+        "OL8_TEXT_FIELD_APPEARANCES",
+        "OL8_TEXT_FIELD_MATERIALS",
+        "OL8_MESSAGE_TONES",
+        "OL8_VALIDATION_STATUSES",
+        "OL8_CHARACTER_LIMIT_BEHAVIORS",
+        "renderTextField",
+        "hydrateTextFields",
+        "countGraphemes",
+        "clipToGraphemes"
       ],
       "constraint": "Composed of atoms. Reusable and more specialised."
     },

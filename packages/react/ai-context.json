@@ -68,6 +68,14 @@
     },
     {
       "tier": "molecule",
+      "module": "molecules/FormMessage.js",
+      "exports": [
+        "FormMessage"
+      ],
+      "constraint": "Composed of atoms. Reusable and more specialised."
+    },
+    {
+      "tier": "molecule",
       "module": "molecules/IconButton.js",
       "exports": [
         "IconButton"
@@ -87,6 +95,16 @@
       "module": "molecules/SelectionOption.js",
       "exports": [
         "SelectionOption"
+      ],
+      "constraint": "Composed of atoms. Reusable and more specialised."
+    },
+    {
+      "tier": "molecule",
+      "module": "molecules/TextField.js",
+      "exports": [
+        "TextField",
+        "countGraphemes",
+        "clipToGraphemes"
       ],
       "constraint": "Composed of atoms. Reusable and more specialised."
     },

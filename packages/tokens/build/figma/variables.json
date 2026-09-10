@@ -4744,6 +4744,17 @@
         "description": "Label-to-control gap."
       },
       {
+        "path": "component.textField.gap.requirement",
+        "name": "Component / Text Field / Gap / Requirement",
+        "type": "dimension",
+        "value": {
+          "value": 3,
+          "unit": "px"
+        },
+        "reference": "spacing.inline.minimal",
+        "description": "Gap between the label and the mark that says the field is required."
+      },
+      {
         "path": "component.textField.gap.supporting",
         "name": "Component / Text Field / Gap / Supporting",
         "type": "dimension",
@@ -4753,6 +4764,17 @@
         },
         "reference": "spacing.stack.tight",
         "description": "Control-to-supporting-region gap."
+      },
+      {
+        "path": "component.textField.gap.inline",
+        "name": "Component / Text Field / Gap / Inline",
+        "type": "dimension",
+        "value": {
+          "value": 6,
+          "unit": "px"
+        },
+        "reference": "spacing.inline.related",
+        "description": "Gap between the slots inside the control: leading icon, prefix, value, suffix and trailing action."
       },
       {
         "path": "component.textField.gap.status",

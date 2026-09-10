@@ -1,0 +1,46 @@
+/**
+ * Oneli8 · Form Message (MOLECULE)
+ * Figma: Form Message 177:13, five tones.
+ *
+ * Anatomy read from Figma: a horizontal row, gap Component / Text Field / Gap /
+ * Status, items centred, one Small status icon beside twelve over eighteen
+ * regular text. Tone changes exactly one thing, the inline content colour,
+ * which both the icon stroke and the text take.
+ */
+
+.ol8-form-message {
+  display: flex;
+  align-items: center;
+  gap: var(--ol8-component-textfield-gap-status);
+  color: var(--_tone);
+  font-family: var(--ol8-font-family-functional);
+  font-size: var(--ol8-font-size-012);
+  font-weight: var(--ol8-font-weight-regular);
+  line-height: var(--ol8-font-line-018);
+}
+
+.ol8-form-message__icon { flex: none; color: var(--_tone); }
+
+/* ---- Tone ------------------------------------------------------------- */
+.ol8-form-message[data-ol8-tone="critical"]    { --_tone: var(--ol8-color-feedbackcritical-inlinecontent); }
+.ol8-form-message[data-ol8-tone="caution"]     { --_tone: var(--ol8-color-feedbackcaution-inlinecontent); }
+.ol8-form-message[data-ol8-tone="positive"]    { --_tone: var(--ol8-color-feedbackpositive-inlinecontent); }
+.ol8-form-message[data-ol8-tone="informative"] { --_tone: var(--ol8-color-feedbackinformative-inlinecontent); }
+
+/* Pending reads as informative text, and Figma gives its loading mark the
+   primary icon colour rather than a feedback colour, because nothing has been
+   decided yet. */
+.ol8-form-message[data-ol8-tone="pending"] {
+  --_tone: var(--ol8-color-feedbackinformative-inlinecontent);
+}
+.ol8-form-message[data-ol8-tone="pending"] .ol8-form-message__icon {
+  color: var(--ol8-color-icon-primary);
+}
+
+/* Same treatment the Button gives its busy mark: rotation is opt in and motion
+   guarded, and Reduced Motion keeps the static mark. */
+@media (prefers-reduced-motion: no-preference) {
+  .ol8-form-message[data-ol8-tone="pending"] .ol8-form-message__icon > svg {
+    animation: ol8-spin 900ms linear infinite;
+  }
+}

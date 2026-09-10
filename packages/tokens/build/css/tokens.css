@@ -547,7 +547,9 @@
   --ol8-component-textfield-radius-large: 18px;
   --ol8-component-textfield-boundary: 2px;
   --ol8-component-textfield-gap-label: 6px;
+  --ol8-component-textfield-gap-requirement: 3px;
   --ol8-component-textfield-gap-supporting: 6px;
+  --ol8-component-textfield-gap-inline: 6px;
   --ol8-component-textfield-gap-status: 3px;
   --ol8-component-textfield-gap-messagecounter: 12px;
   --ol8-component-choice-indicator-compact: 18px;

@@ -390,10 +390,20 @@
           "$value": "{spacing.stack.tight}",
           "$description": "Label-to-control gap."
         },
+        "requirement": {
+          "$type": "dimension",
+          "$value": "{spacing.inline.minimal}",
+          "$description": "Gap between the label and the mark that says the field is required."
+        },
         "supporting": {
           "$type": "dimension",
           "$value": "{spacing.stack.tight}",
           "$description": "Control-to-supporting-region gap."
+        },
+        "inline": {
+          "$type": "dimension",
+          "$value": "{spacing.inline.related}",
+          "$description": "Gap between the slots inside the control: leading icon, prefix, value, suffix and trailing action."
         },
         "status": {
           "$type": "dimension",

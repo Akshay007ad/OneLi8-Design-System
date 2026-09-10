@@ -32,6 +32,27 @@ export const OL8_LINK_FORMS = ['inline', 'standalone', 'navigation'];
 export const OL8_LINK_SIZES = ['small', 'standard', 'large'];
 export const OL8_LINK_MOTIONS = ['system', 'none'];
 
+export const OL8_TEXT_FIELD_SIZES = OL8_BUTTON_SIZES;
+export const OL8_TEXT_FIELD_APPEARANCES = ['outline', 'filled'];
+export const OL8_TEXT_FIELD_MATERIALS = OL8_MATERIALS;
+/** The four tones a message can carry. Pending is not one of them. */
+export const OL8_MESSAGE_TONES = ['critical', 'caution', 'positive', 'informative'];
+/** "Pending is a validation process status, not a fifth message tone." */
+export const OL8_VALIDATION_STATUSES = ['idle', 'pending', 'resolved'];
+/** Soft lets a person overshoot and then correct. Hard is for real technical limits. */
+export const OL8_CHARACTER_LIMIT_BEHAVIORS = ['soft', 'hard'];
+
+/** Form Message itself draws all five, because Figma 177:13 enumerates five. */
+export const OL8_FORM_MESSAGE_TONES = [...OL8_MESSAGE_TONES, 'pending'];
+/** Figma pairs one status icon with each tone (Form Message 177:13). */
+export const OL8_FORM_MESSAGE_ICONS = {
+  critical: 'critical',
+  caution: 'caution',
+  positive: 'positive',
+  informative: 'informative',
+  pending: 'loading',
+};
+
 export const OL8_OPTION_SIZES = ['standard', 'large'];
 export const OL8_AGGREGATE = ['none', 'some', 'all'];
 

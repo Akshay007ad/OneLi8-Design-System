@@ -32,7 +32,8 @@
  */
 
 .ol8-btn[data-ol8-material="gem"],
-.ol8-icon-btn[data-ol8-material="gem"] > .ol8-icon-btn__surface {
+.ol8-icon-btn[data-ol8-material="gem"] > .ol8-icon-btn__surface,
+.ol8-field[data-ol8-material="gem"] > .ol8-field__control-stack > .ol8-field__control {
   position: relative;
   isolation: isolate;
   --_rim: var(--ol8-material-control-gem-rim-default);
@@ -41,7 +42,8 @@
 /* The regular opaque background stays underneath on purpose — it is what
    shows through when the gem layer is suppressed for Reduced Transparency. */
 .ol8-btn[data-ol8-material="gem"]::before,
-.ol8-icon-btn[data-ol8-material="gem"] > .ol8-icon-btn__surface::before {
+.ol8-icon-btn[data-ol8-material="gem"] > .ol8-icon-btn__surface::before,
+.ol8-field[data-ol8-material="gem"] .ol8-field__control::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -58,7 +60,8 @@
 }
 
 .ol8-btn[data-ol8-material="gem"]::after,
-.ol8-icon-btn[data-ol8-material="gem"] > .ol8-icon-btn__surface::after {
+.ol8-icon-btn[data-ol8-material="gem"] > .ol8-icon-btn__surface::after,
+.ol8-field[data-ol8-material="gem"] .ol8-field__control::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -143,9 +146,48 @@
   --_g3: var(--ol8-material-control-gem-secondary-loadinglow);
 }
 
+/* ---- Text Field · the same Secondary body, per Figma 211:36 and 215:226 ---
+   Outline follows the Cut Edge, Filled sits on the Stabilized Face and follows
+   the Inner Thin Cut. Hover moves Filled onto the Cut Edge. Invalid keeps the
+   critical boundary, because a material must never hide a validation result. */
+.ol8-field[data-ol8-material="gem"] .ol8-field__control {
+  --_g1: var(--ol8-material-control-gem-secondary-high);
+  --_g2: var(--ol8-material-control-gem-secondary-mid);
+  --_g3: var(--ol8-material-control-gem-secondary-low);
+  --_surface: transparent;
+  --_border: var(--ol8-material-gem-color-cutedge-high);
+}
+.ol8-field[data-ol8-material="gem"]:hover:not([data-ol8-disabled]) .ol8-field__control {
+  --_g1: var(--ol8-material-control-gem-secondary-hoverhigh);
+  --_g2: var(--ol8-material-control-gem-secondary-hovermid);
+  --_g3: var(--ol8-material-control-gem-secondary-hoverlow);
+  --_rim: var(--ol8-material-control-gem-rim-hover);
+  --_border: var(--ol8-material-gem-color-cutedge-high);
+}
+.ol8-field[data-ol8-material="gem"][data-ol8-appearance="filled"] .ol8-field__control {
+  --_surface: var(--ol8-material-gem-color-quiet-stabilizedface);
+  --_border: var(--ol8-material-gem-color-innerthincut-high);
+}
+.ol8-field[data-ol8-material="gem"][data-ol8-readonly][data-ol8-appearance="filled"] .ol8-field__control {
+  --_border: var(--ol8-material-gem-color-innerthincut-high);
+}
+.ol8-field[data-ol8-material="gem"]:has(.ol8-field__input[aria-invalid="true"]) .ol8-field__control,
+.ol8-field[data-ol8-material="gem"][data-ol8-status="invalid"] .ol8-field__control {
+  --_border: var(--ol8-color-feedbackcritical-inlinecontent);
+}
+/* Disabled resolves to the opaque equivalent, which is the same answer Reduced
+   Transparency gives. */
+.ol8-field[data-ol8-material="gem"][data-ol8-disabled] .ol8-field__control {
+  --_surface: var(--ol8-material-gem-color-quiet-opaqueequivalent);
+  --_border: var(--ol8-color-border-disabled);
+}
+.ol8-field[data-ol8-material="gem"][data-ol8-disabled] .ol8-field__control::before,
+.ol8-field[data-ol8-material="gem"][data-ol8-disabled] .ol8-field__control::after { display: none; }
+
 /* Content must sit above the ::before body. */
 .ol8-btn[data-ol8-material="gem"] > *,
-.ol8-icon-btn[data-ol8-material="gem"] .ol8-icon { position: relative; z-index: 0; }
+.ol8-icon-btn[data-ol8-material="gem"] .ol8-icon,
+.ol8-field[data-ol8-material="gem"] .ol8-field__control > * { position: relative; z-index: 0; }
 
 /* ---- Disabled inherits the regular opaque treatment ------------------ */
 .ol8-btn[data-ol8-material="gem"]:disabled::before,
@@ -160,7 +202,12 @@
   .ol8-btn[data-ol8-material="gem"]::before,
   .ol8-btn[data-ol8-material="gem"]::after,
   .ol8-icon-btn[data-ol8-material="gem"] > .ol8-icon-btn__surface::before,
-  .ol8-icon-btn[data-ol8-material="gem"] > .ol8-icon-btn__surface::after { display: none; }
+  .ol8-icon-btn[data-ol8-material="gem"] > .ol8-icon-btn__surface::after,
+  .ol8-field[data-ol8-material="gem"] .ol8-field__control::before,
+  .ol8-field[data-ol8-material="gem"] .ol8-field__control::after { display: none; }
+  .ol8-field[data-ol8-material="gem"] .ol8-field__control {
+    --_surface: var(--ol8-material-gem-color-quiet-opaqueequivalent);
+  }
   .ol8-btn--secondary[data-ol8-material="gem"] {
     --_bw: var(--ol8-component-button-secondaryboundary);
     --_bd: var(--ol8-color-actionsecondary-contentdefault);

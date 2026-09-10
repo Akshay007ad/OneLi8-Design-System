@@ -1,0 +1,266 @@
+/**
+ * Oneli8 · Text Field (MOLECULE)
+ * Figma: Text Field / Outline 182:33, Text Field / Filled 186:53,
+ *        Text Field / Outline / Gem 211:36, Text Field / Filled / Gem 215:226,
+ *        Text Field / Content 175:2, Form Message 177:13.
+ *
+ * ANATOMY, read from Figma rather than assumed:
+ *   root                vertical, gap Component / Text Field / Gap / Supporting
+ *   · Label Row         horizontal, gap Component / Text Field / Gap / Label
+ *     · Label           twelve over eighteen, Semibold, Tracking Open, Text Primary
+ *     · Requirement     a star in Feedback Critical Content, Regular weight
+ *   · Control Stack     fixed at Component / Text Field / Height / <size>
+ *     · Focus Edge      shown only while focused, Focus Ring Inner Width
+ *     · Control         gap Inline; inset, radius and boundary per size; surface and border
+ *                       per appearance and condition
+ *       · Leading Icon  Size / Icon / Small
+ *       · Prefix        the content size, Text Secondary
+ *       · Input         fills the row
+ *       · Suffix        the content size, Text Secondary
+ *       · Trailing      twenty four
+ *   · Instruction       twelve over eighteen, Text Secondary
+ *   · Supporting Region horizontal, space between, gap Message Counter
+ *     · Form Message    its own molecule
+ *     · Counter         twelve over eighteen, Text Secondary
+ *
+ * CONDITION IS NOT A CLASS. Figma's five Conditions are review evidence. Here
+ * they are :hover, [aria-invalid], [readonly] and :disabled on the real input,
+ * exactly as the Figma description asks.
+ */
+
+.ol8-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ol8-component-textfield-gap-supporting);
+  inline-size: 100%;
+
+  --_surface: var(--ol8-color-surface-default);
+  --_border:  var(--ol8-color-border-default);
+  --_label:   var(--ol8-color-text-primary);
+  --_ink:     var(--ol8-color-text-primary);
+  --_muted:   var(--ol8-color-text-secondary);
+}
+
+/* ---- Label ------------------------------------------------------------ */
+.ol8-field__label-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ol8-component-textfield-gap-requirement);
+}
+.ol8-field__label {
+  color: var(--_label);
+  font-family: var(--ol8-font-family-functional);
+  font-size: var(--ol8-font-size-012);
+  font-weight: var(--ol8-font-weight-semibold);
+  line-height: var(--ol8-font-line-018);
+  letter-spacing: var(--ol8-font-tracking-open);
+}
+.ol8-field__requirement {
+  color: var(--ol8-color-feedbackcritical-content);
+  font-family: var(--ol8-font-family-functional);
+  font-size: var(--ol8-font-size-012);
+  font-weight: var(--ol8-font-weight-regular);
+  line-height: var(--ol8-font-line-018);
+}
+
+/* ---- Control ---------------------------------------------------------- */
+.ol8-field__control-stack {
+  position: relative;
+  display: flex;
+  block-size: var(--_height);
+}
+
+/* The contract asks a coarse pointer adapter to expand the activation region
+   for Compact and Standard, which are shorter than the protected minimum,
+   without overlapping a neighbouring field. That belongs to a platform adapter:
+   an overlay drawn here would sit over the value and take the caret away from
+   the person, which is worse than the shortfall it fixes. Not implemented. */
+
+.ol8-field__control {
+  display: flex;
+  align-items: center;
+  gap: var(--ol8-component-textfield-gap-inline);
+  inline-size: 100%;
+  block-size: var(--_height);
+  padding-inline: var(--_inset);
+  border: var(--ol8-component-textfield-boundary) solid var(--_border);
+  border-radius: var(--_radius);
+  background: var(--_surface);
+  transition-property: border-color, background-color;
+  transition-duration: var(--ol8-motion-interaction-hover-duration);
+  transition-timing-function: var(--ol8-motion-interaction-hover-timing-function);
+}
+
+.ol8-field__leading-icon { flex: none; color: var(--ol8-color-icon-secondary); }
+
+.ol8-field__affix {
+  flex: none;
+  color: var(--_muted);
+  font-family: var(--ol8-font-family-functional);
+  font-size: var(--_content-size);
+  font-weight: var(--ol8-font-weight-regular);
+  line-height: var(--_content-line);
+}
+
+/* The input carries the value, so it takes the primary ink and hands the
+   secondary ink to its placeholder. That is exactly the Content molecule's
+   Value and Placeholder types. */
+.ol8-field__input {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  border: 0;
+  padding: 0;
+  background: none;
+  color: var(--_ink);
+  font-family: var(--ol8-font-family-functional);
+  font-size: var(--_content-size);
+  font-weight: var(--ol8-font-weight-regular);
+  line-height: var(--_content-line);
+}
+.ol8-field__input::placeholder { color: var(--_muted); opacity: 1; }
+.ol8-field__input:focus { outline: none; }
+
+.ol8-field__trailing-action {
+  flex: none;
+  display: inline-flex;
+  border: 0;
+  padding: 0;
+  background: none;
+  color: var(--ol8-color-icon-secondary);
+  cursor: pointer;
+}
+.ol8-field__trailing-action:disabled { color: var(--ol8-color-icon-disabled); cursor: not-allowed; }
+
+/* ---- Size ------------------------------------------------------------- */
+.ol8-field[data-ol8-size="compact"] {
+  --_height: var(--ol8-component-textfield-height-compact);
+  --_inset:  var(--ol8-component-textfield-inset-compact);
+  --_radius: var(--ol8-component-textfield-radius-compact);
+  --_content-size: var(--ol8-font-size-012);
+  --_content-line: var(--ol8-font-line-018);
+}
+.ol8-field[data-ol8-size="standard"] {
+  --_height: var(--ol8-component-textfield-height-standard);
+  --_inset:  var(--ol8-component-textfield-inset-standard);
+  --_radius: var(--ol8-component-textfield-radius-standard);
+  --_content-size: var(--ol8-font-size-016);
+  --_content-line: var(--ol8-font-line-024);
+}
+/* Comfortable grows its box and keeps the standard reading size, which is what
+   Figma's Content set does at this step. */
+.ol8-field[data-ol8-size="comfortable"] {
+  --_height: var(--ol8-component-textfield-height-comfortable);
+  --_inset:  var(--ol8-component-textfield-inset-comfortable);
+  --_radius: var(--ol8-component-textfield-radius-comfortable);
+  --_content-size: var(--ol8-font-size-016);
+  --_content-line: var(--ol8-font-line-024);
+}
+.ol8-field[data-ol8-size="large"] {
+  --_height: var(--ol8-component-textfield-height-large);
+  --_inset:  var(--ol8-component-textfield-inset-large);
+  --_radius: var(--ol8-component-textfield-radius-large);
+  --_content-size: var(--ol8-font-size-021);
+  --_content-line: var(--ol8-font-line-030);
+}
+
+/* ---- Appearance ------------------------------------------------------- */
+.ol8-field[data-ol8-appearance="filled"] {
+  --_surface: var(--ol8-color-surface-sunken);
+  --_border:  var(--ol8-color-border-subtle);
+}
+
+/* ---- Condition, carried by the real input ----------------------------- */
+/* Base condition precedence is Disabled, then Read only, then Invalid, then
+   Default. Hover is an overlay that renders only above Default or Invalid, and
+   only for a fine pointer. */
+@media (hover: hover) and (pointer: fine) {
+  .ol8-field:hover:not([data-ol8-disabled]):not([data-ol8-readonly]) .ol8-field__control {
+    --_border: var(--ol8-color-border-strong);
+  }
+}
+
+.ol8-field[data-ol8-readonly] .ol8-field__control { --_border: var(--ol8-color-border-subtle); }
+
+/* Focus never suppresses Invalid; the focus edge is added on top of it. */
+.ol8-field[data-ol8-invalid] .ol8-field__control,
+.ol8-field:has(.ol8-field__input[aria-invalid="true"]) .ol8-field__control {
+  --_border: var(--ol8-color-feedbackcritical-inlinecontent);
+}
+
+.ol8-field[data-ol8-disabled] {
+  --_label: var(--ol8-color-text-disabled);
+  --_muted: var(--ol8-color-text-disabled);
+  --_ink:   var(--ol8-color-text-disabled);
+}
+.ol8-field[data-ol8-disabled] .ol8-field__control {
+  --_surface: var(--ol8-color-surface-disabled);
+  --_border:  var(--ol8-color-border-disabled);
+}
+.ol8-field[data-ol8-disabled] .ol8-field__input { cursor: not-allowed; }
+.ol8-field[data-ol8-disabled] .ol8-field__leading-icon { color: var(--ol8-color-icon-disabled); }
+
+/* ---- Focus -----------------------------------------------------------
+   Figma draws a Focus Edge sibling that is shown only while focused, at the
+   Focus Ring Inner Width in the outer focus colour. The stack owns it so the
+   edge cannot change the control's own metrics. */
+.ol8-field__control-stack::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--_radius);
+  box-shadow: inset 0 0 0 var(--ol8-focus-ring-innerwidth) var(--ol8-color-focus-outer);
+  opacity: 0;
+  pointer-events: none;
+  transition-property: opacity;
+  transition-duration: var(--ol8-motion-interaction-focus-duration);
+  transition-timing-function: var(--ol8-motion-interaction-focus-timing-function);
+}
+.ol8-field:has(.ol8-field__input:focus-visible) .ol8-field__control-stack::after { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ol8-field__control,
+  .ol8-field__control-stack::after { transition-duration: var(--ol8-motion-duration-instant); }
+}
+
+/* ---- Instruction, message and counter --------------------------------- */
+.ol8-field__instruction {
+  color: var(--_muted);
+  font-family: var(--ol8-font-family-functional);
+  font-size: var(--ol8-font-size-012);
+  font-weight: var(--ol8-font-weight-regular);
+  line-height: var(--ol8-font-line-018);
+  letter-spacing: var(--ol8-font-tracking-open);
+}
+
+/* The message and the counter share one row, counter at the logical inline end.
+   At a narrow width or with enlarged text the counter wraps below the message in
+   source order, and the row gap becomes the tighter status step. The counter is
+   never hidden merely because a message appeared. */
+.ol8-field__supporting {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  column-gap: var(--ol8-component-textfield-gap-messagecounter);
+  row-gap: var(--ol8-component-textfield-gap-status);
+}
+.ol8-field__supporting-spacer { flex: 1 1 auto; }
+
+/* Counter is information, not validation, so it never takes a feedback colour. */
+.ol8-field__counter {
+  flex: none;
+  color: var(--_muted);
+  font-family: var(--ol8-font-family-functional);
+  font-size: var(--ol8-font-size-012);
+  font-weight: var(--ol8-font-weight-regular);
+  line-height: var(--ol8-font-line-018);
+  letter-spacing: var(--ol8-font-tracking-open);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (forced-colors: active) {
+  .ol8-field__control { border-color: ButtonBorder; }
+  .ol8-field:has(.ol8-field__input:focus-visible) .ol8-field__control-stack::after {
+    box-shadow: inset 0 0 0 var(--ol8-focus-ring-innerwidth) Highlight;
+  }
+}

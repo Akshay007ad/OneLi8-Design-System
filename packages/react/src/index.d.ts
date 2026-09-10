@@ -22,6 +22,23 @@ export declare const OL8_LINK_FORMS: readonly Ol8LinkForm[];
 export declare const OL8_LINK_SIZES: readonly Ol8LinkSize[];
 export declare const OL8_LINK_MOTIONS: readonly Ol8LinkMotion[];
 
+export type Ol8TextFieldSize = 'compact' | 'standard' | 'comfortable' | 'large';
+export type Ol8TextFieldAppearance = 'outline' | 'filled';
+/** Pending is a validation process status, not a fifth message tone. */
+export type Ol8MessageTone = 'critical' | 'caution' | 'positive' | 'informative';
+export type Ol8ValidationStatus = 'idle' | 'pending' | 'resolved';
+export type Ol8CharacterLimitBehavior = 'soft' | 'hard';
+/** Form Message itself draws all five, because Figma 177:13 enumerates five. */
+export type Ol8FormMessageTone = Ol8MessageTone | 'pending';
+export declare const OL8_TEXT_FIELD_SIZES: readonly Ol8TextFieldSize[];
+export declare const OL8_TEXT_FIELD_APPEARANCES: readonly Ol8TextFieldAppearance[];
+export declare const OL8_TEXT_FIELD_MATERIALS: readonly Ol8Material[];
+export declare const OL8_MESSAGE_TONES: readonly Ol8MessageTone[];
+export declare const OL8_VALIDATION_STATUSES: readonly Ol8ValidationStatus[];
+export declare const OL8_CHARACTER_LIMIT_BEHAVIORS: readonly Ol8CharacterLimitBehavior[];
+export declare const OL8_FORM_MESSAGE_TONES: readonly Ol8FormMessageTone[];
+export declare const OL8_FORM_MESSAGE_ICONS: Readonly<Record<Ol8FormMessageTone, string>>;
+
 export type Ol8OptionSize = 'standard' | 'large';
 export type Ol8Aggregate = 'none' | 'some' | 'all';
 
@@ -131,6 +148,50 @@ export interface LinkProps extends Omit<ComponentPropsWithoutRef<'a'>, 'href'> {
   motion?: Ol8LinkMotion;
 }
 export declare const Link: ForwardRefExoticComponent<LinkProps & RefAttributes<HTMLAnchorElement>>;
+
+/** MOLECULE. Tone maps to semantic message tone; Pending is the validating state. */
+export interface FormMessageProps extends ComponentPropsWithoutRef<'div'> {
+  children?: ReactNode;
+  tone?: Ol8FormMessageTone;
+  /** Figma's Show Icon. */
+  icon?: boolean;
+}
+export declare const FormMessage: ForwardRefExoticComponent<FormMessageProps & RefAttributes<HTMLDivElement>>;
+
+/** MOLECULE. Conditions are CSS and native state, never props. Gem changes material only. */
+export interface TextFieldProps extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'prefix'> {
+  /** Required and visible. A placeholder is never the label. */
+  label: string;
+  /** Default Comfortable, the cross platform size. */
+  size?: Ol8TextFieldSize;
+  appearance?: Ol8TextFieldAppearance;
+  material?: Ol8Material;
+  /** False keeps the label as the accessible name without showing it, which needs a documented exception. */
+  showLabel?: boolean;
+  /** Correction is required. Never set without also exposing a Critical message. */
+  invalid?: boolean;
+  leadingIcon?: string;
+  prefix?: ReactNode;
+  suffix?: ReactNode;
+  trailingAction?: { icon: string; label: string; onClick?: () => void; pressed?: boolean };
+  instruction?: ReactNode;
+  message?: ReactNode;
+  messageTone?: Ol8MessageTone;
+  messageIcon?: boolean;
+  /** Pending shows the loader; it never freezes typing. */
+  validationStatus?: Ol8ValidationStatus;
+  /** Counted in graphemes, so an emoji counts as one. */
+  characterLimit?: number;
+  /** Soft lets a person overshoot and then correct. Hard is for real technical limits. */
+  characterLimitBehavior?: Ol8CharacterLimitBehavior;
+}
+export declare const TextField: ForwardRefExoticComponent<TextFieldProps & RefAttributes<HTMLInputElement>>;
+
+/** Counts what a reader would call characters. */
+export declare function countGraphemes(value: unknown): number;
+
+/** Keeps the first `limit` graphemes, so a cluster is never cut in half. */
+export declare function clipToGraphemes(value: unknown, limit: number): string;
 
 /** MOLECULE. Never focusable; a listbox moves a virtual cursor instead. */
 export interface SelectionOptionProps extends Omit<ComponentPropsWithoutRef<'li'>, 'children'> {
