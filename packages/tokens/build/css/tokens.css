@@ -527,6 +527,7 @@
   --ol8-component-iconbutton-pressedscrim: var(--ol8-color-scrim-pressed);
   --ol8-component-link-underline-default: 1px;
   --ol8-component-link-underline-emphasis: 2px;
+  --ol8-component-link-underline-current: 3px;
   --ol8-component-link-underline-offset: 3px;
   --ol8-component-link-gap-small: 6px;
   --ol8-component-link-gap-standard: 6px;

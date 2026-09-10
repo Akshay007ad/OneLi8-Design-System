@@ -29,8 +29,7 @@ export const OL8_SELECTION_STATES = {
 export const OL8_CHOICE_KINDS = OL8_SELECTION_KINDS;
 export const OL8_CHOICE_SIZES = OL8_BUTTON_SIZES;
 export const OL8_LINK_FORMS = ['inline', 'standalone', 'navigation'];
-/** Figma defines three. `inherit` is a code addition for links inside body copy. */
-export const OL8_LINK_SIZES = ['small', 'standard', 'large', 'inherit'];
+export const OL8_LINK_SIZES = ['small', 'standard', 'large'];
 export const OL8_LINK_MOTIONS = ['system', 'none'];
 
 export const OL8_OPTION_SIZES = ['standard', 'large'];

@@ -9,8 +9,7 @@
  * :hover, :active, :focus-visible, :visited and [aria-current] carry them.
  */
 export const OL8_LINK_FORMS = ['inline', 'standalone', 'navigation'];
-/** Figma defines three. `inherit` is a code addition for links inside body copy. */
-export const OL8_LINK_SIZES = ['small', 'standard', 'large', 'inherit'];
+export const OL8_LINK_SIZES = ['small', 'standard', 'large'];
 export const OL8_LINK_MOTIONS = ['system', 'none'];
 
 /**

@@ -3914,6 +3914,15 @@ export const tokens = {
     "description": "Hover and Pressed Link underline.",
     "tier": "component"
   },
+  "component.link.underline.current": {
+    "type": "dimension",
+    "value": {
+      "value": 3,
+      "unit": "px"
+    },
+    "description": "Marker that shows the current destination in a Navigation Link. It sits where the underline sits and replaces it.",
+    "tier": "component"
+  },
   "component.link.underline.offset": {
     "type": "dimension",
     "value": {
@@ -5215,6 +5224,7 @@ export const tokenPaths = [
   "component.link.gap.small",
   "component.link.gap.standard",
   "component.link.targetNavigation",
+  "component.link.underline.current",
   "component.link.underline.default",
   "component.link.underline.emphasis",
   "component.link.underline.offset",

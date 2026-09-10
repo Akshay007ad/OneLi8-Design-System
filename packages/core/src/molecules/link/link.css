@@ -65,43 +65,38 @@
 .ol8-link:focus-visible {
   outline: none;
   color: var(--ol8-color-text-primary);
+  text-decoration-color: var(--ol8-color-text-link-default);
   border-radius: var(--ol8-shape-radius-subtle);
   box-shadow:
-    inset 0 0 0 var(--ol8-focus-ring-innerwidth) var(--ol8-color-focus-inner),
-    inset 0 0 0 var(--ol8-focus-ring-totalwidth) var(--ol8-color-focus-outer);
+    0 0 0 var(--ol8-focus-ring-innerwidth) var(--ol8-color-focus-inner),
+    0 0 0 var(--ol8-focus-ring-totalwidth) var(--ol8-color-focus-outer);
 }
 
 /* ---- Form ------------------------------------------------------------- */
 /* Standalone and navigation are targets in their own right, so they take the
-   protected minimum. Inline sits in a sentence and must not. */
+   protected minimum. Inline sits in a sentence and must not. Figma pads both by
+   the minimal inline step and carries a gap for the parked icon slot. */
 .ol8-link[data-ol8-form="standalone"],
 .ol8-link[data-ol8-form="navigation"] {
   display: inline-flex;
   align-items: center;
+  gap: var(--ol8-component-link-gap-standard);
   min-block-size: var(--ol8-component-link-targetnavigation);
+  padding-inline: var(--ol8-spacing-inline-minimal);
+}
+.ol8-link[data-ol8-form="standalone"][data-ol8-size="small"],
+.ol8-link[data-ol8-form="navigation"][data-ol8-size="small"] {
+  gap: var(--ol8-component-link-gap-small);
+}
+.ol8-link[data-ol8-form="standalone"][data-ol8-size="large"],
+.ol8-link[data-ol8-form="navigation"][data-ol8-size="large"] {
+  gap: var(--ol8-component-link-gap-large);
 }
 
-.ol8-link[data-ol8-form="navigation"] {
-  inline-size: 100%;
-  padding-inline: var(--ol8-spacing-inline-standard);
-  text-decoration-color: transparent;
-}
-.ol8-link[data-ol8-form="navigation"]:hover,
-.ol8-link[data-ol8-form="navigation"]:focus-visible {
-  text-decoration-color: currentColor;
-}
+/* Figma keeps the underline in every navigation state and marks the current
+   destination by thickening it to the current marker weight. */
 .ol8-link[data-ol8-form="navigation"][aria-current] {
-  color: var(--ol8-color-actionprimary-default);
-  text-decoration-color: currentColor;
-}
-.ol8-link[data-ol8-form="navigation"][aria-current]::before {
-  content: "";
-  position: absolute;
-  inset-inline-start: 0;
-  inset-block: var(--ol8-spacing-stack-tight);
-  inline-size: var(--ol8-focus-ring-innerwidth);
-  border-radius: var(--ol8-shape-radius-full);
-  background: currentColor;
+  text-decoration-thickness: var(--ol8-component-link-underline-current);
 }
 
 /* ---- Motion ----------------------------------------------------------- */
@@ -116,5 +111,4 @@
     outline-offset: calc(var(--ol8-focus-ring-innerwidth) * -1);
     box-shadow: none;
   }
-  .ol8-link[data-ol8-form="navigation"][aria-current]::before { background: Highlight; }
 }

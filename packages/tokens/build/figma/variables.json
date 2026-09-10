@@ -4524,6 +4524,17 @@
         "description": "Hover and Pressed Link underline."
       },
       {
+        "path": "component.link.underline.current",
+        "name": "Component / Link / Underline / Current",
+        "type": "dimension",
+        "value": {
+          "value": 3,
+          "unit": "px"
+        },
+        "reference": "border.width.strong",
+        "description": "Marker that shows the current destination in a Navigation Link. It sits where the underline sits and replaces it."
+      },
+      {
         "path": "component.link.underline.offset",
         "name": "Component / Link / Underline / Offset",
         "type": "dimension",

@@ -91,6 +91,6 @@ ok(component.component.choiceChip.terminal.$value==="{spacing.inline.standard}"&
 ok(component.component.choiceChip.inset.compact.$value.value===21&&component.component.choiceChip.inset.standard.$value==="{spacing.inset.comfortable}"&&component.component.choiceChip.inset.comfortable.$value.value===27,"Soft Hexagon insets must retain the approved 21px, 24px, and 27px progression");
 ok(component.component.suggestionRail.gap.$value==="{component.choiceChip.gap}"&&component.component.suggestionRail.fieldSeparation.$value==="{spacing.stack.tight}","Suggested Values rail must reuse Choice Chip and structural spacing roles");
 ok(component.component.tabBar.gap.$value==="{spacing.none}"&&component.component.tabBar.inlineInset.$value==="{spacing.inline.minimal}","Tab Bar spacing must map to canonical zero gap and 3px Inline protection");
-ok(manifest.counts.primitive===170&&manifest.counts.semantic===270&&manifest.counts.component===157&&manifest.counts.componentStatuses===10&&manifest.counts.figmaVariables===583&&manifest.counts.figmaElevationStyles===5,"Navigation spacing and contextual token output counts must remain deterministic");
+ok(manifest.counts.primitive===170&&manifest.counts.semantic===270&&manifest.counts.component===158&&manifest.counts.componentStatuses===10&&manifest.counts.figmaVariables===584&&manifest.counts.figmaElevationStyles===5,"Navigation spacing and contextual token output counts must remain deterministic");
 
 console.log(`PASS ${checks}/${checks} canonical token package checks.`);

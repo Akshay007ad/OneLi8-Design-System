@@ -4,8 +4,7 @@
  * [aria-current] carry them. Icons are intentionally parked.
  */
 export type Ol8LinkForm = 'inline' | 'standalone' | 'navigation';
-/** Figma defines three. `inherit` is a code addition for links inside body copy. */
-export type Ol8LinkSize = 'small' | 'standard' | 'large' | 'inherit';
+export type Ol8LinkSize = 'small' | 'standard' | 'large';
 export type Ol8LinkMotion = 'system' | 'none';
 
 export declare const OL8_LINK_FORMS: readonly Ol8LinkForm[];

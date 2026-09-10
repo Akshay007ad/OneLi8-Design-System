@@ -455,6 +455,7 @@ component.link.gap.small|--ol8-component-link-gap-small
 component.link.gap.standard|--ol8-component-link-gap-standard
 component.link.targetNavigation|--ol8-component-link-targetnavigation
 component.link.underline.default|--ol8-component-link-underline-default
+component.link.underline.current|--ol8-component-link-underline-current
 component.link.underline.emphasis|--ol8-component-link-underline-emphasis
 component.link.underline.offset|--ol8-component-link-underline-offset
 component.opticalStroke|--ol8-component-optical-stroke

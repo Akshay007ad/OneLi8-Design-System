@@ -266,6 +266,11 @@
           "$value": "{border.width.standard}",
           "$description": "Hover and Pressed Link underline."
         },
+        "current": {
+          "$type": "dimension",
+          "$value": "{border.width.strong}",
+          "$description": "Marker that shows the current destination in a Navigation Link. It sits where the underline sits and replaces it."
+        },
         "offset": {
           "$type": "dimension",
           "$value": "{focus.ring.offset}",
