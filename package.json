@@ -11,6 +11,7 @@
     "sync:tokens": "node packages/sync/src/build-tokens.mjs",
     "build": "npm run sync:tokens && npm run sync:adapters && npm run sync:icons && npm run check",
     "check": "node packages/sync/src/check-structure.mjs",
-    "sync:adapters": "node packages/sync/src/build-adapters.mjs"
+    "sync:adapters": "node packages/sync/src/build-adapters.mjs",
+    "release": "npm publish -w @oneli8/tokens --tag latest && npm publish -w @oneli8/core --tag latest"
   }
 }
