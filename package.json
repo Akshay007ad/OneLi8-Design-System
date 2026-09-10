@@ -13,6 +13,6 @@
     "build": "npm run sync:tokens && npm run sync:styles && npm run sync:icons && npm run sync:context && npm run check",
     "check": "node packages/sync/src/check-structure.mjs && npm run test:tokens",
     "sync:styles": "node packages/sync/src/build-styles.mjs",
-    "sync:context": "node packages/sync/src/build-react-context.mjs"
+    "sync:context": "node packages/sync/src/build-package-context.mjs"
   }
 }

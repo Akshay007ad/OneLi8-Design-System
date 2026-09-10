@@ -22,7 +22,7 @@
     "AGENTS.md",
     "skills/"
   ],
-  "model": "React components. Same DOM and same stylesheets as @oneli8/core, verified identical.",
+  "model": "Framework agnostic. renderX() returns an HTML string; hydrateX() applies the runtime rules to markup that already exists.",
   "architecture": {
     "convention": "Atomic Design for developers (benjaminwfox.com/blog/tech/atomic-design-for-developers)",
     "rules": [
@@ -36,58 +36,90 @@
   "components": [
     {
       "tier": "atom",
-      "module": "atoms/Icon.js",
+      "module": "atoms/icon/icon.js",
       "exports": [
-        "Icon"
+        "OL8_ICON_SIZES",
+        "isOl8IconName",
+        "renderIconSvg",
+        "renderIcon",
+        "hydrateIcons"
       ],
       "constraint": "Composes no other component. Native elements only."
     },
     {
       "tier": "atom",
-      "module": "atoms/SelectionIndicator.js",
+      "module": "atoms/selection-indicator/selection-indicator.js",
       "exports": [
-        "SelectionIndicator"
+        "OL8_SELECTION_KINDS",
+        "OL8_SELECTION_SIZES",
+        "OL8_SELECTION_STATES",
+        "renderSelectionIndicator"
       ],
       "constraint": "Composes no other component. Native elements only."
     },
     {
       "tier": "molecule",
-      "module": "molecules/Button.js",
+      "module": "molecules/button/button.js",
       "exports": [
-        "Button"
+        "OL8_BUTTON_VARIANTS",
+        "OL8_BUTTON_SIZES",
+        "OL8_MATERIALS",
+        "GEM_VARIANTS",
+        "iconSizeForButton",
+        "renderButton",
+        "hydrateButtons",
+        "setButtonLoading"
       ],
       "constraint": "Composed of atoms. Reusable and more specialised."
     },
     {
       "tier": "molecule",
-      "module": "molecules/ChoiceItem.js",
+      "module": "molecules/choice-item/choice-item.js",
       "exports": [
-        "ChoiceItem"
+        "OL8_CHOICE_KINDS",
+        "OL8_CHOICE_SIZES",
+        "indicatorSizeFor",
+        "selectionStateFor",
+        "renderChoiceItem",
+        "hydrateChoiceItems",
+        "syncIndicator",
+        "setChoiceMixed"
       ],
       "constraint": "Composed of atoms. Reusable and more specialised."
     },
     {
       "tier": "molecule",
-      "module": "molecules/IconButton.js",
+      "module": "molecules/icon-button/icon-button.js",
       "exports": [
-        "IconButton"
+        "OL8_ICON_BUTTON_VARIANTS",
+        "OL8_ICON_BUTTON_SIZES",
+        "OL8_ICON_BUTTON_SHAPES",
+        "artworkSizeForIconButton",
+        "renderIconButton",
+        "hydrateIconButtons"
       ],
       "constraint": "Composed of atoms. Reusable and more specialised."
     },
     {
       "tier": "molecule",
-      "module": "molecules/SelectionOption.js",
+      "module": "molecules/selection-option/selection-option.js",
       "exports": [
-        "SelectionOption"
+        "OL8_OPTION_SIZES",
+        "renderSelectionOption",
+        "setOptionSelected",
+        "setActiveOption"
       ],
       "constraint": "Composed of atoms. Reusable and more specialised."
     },
     {
       "tier": "organism",
-      "module": "organisms/ChoiceGroup.js",
+      "module": "organisms/choice-group/choice-group.js",
       "exports": [
-        "RadioGroup",
-        "CheckboxGroup"
+        "OL8_AGGREGATE",
+        "computeAggregate",
+        "renderRadioGroup",
+        "renderCheckboxGroup",
+        "hydrateChoiceGroups"
       ],
       "constraint": "Composed of atoms, molecules or organisms. May hold application state."
     }

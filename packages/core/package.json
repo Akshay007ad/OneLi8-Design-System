@@ -1,7 +1,7 @@
 {
   "name": "@oneli8/core",
   "version": "1.0.0-beta.4",
-  "description": "OneLi8 Design System \u2014 framework-agnostic components. Renders HTML strings and hydrates existing DOM; no framework required.",
+  "description": "OneLi8 Design System, framework agnostic. renderX returns an HTML string, hydrateX wires existing DOM. Ships the design language and the rules it follows.",
   "keywords": [
     "design-system",
     "components",
@@ -53,7 +53,9 @@
     "./styles/selection-option.css": "./src/molecules/selection-option/selection-option.css",
     "./styles/choice-group.css": "./src/organisms/choice-group/choice-group.css",
     "./styles/gem.css": "./src/materials/gem/gem.css",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./ai-context.json": "./ai-context.json",
+    "./skills/*": "./skills/*"
   },
   "types": "./src/index.d.ts",
   "sideEffects": [
@@ -63,6 +65,10 @@
   "files": [
     "src",
     "styles.css",
+    "ai-context.json",
+    "skills",
+    "PRINCIPLES.md",
+    "AGENTS.md",
     "README.md",
     "LICENSE",
     "NOTICE"

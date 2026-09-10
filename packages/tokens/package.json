@@ -36,7 +36,8 @@
     "./figma": "./build/figma/variables.json",
     "./status": "./build/status/components.json",
     "./source": "./src/semantic.json",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./ai-context.json": "./ai-context.json"
   },
   "types": "./build/typescript/index.d.ts",
   "sideEffects": [
@@ -44,7 +45,6 @@
     "./fonts.css"
   ],
   "files": [
-    "dist",
     "build",
     "src",
     "status",
@@ -53,6 +53,9 @@
     "fonts",
     "fonts.css",
     "overrides.example.css",
+    "ai-context.json",
+    "PRINCIPLES.md",
+    "AGENTS.md",
     "README.md",
     "LICENSE",
     "NOTICE",
