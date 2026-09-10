@@ -1,10 +1,20 @@
 {
   "name": "@oneli8/react",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0-beta.5",
   "description": "OneLi8 Design System for React. Components, design tokens, the Gem material, and the design language they follow.",
-  "keywords": ["react", "design-system", "components", "design-tokens", "accessibility", "atomic-design", "oneli8"],
+  "keywords": [
+    "react",
+    "design-system",
+    "components",
+    "design-tokens",
+    "accessibility",
+    "atomic-design",
+    "oneli8"
+  ],
   "homepage": "https://github.com/Akshay007ad/OneLi8-Design-System#readme",
-  "bugs": { "url": "https://github.com/Akshay007ad/OneLi8-Design-System/issues" },
+  "bugs": {
+    "url": "https://github.com/Akshay007ad/OneLi8-Design-System/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Akshay007ad/OneLi8-Design-System.git",
@@ -14,7 +24,11 @@
   "author": "Akshay Dhore",
   "type": "module",
   "exports": {
-    ".": { "types": "./src/index.d.ts", "import": "./src/index.js", "default": "./src/index.js" },
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js",
+      "default": "./src/index.js"
+    },
     "./styles.css": "./styles.css",
     "./styles/*.css": "./src/styles/*.css",
     "./ai-context.json": "./ai-context.json",
@@ -22,7 +36,10 @@
     "./package.json": "./package.json"
   },
   "types": "./src/index.d.ts",
-  "sideEffects": ["./styles.css", "**/*.css"],
+  "sideEffects": [
+    "./styles.css",
+    "**/*.css"
+  ],
   "files": [
     "src",
     "styles.css",
@@ -35,11 +52,15 @@
     "NOTICE"
   ],
   "dependencies": {
-    "@oneli8/tokens": "1.0.0-beta.4"
+    "@oneli8/tokens": "1.0.0-beta.5"
   },
   "peerDependencies": {
     "react": ">=18"
   },
-  "engines": { "node": ">=20" },
-  "publishConfig": { "access": "public" }
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }
