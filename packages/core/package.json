@@ -1,10 +1,20 @@
 {
   "name": "@oneli8/core",
   "version": "1.0.0-beta.3",
-  "description": "OneLi8 Design System — framework-agnostic components. Renders HTML strings and hydrates existing DOM; no framework required.",
-  "keywords": ["design-system", "components", "headless", "framework-agnostic", "design-tokens", "accessibility", "oneli8"],
+  "description": "OneLi8 Design System \u2014 framework-agnostic components. Renders HTML strings and hydrates existing DOM; no framework required.",
+  "keywords": [
+    "design-system",
+    "components",
+    "headless",
+    "framework-agnostic",
+    "design-tokens",
+    "accessibility",
+    "oneli8"
+  ],
   "homepage": "https://github.com/Akshay007ad/OneLi8-Design-System#readme",
-  "bugs": { "url": "https://github.com/Akshay007ad/OneLi8-Design-System/issues" },
+  "bugs": {
+    "url": "https://github.com/Akshay007ad/OneLi8-Design-System/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Akshay007ad/OneLi8-Design-System.git",
@@ -14,10 +24,26 @@
   "author": "Akshay Dhore",
   "type": "module",
   "exports": {
-    ".": { "types": "./src/index.d.ts", "import": "./src/index.js" },
-    "./atoms": { "types": "./src/atoms/index.d.ts", "import": "./src/atoms/index.js" },
-    "./molecules": { "types": "./src/molecules/index.d.ts", "import": "./src/molecules/index.js" },
-    "./organisms": { "types": "./src/organisms/index.d.ts", "import": "./src/organisms/index.js" },
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js",
+      "default": "./src/index.js"
+    },
+    "./atoms": {
+      "types": "./src/atoms/index.d.ts",
+      "import": "./src/atoms/index.js",
+      "default": "./src/atoms/index.js"
+    },
+    "./molecules": {
+      "types": "./src/molecules/index.d.ts",
+      "import": "./src/molecules/index.js",
+      "default": "./src/molecules/index.js"
+    },
+    "./organisms": {
+      "types": "./src/organisms/index.d.ts",
+      "import": "./src/organisms/index.js",
+      "default": "./src/organisms/index.js"
+    },
     "./styles.css": "./styles.css",
     "./styles/icon.css": "./src/atoms/icon/icon.css",
     "./styles/selection-indicator.css": "./src/atoms/selection-indicator/selection-indicator.css",
@@ -30,11 +56,25 @@
     "./package.json": "./package.json"
   },
   "types": "./src/index.d.ts",
-  "sideEffects": ["./styles.css", "**/*.css"],
-  "files": ["src", "styles.css", "README.md", "LICENSE", "NOTICE"],
+  "sideEffects": [
+    "./styles.css",
+    "**/*.css"
+  ],
+  "files": [
+    "src",
+    "styles.css",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
   "dependencies": {
     "@oneli8/tokens": "1.0.0-beta.3"
   },
-  "engines": { "node": ">=20" },
-  "publishConfig": { "access": "public", "tag": "beta" }
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "beta"
+  }
 }

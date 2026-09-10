@@ -1,10 +1,18 @@
 {
   "name": "@oneli8/tokens",
   "version": "1.0.0-beta.3",
-  "description": "OneLi8 Design System — design tokens compiled from Figma. CSS custom properties and a flat JS object.",
-  "keywords": ["design-tokens", "css-variables", "design-system", "figma", "oneli8"],
+  "description": "OneLi8 Design System \u2014 design tokens compiled from Figma. CSS custom properties and a flat JS object.",
+  "keywords": [
+    "design-tokens",
+    "css-variables",
+    "design-system",
+    "figma",
+    "oneli8"
+  ],
   "homepage": "https://github.com/Akshay007ad/OneLi8-Design-System#readme",
-  "bugs": { "url": "https://github.com/Akshay007ad/OneLi8-Design-System/issues" },
+  "bugs": {
+    "url": "https://github.com/Akshay007ad/OneLi8-Design-System/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Akshay007ad/OneLi8-Design-System.git",
@@ -14,15 +22,36 @@
   "author": "Akshay Dhore",
   "type": "module",
   "exports": {
-    ".": { "types": "./dist/tokens.d.ts", "import": "./dist/tokens.js" },
+    ".": {
+      "types": "./dist/tokens.d.ts",
+      "import": "./dist/tokens.js",
+      "default": "./dist/tokens.js"
+    },
     "./css": "./dist/tokens.css",
     "./tokens.css": "./dist/tokens.css",
+    "./tailwind": "./dist/tailwind/preset.mjs",
+    "./tailwind.css": "./dist/tailwind/theme.css",
+    "./figma": "./dist/figma/variables.json",
+    "./status": "./dist/status/components.json",
     "./source": "./src/tokens.json",
     "./package.json": "./package.json"
   },
   "types": "./dist/tokens.d.ts",
-  "sideEffects": ["./dist/tokens.css"],
-  "files": ["dist", "src", "README.md", "LICENSE", "NOTICE"],
-  "engines": { "node": ">=20" },
-  "publishConfig": { "access": "public", "tag": "beta" }
+  "sideEffects": [
+    "./dist/tokens.css"
+  ],
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "beta"
+  }
 }

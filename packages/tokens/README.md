@@ -30,6 +30,45 @@ Two rules matter when consuming it:
   is composite in Figma — a role bundles family, size, line height, weight and
   tracking — and the class applies all of them together.
 
+## Entry points
+
+| Import | What it gives you |
+|---|---|
+| `@oneli8/tokens` | flat `{ name: value }` map, with a literal-union key type |
+| `@oneli8/tokens/css` | the custom properties and `.ol8-type-*` classes |
+| `@oneli8/tokens/tailwind` | Tailwind v3 preset |
+| `@oneli8/tokens/tailwind.css` | Tailwind v4 `@theme` bridge |
+| `@oneli8/tokens/figma` | round-trip payload: collections, theme modes, type and elevation styles |
+| `@oneli8/tokens/status` | component maturity records |
+| `@oneli8/tokens/source` | the editable `tokens.json` |
+
+```js
+// tailwind.config.js (v3)
+import ol8 from '@oneli8/tokens/tailwind';
+export default { presets: [ol8], content: ['./src/**/*'] };
+```
+
+```css
+/* Tailwind v4 */
+@import "@oneli8/tokens/css";
+@import "@oneli8/tokens/tailwind.css";
+```
+
+Both adapters emit `var(--ol8-*)` references rather than resolved values, so
+Tailwind classes follow the theme attributes exactly like the raw custom
+properties do. `bg-ol8-actionprimary-default` repaints when you switch the
+primary family; it does not bake a blue at build time.
+
+The JS map is the exception: it holds resolved literals, because code that reads
+it wants an actual colour, not a `var()` string.
+
+## Naming
+
+Hyphens separate hierarchy levels; compound words inside a level run together.
+So `--ol8-focus-ring-innerwidth`, not `inner-width` — and likewise
+`surfacedefault`, `disabledcontent`, `paddinginline`, `cutedge`,
+`opaqueequivalent`. This mirrors the Figma variable names exactly.
+
 ## Theming
 
 Three independent axes, each an attribute. They compose — set two at once and you
