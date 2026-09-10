@@ -4400,6 +4400,15 @@ export const tokens = {
     "description": "Suggested Large maximum visible option region before scrolling.",
     "tier": "component"
   },
+  "component.selectionPopup.inset": {
+    "type": "dimension",
+    "value": {
+      "value": 6,
+      "unit": "px"
+    },
+    "description": "Selection popup internal inset.",
+    "tier": "component"
+  },
   "component.selectionOption.minimum.standard": {
     "type": "dimension",
     "value": {
@@ -4605,6 +4614,42 @@ export const tokens = {
       "unit": "px"
     },
     "description": "Canonical Icon Frame presentation for Check or Remove artwork.",
+    "tier": "component"
+  },
+  "component.choiceChip.railInset.compact": {
+    "type": "dimension",
+    "value": {
+      "value": 9,
+      "unit": "px"
+    },
+    "description": "9px rail inset; with the 12px terminal this produces the approved 21px content inset.",
+    "tier": "component"
+  },
+  "component.choiceChip.railInset.standard": {
+    "type": "dimension",
+    "value": {
+      "value": 12,
+      "unit": "px"
+    },
+    "description": "12px rail inset; with the terminal this produces the approved 24px content inset.",
+    "tier": "component"
+  },
+  "component.choiceChip.railInset.comfortable": {
+    "type": "dimension",
+    "value": {
+      "value": 15,
+      "unit": "px"
+    },
+    "description": "15px rail inset; with the terminal this produces the approved 27px content inset.",
+    "tier": "component"
+  },
+  "component.choiceChip.railInset.large": {
+    "type": "dimension",
+    "value": {
+      "value": 15,
+      "unit": "px"
+    },
+    "description": "15px rail inset; with the terminal this produces the approved 27px content inset.",
     "tier": "component"
   },
   "component.tokenField.minimumInput": {
@@ -5140,6 +5185,10 @@ export const tokenPaths = [
   "component.choiceChip.inset.standard",
   "component.choiceChip.mark",
   "component.choiceChip.markGap",
+  "component.choiceChip.railInset.comfortable",
+  "component.choiceChip.railInset.compact",
+  "component.choiceChip.railInset.large",
+  "component.choiceChip.railInset.standard",
   "component.choiceChip.target.large",
   "component.choiceChip.target.standard",
   "component.choiceChip.terminal",
@@ -5189,6 +5238,7 @@ export const tokenPaths = [
   "component.selectionOption.minimum.large",
   "component.selectionOption.minimum.standard",
   "component.selectionPopup.gap",
+  "component.selectionPopup.inset",
   "component.selectionPopup.maximumBlock.large",
   "component.selectionPopup.maximumBlock.standard",
   "component.selectionPopup.paddingBlock",

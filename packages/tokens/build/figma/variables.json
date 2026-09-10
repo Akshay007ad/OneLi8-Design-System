@@ -5118,6 +5118,17 @@
         "description": "Suggested Large maximum visible option region before scrolling."
       },
       {
+        "path": "component.selectionPopup.inset",
+        "name": "Component / Selection Popup / Inset",
+        "type": "dimension",
+        "value": {
+          "value": 6,
+          "unit": "px"
+        },
+        "reference": "spacing.inline.related",
+        "description": "Selection popup internal inset."
+      },
+      {
         "path": "component.selectionOption.minimum.standard",
         "name": "Component / Selection Option / Minimum / Standard",
         "type": "dimension",
@@ -5369,6 +5380,50 @@
         },
         "reference": "size.icon.small",
         "description": "Canonical Icon Frame presentation for Check or Remove artwork."
+      },
+      {
+        "path": "component.choiceChip.railInset.compact",
+        "name": "Component / Choice Chip / Rail Inset / Compact",
+        "type": "dimension",
+        "value": {
+          "value": 9,
+          "unit": "px"
+        },
+        "reference": null,
+        "description": "9px rail inset; with the 12px terminal this produces the approved 21px content inset."
+      },
+      {
+        "path": "component.choiceChip.railInset.standard",
+        "name": "Component / Choice Chip / Rail Inset / Standard",
+        "type": "dimension",
+        "value": {
+          "value": 12,
+          "unit": "px"
+        },
+        "reference": null,
+        "description": "12px rail inset; with the terminal this produces the approved 24px content inset."
+      },
+      {
+        "path": "component.choiceChip.railInset.comfortable",
+        "name": "Component / Choice Chip / Rail Inset / Comfortable",
+        "type": "dimension",
+        "value": {
+          "value": 15,
+          "unit": "px"
+        },
+        "reference": null,
+        "description": "15px rail inset; with the terminal this produces the approved 27px content inset."
+      },
+      {
+        "path": "component.choiceChip.railInset.large",
+        "name": "Component / Choice Chip / Rail Inset / Large",
+        "type": "dimension",
+        "value": {
+          "value": 15,
+          "unit": "px"
+        },
+        "reference": null,
+        "description": "15px rail inset; with the terminal this produces the approved 27px content inset."
       },
       {
         "path": "component.tokenField.minimumInput",

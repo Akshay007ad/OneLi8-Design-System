@@ -634,6 +634,11 @@
           },
           "$description": "Suggested Large maximum visible option region before scrolling."
         }
+      },
+      "inset": {
+        "$type": "dimension",
+        "$value": "{spacing.inline.related}",
+        "$description": "Selection popup internal inset."
       }
     },
     "selectionOption": {
@@ -811,6 +816,52 @@
         "$type": "dimension",
         "$value": "{size.icon.small}",
         "$description": "Canonical Icon Frame presentation for Check or Remove artwork."
+      },
+      "railInset": {
+        "compact": {
+          "$type": "dimension",
+          "$value": {
+            "value": 9,
+            "unit": "px"
+          },
+          "$extensions": {
+            "oneli8.geometry": "approved-component-recipe"
+          },
+          "$description": "9px rail inset; with the 12px terminal this produces the approved 21px content inset."
+        },
+        "standard": {
+          "$type": "dimension",
+          "$value": {
+            "value": 12,
+            "unit": "px"
+          },
+          "$extensions": {
+            "oneli8.geometry": "approved-component-recipe"
+          },
+          "$description": "12px rail inset; with the terminal this produces the approved 24px content inset."
+        },
+        "comfortable": {
+          "$type": "dimension",
+          "$value": {
+            "value": 15,
+            "unit": "px"
+          },
+          "$extensions": {
+            "oneli8.geometry": "approved-component-recipe"
+          },
+          "$description": "15px rail inset; with the terminal this produces the approved 27px content inset."
+        },
+        "large": {
+          "$type": "dimension",
+          "$value": {
+            "value": 15,
+            "unit": "px"
+          },
+          "$extensions": {
+            "oneli8.geometry": "approved-component-recipe"
+          },
+          "$description": "15px rail inset; with the terminal this produces the approved 27px content inset."
+        }
       }
     },
     "tokenField": {

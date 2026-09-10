@@ -296,9 +296,9 @@
   --ol8-material-control-gem--rim-hover: color-mix(in srgb, var(--ol8-color-neutral-030) 36%, transparent);
   --ol8-material-control-gem--rim-specular: color-mix(in srgb, var(--ol8-color-neutral-030) 54%, transparent);
   --ol8-material-control-gem--blur: 12px;
-  --ol8-material-control-gem-gradient-start: 14.639%;
-  --ol8-material-control-gem-gradient-mid: 48.586%;
-  --ol8-material-control-gem-gradient-end: 85.361%;
+  --ol8-material-control-gem--gradient-start: 14.639%;
+  --ol8-material-control-gem--gradient-mid: 48.586%;
+  --ol8-material-control-gem--gradient-end: 85.361%;
   --ol8-material-gem-color-quiet-environmentalface: color-mix(in srgb, var(--ol8-color-neutral-030) 48%, transparent);
   --ol8-material-gem-color-quiet-stabilizedface: color-mix(in srgb, var(--ol8-color-neutral-060) 72%, transparent);
   --ol8-material-gem-color-quiet-opaqueequivalent: var(--ol8-color-neutral-030);
@@ -581,6 +581,7 @@
   --ol8-component-selectionpopup-railinsetinline: 3px;
   --ol8-component-selectionpopup-maximumblock-standard: 288px;
   --ol8-component-selectionpopup-maximumblock-large: 360px;
+  --ol8-component-selectionpopup-inset: 6px;
   --ol8-component-selectionoption-minimum-standard: 48px;
   --ol8-component-selectionoption-minimum-large: 60px;
   --ol8-component-selectionoption-inset-standard: 12px;
@@ -604,6 +605,10 @@
   --ol8-component-choicechip-gap: 6px;
   --ol8-component-choicechip-markgap: 9px;
   --ol8-component-choicechip-mark: 18px;
+  --ol8-component-choice-chip-rail-inset-compact: 9px;
+  --ol8-component-choice-chip-rail-inset-standard: 12px;
+  --ol8-component-choice-chip-rail-inset-comfortable: 15px;
+  --ol8-component-choice-chip-rail-inset-large: 15px;
   --ol8-component-tokenfield-minimuminput: 96px;
   --ol8-component-tokenfield-gap: 6px;
   --ol8-component-tokenfield-paddingblock: 3px;

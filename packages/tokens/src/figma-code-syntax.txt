@@ -549,3 +549,8 @@ material.gem.color.innerThinCut.mid|--ol8-material-gem-color-innerthincut-mid
 material.gem.color.quiet.environmentalFace|--ol8-material-gem-color-quiet-environmentalface
 material.gem.color.quiet.opaqueEquivalent|--ol8-material-gem-color-quiet-opaqueequivalent
 material.gem.color.quiet.stabilizedFace|--ol8-material-gem-color-quiet-stabilizedface
+material.control.gem.gradient.start|--ol8-material-control-gem--gradient-start
+material.control.gem.gradient.mid|--ol8-material-control-gem--gradient-mid
+material.control.gem.gradient.end|--ol8-material-control-gem--gradient-end
+color.scrim.pressed|--ol8-color-scrim-pressed
+component.iconButton.pressedScrim|--ol8-component-iconbutton-pressedscrim
