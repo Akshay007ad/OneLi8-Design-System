@@ -5,3 +5,4 @@ export * from './choice-item/index.js';
 export * from './selection-option/index.js';
 export * from './form-message/index.js';
 export * from './text-field/index.js';
+export * from './select/index.js';

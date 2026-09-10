@@ -348,3 +348,34 @@ export interface TabBarProps extends ComponentPropsWithoutRef<'nav'> {
   material?: Ol8Material;
 }
 export declare const TabBar: ForwardRefExoticComponent<TabBarProps & RefAttributes<HTMLElement>>;
+
+export type Ol8SelectNativePolicy = 'preferred' | 'required' | 'custom-allowed';
+export declare const OL8_SELECT_NATIVE_POLICIES: readonly Ol8SelectNativePolicy[];
+
+export interface Ol8SelectOption {
+  value: string;
+  label: string;
+  disabled?: boolean;
+  group?: string;
+}
+
+/** MOLECULE. Native first: a real select, wearing the Text Field geometry Figma reuses. */
+export interface SelectProps extends Omit<ComponentPropsWithoutRef<'select'>, 'size'> {
+  /** Required and visible. A placeholder is never the label. */
+  label: string;
+  options: Ol8SelectOption[];
+  size?: Ol8TextFieldSize;
+  appearance?: Ol8TextFieldAppearance;
+  material?: Ol8Material;
+  showLabel?: boolean;
+  invalid?: boolean;
+  /** Only when an unselected value is valid, or required validation needs a prompt. */
+  placeholderOption?: string;
+  leadingIcon?: string;
+  instruction?: ReactNode;
+  message?: ReactNode;
+  messageTone?: Ol8MessageTone;
+  /** 'custom-allowed' is refused: use Combobox, which implements the full contract. */
+  native?: Ol8SelectNativePolicy;
+}
+export declare const Select: ForwardRefExoticComponent<SelectProps & RefAttributes<HTMLSelectElement>>;

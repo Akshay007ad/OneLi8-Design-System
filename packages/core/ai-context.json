@@ -133,6 +133,18 @@
     },
     {
       "tier": "molecule",
+      "module": "molecules/select/select.js",
+      "exports": [
+        "OL8_SELECT_SIZES",
+        "OL8_SELECT_APPEARANCES",
+        "OL8_SELECT_MATERIALS",
+        "OL8_SELECT_NATIVE_POLICIES",
+        "renderSelect"
+      ],
+      "constraint": "Composed of atoms. Reusable and more specialised."
+    },
+    {
+      "tier": "molecule",
       "module": "molecules/selection-option/selection-option.js",
       "exports": [
         "OL8_OPTION_SIZES",
@@ -173,12 +185,38 @@
     },
     {
       "tier": "organism",
+      "module": "organisms/combobox/combobox.js",
+      "exports": [
+        "OL8_COMBOBOX_SIZES",
+        "OL8_COMBOBOX_APPEARANCES",
+        "OL8_COMBOBOX_MATERIALS",
+        "OL8_VALUE_POLICIES",
+        "OL8_AUTOCOMPLETE_MODES",
+        "OL8_FILTER_SOURCES",
+        "renderCombobox",
+        "hydrateComboboxes"
+      ],
+      "constraint": "Composed of atoms, molecules or organisms. May hold application state."
+    },
+    {
+      "tier": "organism",
       "module": "organisms/segmented-control/segmented-control.js",
       "exports": [
         "OL8_SEGMENT_BEHAVIORS",
         "OL8_SEGMENT_PRESENTATIONS",
         "renderSegmentedControl",
         "hydrateSegmentedControls"
+      ],
+      "constraint": "Composed of atoms, molecules or organisms. May hold application state."
+    },
+    {
+      "tier": "organism",
+      "module": "organisms/selection-popup/selection-popup.js",
+      "exports": [
+        "OL8_POPUP_WIDTHS",
+        "OL8_POPUP_SIZES",
+        "OL8_POPUP_STATUSES",
+        "renderSelectionPopup"
       ],
       "constraint": "Composed of atoms, molecules or organisms. May hold application state."
     },

@@ -1,0 +1,42 @@
+/* GENERATED from packages/core/src/organisms/combobox/combobox.css by packages/sync/src/build-styles.mjs — do not edit.
+   Edit the source in packages/core/src and re-run `npm run sync:styles`. */
+/**
+ * Oneli8 · Combobox (ORGANISM)
+ * Figma: Organism / Combobox 883:2159 — "Reuses approved Text Field, Selection
+ * Popup and governed icon atoms."
+ *
+ * So the field geometry is the field's, the popup is the popup's, and this
+ * file adds only what belongs to the combination: where the popup sits, and
+ * the two marks at the trailing edge.
+ */
+
+.ol8-combobox { position: relative; }
+
+/* "Closed control to popup block gap" is a token, so the popup sits where the
+   design says rather than wherever absolute positioning lands it. */
+.ol8-combobox__popup {
+  position: absolute;
+  z-index: 1;
+  inset-inline: 0;
+  inset-block-start: calc(100% + var(--ol8-component-selectionpopup-gap));
+}
+
+.ol8-combobox__disclosure {
+  flex: none;
+  display: inline-flex;
+  color: var(--ol8-color-icon-secondary);
+  cursor: pointer;
+}
+
+.ol8-combobox__clear {
+  flex: none;
+  display: inline-flex;
+  border: 0;
+  padding: 0;
+  background: none;
+  color: var(--ol8-color-icon-secondary);
+  cursor: pointer;
+}
+.ol8-combobox__clear:disabled { color: var(--ol8-color-icon-disabled); cursor: not-allowed; }
+
+.ol8-combobox[data-ol8-disabled] .ol8-combobox__disclosure { color: var(--ol8-color-icon-disabled); cursor: not-allowed; }

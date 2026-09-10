@@ -1,0 +1,31 @@
+/**
+ * Oneli8 · Select (MOLECULE)
+ * Figma: Select / Trigger 583:338, Molecule / Select 875:1778.
+ *
+ * "Geometry and appearance reuse approved Text Field tokens", and Figma proves
+ * it: every bound variable on the trigger control is a Text Field one. So
+ * Select carries the field classes and adds only what a native select needs,
+ * which is the disclosure mark and the removal of the platform's own arrow.
+ */
+
+.ol8-select__input {
+  appearance: none;
+  cursor: pointer;
+}
+.ol8-select__input:disabled { cursor: not-allowed; }
+
+/* The native control keeps its own text colour rules, so the value takes the
+   primary ink while an unselected placeholder option stays secondary. */
+.ol8-select__input:has(option[value=""]:checked) { color: var(--ol8-color-text-secondary); }
+
+.ol8-select__disclosure {
+  flex: none;
+  color: var(--ol8-color-icon-secondary);
+  pointer-events: none;
+}
+.ol8-select[data-ol8-disabled] .ol8-select__disclosure { color: var(--ol8-color-icon-disabled); }
+
+/* The disclosure sits over the control, so a click anywhere still reaches the
+   native select underneath and opens the platform picker. */
+.ol8-select .ol8-field__control { position: relative; }
+.ol8-select__input { flex: 1 1 auto; min-inline-size: 0; }

@@ -1,0 +1,92 @@
+/* GENERATED from packages/core/src/organisms/selection-popup/selection-popup.css by packages/sync/src/build-styles.mjs — do not edit.
+   Edit the source in packages/core/src and re-run `npm run sync:styles`. */
+/**
+ * Oneli8 · Selection Popup (ORGANISM)
+ * Figma: Building Blocks / Selection Popup 574:534 — Width, Size.
+ *
+ * The rail is a div with role="listbox" rather than a list element, because a
+ * list carries a user agent margin that a component may not zero here, and the
+ * role already carries every semantic the list element would have added.
+ *
+ * Read from Figma: a raised floating surface at the standard radius with a
+ * default border, padded by the minimal step inline and the related step
+ * block, holding one Option Rail. "Width and Size govern layout only; content
+ * must be canonical Selection Option instances."
+ *
+ * The maximum block is a suggestion, not a cage: the region scrolls rather than
+ * clipping, because an option a person cannot reach is an option that does not
+ * exist.
+ */
+
+.ol8-popup {
+  box-sizing: border-box;
+  padding-block: var(--ol8-component-selectionpopup-paddingblock);
+  padding-inline: var(--ol8-component-selectionpopup-paddinginline);
+  border: var(--ol8-border-width-hairline) solid var(--ol8-color-border-default);
+  border-radius: var(--ol8-shape-radius-standard);
+  background: var(--ol8-color-surface-raised);
+  box-shadow: var(--ol8-elevation-surface-floating);
+}
+
+.ol8-popup__rail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ol8-component-selectionpopup-gap);
+  padding-inline: var(--ol8-component-selectionpopup-railinsetinline);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* ---- Size ------------------------------------------------------------- */
+.ol8-popup[data-ol8-size="standard"] .ol8-popup__rail {
+  max-block-size: var(--ol8-component-selectionpopup-maximumblock-standard);
+}
+.ol8-popup[data-ol8-size="large"] .ol8-popup__rail {
+  max-block-size: var(--ol8-component-selectionpopup-maximumblock-large);
+}
+
+/* ---- Width · layout only, never meaning -------------------------------
+   Content hugs, Anchor matches the control it belongs to, and Wide may exceed
+   it when the options are longer than the field. */
+.ol8-popup[data-ol8-width="content"] { inline-size: max-content; }
+.ol8-popup[data-ol8-width="anchor"]  { inline-size: 100%; }
+.ol8-popup[data-ol8-width="wide"]    { inline-size: max-content; min-inline-size: 100%; }
+
+/* ---- Group labels ------------------------------------------------------ */
+.ol8-popup__group-label {
+  padding-block: var(--ol8-component-selectionpopup-gap);
+  padding-inline: var(--ol8-component-selectionoption-inset-standard);
+  color: var(--ol8-color-text-secondary);
+  font-family: var(--ol8-font-family-functional);
+  font-size: var(--ol8-font-size-012);
+  font-weight: var(--ol8-font-weight-semibold);
+  line-height: var(--ol8-font-line-018);
+  letter-spacing: var(--ol8-font-tracking-open);
+}
+
+/* ---- Status ------------------------------------------------------------
+   "No results is never represented by a selectable option", so a status is a
+   plain region, never an option, and it can never be chosen by mistake. */
+.ol8-popup__status {
+  display: flex;
+  align-items: center;
+  gap: var(--ol8-component-textfield-gap-status);
+  padding-block: var(--ol8-component-selectionpopup-paddingblock);
+  padding-inline: var(--ol8-component-selectionoption-inset-standard);
+  color: var(--ol8-color-text-secondary);
+  font-family: var(--ol8-font-family-functional);
+  font-size: var(--ol8-font-size-012);
+  font-weight: var(--ol8-font-weight-regular);
+  line-height: var(--ol8-font-line-018);
+}
+.ol8-popup__status[data-ol8-status="error"] { color: var(--ol8-color-feedbackcritical-inlinecontent); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .ol8-popup__status[data-ol8-status="loading"] .ol8-icon > svg {
+    animation: ol8-spin 900ms linear infinite;
+  }
+}
+
+@media (forced-colors: active) {
+  .ol8-popup { border-color: CanvasText; box-shadow: none; }
+}

@@ -7,6 +7,7 @@ export { ChoiceItem } from './molecules/ChoiceItem.js';
 export { SelectionOption } from './molecules/SelectionOption.js';
 export { FormMessage } from './molecules/FormMessage.js';
 export { TextField, countGraphemes, clipToGraphemes } from './molecules/TextField.js';
+export { Select, OL8_SELECT_NATIVE_POLICIES } from './molecules/Select.js';
 export { RadioGroup, CheckboxGroup } from './organisms/ChoiceGroup.js';
 export { NavigationBadge } from './atoms/NavigationBadge.js';
 export { Tabs } from './organisms/Tabs.js';

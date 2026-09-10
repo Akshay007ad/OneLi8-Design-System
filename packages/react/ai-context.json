@@ -100,6 +100,15 @@
     },
     {
       "tier": "molecule",
+      "module": "molecules/Select.js",
+      "exports": [
+        "OL8_SELECT_NATIVE_POLICIES",
+        "Select"
+      ],
+      "constraint": "Composed of atoms. Reusable and more specialised."
+    },
+    {
+      "tier": "molecule",
       "module": "molecules/SelectionOption.js",
       "exports": [
         "SelectionOption"

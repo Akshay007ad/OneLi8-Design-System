@@ -14,8 +14,8 @@
  *     virtual cursor with aria-activedescendant while real focus stays put.
  *   - "active" (the cursor) is distinct from "selected" (the data) and from
  *     :hover (the pointer), so it is its own attribute.
- *   - options cannot use the `disabled` attribute — it is not valid on <li> —
- *     so unavailability is aria-disabled.
+ *   - options cannot use the `disabled` attribute — it is not valid on the
+ *     element an option renders as — so unavailability is aria-disabled.
  */
 import { renderIcon, renderIconSvg, isOl8IconName } from '../../atoms/icon/icon.js';
 
@@ -58,14 +58,14 @@ export function renderSelectionOption(label, options = {}) {
   const lead = leadingIcon ? renderIcon(leadingIcon, { size: 18 }) : '';
   const check = `<span class="ol8-option__check" aria-hidden="true">${selected ? renderIconSvg('check') : ''}</span>`;
 
-  return `<li ${attrs}><span class="ol8-option__surface">` +
+  return `<div ${attrs}><span class="ol8-option__surface">` +
     lead +
     `<span class="ol8-option__text">` +
       `<span class="ol8-option__label" id="${labelId}">${escapeText(label)}</span>` +
       (description ? `<span class="ol8-option__description" id="${descId}">${escapeText(description)}</span>` : '') +
     `</span>` +
     check +
-    `</span></li>`;
+    `</span></div>`;
 }
 
 /** Flips one option's selected state and repaints its trailing check. */
