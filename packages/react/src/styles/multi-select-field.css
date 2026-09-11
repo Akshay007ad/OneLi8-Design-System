@@ -1,0 +1,78 @@
+/* GENERATED from packages/core/src/organisms/multi-select-field/multi-select-field.css by packages/sync/src/build-styles.mjs — do not edit.
+   Edit the source in packages/core/src and re-run `npm run sync:styles`. */
+/**
+ * Oneli8 · Multi-select Field (ORGANISM)
+ * Figma: Organism / Multi-select Field / Outline 904:2507 (16 variants)
+ *        Organism / Multi-select Field / Filled  978:4472 (16 variants)
+ *
+ * Almost everything here is inherited rather than declared. The field shell,
+ * its four sizes, both appearances, the Gem material and the focus treatment
+ * all come from the Text Field stylesheet, because Figma builds this organism
+ * from the canonical Text Field owner and only swaps that owner between the
+ * Outline and Filled sets. What is left is the one thing a Text Field has never
+ * had to do: let committed values and the editable input share a run that
+ * wraps.
+ */
+
+/* Figma's root is a vertical stack: the field composition, then the popup,
+   twelve apart. That gap is now bound in Figma to Spacing / Stack / Related. */
+.ol8-multiselect {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ol8-spacing-stack-related);
+  inline-size: 100%;
+}
+
+/* A Text Field pins this stack to one row's height, because a single line
+   input never needs more. A multi value field does: releasing the stack is what
+   lets the control below it grow, and without it the tokens simply spill out of
+   the boundary they are supposed to sit inside. */
+.ol8-multiselect__field > .ol8-field__control-stack {
+  block-size: auto;
+  min-block-size: var(--_height);
+}
+
+/* The control grows instead of scrolling or shrinking its contents. The
+   contract is explicit: the field "starts at its approved Text Field minimum
+   height and grows in 6px or 12px-aligned increments as tokens wrap" and "never
+   compresses tokens to preserve one nominal row". Every token keeps its own
+   protected 48 unit interaction line, so a populated row is taller than an
+   empty field by design. */
+.ol8-multiselect__control {
+  flex-wrap: wrap;
+  align-content: center;
+  block-size: auto;
+  min-block-size: var(--_height);
+  gap: var(--ol8-component-token-field-gap);
+  padding-block: var(--ol8-component-token-field-padding-block);
+}
+
+/* The editable input keeps a usable measure before it gives up its row. */
+.ol8-multiselect__input {
+  min-inline-size: var(--ol8-component-token-field-minimum-input);
+}
+
+/* A token awaiting a second Backspace. The first press only activates, so this
+   has to be visible: a silent activation would make the second press feel like
+   a single key deleting a value. */
+.ol8-multiselect__token[data-ol8-active] {
+  --_surface: var(--ol8-color-selection-surface);
+  --_edge: var(--ol8-color-focus-outer);
+}
+
+/* A read only field's values are labelled content, so nothing inside invites a
+   click that would do nothing. */
+.ol8-multiselect[data-ol8-readonly="true"] .ol8-multiselect__token,
+.ol8-multiselect[data-ol8-availability="disabled"] .ol8-multiselect__token {
+  cursor: default;
+}
+
+/* Announcements only. Removing a value says so, with the remaining count. */
+.ol8-multiselect__status {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

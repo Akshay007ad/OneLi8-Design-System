@@ -605,7 +605,7 @@
   --ol8-component-choicechip-inset-standard: 24px;
   --ol8-component-choicechip-inset-comfortable: 27px;
   --ol8-component-choicechip-inset-large: 27px;
-  --ol8-component-choicechip-gap: 6px;
+  --ol8-component-choice-chip-gap: 6px;
   --ol8-component-choicechip-markgap: 9px;
   --ol8-component-choicechip-mark: 18px;
   --ol8-component-choice-chip-mark-target: 24px;
@@ -613,9 +613,9 @@
   --ol8-component-choice-chip-rail-inset-standard: 12px;
   --ol8-component-choice-chip-rail-inset-comfortable: 15px;
   --ol8-component-choice-chip-rail-inset-large: 15px;
-  --ol8-component-tokenfield-minimuminput: 96px;
-  --ol8-component-tokenfield-gap: 6px;
-  --ol8-component-tokenfield-paddingblock: 3px;
+  --ol8-component-token-field-minimum-input: 96px;
+  --ol8-component-token-field-gap: 6px;
+  --ol8-component-token-field-padding-block: 3px;
   --ol8-component-suggestionrail-gap: 6px;
   --ol8-component-suggestionrail-fieldseparation: 6px;
   --ol8-component-navigation-item-gap: 6px;

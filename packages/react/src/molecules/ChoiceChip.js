@@ -83,7 +83,12 @@ export function ChoiceChip({
     createElement('input', {
       key: 'input', ...rest,
       type: 'checkbox', className: 'ol8-chip__input', id: uid, name, value, disabled, onChange,
-      ...(selected !== undefined ? { checked: selected } : defaultSelected !== undefined ? { defaultChecked: defaultSelected } : {}),
+      // A controlled chip with nothing listening is a display of state, not a
+      // control. Saying so is what React asks for, and it is the truth: the
+      // chip cannot change anything until someone handles the change.
+      ...(selected !== undefined
+        ? { checked: selected, ...(onChange ? {} : { readOnly: true }) }
+        : defaultSelected !== undefined ? { defaultChecked: defaultSelected } : {}),
     }),
     createElement(ChipShape, {
       key: 'shape', uid, label: children,

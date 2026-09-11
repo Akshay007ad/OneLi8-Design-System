@@ -11,14 +11,14 @@ border.width.standard|--ol8-border-width-standard
 border.width.strong|--ol8-border-width-strong
 color.actionDestructive.content|--ol8-color-actiondestructive-content
 color.actionDestructive.default|--ol8-color-actiondestructive-default
-color.actionDestructive.disabled|--ol8-color-actiondestructive-disabled
 color.actionDestructive.disabledContent|--ol8-color-actiondestructive-disabledcontent
+color.actionDestructive.disabled|--ol8-color-actiondestructive-disabled
 color.actionDestructive.hover|--ol8-color-actiondestructive-hover
 color.actionDestructive.pressed|--ol8-color-actiondestructive-pressed
 color.actionPrimary.content|--ol8-color-actionprimary-content
 color.actionPrimary.default|--ol8-color-actionprimary-default
-color.actionPrimary.disabled|--ol8-color-actionprimary-disabled
 color.actionPrimary.disabledContent|--ol8-color-actionprimary-disabledcontent
+color.actionPrimary.disabled|--ol8-color-actionprimary-disabled
 color.actionPrimary.hover|--ol8-color-actionprimary-hover
 color.actionPrimary.pressed|--ol8-color-actionprimary-pressed
 color.actionQuiet.contentDefault|--ol8-color-actionquiet-contentdefault
@@ -233,6 +233,7 @@ component.choice.indicator.comfortable|--ol8-component-choice-indicator-comforta
 component.choice.indicator.compact|--ol8-component-choice-indicator-compact
 component.choice.opticalStroke|--ol8-component-choice-optical-stroke
 component.choice.rowMinimum|--ol8-component-choice-rowminimum
+component.choiceChip.gap|--ol8-component-choice-chip-gap
 component.choiceChip.height.comfortable|--ol8-component-choice-chip-height-comfortable
 component.choiceChip.height.compact|--ol8-component-choice-chip-height-compact
 component.choiceChip.height.large|--ol8-component-choice-chip-height-large
@@ -314,11 +315,11 @@ component.tabBar.inset|--ol8-component-tab-bar-inset
 component.tabBar.itemRadius|--ol8-component-tab-bar-item-radius
 component.tabBar.radius|--ol8-component-tab-bar-radius
 component.tabItem.contentGap|--ol8-component-tab-item-contentgap
-component.tabItem.height|--ol8-component-tab-item-height
 component.tabItem.height.comfortable|--ol8-component-tab-item-height-comfortable
 component.tabItem.height.compact|--ol8-component-tab-item-height-compact
 component.tabItem.height.large|--ol8-component-tab-item-height-large
 component.tabItem.height.standard|--ol8-component-tab-item-height-standard
+component.tabItem.height|--ol8-component-tab-item-height
 component.tabItem.indicatorInset|--ol8-component-tab-item-indicator-inset
 component.tabItem.indicatorThickness|--ol8-component-tab-item-indicator-thickness
 component.tabItem.inset.comfortable|--ol8-component-tab-item-inset-comfortable
@@ -347,6 +348,9 @@ component.textField.radius.comfortable|--ol8-component-textfield-radius-comforta
 component.textField.radius.compact|--ol8-component-textfield-radius-compact
 component.textField.radius.large|--ol8-component-textfield-radius-large
 component.textField.radius.standard|--ol8-component-textfield-radius-standard
+component.tokenField.gap|--ol8-component-token-field-gap
+component.tokenField.minimumInput|--ol8-component-token-field-minimum-input
+component.tokenField.paddingBlock|--ol8-component-token-field-padding-block
 dimension.scale.000|--ol8-dimension-scale-000
 dimension.scale.003|--ol8-dimension-scale-003
 dimension.scale.006|--ol8-dimension-scale-006
@@ -393,8 +397,8 @@ font.tracking.displaySoft|--ol8-font-tracking-displaysoft
 font.tracking.normal|--ol8-font-tracking-normal
 font.tracking.open|--ol8-font-tracking-open
 font.tracking.snug|--ol8-font-tracking-snug
-font.tracking.tight|--ol8-font-tracking-tight
 font.tracking.tighter|--ol8-font-tracking-tighter
+font.tracking.tight|--ol8-font-tracking-tight
 font.tracking.titleSoft|--ol8-font-tracking-titlesoft
 font.tracking.titleTight|--ol8-font-tracking-titletight
 font.weight.bold|--ol8-font-weight-bold

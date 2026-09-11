@@ -47,7 +47,7 @@ export function resolveTokenMark(mark, { removable = true, selected = false } = 
 export function renderToken(label, options = {}) {
   const {
     size = 'standard', selected = false, mark = 'auto', removable = true,
-    removeLabel, id, className,
+    removeLabel, focusable = true, id, className,
   } = options;
 
   if (!OL8_TOKEN_SIZES.includes(size)) throw new Error(`[ol8] unknown token size "${size}"`);
@@ -66,6 +66,7 @@ export function renderToken(label, options = {}) {
   // value must remain readable, never shortened or overlaid by its mark.
   const markup = resolved === 'remove'
     ? `<button type="button" class="ol8-chip__mark ol8-token__remove" ` +
+      (focusable ? '' : 'tabindex="-1" ') +
       `aria-label="${escapeAttr(removeLabel ?? `Remove ${label}`)}">${renderIconSvg('close')}</button>`
     : resolved === 'check'
       ? `<span class="ol8-chip__mark" aria-hidden="true">${renderIconSvg('check')}</span>`

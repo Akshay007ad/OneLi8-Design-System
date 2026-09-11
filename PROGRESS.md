@@ -1,8 +1,8 @@
 # Where this stands
 
 Written 10 September 2026. Everything below is verified by `npm run build`,
-which now runs the structure check, 70 token checks, 47 core component checks
-and 31 React reference checks.
+which now runs the structure check, 70 token checks, 65 core component checks
+and 44 React reference checks.
 
 ## Done and committed
 
@@ -52,20 +52,49 @@ Size=Standard both carry the same 10.2 by 6.9 artwork at the same 1.8 stroke,
 centred in their box. Scaling it also dropped the stroke to 1.35, off the 1.8
 system. Both are fixed.
 
+**The last three organisms on the Select and Combobox page.** Multi-select Field
+and Choice Picker, which is every set on that page now built.
+
+Multi-select Field is one component with an appearance axis rather than two,
+because the Figma Filled description says so itself: "Same atomic composition
+and size behavior as Outline; only the canonical field appearance owner
+changes." In Figma the tokens are absolutely positioned over the field shell,
+since a design file draws a picture rather than a layout that reflows, so the
+real arrangement came from the contract: the committed values and the editable
+input share one wrapping run, and the field grows rather than compressing
+tokens to hold one nominal row.
+
+Choice Picker follows the inline composition the maintainer approved as
+canonical: a search field, a wrapping matrix of real checkboxes wearing the chip
+appearance, and a commitment line that exists only in Apply mode. Figma draws
+"Enter to apply" as text; the decision recorded on the component requires it to
+be an actual clickable and focusable action, so it is a button, because a
+keyboard instruction is no affordance for a pointer, touch, or a screen reader.
+
+**Selection Popup now has a React reference,** which the Multi-select Field
+needed. Writing it surfaced that React drew each option as an `li` inside a
+`div` with role listbox, which is invalid markup and a drift from core, which
+has always drawn a div. React now matches.
+
+**Three defects found by looking at it rather than by running the tests.** A
+committed value given as a bare string showed the option's value instead of its
+label, so a field holding "ui" read "ui" rather than "Interface". The Text Field
+pins its control stack to one row's height, which a single line input never
+notices and a wrapping one does: tokens spilled straight out of the boundary
+they belong inside. And a controlled chip with no change handler made React warn
+about a read only field, which was fair, so a chip that nothing is listening to
+now says it is read only rather than pretending otherwise.
+
 ## Not built yet
 
-Five sets remain on the Select and Combobox page:
+Every component set on every page is now built in both packages. What is left
+is evidence rather than construction:
 
-| Figma set | Intended path |
+| Gap | What it is |
 |---|---|
-| Organism / Multi-select Field / Outline 904:2507 | not yet named |
-| Organism / Multi-select Field / Filled 978:4472 | not yet named |
-| Organism / Choice Picker 906:2898 | not yet named |
-| Molecule / Select 875:1778 (the expanded composition) | composed, not yet a variant test |
-| Organism / Combobox 883:2159 (the expanded composition) | composed, not yet a variant test |
-
-React references for Selection Popup and Combobox are also still to write; the
-core versions exist and are tested.
+| Combobox React reference | Core is built and tested; React is not written |
+| Molecule / Select 875:1778 | Composed, but no variant test against the expanded composition |
+| Organism / Combobox 883:2159 | Composed, but no variant test against the expanded composition |
 
 ## Decisions worth your eye
 
@@ -129,6 +158,13 @@ All of these name a value that was already there, rather than changing a design.
   on the other among peer tokens, and the contract asks for one mark treatment
   across an instance. It now matches the anatomy the contract writes down,
   "Label + optional Remove mark".
+- Four variables naming values this repository had inferred: `Component /
+  Choice Chip / Gap`, and Token Field's `Gap`, `Padding Block` and `Minimum
+  Input`. Tokens with inferred names went from thirty five to thirty one, and
+  the chip family now spells itself one way rather than two.
+- Sixty four bindings of raw numbers Figma was already drawing: the twelve
+  between a field and its popup, now `Spacing / Stack / Related`, and the six of
+  the picker's wrapping matrix, now the Choice Chip gap.
 - `Component / Choice Chip / Mark Target`, a plain twenty four. The Remove mark
   is drawn at eighteen and the contract asks for a reachable target of at least
   twenty four, so the target is expanded around the drawn mark rather than the
@@ -137,7 +173,7 @@ All of these name a value that was already there, rather than changing a design.
 
 ## Still open from before
 
-- Thirty five tokens still have inferred names, most of them Choice Chip. Four
+- Thirty one tokens still have inferred names. Four
   of those, `innerTerminal`, `centerCut`, `innerCenterCut` and `bezelInset`,
   describe a mask based construction that neither Figma nor the code uses, since
   both draw two vectors per terminal instead. They are unreferenced.

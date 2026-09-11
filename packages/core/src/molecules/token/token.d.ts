@@ -26,6 +26,8 @@ export interface Ol8TokenOptions {
   removable?: boolean;
   /** Overrides the default "Remove {label}" accessible name. */
   removeLabel?: string;
+  /** False makes the Remove button reachable by arrow key rather than Tab. */
+  focusable?: boolean;
   id?: string;
   className?: string;
 }

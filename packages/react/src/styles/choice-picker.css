@@ -1,0 +1,100 @@
+/* GENERATED from packages/core/src/organisms/choice-picker/choice-picker.css by packages/sync/src/build-styles.mjs — do not edit.
+   Edit the source in packages/core/src and re-run `npm run sync:styles`. */
+/**
+ * Oneli8 · Choice Picker (ORGANISM)
+ * Figma: Organism / Choice Picker / Soft Hexagon 906:2898 (16 variants)
+ *
+ * Three parts stacked twelve apart: a search field, a wrapping matrix of chips,
+ * and in Apply mode a commitment line. The search field is the canonical Text
+ * Field owner and the chips are the canonical Choice Chip owner, so neither is
+ * restyled here.
+ *
+ * Read from all four sizes in Figma: the root gap, the matrix gap and the
+ * commitment typography do NOT scale with the picker size. They are twelve,
+ * six, and 12/18 at Compact, Standard, Comfortable and Large alike. Only the
+ * search field and the chips take the size.
+ */
+
+.ol8-picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ol8-spacing-stack-related);
+  inline-size: 100%;
+}
+
+/* "The matrix wraps with 6px gaps and preserves source/reading order; it is not
+   a masonry layout." A plain wrapping flex row is exactly that. */
+.ol8-picker__matrix {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ol8-component-choice-chip-gap);
+}
+
+/* Figma: HORIZONTAL, space between, 24 tall, both texts secondary at 12/18. */
+.ol8-picker__commitment {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--ol8-spacing-inline-standard);
+  min-block-size: var(--ol8-size-icon-standard);
+  font-size: var(--ol8-font-size-012);
+  line-height: var(--ol8-font-line-018);
+  color: var(--ol8-color-text-secondary);
+}
+
+.ol8-picker__summary {
+  font-family: var(--ol8-font-family-functional);
+  color: inherit;
+}
+
+/* Clear all and the apply hint are text weight actions rather than Button
+   instances. The contract asks for Clear all to be quiet, and Figma's row is
+   twenty four tall, which a Button's protected forty eight target would break.
+   They are still real buttons, so they are reachable and announced. */
+.ol8-picker__apply,
+.ol8-picker__clear {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: var(--ol8-font-family-functional);
+  font-size: inherit;
+  line-height: inherit;
+  color: var(--ol8-color-actionquiet-contentdefault);
+  cursor: pointer;
+}
+.ol8-picker__apply:hover,
+.ol8-picker__clear:hover {
+  color: var(--ol8-color-actionquiet-contenthover);
+  text-decoration: underline;
+}
+.ol8-picker__apply:focus-visible,
+.ol8-picker__clear:focus-visible {
+  outline: var(--ol8-focus-ring-innerwidth) solid var(--ol8-color-focus-inner);
+  outline-offset: var(--ol8-focus-ring-offset);
+}
+
+.ol8-picker[data-ol8-availability="disabled"] .ol8-picker__apply,
+.ol8-picker[data-ol8-availability="disabled"] .ol8-picker__clear {
+  color: var(--ol8-color-actionquiet-contentdisabled);
+  cursor: not-allowed;
+}
+
+/* The search label stays associated while the composition hides it. */
+.ol8-picker__label-row--hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Retrieval and result counts are announced rather than only drawn. */
+.ol8-picker__status {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

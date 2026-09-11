@@ -14,7 +14,7 @@ import { OL8_TOKEN_SIZES, OL8_TOKEN_MARKS, resolveTokenMark } from '../foundatio
  */
 export function Token({
   children, size = 'standard', selected = false, mark = 'auto', removable = true,
-  removeLabel, onRemove, id, className = '', ...rest
+  removeLabel, focusable = true, onRemove, id, className = '', ...rest
 }) {
   if (!OL8_TOKEN_SIZES.includes(size)) throw new Error(`[ol8] unknown token size "${size}"`);
   if (!OL8_TOKEN_MARKS.includes(mark)) throw new Error(`[ol8] unknown token mark "${mark}"`);
@@ -32,6 +32,7 @@ export function Token({
     ? createElement('button', {
         key: 'mark', type: 'button', className: 'ol8-chip__mark ol8-token__remove',
         'aria-label': removeLabel ?? `Remove ${children}`, onClick: onRemove,
+        ...(focusable ? {} : { tabIndex: -1 }),
       }, createElement(IconGlyph, { name: 'close' }))
     : resolved === 'check'
       ? createElement('span', { key: 'mark', className: 'ol8-chip__mark', 'aria-hidden': 'true' },

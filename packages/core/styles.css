@@ -19,7 +19,9 @@
 @import "./src/molecules/text-field/text-field.css";
 @import "./src/molecules/token/token.css";
 @import "./src/organisms/choice-group/choice-group.css";
+@import "./src/organisms/choice-picker/choice-picker.css";
 @import "./src/organisms/combobox/combobox.css";
+@import "./src/organisms/multi-select-field/multi-select-field.css";
 @import "./src/organisms/segmented-control/segmented-control.css";
 @import "./src/organisms/selection-popup/selection-popup.css";
 @import "./src/organisms/tab-bar/tab-bar.css";

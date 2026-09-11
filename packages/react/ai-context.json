@@ -152,9 +152,33 @@
     },
     {
       "tier": "organism",
+      "module": "organisms/ChoicePicker.js",
+      "exports": [
+        "ChoicePicker"
+      ],
+      "constraint": "Composed of atoms, molecules or organisms. May hold application state."
+    },
+    {
+      "tier": "organism",
+      "module": "organisms/MultiSelectField.js",
+      "exports": [
+        "MultiSelectField"
+      ],
+      "constraint": "Composed of atoms, molecules or organisms. May hold application state."
+    },
+    {
+      "tier": "organism",
       "module": "organisms/SegmentedControl.js",
       "exports": [
         "SegmentedControl"
+      ],
+      "constraint": "Composed of atoms, molecules or organisms. May hold application state."
+    },
+    {
+      "tier": "organism",
+      "module": "organisms/SelectionPopup.js",
+      "exports": [
+        "SelectionPopup"
       ],
       "constraint": "Composed of atoms, molecules or organisms. May hold application state."
     },

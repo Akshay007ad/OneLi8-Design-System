@@ -207,16 +207,41 @@
     },
     {
       "tier": "organism",
+      "module": "organisms/choice-picker/choice-picker.js",
+      "exports": [
+        "OL8_PICKER_SIZES",
+        "OL8_PICKER_MATERIALS",
+        "OL8_COMMIT_BEHAVIORS",
+        "OL8_PICKER_PRESENTATIONS",
+        "OL8_PICKER_MARKS",
+        "renderChoicePicker",
+        "hydrateChoicePickers"
+      ],
+      "constraint": "Composed of atoms, molecules or organisms. May hold application state."
+    },
+    {
+      "tier": "organism",
       "module": "organisms/combobox/combobox.js",
       "exports": [
         "OL8_COMBOBOX_SIZES",
         "OL8_COMBOBOX_APPEARANCES",
         "OL8_COMBOBOX_MATERIALS",
-        "OL8_VALUE_POLICIES",
         "OL8_AUTOCOMPLETE_MODES",
         "OL8_FILTER_SOURCES",
         "renderCombobox",
         "hydrateComboboxes"
+      ],
+      "constraint": "Composed of atoms, molecules or organisms. May hold application state."
+    },
+    {
+      "tier": "organism",
+      "module": "organisms/multi-select-field/multi-select-field.js",
+      "exports": [
+        "OL8_MULTI_SELECT_SIZES",
+        "OL8_MULTI_SELECT_APPEARANCES",
+        "OL8_MULTI_SELECT_MATERIALS",
+        "renderMultiSelectField",
+        "hydrateMultiSelectFields"
       ],
       "constraint": "Composed of atoms, molecules or organisms. May hold application state."
     },

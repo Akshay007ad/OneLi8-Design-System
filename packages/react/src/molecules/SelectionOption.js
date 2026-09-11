@@ -16,7 +16,10 @@ export function SelectionOption({
   const optionId = id ?? `ol8-option-${auto}`;
   const labelId = `${optionId}-label`;
   const descId = description ? `${optionId}-desc` : undefined;
-  return createElement('li', {
+  // A div, not an li: the popup rail is a div with role="listbox", and an li
+  // outside a list is invalid markup. The core renderer has always emitted a
+  // div here; this had drifted.
+  return createElement('div', {
     ...rest,
     className: `ol8-option${className ? ` ${className}` : ''}`,
     role: 'option', id: optionId,

@@ -7,7 +7,8 @@
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { TextField, FormMessage, Tabs, SegmentedControl, TabBar, Link,
-         ChoiceChip, Token } from '../src/index.js';
+         ChoiceChip, Token, MultiSelectField, ChoicePicker,
+         SelectionPopup } from '../src/index.js';
 import { renderChoiceChip, renderToken } from '@oneli8/core';
 
 const out = [];
@@ -160,5 +161,61 @@ t('Token Mark None leaves no phantom slot and no control', () => {
 });
 threws('Token refuses a Remove mark on a non removable value', () =>
   html(createElement(Token, { mark: 'remove', removable: false }, 'A')));
+
+
+// ---- The three organisms ------------------------------------------------
+const SKILLS = [{ value: 'ui', label: 'Interface' }, { value: 'ps', label: 'Photoshop' }];
+
+t('MultiSelectField answers like core: tokens out of the tab order', () => {
+  const s = html(createElement(MultiSelectField, { label: 'Skills', id: 'f', options: SKILLS, values: ['ui', 'ps'] }));
+  if (count(s, /tabindex="-1"/g) !== 2) throw new Error('both Remove buttons leave the tab order');
+  has(s, 'role="combobox"'); has(s, 'aria-controls="f-popup"');
+});
+t('a committed value shows its option label, not its value', () => {
+  const s = html(createElement(MultiSelectField, { label: 'S', id: 'f', options: SKILLS, values: ['ui'] }));
+  has(s, '>Interface</span>'); has(s, 'aria-label="Remove Interface"');
+});
+threws('MultiSelectField refuses a value outside a constrained set', () =>
+  html(createElement(MultiSelectField, { label: 'S', options: SKILLS, values: ['nope'] })));
+threws('MultiSelectField refuses a duplicate', () =>
+  html(createElement(MultiSelectField, { label: 'S', options: SKILLS, values: ['ui', 'ui'] })));
+threws('MultiSelectField refuses read only plus invalid', () =>
+  html(createElement(MultiSelectField, { label: 'S', readOnly: true, invalid: true })));
+t('MultiSelectField expanded opens a multi selectable listbox', () => {
+  const s = html(createElement(MultiSelectField, { label: 'Skills', id: 'f', options: SKILLS, values: ['ui'], expanded: true }));
+  has(s, 'aria-multiselectable="true"'); has(s, 'id="f-popup"');
+});
+t('a read only field keeps its values as labelled content', () => {
+  const s = html(createElement(MultiSelectField, { label: 'S', id: 'f', options: SKILLS, values: ['ui'], readOnly: true }));
+  has(s, 'data-ol8-mark="none"');
+  if (s.includes('ol8-token__remove')) throw new Error('no dead Remove button');
+});
+
+const OPTS = [{ value: 'a', label: 'Interface Design', selected: true }, { value: 'b', label: 'Web' }];
+t('ChoicePicker apply mode matches core: a real action, not a sentence', () => {
+  const s = html(createElement(ChoicePicker, { label: 'Search', id: 'p', options: OPTS, commitBehavior: 'apply' }));
+  has(s, 'class="ol8-picker__apply"'); has(s, 'Enter to apply'); has(s, '1 selected');
+  has(s, 'role="group"');
+});
+threws('ChoicePicker refuses an apply action under immediate commitment', () =>
+  html(createElement(ChoicePicker, { label: 'S', options: OPTS, applyHint: 'Apply' })));
+t('ChoicePicker immediate mode draws no commitment line', () => {
+  const s = html(createElement(ChoicePicker, { label: 'S', id: 'p', options: OPTS }));
+  if (s.includes('ol8-picker__commitment')) throw new Error('nothing is pending, so nothing is said');
+  if (count(s, /type="checkbox"/g) !== 2) throw new Error('every option is a real checkbox');
+});
+t('ChoicePicker peers never mix Check and None', () => {
+  has(html(createElement(ChoicePicker, { label: 'S', id: 'p', options: OPTS })), 'ol8-chip__mark');
+  const none = html(createElement(ChoicePicker, { label: 'S', id: 'p', options: OPTS, mark: 'none' }));
+  if (none.includes('ol8-chip__mark')) throw new Error('None collapses the slot for every peer');
+});
+t('SelectionPopup options are divs, matching the core renderer', () => {
+  const s = html(createElement(SelectionPopup, { id: 'x', label: 'Skills', options: SKILLS, multiple: true }));
+  has(s, 'role="listbox"'); has(s, 'aria-multiselectable="true"');
+  if (s.includes('<li')) throw new Error('an li outside a list is invalid markup');
+  if (count(s, /role="option"/g) !== 2) throw new Error('one option per item');
+});
+threws('SelectionPopup refuses a wordless status', () =>
+  html(createElement(SelectionPopup, { id: 'x', label: 'S', options: SKILLS, status: 'loading' })));
 
 console.log(`✓ React reference: ${out.length}/${out.length} checks`);

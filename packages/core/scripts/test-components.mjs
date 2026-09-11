@@ -6,7 +6,8 @@
 import { renderTextField, renderFormMessage, countGraphemes, clipToGraphemes,
          renderTabs, renderTabPanel, renderSegmentedControl, renderTabBar,
          renderNavigationBadge, renderChoiceChip, renderToken,
-         resolveTokenMark } from '../src/index.js';
+         resolveTokenMark, renderMultiSelectField,
+         renderChoicePicker } from '../src/index.js';
 import { resolveNavigationKey } from '../src/organisms/navigation-keys.js';
 
 const out = [];
@@ -242,6 +243,114 @@ t('Mark None leaves no phantom slot', () => {
 });
 t('a token carries no input, because it is content and not a control', () => {
   hasnt(renderToken('A', { mark: 'none' }), '<input');
+});
+
+
+// ---- Multi-select Field (Figma 904:2507 and 978:4472) -------------------
+const SKILLS = [{ value: 'ui', label: 'Interface' }, { value: 'ps', label: 'Photoshop' }, { value: 'web', label: 'Web' }];
+const field = (o = {}) => renderMultiSelectField({ label: 'Skills', id: 'f', options: SKILLS, ...o });
+
+t('a constrained field refuses a value that is not an option', () => {
+  let threw = false;
+  try { field({ values: ['Invented'] }); } catch { threw = true; }
+  if (!threw) throw new Error('constrained mode cannot create a non option token');
+  // suggestive may author one
+  has(field({ valuePolicy: 'suggestive', values: ['Invented'] }), '>Invented<');
+});
+t('a committed value shows its option label, not its value', () => {
+  const h = field({ values: ['ui'] });
+  has(h, '>Interface<'); hasnt(h, '>ui<');
+  has(h, 'aria-label="Remove Interface"');
+  // a suggestive field's authored entry has no option, so it shows itself
+  has(field({ valuePolicy: 'suggestive', values: ['Rust'] }), '>Rust<');
+});
+t('a duplicate is never added invisibly', () => {
+  let threw = false;
+  try { field({ values: ['ui', 'ui'] }); } catch { threw = true; }
+  if (!threw) throw new Error('should have thrown');
+  eq((field({ values: ['ui', 'ui'], allowDuplicates: true }).match(/ol8-multiselect__token/g) || []).length, 2, 'allowed');
+});
+t('the maximum blocks additions and says so as a plain status', () => {
+  let threw = false;
+  try { field({ values: ['ui', 'ps'], maximumValues: 1 }); } catch { threw = true; }
+  if (!threw) throw new Error('should have thrown');
+  const h = field({ values: ['ui'], maximumValues: 1 });
+  has(h, 'data-ol8-full="true"'); has(h, 'Maximum of 1 reached'); has(h, 'role="status"');
+});
+t('read only plus invalid is refused, as in a Text Field', () => {
+  let threw = false;
+  try { field({ readOnly: true, invalid: true }); } catch { threw = true; }
+  if (!threw) throw new Error('should have thrown');
+});
+t('tokens are not tab stops; Tab enters at the input', () => {
+  const h = field({ values: ['ui', 'ps'] });
+  eq((h.match(/tabindex="-1"/g) || []).length, 2, 'both Remove buttons leave the tab order');
+  has(h, 'class="ol8-field__input ol8-multiselect__input"');
+});
+t('a read only field keeps its values as labelled content', () => {
+  const h = field({ values: ['ui'], readOnly: true });
+  has(h, 'data-ol8-mark="none"'); hasnt(h, 'ol8-token__remove');
+});
+t('expanded points the combobox at a multi selectable listbox', () => {
+  const h = field({ values: ['ui'], expanded: true });
+  has(h, 'aria-expanded="true"'); has(h, 'aria-controls="f-popup"');
+  has(h, 'id="f-popup"'); has(h, 'aria-multiselectable="true"');
+});
+t('collapsed still answers the id the combobox points at', () => {
+  const h = field();
+  has(h, 'aria-expanded="false"'); has(h, 'id="f-popup" hidden');
+});
+t('both appearances are one component, as the Figma description says', () => {
+  has(field({ appearance: 'filled' }), 'data-ol8-appearance="filled"');
+  has(field({ appearance: 'outline' }), 'data-ol8-appearance="outline"');
+  let threw = false;
+  try { field({ appearance: 'ghost' }); } catch { threw = true; }
+  if (!threw) throw new Error('should have thrown');
+});
+
+// ---- Choice Picker (Figma 906:2898) -------------------------------------
+const OPTS = [{ value: 'a', label: 'Interface Design', selected: true }, { value: 'b', label: 'Web' }];
+const picker = (o = {}) => renderChoicePicker({ label: 'Search skills', id: 'p', options: OPTS, ...o });
+
+t('immediate commitment refuses an apply action', () => {
+  let threw = false;
+  try { picker({ applyHint: 'Apply' }); } catch { threw = true; }
+  if (!threw) throw new Error('an apply action with immediate updates is a lie');
+  hasnt(picker(), 'ol8-picker__commitment');
+});
+t('apply mode holds a pending set and offers a real action', () => {
+  const h = picker({ commitBehavior: 'apply' });
+  has(h, 'ol8-picker__commitment');
+  has(h, '<button type="button" class="ol8-picker__apply">Enter to apply</button>');
+  has(h, '1 selected');
+});
+t('the picker is a group, not a dialog pretending to be a listbox', () => {
+  const h = picker();
+  has(h, 'role="group"'); has(h, 'aria-labelledby="p-label"');
+  hasnt(h, 'role="listbox"');
+});
+t('the search label stays associated while the composition hides it', () => {
+  const h = picker();
+  has(h, 'ol8-picker__label-row--hidden');
+  has(h, '<label class="ol8-field__label" id="p-label" for="p">Search skills</label>');
+});
+t('every option is a real checkbox wearing the chip appearance', () => {
+  const h = picker();
+  eq((h.match(/type="checkbox"/g) || []).length, 2, 'one input per choice');
+  eq((h.match(/ol8-picker__chip/g) || []).length, 2, 'both wear the chip');
+});
+t('peer chips never mix Check and None', () => {
+  has(picker(), 'ol8-chip__mark');                    // check is the default
+  hasnt(picker({ mark: 'none' }), 'ol8-chip__mark');  // none collapses for all
+});
+t('the search uses the governed icon rather than local artwork', () => {
+  has(picker(), 'data-ol8-icon="search"');
+});
+t('a status needs words, because a spinner announces nothing', () => {
+  let threw = false;
+  try { picker({ status: 'loading' }); } catch { threw = true; }
+  if (!threw) throw new Error('should have thrown');
+  has(picker({ status: 'loading', statusText: 'Searching' }), 'Searching');
 });
 
 console.log(`\u2713 component contract: ${out.length}/${out.length} checks`);

@@ -78,6 +78,22 @@ export function resolveTokenMark(mark, { removable = true, selected = false } = 
 }
 
 export const OL8_OPTION_SIZES = ['standard', 'large'];
+export const OL8_POPUP_WIDTHS = ['content', 'anchor', 'wide'];
+export const OL8_POPUP_SIZES = OL8_OPTION_SIZES;
+export const OL8_MULTI_SELECT_SIZES = OL8_BUTTON_SIZES;
+export const OL8_MULTI_SELECT_APPEARANCES = ['outline', 'filled'];
+export const OL8_MULTI_SELECT_MATERIALS = OL8_MATERIALS;
+/** Constrained resolves from a known set; suggestive may also author values. */
+export const OL8_VALUE_POLICIES = ['constrained', 'suggestive'];
+
+export const OL8_PICKER_SIZES = OL8_BUTTON_SIZES;
+export const OL8_PICKER_MATERIALS = OL8_MATERIALS;
+export const OL8_COMMIT_BEHAVIORS = ['immediate', 'apply'];
+export const OL8_PICKER_PRESENTATIONS = ['inline', 'popup'];
+/** One treatment across an instance; peers never mix Check and None. */
+export const OL8_PICKER_MARKS = ['check', 'none'];
+
+export const OL8_POPUP_STATUSES = ['none', 'loading', 'empty', 'error'];
 export const OL8_AGGREGATE = ['none', 'some', 'all'];
 
 /** Compact and Standard take the 18px icon; Comfortable and Large take 24px. */
