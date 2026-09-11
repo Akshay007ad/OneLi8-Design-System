@@ -24,6 +24,7 @@ export declare const OL8_ICONS: {
   readonly "chevron-up": Ol8IconEntry;
   readonly "clear": Ol8IconEntry;
   readonly "close": Ol8IconEntry;
+  readonly "copy": Ol8IconEntry;
   readonly "critical": Ol8IconEntry;
   readonly "forward": Ol8IconEntry;
   readonly "informative": Ol8IconEntry;

@@ -156,6 +156,25 @@ export const OL8_ICONS = {
       }
     ]
   },
+  "copy": {
+    "category": "action",
+    "figmaNode": "1291:153",
+    "mirrorInRTL": false,
+    "sourceInk": "#151817",
+    "body": "<path id=\"glyph-path\" d=\"M4.5 9H13.5C14.3284 9 15 9.6716 15 10.5V19.5C15 20.3284 14.3284 21 13.5 21H4.5C3.6716 21 3 20.3284 3 19.5V10.5C3 9.6716 3.6716 9 4.5 9ZM9 9V4.5C9 3.6716 9.6716 3 10.5 3H19.5C20.3284 3 21 3.6716 21 4.5V13.5C21 14.3284 20.3284 15 19.5 15H15\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+    "elements": [
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M4.5 9H13.5C14.3284 9 15 9.6716 15 10.5V19.5C15 20.3284 14.3284 21 13.5 21H4.5C3.6716 21 3 20.3284 3 19.5V10.5C3 9.6716 3.6716 9 4.5 9ZM9 9V4.5C9 3.6716 9.6716 3 10.5 3H19.5C20.3284 3 21 3.6716 21 4.5V13.5C21 14.3284 20.3284 15 19.5 15H15",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      }
+    ]
+  },
   "critical": {
     "category": "status",
     "figmaNode": "418:18",
