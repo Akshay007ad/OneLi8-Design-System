@@ -194,11 +194,15 @@ All of these name a value that was already there, rather than changing a design.
 
 ## Still open from before
 
-- The Token's cross cannot be resized in Figma. It sits inside the Choice Chip
-  geometry owner instance, and Figma refuses size overrides that deep, silently.
-  So the cross stays at the 9 span there and code follows it. Giving the two
-  marks exactly equal spans would mean restructuring the chip, which is your
-  call rather than mine.
+- **Settled: the Token's two marks stay at different spans, check 10.2 and cross
+  9.** The check is the larger of the two, so nothing dominates. Equalising them
+  would mean changing the shared `Icon / Selection / Check` master, which is
+  instanced 197 times across eleven families, so every checkbox, option, popup
+  and chip tick in the system would shrink by twelve percent. Akshay looked at
+  that number and chose to leave it. The cross cannot be moved the other way: it
+  sits inside the Choice Chip geometry owner instance and Figma refuses size
+  overrides that deep, silently.
+
 - Thirty one tokens still have inferred names. Four
   of those, `innerTerminal`, `centerCut`, `innerCenterCut` and `bezelInset`,
   describe a mask based construction that neither Figma nor the code uses, since
