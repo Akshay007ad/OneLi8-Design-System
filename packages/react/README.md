@@ -1,32 +1,56 @@
 # @oneli8/react
 
-OneLi8 Design System for React.
+[![npm](https://img.shields.io/npm/v/@oneli8/react?color=2c438b&label=npm)](https://www.npmjs.com/package/@oneli8/react)
+[![licence](https://img.shields.io/npm/l/@oneli8/react?color=2c438b)](https://github.com/Akshay007ad/OneLi8-Design-System/blob/main/LICENSE)
+
+**OneLi8 means One Light.**
+
+A design system created by Akshay Dhore, intended for broad human benefit and
+conceived as service to Guruji Shrii Arnav, whose teachings inspire it. Service,
+clarity, harmony, proportion, restraint and evolution guide its decisions.
+
+The practical intention is narrower and easier to check. Most design systems
+hand you components and hope you stay inside them. This one hands you the
+reasoning as well, so when you need something it does not ship, you can build it
+and have it still belong. The rules travel inside this package, not in a wiki
+someone forgets to read.
 
 ```sh
 npm install @oneli8/react
 ```
 
 ```jsx
-import { Button, Icon } from '@oneli8/react';
+import { MultiSelectField } from '@oneli8/react';
 import '@oneli8/react/styles.css';
 
-export function Actions() {
-  return <Button variant="primary" leadingIcon="add">Add item</Button>;
-}
+<MultiSelectField
+  label="Skills"
+  options={skills}
+  values={chosen}
+  placeholder="Add skill…"
+  onRemoveValue={remove}
+/>
 ```
 
-## What is included
+Every component is drawn from a component set in the Figma source rather than
+invented in code, and the two are checked against each other on every build.
 
-| Tier | Components |
-|---|---|
-| Atom | `Icon`, `SelectionIndicator`, `NavigationBadge` |
-| Molecule | `Button`, `IconButton`, `Link`, `TextField`, `FormMessage`, `Select`, `ChoiceItem`, `SelectionOption`, `ChoiceChip`, `Token` |
-| Organism | `Tabs`, `TabBar`, `SegmentedControl`, `RadioGroup`, `CheckboxGroup`, `SelectionPopup`, `Combobox`, `MultiSelectField`, `ChoicePicker` |
-| Material | Gem, an attribute adapter rather than a tier |
+## What is included
 
 Twenty one components, matching `@oneli8/core` one for one. Both packages are
 checked against each other on every build, so the two cannot answer differently
 about a role, a name, a relationship or a state.
+
+**Atoms** · `Icon` · `SelectionIndicator` · `NavigationBadge`
+
+**Molecules** · `Button` · `IconButton` · `Link` · `TextField` · `FormMessage`
+· `Select` · `ChoiceItem` · `SelectionOption` · `ChoiceChip` · `Token`
+
+**Organisms** · `Tabs` · `TabBar` · `SegmentedControl` · `RadioGroup`
+· `CheckboxGroup` · `SelectionPopup` · `Combobox` · `MultiSelectField`
+· `ChoicePicker`
+
+**Material** · Gem, an attribute adapter rather than a tier
 
 ## The system travels with the package
 
@@ -54,14 +78,9 @@ Read @oneli8/react/ai-context.json and PRINCIPLES.md before writing any OneLi8 U
 
 ## Why this exists
 
-OneLi8 means One Light. It was created by Akshay Dhore, intended for broad human
-benefit and conceived as service to Guruji Shrii Arnav, whose teachings inspire
-it. Service, clarity, harmony, proportion, restraint and evolution guide its
-decisions. `PRINCIPLES.md` ships inside this package and sets them out in full.
-
-The practical intention: most design systems hand you components and hope you
-stay inside them. This one hands you the reasoning too, so when you need
-something it does not ship you can build it and have it still belong.
+`PRINCIPLES.md` ships inside this package and sets out the six values in full,
+along with the three operating laws every component obeys. It is the document to
+read before extending anything.
 
 ## Naming
 

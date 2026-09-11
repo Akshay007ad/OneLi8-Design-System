@@ -1,19 +1,36 @@
 # @oneli8/tokens
 
-OneLi8 Design System, design tokens compiled from Figma.
+[![npm](https://img.shields.io/npm/v/@oneli8/tokens?color=2c438b&label=npm)](https://www.npmjs.com/package/@oneli8/tokens)
+[![licence](https://img.shields.io/npm/l/@oneli8/tokens?color=2c438b)](https://github.com/Akshay007ad/OneLi8-Design-System/blob/main/LICENSE)
+
+**OneLi8 means One Light.**
+
+A design system created by Akshay Dhore, intended for broad human benefit and
+conceived as service to Guruji Shrii Arnav, whose teachings inspire it. Service,
+clarity, harmony, proportion, restraint and evolution guide its decisions.
+
+This package is the decisions on their own, with no markup: the vocabulary every
+OneLi8 component reads. It is also the Tailwind package, with a version 3 preset
+and a version 4 bridge.
 
 ```sh
 npm install @oneli8/tokens
 ```
 
 ```js
-import '@oneli8/tokens/css';        // every token as a :root custom property
-import { tokens } from '@oneli8/tokens';  // flat { 'color-text-primary': '#151817', ... }
+import '@oneli8/tokens/css';             // every token as a :root custom property
+import { tokens } from '@oneli8/tokens'; // flat { 'color-text-primary': '#151817', ... }
 ```
 
-Every value is generated from `src/tokens.json`, which is verified against the
-Figma file rather than maintained by hand. Do not edit `dist/`, edit the source and
-rebuild.
+Names are not derived from a rule. Every variable carries an explicit code
+syntax in Figma, recorded verbatim in `src/figma-code-syntax.txt`, so the name a
+component reads is the name the designer set. Where Figma spells two sibling
+tokens differently, this package reproduces both rather than tidying one.
+
+The vocabulary is authored across `src/primitive.json`, `src/semantic.json`,
+`src/component.json` and `src/themes.json`, each value carrying its own
+description. Everything under `build/` is generated, so edit the source and
+rebuild rather than the output.
 
 ## What the vocabulary contains
 

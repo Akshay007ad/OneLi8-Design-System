@@ -1,51 +1,67 @@
 # @oneli8/core
 
-OneLi8 Design System, framework agnostic components.
+[![npm](https://img.shields.io/npm/v/@oneli8/core?color=2c438b&label=npm)](https://www.npmjs.com/package/@oneli8/core)
+[![licence](https://img.shields.io/npm/l/@oneli8/core?color=2c438b)](https://github.com/Akshay007ad/OneLi8-Design-System/blob/main/LICENSE)
 
-Every component is two functions: `renderX(...)` returns an HTML **string**, and
-`hydrateX(root)` enforces the runtime contract on markup that already exists.
-There is no framework dependency, no virtual DOM and no build step.
+**OneLi8 means One Light.**
+
+A design system created by Akshay Dhore, intended for broad human benefit and
+conceived as service to Guruji Shrii Arnav, whose teachings inspire it. Service,
+clarity, harmony, proportion, restraint and evolution guide its decisions.
+
+The practical intention is narrower and easier to check. Most design systems
+hand you components and hope you stay inside them. This one hands you the
+reasoning as well, so when you need something it does not ship, you can build it
+and have it still belong. The rules travel inside this package, not in a wiki
+someone forgets to read.
+
+This is the framework free build. It runs anywhere HTML is produced as a string:
+Rails, Django, Laravel, Astro, Eleventy, a CMS theme, or hand written markup.
 
 ```sh
 npm install @oneli8/core
 ```
 
 ```js
-import { renderButton, hydrateButtons } from '@oneli8/core';
+import { renderMultiSelectField, hydrateMultiSelectFields } from '@oneli8/core';
 import '@oneli8/core/styles.css';
 
-document.querySelector('#toolbar').innerHTML = renderButton('Save', {
-  variant: 'primary',
-  leadingIcon: 'add',
+element.innerHTML = renderMultiSelectField({
+  label: 'Skills',
+  options: skills,
+  values: chosen,
+  placeholder: 'Add skill…',
 });
-
-hydrateButtons();
+hydrateMultiSelectFields();
 ```
+
+`render*` returns markup. `hydrate*` wires up only what markup genuinely cannot
+express. Both halves produce the same DOM as `@oneli8/react`, checked on every
+build.
 
 ## What is included
 
-| Tier | Component |
-|---|---|
-| Atom | `Icon`, `Selection Indicator` (checkbox, radio, switch), `Navigation Badge` |
-| Molecule | `Button`, `Icon Button`, `Link`, `Text Field`, `Form Message`, `Select`, `Choice Item`, `Selection Option`, `Choice Chip`, `Token` |
-| Organism | `Tabs`, `Tab Bar`, `Segmented Control`, `Choice Group`, `Selection Popup`, `Combobox`, `Multi-select Field`, `Choice Picker` |
-| Material | `Gem`, an attribute adapter, not a tier |
+Twenty one components, every one of them drawn from a component set in the Figma
+source rather than invented here. Anything not listed is not exported. Tokens
+exist for families whose implementations are not in this release; a token is not
+a promise of a component.
 
-Twenty one components, every one of them drawn from a component set in the
-Figma file rather than invented here. Anything not listed is not exported.
-Tokens exist for families whose implementations are not in this release; a token
-is not a promise of a component.
+**Atoms** · `Icon` · `Selection Indicator` (checkbox, radio, switch)
+· `Navigation Badge`
+
+**Molecules** · `Button` · `Icon Button` · `Link` · `Text Field` · `Form Message`
+· `Select` · `Choice Item` · `Selection Option` · `Choice Chip` · `Token`
+
+**Organisms** · `Tabs` · `Tab Bar` · `Segmented Control` · `Choice Group`
+· `Selection Popup` · `Combobox` · `Multi-select Field` · `Choice Picker`
+
+**Material** · `Gem`, an attribute adapter, not a tier
 
 ## Why this exists
 
-OneLi8 means One Light. It was created by Akshay Dhore, intended for broad human
-benefit and conceived as service to Guruji Shrii Arnav, whose teachings inspire
-it. Service, clarity, harmony, proportion, restraint and evolution guide its
-decisions. `PRINCIPLES.md` ships inside this package and sets them out in full.
-
-The practical intention: most design systems hand you components and hope you
-stay inside them. This one hands you the reasoning too, so when you need
-something it does not ship you can build it and have it still belong.
+`PRINCIPLES.md` ships inside this package and sets out the six values in full,
+along with the three operating laws every component obeys. It is the document to
+read before extending anything.
 
 ## Naming
 
