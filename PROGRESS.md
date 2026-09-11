@@ -85,6 +85,11 @@ they belong inside. And a controlled chip with no change handler made React warn
 about a read only field, which was fair, so a chip that nothing is listening to
 now says it is read only rather than pretending otherwise.
 
+**The core package exported eight of its twenty three stylesheets.** The export
+map was hand maintained like the aggregate was, so a consumer could import the
+whole sheet or a handful of early components and nothing else. It is generated
+now, from the same walk that writes the aggregate.
+
 **Combobox has a React reference,** so core and React now carry the same
 twenty one components. React owns none of the keyboard model there: opening,
 the active option and committing are application state, so they arrive as props
@@ -201,4 +206,6 @@ All of these name a value that was already there, rather than changing a design.
 - Five Figma variables are defined but not emitted, all superseded `683:*`
   duplicates.
 - `data-ol8-type-mode` is inert and has no Figma design behind it.
-- The version is still `1.0.0-beta.5`. Nothing is published from this work yet.
+- The version is `1.0.0-beta.6` in all four package files, built, packed and
+  smoke tested against a clean consumer, but NOT published. Publishing needs a
+  one time code from your authenticator, which only you can enter.

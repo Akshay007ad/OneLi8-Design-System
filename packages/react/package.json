@@ -1,6 +1,6 @@
 {
   "name": "@oneli8/react",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.6",
   "description": "OneLi8 Design System for React. Components, design tokens, the Gem material, and the design language they follow.",
   "keywords": [
     "react",
@@ -52,7 +52,7 @@
     "NOTICE"
   ],
   "dependencies": {
-    "@oneli8/tokens": "1.0.0-beta.5"
+    "@oneli8/tokens": "1.0.0-beta.6"
   },
   "peerDependencies": {
     "react": ">=18"

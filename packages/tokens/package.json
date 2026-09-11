@@ -1,6 +1,6 @@
 {
   "name": "@oneli8/tokens",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.6",
   "description": "OneLi8 Design System \u2014 design tokens compiled from Figma. CSS custom properties and a flat JS object.",
   "keywords": [
     "design-tokens",

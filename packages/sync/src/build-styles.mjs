@@ -66,5 +66,27 @@ writeFileSync(join(ROOT, 'packages/core/styles.css'),
 writeFileSync(join(ROOT, 'packages/react/styles.css'),
   header('react') + ordered.map(s => `@import "./src/styles/${basename(s)}";\n`).join(''));
 
+/* The per sheet export map in core is generated for the same reason the
+   aggregate is. It was written by hand and listed eight of the twenty three
+   sheets, so a consumer could import the aggregate or a handful of early
+   components and nothing else. React needs no equivalent: its copies are flat,
+   so one wildcard covers them. */
+const pkgPath = join(ROOT, 'packages/core/package.json');
+const pkg = JSON.parse(readFileSync(pkgPath, 'utf8'));
+const kept = Object.fromEntries(
+  Object.entries(pkg.exports).filter(([key]) => !key.startsWith('./styles/')));
+const styleExports = Object.fromEntries(ordered.map(sheet =>
+  [`./styles/${basename(sheet)}`, `./${relative(join(ROOT, 'packages/core'), sheet)}`]));
+// Keep the map's shape: the entry points first, then the stylesheets, then the
+// metadata keys that were already last.
+const TAIL = ['./package.json', './ai-context.json', './skills/*'];
+pkg.exports = {
+  ...Object.fromEntries(Object.entries(kept).filter(([k]) => !TAIL.includes(k))),
+  ...styleExports,
+  ...Object.fromEntries(TAIL.filter(k => k in kept).map(k => [k, kept[k]])),
+};
+writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
+
 console.log(`✓ ${sheets.length} stylesheets -> packages/react/src/styles (source: packages/core/src)`);
 console.log(`✓ aggregate styles.css generated for both packages (${ordered.length} imports each)`);
+console.log(`✓ ${ordered.length} per sheet exports generated in @oneli8/core`);

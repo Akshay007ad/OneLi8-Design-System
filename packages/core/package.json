@@ -1,6 +1,6 @@
 {
   "name": "@oneli8/core",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.6",
   "description": "OneLi8 Design System, framework agnostic. renderX returns an HTML string, hydrateX wires existing DOM. Ships the design language and the rules it follows.",
   "keywords": [
     "design-system",
@@ -46,12 +46,27 @@
     },
     "./styles.css": "./styles.css",
     "./styles/icon.css": "./src/atoms/icon/icon.css",
+    "./styles/navigation-badge.css": "./src/atoms/navigation-badge/navigation-badge.css",
     "./styles/selection-indicator.css": "./src/atoms/selection-indicator/selection-indicator.css",
     "./styles/button.css": "./src/molecules/button/button.css",
-    "./styles/icon-button.css": "./src/molecules/icon-button/icon-button.css",
+    "./styles/choice-chip.css": "./src/molecules/choice-chip/choice-chip.css",
     "./styles/choice-item.css": "./src/molecules/choice-item/choice-item.css",
+    "./styles/form-message.css": "./src/molecules/form-message/form-message.css",
+    "./styles/icon-button.css": "./src/molecules/icon-button/icon-button.css",
+    "./styles/link.css": "./src/molecules/link/link.css",
+    "./styles/navigation-item.css": "./src/molecules/navigation-item/navigation-item.css",
+    "./styles/select.css": "./src/molecules/select/select.css",
     "./styles/selection-option.css": "./src/molecules/selection-option/selection-option.css",
+    "./styles/text-field.css": "./src/molecules/text-field/text-field.css",
+    "./styles/token.css": "./src/molecules/token/token.css",
     "./styles/choice-group.css": "./src/organisms/choice-group/choice-group.css",
+    "./styles/choice-picker.css": "./src/organisms/choice-picker/choice-picker.css",
+    "./styles/combobox.css": "./src/organisms/combobox/combobox.css",
+    "./styles/multi-select-field.css": "./src/organisms/multi-select-field/multi-select-field.css",
+    "./styles/segmented-control.css": "./src/organisms/segmented-control/segmented-control.css",
+    "./styles/selection-popup.css": "./src/organisms/selection-popup/selection-popup.css",
+    "./styles/tab-bar.css": "./src/organisms/tab-bar/tab-bar.css",
+    "./styles/tabs.css": "./src/organisms/tabs/tabs.css",
     "./styles/gem.css": "./src/materials/gem/gem.css",
     "./package.json": "./package.json",
     "./ai-context.json": "./ai-context.json",
@@ -74,7 +89,7 @@
     "NOTICE"
   ],
   "dependencies": {
-    "@oneli8/tokens": "1.0.0-beta.5"
+    "@oneli8/tokens": "1.0.0-beta.6"
   },
   "engines": {
     "node": ">=20"
