@@ -5,7 +5,8 @@
  */
 import { renderTextField, renderFormMessage, countGraphemes, clipToGraphemes,
          renderTabs, renderTabPanel, renderSegmentedControl, renderTabBar,
-         renderNavigationBadge } from '../src/index.js';
+         renderNavigationBadge, renderChoiceChip, renderToken,
+         resolveTokenMark } from '../src/index.js';
 import { resolveNavigationKey } from '../src/organisms/navigation-keys.js';
 
 const out = [];
@@ -164,4 +165,83 @@ if (failed.length) {
   for (const f of out) console.error('  \u00b7 ' + f);
   process.exit(1);
 }
+
+// ---- Choice Chip and Token (Figma 636:847 and 897:2106) -----------------
+t('the chip is a real checkbox, so selection is not colour alone', () => {
+  const h = renderChoiceChip('Accessibility', { selected: true, id: 'c1' });
+  has(h, '<input type="checkbox"'); has(h, 'checked');
+  has(h, 'data-ol8-selection="selected"');
+});
+t('every size Figma draws is accepted and nothing else is', () => {
+  for (const size of ['compact', 'standard', 'comfortable', 'large']) {
+    has(renderChoiceChip('A', { size }), `data-ol8-size="${size}"`);
+  }
+  let threw = false;
+  try { renderChoiceChip('A', { size: 'huge' }); } catch { threw = true; }
+  if (!threw) throw new Error('an invented size should have thrown');
+});
+t('the silhouette is two fixed terminals and one growing rail', () => {
+  const h = renderChoiceChip('A', { id: 'c2' });
+  eq((h.match(/ol8-chip__terminal--/g) || []).length, 2, 'two terminals');
+  has(h, 'ol8-chip__terminal--leading'); has(h, 'ol8-chip__terminal--trailing');
+  eq((h.match(/ol8-chip__rail/g) || []).length, 1, 'one rail');
+});
+t('the terminal viewBox is the 12 x 30 space Figma draws it in', () => {
+  has(renderChoiceChip('A'), 'viewBox="0 0 12 30"');
+  has(renderChoiceChip('A'), 'preserveAspectRatio="none"');
+});
+t('the edge omits the seam, so the rail continues one perimeter', () => {
+  const h = renderChoiceChip('A', { id: 'c3' });
+  // the fill closes with Z; the edge does not, because Figma's outline
+  // "deliberately omits the hidden vertical closing edge"
+  has(h, 'L12 30 Z"'); has(h, 'L12 30"');
+});
+t('the mark is absent until Show Mark, and then leads the label', () => {
+  hasnt(renderChoiceChip('A'), 'ol8-chip__mark');
+  const h = renderChoiceChip('Accessibility', { selected: true, showMark: true, id: 'c4' });
+  if (h.indexOf('ol8-chip__mark') > h.indexOf('ol8-chip__label')) {
+    throw new Error('Figma places the mark before the label in every variant');
+  }
+});
+t('a chip refuses an empty label', () => {
+  let threw = false;
+  try { renderChoiceChip('  '); } catch { threw = true; }
+  if (!threw) throw new Error('should have thrown');
+});
+
+t('a token delegates its geometry to the chip owner, as Figma does', () => {
+  const chip = renderChoiceChip('Accessibility', { id: 'x' });
+  const token = renderToken('Accessibility', { id: 'x' });
+  has(token, 'ol8-token'); has(token, 'ol8-chip');
+  // the same two terminals, the same paths
+  eq((token.match(/ol8-chip__terminal--/g) || []).length, 2, 'two terminals');
+  const path = chip.match(/d="(M12 0[^"]+Z)"/)[1];
+  has(token, path);
+});
+t('auto resolves the mark the way the contract says', () => {
+  eq(resolveTokenMark('auto', { removable: true }), 'remove', 'removable committed value');
+  eq(resolveTokenMark('auto', { removable: false, selected: true }), 'check', 'selected choice');
+  eq(resolveTokenMark('auto', { removable: false, selected: false }), 'none', 'informational');
+  eq(resolveTokenMark('check', { removable: true }), 'check', 'an explicit mark is kept');
+});
+t('removal is a real button that names the value it removes', () => {
+  const h = renderToken('Accessibility', { mark: 'remove', id: 't1' });
+  has(h, '<button type="button"'); has(h, 'aria-label="Remove Accessibility"');
+  has(h, 'data-ol8-mark="remove"');
+  // the label is still complete beside it, never shortened by the mark
+  has(h, '>Accessibility</span>');
+});
+t('a non removable token may not carry a Remove mark', () => {
+  let threw = false;
+  try { renderToken('A', { mark: 'remove', removable: false }); } catch { threw = true; }
+  if (!threw) throw new Error('should have thrown');
+});
+t('Mark None leaves no phantom slot', () => {
+  const h = renderToken('A', { mark: 'none' });
+  hasnt(h, 'ol8-chip__mark'); has(h, 'data-ol8-mark="none"');
+});
+t('a token carries no input, because it is content and not a control', () => {
+  hasnt(renderToken('A', { mark: 'none' }), '<input');
+});
+
 console.log(`\u2713 component contract: ${out.length}/${out.length} checks`);

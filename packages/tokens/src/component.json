@@ -832,6 +832,17 @@
         "$value": "{size.icon.small}",
         "$description": "Canonical Icon Frame presentation for Check or Remove artwork."
       },
+      "markTarget": {
+        "$type": "dimension",
+        "$value": {
+          "value": 24,
+          "unit": "px"
+        },
+        "$extensions": {
+          "oneli8.geometry": "approved-component-recipe"
+        },
+        "$description": "Minimum reachable target for the Remove mark. The mark is drawn at 18; the contract asks for at least 24 that overlaps neither the label nor the chip edge, so the target is expanded around the drawn mark rather than enlarging it."
+      },
       "railInset": {
         "compact": {
           "$type": "dimension",

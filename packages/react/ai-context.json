@@ -68,6 +68,14 @@
     },
     {
       "tier": "molecule",
+      "module": "molecules/ChoiceChip.js",
+      "exports": [
+        "ChoiceChip"
+      ],
+      "constraint": "Composed of atoms. Reusable and more specialised."
+    },
+    {
+      "tier": "molecule",
       "module": "molecules/ChoiceItem.js",
       "exports": [
         "ChoiceItem"
@@ -122,6 +130,14 @@
         "TextField",
         "countGraphemes",
         "clipToGraphemes"
+      ],
+      "constraint": "Composed of atoms. Reusable and more specialised."
+    },
+    {
+      "tier": "molecule",
+      "module": "molecules/Token.js",
+      "exports": [
+        "Token"
       ],
       "constraint": "Composed of atoms. Reusable and more specialised."
     },

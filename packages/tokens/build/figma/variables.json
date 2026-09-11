@@ -5415,6 +5415,17 @@
         "description": "Canonical Icon Frame presentation for Check or Remove artwork."
       },
       {
+        "path": "component.choiceChip.markTarget",
+        "name": "Component / Choice Chip / Mark Target",
+        "type": "dimension",
+        "value": {
+          "value": 24,
+          "unit": "px"
+        },
+        "reference": null,
+        "description": "Minimum reachable target for the Remove mark. The mark is drawn at 18; the contract asks for at least 24 that overlaps neither the label nor the chip edge, so the target is expanded around the drawn mark rather than enlarging it."
+      },
+      {
         "path": "component.choiceChip.railInset.compact",
         "name": "Component / Choice Chip / Rail Inset / Compact",
         "type": "dimension",

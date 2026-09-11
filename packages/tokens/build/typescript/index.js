@@ -4643,6 +4643,15 @@ export const tokens = {
     "description": "Canonical Icon Frame presentation for Check or Remove artwork.",
     "tier": "component"
   },
+  "component.choiceChip.markTarget": {
+    "type": "dimension",
+    "value": {
+      "value": 24,
+      "unit": "px"
+    },
+    "description": "Minimum reachable target for the Remove mark. The mark is drawn at 18; the contract asks for at least 24 that overlaps neither the label nor the chip edge, so the target is expanded around the drawn mark rather than enlarging it.",
+    "tier": "component"
+  },
   "component.choiceChip.railInset.compact": {
     "type": "dimension",
     "value": {
@@ -5212,6 +5221,7 @@ export const tokenPaths = [
   "component.choiceChip.inset.standard",
   "component.choiceChip.mark",
   "component.choiceChip.markGap",
+  "component.choiceChip.markTarget",
   "component.choiceChip.railInset.comfortable",
   "component.choiceChip.railInset.compact",
   "component.choiceChip.railInset.large",

@@ -237,6 +237,7 @@ component.choiceChip.height.comfortable|--ol8-component-choice-chip-height-comfo
 component.choiceChip.height.compact|--ol8-component-choice-chip-height-compact
 component.choiceChip.height.large|--ol8-component-choice-chip-height-large
 component.choiceChip.height.standard|--ol8-component-choice-chip-height-standard
+component.choiceChip.markTarget|--ol8-component-choice-chip-mark-target
 component.choiceChip.railInset.comfortable|--ol8-component-choice-chip-rail-inset-comfortable
 component.choiceChip.railInset.compact|--ol8-component-choice-chip-rail-inset-compact
 component.choiceChip.railInset.large|--ol8-component-choice-chip-rail-inset-large

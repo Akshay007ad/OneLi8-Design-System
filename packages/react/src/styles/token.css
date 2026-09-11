@@ -1,0 +1,45 @@
+/* GENERATED from packages/core/src/molecules/token/token.css by packages/sync/src/build-styles.mjs — do not edit.
+   Edit the source in packages/core/src and re-run `npm run sync:styles`. */
+/**
+ * Oneli8 · Token (MOLECULE)
+ * Figma: Select and Combobox / Molecule / Token 897:2106 (24 variants)
+ *
+ * The silhouette, sizes and colours all come from the Choice Chip stylesheet,
+ * because Figma's Token instantiates the Choice Chip Geometry Owner rather than
+ * redrawing it. Every rule here is about the one axis Token adds: the Mark.
+ */
+
+/* A token is content, not a control. Only its Remove mark is interactive. */
+.ol8-token.ol8-chip { cursor: default; }
+
+/* ---- Remove ---------------------------------------------------------- */
+.ol8-token__remove {
+  position: relative;      /* anchors the expanded target below */
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  /* The ring follows the mark, not the chip: the chip is not the target. */
+  border-radius: var(--ol8-shape-radius-full);
+}
+
+/* The mark is drawn at 18 because that is what Figma draws, but the contract
+   asks for a target of at least 24 that does not overlap anything. The target
+   is expanded with a pseudo element so the drawn size and the reachable size
+   can differ without moving the label: it grows 3 into a 9 gap on one side and
+   into the rail inset on the other, so it still touches neither. */
+.ol8-token__remove::before {
+  content: "";
+  position: absolute;
+  inline-size: var(--ol8-component-choice-chip-mark-target);
+  block-size: var(--ol8-component-choice-chip-mark-target);
+  transform: translate(-50%, -50%);
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+}
+
+.ol8-token__remove:focus-visible {
+  outline: var(--ol8-focus-ring-innerwidth) solid var(--ol8-color-focus-inner);
+  outline-offset: var(--ol8-focus-ring-offset);
+}

@@ -82,6 +82,17 @@
     },
     {
       "tier": "molecule",
+      "module": "molecules/choice-chip/choice-chip.js",
+      "exports": [
+        "OL8_CHIP_SIZES",
+        "renderChoiceChip",
+        "hydrateChoiceChips",
+        "syncChip"
+      ],
+      "constraint": "Composed of atoms. Reusable and more specialised."
+    },
+    {
+      "tier": "molecule",
       "module": "molecules/choice-item/choice-item.js",
       "exports": [
         "OL8_CHOICE_KINDS",
@@ -168,6 +179,17 @@
         "hydrateTextFields",
         "countGraphemes",
         "clipToGraphemes"
+      ],
+      "constraint": "Composed of atoms. Reusable and more specialised."
+    },
+    {
+      "tier": "molecule",
+      "module": "molecules/token/token.js",
+      "exports": [
+        "OL8_TOKEN_SIZES",
+        "OL8_TOKEN_MARKS",
+        "resolveTokenMark",
+        "renderToken"
       ],
       "constraint": "Composed of atoms. Reusable and more specialised."
     },

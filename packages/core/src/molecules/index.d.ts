@@ -6,3 +6,5 @@ export * from './link/index.js';
 export * from './form-message/index.js';
 export * from './text-field/index.js';
 export * from './select/index.js';
+export * from './choice-chip/index.js';
+export * from './token/index.js';

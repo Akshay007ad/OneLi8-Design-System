@@ -1,8 +1,8 @@
 # Where this stands
 
 Written 10 September 2026. Everything below is verified by `npm run build`,
-which now runs the structure check, 69 token checks, 34 core component checks
-and 23 React reference checks.
+which now runs the structure check, 70 token checks, 47 core component checks
+and 31 React reference checks.
 
 ## Done and committed
 
@@ -25,14 +25,39 @@ Segmented Control and Tab Bar, at the paths the status registry already named.
 **Select, Selection Popup and Combobox.** Three of the ten sets on the Select
 and Combobox page.
 
+**Choice Chip and Token.** The Soft Hexagon, built the way Figma builds it: a
+fixed twelve unit terminal, a rail that grows with the label, and a mirrored
+terminal, so a short chip and a long one keep the same shoulder depth and side
+angle. The terminals are real paths rather than a polygon, because the contract
+rejects approximating their softness with extra vertices. One viewBox serves all
+four heights: read from Figma, every terminal path at thirty, thirty six and
+forty two shares identical X values and Y values that are the same fractions of
+the height, so stretching Y alone is exact. Token draws no silhouette of its
+own; it instantiates the chip's, exactly as the Figma component instantiates the
+Geometry Owner.
+
+**Ten stylesheets that were built but never shipped.** Text Field, Form Message,
+Select, Combobox, Selection Popup, Navigation Badge, Navigation Item, Tabs, Tab
+Bar and Segmented Control all had stylesheets in the tree and no import in
+either package's `styles.css`, so a consumer loading them got markup with no
+rules to paint it. The aggregate is now generated from the directory rather than
+maintained by hand, which is the only version of this that cannot fall behind
+again.
+
+**The checkbox check was drawn a quarter too small at compact.** The stylesheet
+scaled the glyph with its box, on a stated assumption that the eighteen master
+is an exact three quarter scale of the twenty four one. Figma says otherwise:
+`Icon / Selection / Check` is a governed two size master where Size=Small and
+Size=Standard both carry the same 10.2 by 6.9 artwork at the same 1.8 stroke,
+centred in their box. Scaling it also dropped the stroke to 1.35, off the 1.8
+system. Both are fixed.
+
 ## Not built yet
 
-Seven sets remain on the Select and Combobox page:
+Five sets remain on the Select and Combobox page:
 
 | Figma set | Intended path |
 |---|---|
-| Choice Chip / Soft Hexagon 636:847 | `packages/react/src/molecules/ChoiceChip.js` |
-| Molecule / Token 897:2106 | `packages/react/src/molecules/Token.js` |
 | Organism / Multi-select Field / Outline 904:2507 | not yet named |
 | Organism / Multi-select Field / Filled 978:4472 | not yet named |
 | Organism / Choice Picker 906:2898 | not yet named |
@@ -69,6 +94,28 @@ The contract asks an adapter to expand the activation region. An overlay drawn
 in CSS would sit over the value and take the caret away, which is worse than the
 shortfall it fixes. It belongs to a platform adapter.
 
+**Figma puts the mark BEFORE the label in every Token variant, Remove
+included.** The contract writes the anatomy the other way round, as "Label +
+optional Remove mark". A leading remove affordance is unusual, so this is worth
+your eye, but Figma is unambiguous across all twenty four variants and code
+follows it. Say the word and it moves.
+
+**The chip's default size is Standard.** Figma's variant default is Compact, but
+that is which variant sits first in the set rather than a statement about the
+API, and this contract names no default at all. Standard is what every other
+size bearing component in the repository defaults to, so the house convention
+wins until you say otherwise.
+
+**The chip's edge uses a non scaling stroke.** It has to: the terminal stretches
+on Y only, so an ordinary stroke would come out thicker along the top and bottom
+than up the angled ends. The cost is that a CSS `zoom` or `transform: scale()`
+applied to a chip will scale the rail's border and not the terminal's edge.
+Browser page zoom is unaffected, because that scales CSS pixels and both follow.
+
+**`component.choiceChip.markGap` and `component.choice.gap.standard` are both
+nine and mean the same thing.** Figma binds the rail to the second. The first is
+authored, unbound and now unused. One of them should go.
+
 ## Figma changes I made
 
 All of these name a value that was already there, rather than changing a design.
@@ -80,10 +127,18 @@ All of these name a value that was already there, rather than changing a design.
 - Eighteen navigation component variables, so names that this repository had
   inferred are now names Figma agreed. Tokens with inferred names went from
   fifty three to thirty five.
+- `Component / Choice Chip / Mark Target`, a plain twenty four. The Remove mark
+  is drawn at eighteen and the contract asks for a reachable target of at least
+  twenty four, so the target is expanded around the drawn mark rather than the
+  mark being enlarged. This is the one value here that Figma does not draw; it
+  was created so the name would be Figma's rather than mine.
 
 ## Still open from before
 
-- Thirty five tokens still have inferred names, most of them Choice Chip.
+- Thirty five tokens still have inferred names, most of them Choice Chip. Four
+  of those, `innerTerminal`, `centerCut`, `innerCenterCut` and `bezelInset`,
+  describe a mask based construction that neither Figma nor the code uses, since
+  both draw two vectors per terminal instead. They are unreferenced.
 - Five Figma variables are defined but not emitted, all superseded `683:*`
   duplicates.
 - `data-ol8-type-mode` is inert and has no Figma design behind it.

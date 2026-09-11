@@ -65,6 +65,18 @@ export const OL8_SEGMENT_PRESENTATIONS = [
 ];
 export const OL8_TAB_BAR_PRESENTATIONS = ['bottom', 'inline', 'sidebar', 'spatial-rail'];
 
+export const OL8_CHIP_SIZES = OL8_BUTTON_SIZES;
+export const OL8_TOKEN_SIZES = OL8_CHIP_SIZES;
+/** Figma draws the last three; `auto` resolves to one of them in code. */
+export const OL8_TOKEN_MARKS = ['auto', 'none', 'check', 'remove'];
+
+/** The contract's resolution, stated once so both packages agree. */
+export function resolveTokenMark(mark, { removable = true, selected = false } = {}) {
+  if (mark !== 'auto') return mark;
+  if (removable) return 'remove';
+  return selected ? 'check' : 'none';
+}
+
 export const OL8_OPTION_SIZES = ['standard', 'large'];
 export const OL8_AGGREGATE = ['none', 'some', 'all'];
 

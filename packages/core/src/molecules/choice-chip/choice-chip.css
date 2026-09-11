@@ -1,0 +1,214 @@
+/**
+ * Oneli8 · Choice Chip (MOLECULE) — the Soft Hexagon
+ * Figma: Select and Combobox / Choice Chip / Soft Hexagon 636:847 (8 variants)
+ *
+ * GEOMETRY, read from all four sizes in Figma:
+ *   size         target  visible  rail inset  gap  label
+ *   compact        48      30         9        9   12 / 18
+ *   standard       48      36        12        9   12 / 18
+ *   comfortable    48      42        15        9   16 / 24
+ *   large          60      42        15        9   16 / 24
+ * The terminal is a fixed 12 at every size and never scales with the label,
+ * so peer chips of different lengths keep one shoulder depth and side angle.
+ *
+ * The visible silhouette sits inside a taller protected target, which is why
+ * `min-block-size` is the target and the rail carries the visible height.
+ */
+
+.ol8-chip {
+  --_height: var(--ol8-component-choice-chip-height-standard);
+  --_target: var(--ol8-component-choice-chip-target-standard);
+  --_inset:  var(--ol8-component-choice-chip-rail-inset-standard);
+  --_label-size: var(--ol8-font-size-012);
+  --_label-line: var(--ol8-font-line-018);
+
+  /* Inactive is the quiet Neutral treatment; Selected is Primary Soft. */
+  --_surface: var(--ol8-color-surface-sunken);
+  --_edge:    var(--ol8-color-border-subtle);
+  --_ink:     var(--ol8-color-text-primary);
+
+  /* The ring is painted at every state and is simply invisible until focus,
+     so focus never changes the geometry, only the colour. */
+  --_focus-outer: transparent;
+  --_focus-inner: transparent;
+
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--_target);
+  font-family: var(--ol8-font-family-functional);
+  font-variation-settings: "ARRR" var(--ol8-font-axis-arrr-baseline);
+  color: var(--_ink);
+  cursor: pointer;
+}
+.ol8-chip[data-ol8-availability="disabled"] { cursor: not-allowed; }
+
+/* ---- Size ------------------------------------------------------------ */
+.ol8-chip[data-ol8-size="compact"] {
+  --_height: var(--ol8-component-choice-chip-height-compact);
+  --_inset:  var(--ol8-component-choice-chip-rail-inset-compact);
+}
+.ol8-chip[data-ol8-size="standard"] {
+  --_height: var(--ol8-component-choice-chip-height-standard);
+  --_inset:  var(--ol8-component-choice-chip-rail-inset-standard);
+}
+.ol8-chip[data-ol8-size="comfortable"] {
+  --_height: var(--ol8-component-choice-chip-height-comfortable);
+  --_inset:  var(--ol8-component-choice-chip-rail-inset-comfortable);
+  --_label-size: var(--ol8-font-size-016);
+  --_label-line: var(--ol8-font-line-024);
+}
+.ol8-chip[data-ol8-size="large"] {
+  --_height: var(--ol8-component-choice-chip-height-large);
+  --_target: var(--ol8-component-choice-chip-target-large);
+  --_inset:  var(--ol8-component-choice-chip-rail-inset-large);
+  --_label-size: var(--ol8-font-size-016);
+  --_label-line: var(--ol8-font-line-024);
+}
+
+/* ---- Selection ------------------------------------------------------- */
+/* Never colour alone: the native checked state carries the same fact, and the
+   selected edge is a stronger contrast than the inactive one. */
+.ol8-chip[data-ol8-selection="selected"] {
+  --_surface: var(--ol8-color-selection-surface);
+  --_edge:    var(--ol8-color-primary-360);
+  --_ink:     var(--ol8-color-selection-content);
+}
+.ol8-chip[data-ol8-availability="disabled"] {
+  --_surface: var(--ol8-color-surface-disabled);
+  --_edge:    var(--ol8-color-border-disabled);
+  --_ink:     var(--ol8-color-text-disabled);
+}
+
+.ol8-chip__input {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---- Terminals ------------------------------------------------------- */
+/* One viewBox serves every height: Figma's terminal paths share identical X
+   values at 30, 36 and 42, and Y values that are the same fractions of the
+   height, so stretching Y alone is exact rather than approximate. */
+.ol8-chip__terminal {
+  flex: none;
+  inline-size: var(--ol8-component-choice-chip-terminal);
+  block-size: var(--_height);
+  /* The point reaches 0.15 beyond the box, as it does in Figma, and the focus
+     ring is painted outside the silhouette. Neither may be clipped. */
+  overflow: visible;
+}
+/* The trailing terminal is the leading one mirrored, so they cannot drift. */
+.ol8-chip__terminal--trailing { transform: scaleX(-1); }
+
+.ol8-chip__fill { fill: var(--_surface); }
+
+/* Double width, clipped to the fill: the outer half is cut away and what
+   remains is an inside edge of exactly one border width, matching the rail's
+   own inside border. A centred stroke would stand 1px proud of the rail and
+   show a step at the shoulder. */
+.ol8-chip__edge {
+  fill: none;
+  stroke: var(--_edge);
+  stroke-width: calc(var(--ol8-border-width-standard) * 2);
+  vector-effect: non-scaling-stroke;
+}
+
+/* Both rings are painted before the fill and at double width, so the inner
+   half of each lands under the fill and only the outer half shows. This is how
+   the ring follows the hexagon instead of boxing it. */
+.ol8-chip__focus-outer,
+.ol8-chip__focus-inner { fill: none; vector-effect: non-scaling-stroke; }
+.ol8-chip__focus-outer {
+  stroke: var(--_focus-outer);
+  stroke-width: calc((var(--ol8-focus-ring-outerwidth) + var(--ol8-focus-ring-innerwidth)) * 2);
+}
+.ol8-chip__focus-inner {
+  stroke: var(--_focus-inner);
+  stroke-width: calc(var(--ol8-focus-ring-innerwidth) * 2);
+}
+
+.ol8-chip:has(> .ol8-chip__input:focus-visible) {
+  --_focus-outer: var(--ol8-color-focus-outer);
+  --_focus-inner: var(--ol8-color-focus-inner);
+}
+
+/* ---- Centre rail ----------------------------------------------------- */
+/* Only the rail grows with the label. It owns the top and bottom of the
+   perimeter; the terminals own the angled ends. */
+.ol8-chip__rail {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--ol8-component-choice-gap-standard);
+  block-size: var(--_height);
+  padding-inline: var(--_inset);
+  background: var(--_surface);
+  border-block: var(--ol8-border-width-standard) solid var(--_edge);
+}
+
+/* The ring's flat runs, continuing the terminals' strokes across the rail.
+   Two colours in one band, ordered outward from the silhouette. */
+.ol8-chip__rail::before,
+.ol8-chip__rail::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  block-size: calc(var(--ol8-focus-ring-outerwidth) + var(--ol8-focus-ring-innerwidth));
+}
+.ol8-chip__rail::before {
+  inset-block-end: 100%;
+  background: linear-gradient(
+    var(--_focus-outer) 0 var(--ol8-focus-ring-outerwidth),
+    var(--_focus-inner) var(--ol8-focus-ring-outerwidth) 100%);
+}
+.ol8-chip__rail::after {
+  inset-block-start: 100%;
+  background: linear-gradient(
+    var(--_focus-inner) 0 var(--ol8-focus-ring-innerwidth),
+    var(--_focus-outer) var(--ol8-focus-ring-innerwidth) 100%);
+}
+
+.ol8-chip__label {
+  font-size: var(--_label-size);
+  line-height: var(--_label-line);
+  font-weight: var(--ol8-font-weight-regular);
+  color: var(--_ink);
+}
+
+/* ---- Mark ------------------------------------------------------------ */
+/* Figma places the mark BEFORE the label in every variant, Remove included. */
+.ol8-chip__mark {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--ol8-component-choicechip-mark);
+  block-size: var(--ol8-component-choicechip-mark);
+  color: var(--_ink);
+}
+
+/* The Check does not scale with its slot. Figma's `Icon / Selection / Check`
+   is a governed small master, not an Icon Frame instance: Size=Small and
+   Size=Standard both carry the same 10.2 x 6.9 artwork at the same 1.8 stroke,
+   centred in an 18 or 24 box. So the source box stays 24 units and overflows
+   the smaller slot, exactly as Figma draws it. */
+.ol8-chip__mark > svg {
+  display: block;
+  flex: none;
+  inline-size: var(--ol8-size-icon-standard);
+  block-size: var(--ol8-size-icon-standard);
+  overflow: visible;
+}
+
+/* Both marks read at the one governed optical stroke, which is what Figma
+   draws and what the iconography contract calls contextual stroke
+   normalization: peer marks in one family match apparent weight. */
+.ol8-chip__mark > svg > * {
+  vector-effect: non-scaling-stroke;
+  stroke-width: var(--ol8-component-choice-optical-stroke);
+}

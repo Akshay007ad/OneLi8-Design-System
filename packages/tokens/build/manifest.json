@@ -4,9 +4,9 @@
   "counts": {
     "primitive": 170,
     "semantic": 270,
-    "component": 160,
+    "component": 161,
     "componentStatuses": 10,
-    "figmaVariables": 586,
+    "figmaVariables": 587,
     "figmaTypographyStyles": 9,
     "figmaElevationStyles": 5
   },

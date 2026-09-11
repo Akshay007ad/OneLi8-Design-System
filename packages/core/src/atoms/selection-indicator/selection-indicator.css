@@ -71,12 +71,21 @@
   --_ink: var(--ol8-color-icon-disabled);
 }
 
-/* The check glyph scales geometrically with the box (18px master is an exact
-   0.75x of the 24px one), so a single 24-unit path serves both sizes. */
+/* The check glyph does NOT scale with the box, for the same reason the Mixed
+   bar below does not. Figma's `Icon / Selection / Check` is a governed two size
+   master rather than an Icon Frame instance: Size=Small (18) and Size=Standard
+   (24) both carry the same 10.2 x 6.9 artwork at the same 1.8 stroke, centred
+   in their box. So the source keeps its 24 unit box at both sizes and the
+   smaller box simply lets the empty margin overflow. The artwork is well
+   inside 18, so nothing is clipped.
+
+   This previously scaled with the box, which drew the compact check a quarter
+   smaller than Figma at a 1.35 stroke, off the 1.8 system. */
 .ol8-selection--checkbox > .ol8-selection__mark > svg {
   display: block;
-  inline-size: var(--_box);
-  block-size: var(--_box);
+  inline-size: var(--ol8-size-icon-standard);
+  block-size: var(--ol8-size-icon-standard);
+  overflow: visible;
 }
 
 /* The Mixed bar does NOT scale. Both the 18px and 24px masters carry the same

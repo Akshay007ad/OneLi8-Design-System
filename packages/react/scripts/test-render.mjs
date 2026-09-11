@@ -6,7 +6,9 @@
  */
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { TextField, FormMessage, Tabs, SegmentedControl, TabBar, Link } from '../src/index.js';
+import { TextField, FormMessage, Tabs, SegmentedControl, TabBar, Link,
+         ChoiceChip, Token } from '../src/index.js';
+import { renderChoiceChip, renderToken } from '@oneli8/core';
 
 const out = [];
 const t = (name, fn) => { try { fn(); out.push(`ok   ${name}`); } catch (e) { out.push(`FAIL ${name}: ${e.message}`); } };
@@ -113,4 +115,50 @@ if (failed.length) {
   for (const f of out) console.error('  · ' + f);
   process.exit(1);
 }
+
+// ---- Choice Chip and Token ---------------------------------------------
+t('ChoiceChip renders the same real checkbox the core renderer does', () => {
+  const s = html(createElement(ChoiceChip, { selected: true, showMark: true, id: 'c1', onChange() {} }, 'Accessibility'));
+  has(s, 'type="checkbox"'); has(s, 'checked'); has(s, 'data-ol8-selection="selected"');
+  has(s, 'ol8-chip__mark');
+});
+t('ChoiceChip draws the same silhouette as core, path for path', () => {
+  const s = html(createElement(ChoiceChip, { id: 'c2' }, 'Accessibility'));
+  const core = renderChoiceChip('Accessibility', { id: 'c2' });
+  const corePath = core.match(/d="(M12 0[^"]+Z)"/)[1];
+  has(s, corePath);
+  const coreEdge = core.match(/d="(M12 0[^"]+L12 30)"/)[1];
+  has(s, coreEdge);
+  if (count(s, /ol8-chip__terminal--/g) !== 2) throw new Error('two terminals, one per end');
+});
+t('ChoiceChip keeps the mark ahead of the label, as Figma draws it', () => {
+  const s = html(createElement(ChoiceChip, { showMark: true, id: 'c3' }, 'Accessibility'));
+  if (s.indexOf('ol8-chip__mark') > s.indexOf('ol8-chip__label')) {
+    throw new Error('the mark leads the label in every Figma variant');
+  }
+});
+threws('ChoiceChip refuses a size Figma does not draw', () =>
+  html(createElement(ChoiceChip, { size: 'huge' }, 'A')));
+
+t('Token delegates geometry to the chip owner', () => {
+  const s = html(createElement(Token, { id: 't1' }, 'Accessibility'));
+  has(s, 'ol8-token'); has(s, 'ol8-chip');
+  const core = renderToken('Accessibility', { id: 't1' });
+  has(s, core.match(/d="(M12 0[^"]+Z)"/)[1]);
+});
+t('Token auto resolves to Remove for a removable value, as in core', () => {
+  const s = html(createElement(Token, { id: 't2' }, 'Accessibility'));
+  has(s, 'data-ol8-mark="remove"');
+  has(s, 'aria-label="Remove Accessibility"');
+  has(renderToken('Accessibility', { id: 't2' }), 'data-ol8-mark="remove"');
+});
+t('Token Mark None leaves no phantom slot and no control', () => {
+  const s = html(createElement(Token, { mark: 'none' }, 'Accessibility'));
+  has(s, 'data-ol8-mark="none"');
+  if (s.includes('ol8-chip__mark')) throw new Error('None must collapse the slot');
+  if (s.includes('<input') || s.includes('<button')) throw new Error('a token is content, not a control');
+});
+threws('Token refuses a Remove mark on a non removable value', () =>
+  html(createElement(Token, { mark: 'remove', removable: false }, 'A')));
+
 console.log(`✓ React reference: ${out.length}/${out.length} checks`);
