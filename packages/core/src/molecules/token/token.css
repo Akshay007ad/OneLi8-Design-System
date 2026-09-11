@@ -25,8 +25,8 @@
 /* The mark is drawn at 18 because that is what Figma draws, but the contract
    asks for a target of at least 24 that does not overlap anything. The target
    is expanded with a pseudo element so the drawn size and the reachable size
-   can differ without moving the label: it grows 3 into a 9 gap on one side and
-   into the rail inset on the other, so it still touches neither. */
+   can differ without moving the label: it grows 3 into the 9 gap on one side
+   and into the rail inset on the other, so it still touches neither. */
 .ol8-token__remove::before {
   content: "";
   position: absolute;

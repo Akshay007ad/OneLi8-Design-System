@@ -196,11 +196,11 @@ t('the edge omits the seam, so the rail continues one perimeter', () => {
   // "deliberately omits the hidden vertical closing edge"
   has(h, 'L12 30 Z"'); has(h, 'L12 30"');
 });
-t('the mark is absent until Show Mark, and then leads the label', () => {
+t('the mark is absent until Show Mark, and then follows the label', () => {
   hasnt(renderChoiceChip('A'), 'ol8-chip__mark');
   const h = renderChoiceChip('Accessibility', { selected: true, showMark: true, id: 'c4' });
-  if (h.indexOf('ol8-chip__mark') > h.indexOf('ol8-chip__label')) {
-    throw new Error('Figma places the mark before the label in every variant');
+  if (h.indexOf('ol8-chip__mark') < h.indexOf('ol8-chip__label')) {
+    throw new Error('the mark trails the label, so Check and Remove share one side');
   }
 });
 t('a chip refuses an empty label', () => {

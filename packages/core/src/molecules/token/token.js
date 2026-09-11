@@ -61,8 +61,9 @@ export function renderToken(label, options = {}) {
   const resolved = resolveTokenMark(mark, { removable, selected });
 
   // The Remove mark is the only interactive part, so it is a real button with
-  // its own accessible name. The label stays the token's content: the contract
-  // requires the complete value to remain readable, never shortened by a mark.
+  // its own accessible name. It follows the label, which is the anatomy the
+  // contract writes down, and the label stays the token's content: the complete
+  // value must remain readable, never shortened or overlaid by its mark.
   const markup = resolved === 'remove'
     ? `<button type="button" class="ol8-chip__mark ol8-token__remove" ` +
       `aria-label="${escapeAttr(removeLabel ?? `Remove ${label}`)}">${renderIconSvg('close')}</button>`

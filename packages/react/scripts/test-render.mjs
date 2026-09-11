@@ -131,10 +131,10 @@ t('ChoiceChip draws the same silhouette as core, path for path', () => {
   has(s, coreEdge);
   if (count(s, /ol8-chip__terminal--/g) !== 2) throw new Error('two terminals, one per end');
 });
-t('ChoiceChip keeps the mark ahead of the label, as Figma draws it', () => {
+t('ChoiceChip keeps the mark after the label, as Figma draws it', () => {
   const s = html(createElement(ChoiceChip, { showMark: true, id: 'c3' }, 'Accessibility'));
-  if (s.indexOf('ol8-chip__mark') > s.indexOf('ol8-chip__label')) {
-    throw new Error('the mark leads the label in every Figma variant');
+  if (s.indexOf('ol8-chip__mark') < s.indexOf('ol8-chip__label')) {
+    throw new Error('the mark trails the label, so Check and Remove share one side');
   }
 });
 threws('ChoiceChip refuses a size Figma does not draw', () =>

@@ -82,14 +82,16 @@ function renderTerminal(uid, side) {
  * "Choice Chip / Geometry Owner" and both the public chip and the Token
  * instantiate it rather than redrawing it.
  *
- * `mark` is markup for the rail's leading slot, or an empty string. Figma puts
- * the mark BEFORE the label in every variant, including Remove.
+ * `mark` is markup for the rail's trailing slot, or an empty string. The mark
+ * follows the label, which is the anatomy the contract writes down as "Label +
+ * optional Remove mark", and one position serves Check and Remove alike so
+ * peer marks never end up on opposite sides.
  */
 export function renderChipShape(uid, label, mark = '') {
   return renderTerminal(uid, 'leading') +
     `<span class="ol8-chip__rail">` +
-      mark +
       `<span class="ol8-chip__label">${escapeText(label)}</span>` +
+      mark +
     `</span>` +
     renderTerminal(uid, 'trailing');
 }

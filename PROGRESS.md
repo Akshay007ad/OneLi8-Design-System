@@ -94,12 +94,6 @@ The contract asks an adapter to expand the activation region. An overlay drawn
 in CSS would sit over the value and take the caret away, which is worse than the
 shortfall it fixes. It belongs to a platform adapter.
 
-**Figma puts the mark BEFORE the label in every Token variant, Remove
-included.** The contract writes the anatomy the other way round, as "Label +
-optional Remove mark". A leading remove affordance is unusual, so this is worth
-your eye, but Figma is unambiguous across all twenty four variants and code
-follows it. Say the word and it moves.
-
 **The chip's default size is Standard.** Figma's variant default is Compact, but
 that is which variant sits first in the set rather than a statement about the
 API, and this contract names no default at all. Standard is what every other
@@ -127,6 +121,14 @@ All of these name a value that was already there, rather than changing a design.
 - Eighteen navigation component variables, so names that this repository had
   inferred are now names Figma agreed. Tokens with inferred names went from
   fifty three to thirty five.
+- The mark moved from leading to trailing in all eight Choice Chip variants,
+  which the twenty four Token variants inherit. Figma had drawn it ahead of the
+  label, including the Remove cross, which is an unusual place for a remove
+  affordance. You called it, so it moved. The whole slot moved rather than the
+  cross alone, because splitting it would leave a Check on one side and a cross
+  on the other among peer tokens, and the contract asks for one mark treatment
+  across an instance. It now matches the anatomy the contract writes down,
+  "Label + optional Remove mark".
 - `Component / Choice Chip / Mark Target`, a plain twenty four. The Remove mark
   is drawn at eighteen and the contract asks for a reachable target of at least
   twenty four, so the target is expanded around the drawn mark rather than the

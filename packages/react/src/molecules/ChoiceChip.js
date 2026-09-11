@@ -40,13 +40,18 @@ function Terminal({ uid, side }) {
   ]);
 }
 
-/** The silhouette and its rail. Figma's "Choice Chip / Geometry Owner". */
+/**
+ * The silhouette and its rail. Figma's "Choice Chip / Geometry Owner".
+ * The mark follows the label, which is the anatomy the contract writes down as
+ * "Label + optional Remove mark", and one position serves Check and Remove
+ * alike so peer marks never end up on opposite sides.
+ */
 export function ChipShape({ uid, label, mark = null }) {
   return [
     createElement(Terminal, { key: 'l', uid, side: 'leading' }),
     createElement('span', { key: 'r', className: 'ol8-chip__rail' }, [
-      mark,
       createElement('span', { key: 'label', className: 'ol8-chip__label' }, label),
+      mark,
     ]),
     createElement(Terminal, { key: 't', uid, side: 'trailing' }),
   ];
