@@ -160,6 +160,14 @@
     },
     {
       "tier": "organism",
+      "module": "organisms/Combobox.js",
+      "exports": [
+        "Combobox"
+      ],
+      "constraint": "Composed of atoms, molecules or organisms. May hold application state."
+    },
+    {
+      "tier": "organism",
       "module": "organisms/MultiSelectField.js",
       "exports": [
         "MultiSelectField"

@@ -86,6 +86,12 @@ export const OL8_MULTI_SELECT_MATERIALS = OL8_MATERIALS;
 /** Constrained resolves from a known set; suggestive may also author values. */
 export const OL8_VALUE_POLICIES = ['constrained', 'suggestive'];
 
+export const OL8_COMBOBOX_SIZES = OL8_BUTTON_SIZES;
+export const OL8_COMBOBOX_APPEARANCES = ['outline', 'filled'];
+export const OL8_COMBOBOX_MATERIALS = OL8_MATERIALS;
+export const OL8_AUTOCOMPLETE_MODES = ['none', 'list-manual', 'list-automatic'];
+export const OL8_FILTER_SOURCES = ['local', 'remote', 'external'];
+
 export const OL8_PICKER_SIZES = OL8_BUTTON_SIZES;
 export const OL8_PICKER_MATERIALS = OL8_MATERIALS;
 export const OL8_COMMIT_BEHAVIORS = ['immediate', 'apply'];

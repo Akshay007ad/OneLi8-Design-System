@@ -7,7 +7,7 @@ import { renderTextField, renderFormMessage, countGraphemes, clipToGraphemes,
          renderTabs, renderTabPanel, renderSegmentedControl, renderTabBar,
          renderNavigationBadge, renderChoiceChip, renderToken,
          resolveTokenMark, renderMultiSelectField,
-         renderChoicePicker } from '../src/index.js';
+         renderChoicePicker, renderSelect, renderCombobox } from '../src/index.js';
 import { resolveNavigationKey } from '../src/organisms/navigation-keys.js';
 
 const out = [];
@@ -351,6 +351,73 @@ t('a status needs words, because a spinner announces nothing', () => {
   try { picker({ status: 'loading' }); } catch { threw = true; }
   if (!threw) throw new Error('should have thrown');
   has(picker({ status: 'loading', statusText: 'Searching' }), 'Searching');
+});
+
+
+// ---- Both marks come from the governed pool, never local artwork ---------
+t('the check and the cross share one slot and one source', () => {
+  const check = renderToken('Tag', { selected: true, mark: 'check', id: 'k' });
+  const cross = renderToken('Tag', { selected: true, mark: 'remove', id: 'x' });
+  // one slot class, so one size, one colour and one position rule serve both
+  has(check, 'class="ol8-chip__mark"'); has(cross, 'ol8-chip__mark ol8-token__remove');
+  // both are the canonical 24 unit sources, not artwork drawn here
+  eq((check.match(/viewBox="0 0 24 24"/g) || []).length, 1, 'check is the library source');
+  eq((cross.match(/viewBox="0 0 24 24"/g) || []).length, 1, 'cross is the library source');
+  // and both carry the one governed stroke
+  has(check, 'stroke-width="1.8"'); has(cross, 'stroke-width="1.8"');
+});
+
+// ---- The Select and Combobox variant matrices ---------------------------
+// Figma 875:1778 and 883:2159 both declare Material x Appearance x Size, with
+// Expanded as a BOOLEAN property rather than an axis, "to avoid variant
+// explosion". So sixteen variants each, and open state multiplies nothing.
+const MATERIALS = ['regular', 'gem'];
+const APPEARANCES = ['outline', 'filled'];
+const SIZES = ['compact', 'standard', 'comfortable', 'large'];
+const ITEMS = [{ value: 'a', label: 'Alpha' }, { value: 'b', label: 'Beta' }];
+
+t('Select renders all sixteen Figma variants with truthful attributes', () => {
+  let seen = 0;
+  for (const material of MATERIALS) for (const appearance of APPEARANCES) for (const size of SIZES) {
+    const h = renderSelect({ label: 'Pick', id: `s-${seen}`, options: ITEMS, material, appearance, size });
+    has(h, `data-ol8-size="${size}"`);
+    has(h, `data-ol8-appearance="${appearance}"`);
+    if (material === 'gem') has(h, 'data-ol8-material="gem"');
+    else hasnt(h, 'data-ol8-material="gem"');
+    seen += 1;
+  }
+  eq(seen, 16, 'Material x Appearance x Size');
+});
+t('Combobox renders all sixteen Figma variants with truthful attributes', () => {
+  let seen = 0;
+  for (const material of MATERIALS) for (const appearance of APPEARANCES) for (const size of SIZES) {
+    const h = renderCombobox({ label: 'Pick', id: `c-${seen}`, options: ITEMS, material, appearance, size });
+    has(h, `data-ol8-size="${size}"`);
+    has(h, `data-ol8-appearance="${appearance}"`);
+    if (material === 'gem') has(h, 'data-ol8-material="gem"');
+    else hasnt(h, 'data-ol8-material="gem"');
+    seen += 1;
+  }
+  eq(seen, 16, 'Material x Appearance x Size');
+});
+t('Expanded is a boolean, so it multiplies no variants', () => {
+  // the same sixteen, open and closed, differ only in the open state itself
+  const shut = renderCombobox({ label: 'Pick', id: 'c', options: ITEMS });
+  const open = renderCombobox({ label: 'Pick', id: 'c', options: ITEMS, open: true });
+  has(shut, 'aria-expanded="false"'); has(open, 'aria-expanded="true"');
+  has(shut, 'data-ol8-icon="chevron-down"'); has(open, 'data-ol8-icon="chevron-up"');
+  // and the popup is present either way, so its id never dangles
+  has(shut, 'id="c-listbox"'); has(open, 'id="c-listbox"');
+});
+t('both reuse the Selection Popup owner rather than local artwork', () => {
+  has(renderCombobox({ label: 'P', id: 'c', options: ITEMS, open: true }), 'class="ol8-popup"');
+  has(renderCombobox({ label: 'P', id: 'c', options: ITEMS, open: true }), 'role="listbox"');
+});
+t('Gem is an attribute, independent of appearance, in both', () => {
+  for (const render of [renderSelect, renderCombobox]) {
+    const h = render({ label: 'P', id: 'g', options: ITEMS, material: 'gem', appearance: 'filled' });
+    has(h, 'data-ol8-material="gem"'); has(h, 'data-ol8-appearance="filled"');
+  }
 });
 
 console.log(`\u2713 component contract: ${out.length}/${out.length} checks`);

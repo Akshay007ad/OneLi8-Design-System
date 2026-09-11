@@ -43,3 +43,23 @@
   outline: var(--ol8-focus-ring-innerwidth) solid var(--ol8-color-focus-inner);
   outline-offset: var(--ol8-focus-ring-offset);
 }
+
+/* ---- Mark size parity ------------------------------------------------
+   The two marks have to read as one size, and they did not. The Icon Library's
+   cross spans 12 x 12 in the canonical 24 space while the check spans
+   10.2 x 6.9, so drawn at one frame size the cross was fifteen percent wider
+   and well over half again as tall, and it swamped the check beside it.
+
+   Figma does not draw it that way: its Remove mark is an Icon Frame instance at
+   18, so the cross comes out at 9 x 9 there, a little narrower than the check
+   and balanced against it. The oversized cross was this stylesheet rendering
+   the library source at full size, not a decision in the design.
+
+   So the cross is scaled to the 9 span Figma draws. The stroke does not follow
+   it: it is a non scaling stroke, so it stays the governed 1.8 that every glyph
+   in the system uses, which is also what Figma keeps. */
+.ol8-token__remove > svg > * {
+  transform: scale(0.75);        /* 9 / 12, the span Figma draws */
+  transform-box: fill-box;
+  transform-origin: center;
+}

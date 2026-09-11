@@ -1,8 +1,8 @@
 # Where this stands
 
 Written 10 September 2026. Everything below is verified by `npm run build`,
-which now runs the structure check, 70 token checks, 65 core component checks
-and 44 React reference checks.
+which now runs the structure check, 70 token checks, 71 core component checks
+and 50 React reference checks.
 
 ## Done and committed
 
@@ -85,16 +85,29 @@ they belong inside. And a controlled chip with no change handler made React warn
 about a read only field, which was fair, so a chip that nothing is listening to
 now says it is read only rather than pretending otherwise.
 
+**Combobox has a React reference,** so core and React now carry the same
+twenty one components. React owns none of the keyboard model there: opening,
+the active option and committing are application state, so they arrive as props
+and leave as callbacks rather than being fought over.
+
+**Select and Combobox have their variant matrices.** Both Figma sets declare
+Material x Appearance x Size and hold Expanded as a boolean property rather
+than an axis, "to avoid variant explosion", so the tests walk all sixteen in
+each package and separately prove that opening multiplies nothing.
+
+**The Token's two marks were not the same size.** The Icon Library cross spans
+12 x 12 in the canonical 24 space and the check spans 10.2 x 6.9, so drawing
+both at one frame size made the cross fifteen percent wider and well over half
+again as tall, and it swamped the check beside it. Figma never drew it that way:
+its Remove mark is an Icon Frame instance at 18, so the cross is 9 x 9 there and
+sits comfortably against the check. The oversized cross was the stylesheet
+rendering the library source at full size. Code now draws the 9 span Figma
+draws, with the stroke left at the governed 1.8.
+
 ## Not built yet
 
-Every component set on every page is now built in both packages. What is left
-is evidence rather than construction:
-
-| Gap | What it is |
-|---|---|
-| Combobox React reference | Core is built and tested; React is not written |
-| Molecule / Select 875:1778 | Composed, but no variant test against the expanded composition |
-| Organism / Combobox 883:2159 | Composed, but no variant test against the expanded composition |
+Nothing. Every component set on every page is built in both packages, and every
+one has its variant coverage.
 
 ## Decisions worth your eye
 
@@ -162,6 +175,9 @@ All of these name a value that was already there, rather than changing a design.
   Choice Chip / Gap`, and Token Field's `Gap`, `Padding Block` and `Minimum
   Input`. Tokens with inferred names went from thirty five to thirty one, and
   the chip family now spells itself one way rather than two.
+- The Token's Remove mark moved from leading to trailing, and the six variants
+  whose mark slot was still named "Selected Check" while holding a cross now say
+  "Remove Mark".
 - Sixty four bindings of raw numbers Figma was already drawing: the twelve
   between a field and its popup, now `Spacing / Stack / Related`, and the six of
   the picker's wrapping matrix, now the Choice Chip gap.
@@ -173,6 +189,11 @@ All of these name a value that was already there, rather than changing a design.
 
 ## Still open from before
 
+- The Token's cross cannot be resized in Figma. It sits inside the Choice Chip
+  geometry owner instance, and Figma refuses size overrides that deep, silently.
+  So the cross stays at the 9 span there and code follows it. Giving the two
+  marks exactly equal spans would mean restructuring the chip, which is your
+  call rather than mine.
 - Thirty one tokens still have inferred names. Four
   of those, `innerTerminal`, `centerCut`, `innerCenterCut` and `bezelInset`,
   describe a mask based construction that neither Figma nor the code uses, since

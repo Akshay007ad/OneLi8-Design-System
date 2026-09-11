@@ -8,7 +8,7 @@ import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { TextField, FormMessage, Tabs, SegmentedControl, TabBar, Link,
          ChoiceChip, Token, MultiSelectField, ChoicePicker,
-         SelectionPopup } from '../src/index.js';
+         SelectionPopup, Combobox, Select } from '../src/index.js';
 import { renderChoiceChip, renderToken } from '@oneli8/core';
 
 const out = [];
@@ -217,5 +217,48 @@ t('SelectionPopup options are divs, matching the core renderer', () => {
 });
 threws('SelectionPopup refuses a wordless status', () =>
   html(createElement(SelectionPopup, { id: 'x', label: 'S', options: SKILLS, status: 'loading' })));
+
+
+// ---- The Select and Combobox variant matrices, React side ---------------
+const MATERIALS = ['regular', 'gem'];
+const APPEARANCES = ['outline', 'filled'];
+const SIZES = ['compact', 'standard', 'comfortable', 'large'];
+const ITEMS = [{ value: 'a', label: 'Alpha' }, { value: 'b', label: 'Beta' }];
+
+t('Combobox answers for all sixteen Figma variants', () => {
+  let seen = 0;
+  for (const material of MATERIALS) for (const appearance of APPEARANCES) for (const size of SIZES) {
+    const s = html(createElement(Combobox, { label: 'Pick', id: `c${seen}`, options: ITEMS, material, appearance, size }));
+    has(s, `data-ol8-size="${size}"`); has(s, `data-ol8-appearance="${appearance}"`);
+    if (material === 'gem' && !s.includes('data-ol8-material="gem"')) throw new Error('gem is an attribute');
+    seen += 1;
+  }
+  if (seen !== 16) throw new Error('Material x Appearance x Size');
+});
+t('Select answers for all sixteen Figma variants', () => {
+  let seen = 0;
+  for (const material of MATERIALS) for (const appearance of APPEARANCES) for (const size of SIZES) {
+    const s = html(createElement(Select, { label: 'Pick', id: `s${seen}`, options: ITEMS, material, appearance, size }));
+    has(s, `data-ol8-size="${size}"`); has(s, `data-ol8-appearance="${appearance}"`);
+    seen += 1;
+  }
+  if (seen !== 16) throw new Error('Material x Appearance x Size');
+});
+t('Combobox Expanded is a boolean and multiplies no variants', () => {
+  const shut = html(createElement(Combobox, { label: 'P', id: 'c', options: ITEMS }));
+  const open = html(createElement(Combobox, { label: 'P', id: 'c', options: ITEMS, open: true }));
+  has(shut, 'aria-expanded="false"'); has(open, 'aria-expanded="true"');
+  has(shut, 'id="c-listbox"'); has(open, 'id="c-listbox"');
+});
+t('Combobox keeps focus on the input and options out of the tab order', () => {
+  const s = html(createElement(Combobox, { label: 'P', id: 'c', options: ITEMS, open: true, active: 'a', clearable: true }));
+  has(s, 'aria-activedescendant="c-listbox-option-a"');
+  has(s, 'tabindex="-1"');            // the clear action is not a second stop
+  if (s.includes('tabindex="0"')) throw new Error('no popup descendant is a tab stop');
+});
+threws('Combobox refuses clearable on a required value', () =>
+  html(createElement(Combobox, { label: 'P', options: ITEMS, required: true, clearable: true })));
+threws('Combobox refuses read only plus invalid', () =>
+  html(createElement(Combobox, { label: 'P', options: ITEMS, readOnly: true, invalid: true })));
 
 console.log(`✓ React reference: ${out.length}/${out.length} checks`);

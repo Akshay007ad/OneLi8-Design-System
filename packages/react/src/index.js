@@ -14,6 +14,7 @@ export { RadioGroup, CheckboxGroup } from './organisms/ChoiceGroup.js';
 export { SelectionPopup } from './organisms/SelectionPopup.js';
 export { MultiSelectField } from './organisms/MultiSelectField.js';
 export { ChoicePicker } from './organisms/ChoicePicker.js';
+export { Combobox } from './organisms/Combobox.js';
 export { NavigationBadge } from './atoms/NavigationBadge.js';
 export { Tabs } from './organisms/Tabs.js';
 export { SegmentedControl } from './organisms/SegmentedControl.js';
