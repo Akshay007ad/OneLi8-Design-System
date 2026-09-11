@@ -49,7 +49,7 @@ Figma file: 0wRnp6ulIEA8PCV6wqGmAJ ("Oneli8 Design System — 1.0.0-beta.1")
 
 - Consume SEMANTIC roles only. Primitives are hidden from Figma pickers.
 - `--ol8-color-primary-*` aliases `--ol8-color-blue-*`; prefer the semantic role.
-- Typography roles are composite — use `.ol8-type-<role>`, not the raw font vars.
+- Typography roles are composite. Apply all five of `--ol8-typography-<role>-{font-family,font-size,font-weight,line-height,letter-spacing}` together. There are no class names in this package.
 - Elevation ink is cyan-840 `rgb(22,63,75)`, never black.
 
 ## Status

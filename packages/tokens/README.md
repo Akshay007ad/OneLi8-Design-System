@@ -7,7 +7,7 @@ npm install @oneli8/tokens
 ```
 
 ```js
-import '@oneli8/tokens/css';        // :root custom properties + .ol8-type-* classes
+import '@oneli8/tokens/css';        // every token as a :root custom property
 import { tokens } from '@oneli8/tokens';  // flat { 'color-text-primary': '#151817', ... }
 ```
 
@@ -56,7 +56,7 @@ Two rules matter when consuming it:
 | Import | What it gives you |
 |---|---|
 | `@oneli8/tokens` | flat `{ name: value }` map, with a literal union key type |
-| `@oneli8/tokens/css` | the custom properties and `.ol8-type-*` classes |
+| `@oneli8/tokens/css` | every token as a CSS custom property |
 | `@oneli8/tokens/tailwind` | Tailwind v3 preset |
 | `@oneli8/tokens/tailwind.css` | Tailwind v4 `@theme` bridge |
 | `@oneli8/tokens/figma` | round trip payload: collections, theme modes, type and elevation styles |

@@ -34,7 +34,7 @@ const SHARED_FORBIDDEN = [
   'A literal colour, size or font value anywhere in a component.',
   'A primitive token in a component. Primitives are hidden from the Figma pickers for the same reason.',
   'An invented icon name. Choose from OL8_ICONS.',
-  'A per-size icon stroke. The 1.8 stroke is shared, and the 18px master is an exact 0.75 scale of the 24px one.',
+  'A per-size icon stroke. The 1.8 stroke is shared, and an Icon Frame instance is an exact scale of the 24px master, so an 18px one carries a 1.35 stroke. The selection masters are the exception: Icon / Selection / Check keeps the same 10.2 x 6.9 artwork at 1.8 in both its 18 and 24 boxes, so it is not scaled.',
   'Mixing a filled treatment with an outlined one across selection controls. Checkbox and Radio share one language.',
 ];
 

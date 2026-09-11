@@ -1,6 +1,6 @@
 {
   "name": "@oneli8/core",
-  "version": "1.0.0-beta.6",
+  "version": "1.0.0-beta.7",
   "description": "OneLi8 Design System, framework agnostic. renderX returns an HTML string, hydrateX wires existing DOM. Ships the design language and the rules it follows.",
   "keywords": [
     "design-system",
@@ -89,7 +89,7 @@
     "NOTICE"
   ],
   "dependencies": {
-    "@oneli8/tokens": "1.0.0-beta.6"
+    "@oneli8/tokens": "1.0.0-beta.7"
   },
   "engines": {
     "node": ">=20"
