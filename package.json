@@ -15,6 +15,7 @@
     "sync:styles": "node packages/sync/src/build-styles.mjs",
     "sync:context": "node packages/sync/src/build-package-context.mjs",
     "test:components": "node packages/core/scripts/test-components.mjs",
-    "test:react": "node packages/react/scripts/test-render.mjs"
+    "test:react": "node packages/react/scripts/test-render.mjs",
+    "release": "npm run build && npm publish --workspace @oneli8/tokens --tag latest && npm publish --workspace @oneli8/core --tag latest && npm publish --workspace @oneli8/react --tag latest"
   }
 }
