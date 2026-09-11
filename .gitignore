@@ -1,3 +1,13 @@
 node_modules/
 .DS_Store
 *.log
+
+# Credentials. npm writes the publish token to ~/.npmrc, outside this repo, so
+# nothing here should ever hold one. These lines exist so that a token placed
+# here by accident, or by a tool run from inside the project, cannot be
+# committed. npm also refuses to publish a .npmrc, so this is the git half of
+# the same guard.
+.npmrc
+.env
+.env.*
+*.pem
