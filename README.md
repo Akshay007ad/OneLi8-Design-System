@@ -92,9 +92,12 @@ level. Words themselves stay readable: no abbreviations, no truncation, no `btn`
 where `button` will do.
 
 Figma is the authority on the result. Every variable there carries an explicit
-name for code, and `packages/tokens/src/figma-code-syntax.txt` records all 544
-of them verbatim. Nothing is derived from a rule, because a rule would have to
-guess, and guessing is how the two drifted apart before.
+name for code, and `packages/tokens/src/figma-code-syntax.txt` records them
+verbatim. The build reads a name from that record rather than re-deriving it
+from the grammar above, because the file is not perfectly regular between
+siblings and a re-derivation would have to guess. Guessing is how code and
+design drifted apart before. The grammar is the rule; the record is the
+spelling.
 
 ## What is included
 

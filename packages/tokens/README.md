@@ -22,10 +22,16 @@ import '@oneli8/tokens/css';             // every token as a :root custom proper
 import { tokens } from '@oneli8/tokens'; // flat { 'color-text-primary': '#151817', ... }
 ```
 
-Names are not derived from a rule. Every variable carries an explicit code
-syntax in Figma, recorded verbatim in `src/figma-code-syntax.txt`, so the name a
-component reads is the name the designer set. Where Figma spells two sibling
-tokens differently, this package reproduces both rather than tidying one.
+The names follow a grammar, and the grammar is borrowed from Sanskrit rather
+than from a CSS convention. A compound that names one thing is written as one
+word, and a qualifier stays separate from what it qualifies. That is the whole
+rule, and the Naming section below works through it.
+
+Figma is the authority on the result. Every variable there carries an explicit
+code syntax, recorded verbatim in `src/figma-code-syntax.txt`, so a component
+reads the spelling the designer set rather than one re-derived from the grammar.
+Where the file spells two siblings differently, this package reproduces both
+rather than tidying one. The grammar is the rule; the record is the spelling.
 
 The vocabulary is authored across `src/primitive.json`, `src/semantic.json`,
 `src/component.json` and `src/themes.json`, each value carrying its own
