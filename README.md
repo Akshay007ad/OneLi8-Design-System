@@ -100,13 +100,15 @@ guess, and guessing is how the two drifted apart before.
 
 | Tier | Components |
 |---|---|
-| Atom | Icon, Selection Indicator (checkbox, radio, switch) |
-| Molecule | Button, Icon Button, Choice Item, Selection Option |
-| Organism | Choice Group (checkbox hierarchy, radio group) |
+| Atom | Icon, Selection Indicator (checkbox, radio, switch), Navigation Badge |
+| Molecule | Button, Icon Button, Link, Text Field, Form Message, Select, Choice Item, Selection Option, Choice Chip, Token |
+| Organism | Tabs, Tab Bar, Segmented Control, Choice Group, Selection Popup, Combobox, Multi-select Field, Choice Picker |
 | Material | Gem, an attribute adapter rather than a tier |
 
-Nothing else is exported. Tokens exist for component families that are not
-implemented yet, so a token is never a promise that a component ships.
+Twenty one components. Every one of them comes from a component set in the Figma
+file, and every component set in that file is now implemented. Nothing else is
+exported. Tokens exist for families that are not implemented yet, so a token is
+never a promise that a component ships.
 
 Install `@oneli8/tokens` on its own if you want the design decisions without the
 components. It carries CSS custom properties, a typed JavaScript map, Tailwind
@@ -217,6 +219,75 @@ instance (153.1595° at 83x42, 151.6609° at 89x48, 149.2872° at 101x60), but e
 one satisfies `θ = 90° + atan(W/H)`, which is exactly what CSS's corner keyword
 computes. The keyword holds at any label width. A baked degree would not.
 
+### Text Field
+
+Four sizes, two appearances, and Gem available on both. The counter counts
+grapheme clusters rather than code units, so a family emoji is one character and
+not eleven. There is no native `maxlength`, because that counts code units and
+would cut a cluster in half.
+
+`validationStatus` is Idle, Pending or Resolved, and Pending is a status rather
+than a fifth message tone. A read only field cannot be invalid: nobody can act
+on the message, so the combination throws instead of rendering.
+
+### Choice Chip and Token
+
+The Soft Hexagon. Two fixed twelve unit terminals with a centre rail that grows
+with the label, so a short chip and a long one keep the same shoulder depth and
+side angle. Ends that scale with the text are prohibited, and the softness at
+the shoulders is drawn rather than approximated with extra vertices, which would
+read as an octagon.
+
+A Choice Chip is a real checkbox wearing that appearance, so selection is
+carried by native checked state and a stronger edge rather than by colour alone.
+A Token is a committed value: ordinary content whose only interactive part is an
+optional Remove button. Token delegates every bit of geometry to the chip, the
+way the Figma component instantiates the chip as its geometry owner.
+
+The mark follows the label. Check and Remove share that one position, so peer
+tokens never put a tick on one side and a cross on the other.
+
+### Multi-select Field
+
+One component for both the Outline and Filled Figma sets, because the two differ
+only by which field owner they instantiate. Committed values and the editable
+input share one wrapping run, and the field grows as they wrap rather than
+compressing tokens to preserve one nominal row.
+
+Tab enters the composite at the input. Tokens are not tab stops, so a field
+holding twenty values does not put twenty stops in the page: the arrow keys walk
+them instead. Removal takes two presses, because one stray Backspace should not
+silently drop a value. Escape cancels the preview and never clears the field.
+
+A constrained field cannot hold a value that is not an option, and a value given
+as a bare string shows that option's label rather than its value.
+
+### Choice Picker
+
+Search over a wrapping matrix of choices, where every option is a real checkbox
+wearing the chip appearance. It is an accessible group rather than a dialog
+pretending to be a listbox, because the surface holds search, many independent
+choices and actions at once.
+
+Apply mode holds a pending selection and says what is pending; Enter commits it
+and Escape restores the last committed set without closing or moving focus. A
+composing input method is left alone, since Enter there is choosing a candidate
+rather than applying a selection. Immediate mode commits each toggle and omits
+the apply action entirely, rather than showing one that would be a lie.
+
+### Combobox
+
+A native single line text input does the editing, so caret, selection,
+composition, dictation, undo and paste all keep working. Focus never leaves that
+input: the active option is a virtual cursor carried by `aria-activedescendant`,
+and no popup descendant is a second tab stop.
+
+Current value, active option and keyboard focus are three distinct states.
+Escape closes the popup without committing the preview and restores the prior
+committed value. Clearing is an explicit named action rather than an unlabelled
+cross, and a required value is not clearable, since clearing it would leave
+something the form cannot accept.
+
 ## Deliberate deviations from the Figma source
 
 These are the only places the code does not mirror Figma. Each one is a defect
@@ -318,6 +389,17 @@ Reproduced faithfully rather than silently corrected:
   and the code follows the built asset. The Icon Frame Display Proof (418:52)
   settles it: one master is shown at all eleven sizes, so an independently drawn
   18px master would contradict the system's own demonstration.
+* **A Token's two marks are drawn at different spans.** The Check is a governed
+  small master that keeps its 10.2 by 6.9 artwork at both 18 and 24, while the
+  Remove cross is an Icon Frame instance at 18, so its artwork comes out 9 by 9.
+  The two sit in the same slot and read as slightly different sizes. Code
+  follows Figma. Equalising them would mean restructuring the chip, because the
+  mark lives inside the Choice Chip geometry owner instance and Figma refuses
+  size overrides that deep.
+* **The Choice Picker's commitment line carries raw type.** Its summary and
+  apply text are a literal 12 and 18 rather than bound to `Font / Size / 012`
+  and `Font / Line / 018`, which every other text in the file uses. The values
+  are right, so code reads the tokens and the rendering matches.
 * `--ol8-component-icon-stroke` reports `1.7999999523162842`, a float32 artifact
   of 1.8. It is normalised to `1.8` in `tokens.json`, matching the documented
   universal optical stroke.

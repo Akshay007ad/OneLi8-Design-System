@@ -19,10 +19,14 @@ export function Actions() {
 
 | Tier | Components |
 |---|---|
-| Atom | `Icon`, `SelectionIndicator` |
-| Molecule | `Button`, `IconButton`, `ChoiceItem`, `SelectionOption` |
-| Organism | `RadioGroup`, `CheckboxGroup` |
+| Atom | `Icon`, `SelectionIndicator`, `NavigationBadge` |
+| Molecule | `Button`, `IconButton`, `Link`, `TextField`, `FormMessage`, `Select`, `ChoiceItem`, `SelectionOption`, `ChoiceChip`, `Token` |
+| Organism | `Tabs`, `TabBar`, `SegmentedControl`, `RadioGroup`, `CheckboxGroup`, `SelectionPopup`, `Combobox`, `MultiSelectField`, `ChoicePicker` |
 | Material | Gem, an attribute adapter rather than a tier |
+
+Twenty one components, matching `@oneli8/core` one for one. Both packages are
+checked against each other on every build, so the two cannot answer differently
+about a role, a name, a relationship or a state.
 
 ## The system travels with the package
 

@@ -26,13 +26,15 @@ hydrateButtons();
 
 | Tier | Component |
 |---|---|
-| Atom | `Icon`, `Selection Indicator` (checkbox, radio, switch) |
-| Molecule | `Button`, `Icon Button`, `Choice Item`, `Selection Option` |
-| Organism | `Choice Group` (checkbox hierarchy, radio group) |
+| Atom | `Icon`, `Selection Indicator` (checkbox, radio, switch), `Navigation Badge` |
+| Molecule | `Button`, `Icon Button`, `Link`, `Text Field`, `Form Message`, `Select`, `Choice Item`, `Selection Option`, `Choice Chip`, `Token` |
+| Organism | `Tabs`, `Tab Bar`, `Segmented Control`, `Choice Group`, `Selection Popup`, `Combobox`, `Multi-select Field`, `Choice Picker` |
 | Material | `Gem`, an attribute adapter, not a tier |
 
-Anything not listed is not exported. Tokens exist for component families whose
-implementations are not in this release; a token is not a promise of a component.
+Twenty one components, every one of them drawn from a component set in the
+Figma file rather than invented here. Anything not listed is not exported.
+Tokens exist for families whose implementations are not in this release; a token
+is not a promise of a component.
 
 ## Why this exists
 
@@ -70,8 +72,18 @@ what markup genuinely cannot express:
 - A `<button>` without an explicit `type` submits its form. Hydration pins it.
 - Links cannot be natively disabled, so they get `aria-disabled` and their
   activation is swallowed.
+- Tabs and Segmented Control move one tab stop across their items with the
+  arrow keys, which is a roving focus model markup cannot describe.
+- Combobox keeps real focus on its input and carries the active option as a
+  virtual cursor, so the cursor has to be moved in script.
+- Multi-select Field walks its committed values with the arrow keys and takes
+  two presses to remove one, so a stray Backspace cannot drop a value.
+- Choice Picker in Apply mode commits on Enter and restores on Escape, and
+  leaves a composing input method alone.
 
-Hydration is idempotent, running it twice changes nothing.
+Fifteen `hydrate*` functions ship, one per family that needs one. Hydration is
+idempotent, running it twice changes nothing, and a page that never calls it
+still renders and still reads correctly.
 
 ## Styles
 

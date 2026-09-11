@@ -17,18 +17,39 @@ rebuild.
 
 ## What the vocabulary contains
 
-99 colour primitives across 9 ramps, 68 semantic colour roles, 45 Gem material
-roles, 27 control material roles, a 3px atomic dimension scale, 9 radii, 9
-composite typography roles and 5 elevations.
+601 tokens in three tiers: 170 primitives, 270 semantic roles and 161 component
+roles. Nine colour ramps, a 3px atomic dimension scale, nine radii, nine
+composite typography roles, five elevation surfaces and the Gem material.
+
+The tiers are not decoration. A primitive is a value, a semantic role is a
+decision, and a component role is that decision applied to one part of one
+component. Each tier may only reference the tier above it, and the build refuses
+a component token that reaches straight for a primitive.
 
 Two rules matter when consuming it:
 
 - **Use semantic roles, not primitives.** `color-blue-600` is a swatch;
   `color-actionprimary-default` is a decision. Primitives are hidden from Figma
   pickers for the same reason.
-- **Use the `.ol8-type-<role>` class, not individual font variables.** Typography
-  is composite in Figma, a role bundles family, size, line height, weight and
-  tracking, and the class applies all of them together.
+- **Use a whole typography role, not loose font variables.** Typography is
+  composite in Figma: a role bundles family, size, line height, weight and
+  tracking, and those five belong together. Nine roles ship, each as five
+  custom properties.
+
+```css
+.article-lead {
+  font-family:     var(--ol8-typography-body-large-font-family);
+  font-size:       var(--ol8-typography-body-large-font-size);
+  font-weight:     var(--ol8-typography-body-large-font-weight);
+  line-height:     var(--ol8-typography-body-large-line-height);
+  letter-spacing:  var(--ol8-typography-body-large-letter-spacing);
+}
+```
+
+  The roles are `display-large`, `display-medium`, `display-small`,
+  `title-large`, `title-medium`, `title-small`, `body-large`, `body-medium` and
+  `body-small`. This package ships custom properties and no class names, so
+  nothing here can collide with your own stylesheet.
 
 ## Entry points
 
