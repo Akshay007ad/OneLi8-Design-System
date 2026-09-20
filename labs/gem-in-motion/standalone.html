@@ -1118,6 +1118,513 @@
 /* ---- fullWidth (runtime-only, per the Figma description) ------------- */
 .ol8-btn[data-ol8-fullwidth] { display: flex; inline-size: 100%; }
 </style>
+<style>/* inlined from ../../packages/core/src/molecules/icon-button/icon-button.css */
+/**
+ * Oneli8 · Icon Button
+ * Figma: section "Icon Button" (1034:10546) — Primary 86:2, Secondary 87:26,
+ *        Quiet 88:50, Destructive 89:74, plus the four Circle sets.
+ *        4 families × 2 shapes × 4 sizes × 6 states = 192 components.
+ *
+ * Documentation (85:9):
+ *   "Visible boxes: 36/42/48/60px · protected targets: 48/48/48/60px
+ *    Artwork: 18/18/24/36px
+ *    Hover changes the container only; the symbol never translates, rotates
+ *    or scales. Accessible name is mandatory. Rounded Square is the canonical
+ *    base; Circle is a governed presentation extension."
+ *
+ * The component is TWO boxes, and that is the whole point:
+ *   .ol8-icon-btn           — the protected TARGET. Transparent, no paint.
+ *                             Never smaller than 48px even when the visible
+ *                             box is 36px, so the hit area stays compliant.
+ *   .ol8-icon-btn__surface  — the VISIBLE box. Carries bg, 2px border, radius.
+ *
+ * Collapsing these into one element would silently shrink the touch target
+ * to 36px at Compact. Don't.
+ */
+
+.ol8-icon-btn {
+  --_target:  var(--ol8-component-iconbutton-target-standard);
+  --_box:     var(--ol8-component-iconbutton-box-standard);
+  --_radius:  var(--ol8-component-iconbutton-radius-standard);
+  --_artwork: var(--ol8-component-iconbutton-artwork-standard);
+
+  --_bg: transparent;
+  --_bd: transparent;
+  --_ink: var(--ol8-color-icon-primary);
+
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--_target);
+  block-size: var(--_target);
+  padding: 0;
+  border: 0;
+  background: none;          /* the target paints nothing */
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.ol8-icon-btn__surface {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--_box);
+  block-size: var(--_box);
+  border: var(--ol8-border-width-standard) solid var(--_bd);
+  border-radius: var(--_radius);
+  background: var(--_bg);
+  color: var(--_ink);
+}
+
+/* The surface governs artwork size — never set a size on the glyph. */
+.ol8-icon-btn .ol8-icon { --_ol8-icon-size: var(--_artwork); }
+
+/* "the symbol never translates, rotates, or scales" — no transform on the
+   glyph in any state. Hover changes the container only. */
+
+/* ---- Size ------------------------------------------------------------ */
+.ol8-icon-btn[data-ol8-size="compact"] {
+  --_target: var(--ol8-component-iconbutton-target-compact);
+  --_box: var(--ol8-component-iconbutton-box-compact);
+  --_radius: var(--ol8-component-iconbutton-radius-compact);
+  --_artwork: var(--ol8-component-iconbutton-artwork-compact);
+}
+.ol8-icon-btn[data-ol8-size="standard"] {
+  --_target: var(--ol8-component-iconbutton-target-standard);
+  --_box: var(--ol8-component-iconbutton-box-standard);
+  --_radius: var(--ol8-component-iconbutton-radius-standard);
+  --_artwork: var(--ol8-component-iconbutton-artwork-standard);
+}
+.ol8-icon-btn[data-ol8-size="comfortable"] {
+  --_target: var(--ol8-component-iconbutton-target-comfortable);
+  --_box: var(--ol8-component-iconbutton-box-comfortable);
+  --_radius: var(--ol8-component-iconbutton-radius-comfortable);
+  --_artwork: var(--ol8-component-iconbutton-artwork-comfortable);
+}
+.ol8-icon-btn[data-ol8-size="large"] {
+  --_target: var(--ol8-component-iconbutton-target-large);
+  --_box: var(--ol8-component-iconbutton-box-large);
+  --_radius: var(--ol8-component-iconbutton-radius-large);
+  --_artwork: var(--ol8-component-iconbutton-artwork-large);
+}
+
+/* ---- Shape: Circle is a governed presentation extension -------------- */
+.ol8-icon-btn[data-ol8-shape="circle"] { --_radius: var(--ol8-shape-radius-full); }
+
+/* ---- Family: Primary ------------------------------------------------- */
+/* The glyph binds to the action's CONTENT colour, not the neutral ink role.
+   Figma binds --ol8-color-icon-primary (#151817) here, which lands a near-black
+   glyph on a #2c438b surface: 1.94:1, against the 3:1 WCAG 1.4.11 minimum for
+   graphical objects. --ol8-color-actionprimary-content measures 8.81:1. */
+.ol8-icon-btn--primary {
+  --_bg: var(--ol8-color-actionprimary-default);
+  --_bd: var(--ol8-color-actionprimary-default);
+  --_ink: var(--ol8-color-actionprimary-content);
+}
+.ol8-icon-btn--primary:hover:not(:disabled):not([data-ol8-loading]) > .ol8-icon-btn__surface,
+.ol8-icon-btn--primary[data-ol8-loading] > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actionprimary-hover); --_bd: var(--ol8-color-actionprimary-hover);
+}
+.ol8-icon-btn--primary:active:not(:disabled) > .ol8-icon-btn__surface,
+.ol8-icon-btn--primary[aria-pressed="true"]:not(:disabled) > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actionprimary-pressed); --_bd: var(--ol8-color-actionprimary-pressed);
+}
+.ol8-icon-btn--primary:disabled > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actionprimary-disabled);
+  --_bd: var(--ol8-color-border-disabled);
+  /* Disabled flips to a LIGHT surface, so the glyph flips back to dark ink. */
+  --_ink: var(--ol8-color-actionprimary-disabledcontent);
+}
+
+/* ---- Family: Destructive --------------------------------------------- */
+/* Same defect as Primary: #151817 on #922824 measures 2.17:1. */
+.ol8-icon-btn--destructive {
+  --_bg: var(--ol8-color-actiondestructive-default);
+  --_bd: var(--ol8-color-actiondestructive-default);
+  --_ink: var(--ol8-color-actiondestructive-content);
+}
+.ol8-icon-btn--destructive:hover:not(:disabled):not([data-ol8-loading]) > .ol8-icon-btn__surface,
+.ol8-icon-btn--destructive[data-ol8-loading] > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actiondestructive-hover); --_bd: var(--ol8-color-actiondestructive-hover);
+}
+.ol8-icon-btn--destructive:active:not(:disabled) > .ol8-icon-btn__surface,
+.ol8-icon-btn--destructive[aria-pressed="true"]:not(:disabled) > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actiondestructive-pressed); --_bd: var(--ol8-color-actiondestructive-pressed);
+}
+.ol8-icon-btn--destructive:disabled > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actiondestructive-disabled);
+  --_bd: var(--ol8-color-border-disabled);
+  --_ink: var(--ol8-color-actiondestructive-disabledcontent);
+}
+
+/* ---- Family: Secondary (bordered, transparent) ----------------------- */
+.ol8-icon-btn--secondary {
+  --_bg: var(--ol8-color-actionsecondary-surfacedefault);
+  --_bd: var(--ol8-color-actionsecondary-contentdefault);
+  --_ink: var(--ol8-color-actionsecondary-contentdefault);
+}
+.ol8-icon-btn--secondary:hover:not(:disabled):not([data-ol8-loading]) > .ol8-icon-btn__surface,
+.ol8-icon-btn--secondary[data-ol8-loading] > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actionsecondary-surfacehover);
+  --_bd: var(--ol8-color-actionsecondary-contenthover);
+  --_ink: var(--ol8-color-actionsecondary-contenthover);
+}
+.ol8-icon-btn--secondary:active:not(:disabled) > .ol8-icon-btn__surface,
+.ol8-icon-btn--secondary[aria-pressed="true"]:not(:disabled) > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actionsecondary-surfacepressed);
+  --_bd: var(--ol8-color-actionsecondary-contentpressed);
+  --_ink: var(--ol8-color-actionsecondary-contentpressed);
+}
+.ol8-icon-btn--secondary:disabled > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actionsecondary-surfacedisabled);
+  --_bd: var(--ol8-color-border-disabled);
+  --_ink: var(--ol8-color-actionsecondary-contentdisabled);
+}
+
+/* ---- Family: Quiet (no boundary) ------------------------------------- */
+.ol8-icon-btn--quiet {
+  --_bg: var(--ol8-color-actionquiet-surfacedefault);
+  --_bd: transparent;
+  --_ink: var(--ol8-color-actionquiet-contentdefault);
+}
+.ol8-icon-btn--quiet:hover:not(:disabled):not([data-ol8-loading]) > .ol8-icon-btn__surface,
+.ol8-icon-btn--quiet[data-ol8-loading] > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actionquiet-surfacehover); --_ink: var(--ol8-color-actionquiet-contenthover);
+}
+.ol8-icon-btn--quiet:active:not(:disabled) > .ol8-icon-btn__surface,
+.ol8-icon-btn--quiet[aria-pressed="true"]:not(:disabled) > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actionquiet-surfacepressed); --_ink: var(--ol8-color-actionquiet-contentpressed);
+}
+.ol8-icon-btn--quiet:disabled > .ol8-icon-btn__surface {
+  --_bg: var(--ol8-color-actionquiet-surfacedisabled); --_ink: var(--ol8-color-actionquiet-contentdisabled);
+}
+
+/* ---- Pressed scrim ---------------------------------------------------
+   Figma layers a 3px inset scrim over the pressed surface, in addition to
+   the darker fill. Reproduced as an inset shadow rather than an extra node. */
+.ol8-icon-btn:active:not(:disabled) > .ol8-icon-btn__surface,
+.ol8-icon-btn[aria-pressed="true"]:not(:disabled) > .ol8-icon-btn__surface {
+  box-shadow: inset 0 0 0 3px var(--ol8-component-iconbutton-pressedscrim);
+}
+
+/* ---- Focus -----------------------------------------------------------
+   OUTSIDE two-tone ring, unlike the labelled Button's inside stroke.
+
+   Figma declares the 6px outer shadow FIRST, and box-shadow paints the first
+   shadow on top — so the 6px dark spread completely covers the 3px light one
+   and only a flat dark band renders. Sampling the Figma export confirms it:
+   uniform #101b3a at every perimeter position and at both 2px and 4px depth.
+
+   The inner band is declared here first so both are visible: light from the
+   edge out to 3px, dark from 3px to 6px. That is the ring the two tokens
+   describe. To restore the Figma-exact single-band ring, swap these two
+   lines back.
+
+   Both focus-ring tokens are BAND THICKNESSES (3px each). box-shadow spread is
+   cumulative from the edge, so the outer band's spread is the sum of the two —
+   3px light from the edge, then dark from 3px out to 6px. Do not pass
+   --ol8-focus-ring-outerwidth here on its own: that would paint the dark band
+   at the same 3px radius as the light one and hide it completely. */
+.ol8-icon-btn:focus-visible { outline: none; }
+.ol8-icon-btn:focus-visible > .ol8-icon-btn__surface {
+  box-shadow:
+    0 0 0 var(--ol8-focus-ring-innerwidth) var(--ol8-color-focus-inner),
+    0 0 0 calc(var(--ol8-focus-ring-innerwidth) + var(--ol8-focus-ring-outerwidth)) var(--ol8-color-focus-outer);
+}
+
+/* ---- Disabled / Loading ---------------------------------------------- */
+.ol8-icon-btn:disabled { cursor: not-allowed; }
+.ol8-icon-btn[data-ol8-loading] { cursor: progress; }
+@media (prefers-reduced-motion: no-preference) {
+  .ol8-icon-btn[data-ol8-loading] .ol8-icon > svg { animation: ol8-spin 900ms linear infinite; }
+}
+</style>
+<!-- Token layers onto the chip: .ol8-chip geometry lives in choice-chip.css,
+     so a page using renderToken needs both or the terminals stretch. -->
+<style>/* inlined from ../../packages/core/src/molecules/choice-chip/choice-chip.css */
+/**
+ * Oneli8 · Choice Chip (MOLECULE) — the Soft Hexagon
+ * Figma: Select and Combobox / Choice Chip / Soft Hexagon 636:847 (8 variants)
+ *
+ * GEOMETRY, read from all four sizes in Figma:
+ *   size         target  visible  rail inset  gap  label
+ *   compact        48      30         9        9   12 / 18
+ *   standard       48      36        12        9   12 / 18
+ *   comfortable    48      42        15        9   16 / 24
+ *   large          60      42        15        9   16 / 24
+ * The terminal is a fixed 12 at every size and never scales with the label,
+ * so peer chips of different lengths keep one shoulder depth and side angle.
+ *
+ * The visible silhouette sits inside a taller protected target, which is why
+ * `min-block-size` is the target and the rail carries the visible height.
+ */
+
+.ol8-chip {
+  --_height: var(--ol8-component-choice-chip-height-standard);
+  --_target: var(--ol8-component-choice-chip-target-standard);
+  --_inset:  var(--ol8-component-choice-chip-rail-inset-standard);
+  --_label-size: var(--ol8-font-size-012);
+  --_label-line: var(--ol8-font-line-018);
+
+  /* Inactive is the quiet Neutral treatment; Selected is Primary Soft. */
+  --_surface: var(--ol8-color-surface-sunken);
+  --_edge:    var(--ol8-color-border-subtle);
+  --_ink:     var(--ol8-color-text-primary);
+
+  /* The ring is painted at every state and is simply invisible until focus,
+     so focus never changes the geometry, only the colour. */
+  --_focus-outer: transparent;
+  --_focus-inner: transparent;
+
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--_target);
+  font-family: var(--ol8-font-family-functional);
+  font-variation-settings: "ARRR" var(--ol8-font-axis-arrr-baseline);
+  color: var(--_ink);
+  cursor: pointer;
+}
+.ol8-chip[data-ol8-availability="disabled"] { cursor: not-allowed; }
+
+/* ---- Size ------------------------------------------------------------ */
+.ol8-chip[data-ol8-size="compact"] {
+  --_height: var(--ol8-component-choice-chip-height-compact);
+  --_inset:  var(--ol8-component-choice-chip-rail-inset-compact);
+}
+.ol8-chip[data-ol8-size="standard"] {
+  --_height: var(--ol8-component-choice-chip-height-standard);
+  --_inset:  var(--ol8-component-choice-chip-rail-inset-standard);
+}
+.ol8-chip[data-ol8-size="comfortable"] {
+  --_height: var(--ol8-component-choice-chip-height-comfortable);
+  --_inset:  var(--ol8-component-choice-chip-rail-inset-comfortable);
+  --_label-size: var(--ol8-font-size-016);
+  --_label-line: var(--ol8-font-line-024);
+}
+.ol8-chip[data-ol8-size="large"] {
+  --_height: var(--ol8-component-choice-chip-height-large);
+  --_target: var(--ol8-component-choice-chip-target-large);
+  --_inset:  var(--ol8-component-choice-chip-rail-inset-large);
+  --_label-size: var(--ol8-font-size-016);
+  --_label-line: var(--ol8-font-line-024);
+}
+
+/* ---- Selection ------------------------------------------------------- */
+/* Never colour alone: the native checked state carries the same fact, and the
+   selected edge is a stronger contrast than the inactive one. */
+.ol8-chip[data-ol8-selection="selected"] {
+  --_surface: var(--ol8-color-selection-surface);
+  --_edge:    var(--ol8-color-primary-360);
+  --_ink:     var(--ol8-color-selection-content);
+}
+.ol8-chip[data-ol8-availability="disabled"] {
+  --_surface: var(--ol8-color-surface-disabled);
+  --_edge:    var(--ol8-color-border-disabled);
+  --_ink:     var(--ol8-color-text-disabled);
+}
+
+.ol8-chip__input {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---- Terminals ------------------------------------------------------- */
+/* One viewBox serves every height: Figma's terminal paths share identical X
+   values at 30, 36 and 42, and Y values that are the same fractions of the
+   height, so stretching Y alone is exact rather than approximate. */
+.ol8-chip__terminal {
+  flex: none;
+  inline-size: var(--ol8-component-choice-chip-terminal);
+  block-size: var(--_height);
+  /* The point reaches 0.15 beyond the box, as it does in Figma, and the focus
+     ring is painted outside the silhouette. Neither may be clipped. */
+  overflow: visible;
+}
+/* The trailing terminal is the leading one mirrored, so they cannot drift. */
+.ol8-chip__terminal--trailing { transform: scaleX(-1); }
+
+.ol8-chip__fill { fill: var(--_surface); }
+
+/* Double width, clipped to the fill: the outer half is cut away and what
+   remains is an inside edge of exactly one border width, matching the rail's
+   own inside border. A centred stroke would stand 1px proud of the rail and
+   show a step at the shoulder. */
+.ol8-chip__edge {
+  fill: none;
+  stroke: var(--_edge);
+  stroke-width: calc(var(--ol8-border-width-standard) * 2);
+  vector-effect: non-scaling-stroke;
+}
+
+/* Both rings are painted before the fill and at double width, so the inner
+   half of each lands under the fill and only the outer half shows. This is how
+   the ring follows the hexagon instead of boxing it. */
+.ol8-chip__focus-outer,
+.ol8-chip__focus-inner { fill: none; vector-effect: non-scaling-stroke; }
+.ol8-chip__focus-outer {
+  stroke: var(--_focus-outer);
+  stroke-width: calc((var(--ol8-focus-ring-outerwidth) + var(--ol8-focus-ring-innerwidth)) * 2);
+}
+.ol8-chip__focus-inner {
+  stroke: var(--_focus-inner);
+  stroke-width: calc(var(--ol8-focus-ring-innerwidth) * 2);
+}
+
+.ol8-chip:has(> .ol8-chip__input:focus-visible) {
+  --_focus-outer: var(--ol8-color-focus-outer);
+  --_focus-inner: var(--ol8-color-focus-inner);
+}
+
+/* ---- Centre rail ----------------------------------------------------- */
+/* Only the rail grows with the label. It owns the top and bottom of the
+   perimeter; the terminals own the angled ends. */
+.ol8-chip__rail {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--ol8-component-choice-gap-standard);
+  block-size: var(--_height);
+  padding-inline: var(--_inset);
+  background: var(--_surface);
+  border-block: var(--ol8-border-width-standard) solid var(--_edge);
+}
+
+/* The ring's flat runs, continuing the terminals' strokes across the rail.
+   Two colours in one band, ordered outward from the silhouette. */
+.ol8-chip__rail::before,
+.ol8-chip__rail::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  block-size: calc(var(--ol8-focus-ring-outerwidth) + var(--ol8-focus-ring-innerwidth));
+}
+.ol8-chip__rail::before {
+  inset-block-end: 100%;
+  background: linear-gradient(
+    var(--_focus-outer) 0 var(--ol8-focus-ring-outerwidth),
+    var(--_focus-inner) var(--ol8-focus-ring-outerwidth) 100%);
+}
+.ol8-chip__rail::after {
+  inset-block-start: 100%;
+  background: linear-gradient(
+    var(--_focus-inner) 0 var(--ol8-focus-ring-innerwidth),
+    var(--_focus-outer) var(--ol8-focus-ring-innerwidth) 100%);
+}
+
+.ol8-chip__label {
+  font-size: var(--_label-size);
+  line-height: var(--_label-line);
+  font-weight: var(--ol8-font-weight-regular);
+  color: var(--_ink);
+}
+
+/* ---- Mark ------------------------------------------------------------ */
+/* Figma places the mark BEFORE the label in every variant, Remove included. */
+.ol8-chip__mark {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--ol8-component-choicechip-mark);
+  block-size: var(--ol8-component-choicechip-mark);
+  color: var(--_ink);
+}
+
+/* The Check does not scale with its slot. Figma's `Icon / Selection / Check`
+   is a governed small master, not an Icon Frame instance: Size=Small and
+   Size=Standard both carry the same 10.2 x 6.9 artwork at the same 1.8 stroke,
+   centred in an 18 or 24 box. So the source box stays 24 units and overflows
+   the smaller slot, exactly as Figma draws it. */
+.ol8-chip__mark > svg {
+  display: block;
+  flex: none;
+  inline-size: var(--ol8-size-icon-standard);
+  block-size: var(--ol8-size-icon-standard);
+  overflow: visible;
+}
+
+/* Both marks read at the one governed optical stroke, which is what Figma
+   draws and what the iconography contract calls contextual stroke
+   normalization: peer marks in one family match apparent weight. */
+.ol8-chip__mark > svg > * {
+  vector-effect: non-scaling-stroke;
+  stroke-width: var(--ol8-component-choice-optical-stroke);
+}
+</style>
+<style>/* inlined from ../../packages/core/src/molecules/token/token.css */
+/**
+ * Oneli8 · Token (MOLECULE)
+ * Figma: Select and Combobox / Molecule / Token 897:2106 (24 variants)
+ *
+ * The silhouette, sizes and colours all come from the Choice Chip stylesheet,
+ * because Figma's Token instantiates the Choice Chip Geometry Owner rather than
+ * redrawing it. Every rule here is about the one axis Token adds: the Mark.
+ */
+
+/* A token is content, not a control. Only its Remove mark is interactive. */
+.ol8-token.ol8-chip { cursor: default; }
+
+/* ---- Remove ---------------------------------------------------------- */
+.ol8-token__remove {
+  position: relative;      /* anchors the expanded target below */
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  /* The ring follows the mark, not the chip: the chip is not the target. */
+  border-radius: var(--ol8-shape-radius-full);
+}
+
+/* The mark is drawn at 18 because that is what Figma draws, but the contract
+   asks for a target of at least 24 that does not overlap anything. The target
+   is expanded with a pseudo element so the drawn size and the reachable size
+   can differ without moving the label: it grows 3 into the 9 gap on one side
+   and into the rail inset on the other, so it still touches neither. */
+.ol8-token__remove::before {
+  content: "";
+  position: absolute;
+  inline-size: var(--ol8-component-choice-chip-mark-target);
+  block-size: var(--ol8-component-choice-chip-mark-target);
+  transform: translate(-50%, -50%);
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+}
+
+.ol8-token__remove:focus-visible {
+  outline: var(--ol8-focus-ring-innerwidth) solid var(--ol8-color-focus-inner);
+  outline-offset: var(--ol8-focus-ring-offset);
+}
+
+/* ---- Mark size parity ------------------------------------------------
+   The two marks have to read as one size, and they did not. The Icon Library's
+   cross spans 12 x 12 in the canonical 24 space while the check spans
+   10.2 x 6.9, so drawn at one frame size the cross was fifteen percent wider
+   and well over half again as tall, and it swamped the check beside it.
+
+   Figma does not draw it that way: its Remove mark is an Icon Frame instance at
+   18, so the cross comes out at 9 x 9 there, a little narrower than the check
+   and balanced against it. The oversized cross was this stylesheet rendering
+   the library source at full size, not a decision in the design.
+
+   So the cross is scaled to the 9 span Figma draws. The stroke does not follow
+   it: it is a non scaling stroke, so it stays the governed 1.8 that every glyph
+   in the system uses, which is also what Figma keeps. */
+.ol8-token__remove > svg > * {
+  transform: scale(0.75);        /* 9 / 12, the span Figma draws */
+  transform-box: fill-box;
+  transform-origin: center;
+}
+</style>
 <style>/* inlined from ../../packages/core/src/organisms/segmented-control/segmented-control.css */
 /**
  * Oneli8 · Segmented Control (ORGANISM)
@@ -1546,27 +2053,37 @@
   #scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
   /* The HUD blurs as a whole. Nothing is removed, nothing fades out —
-     the widgets stay exactly where they are and stop being readable. */
+     the widgets stay exactly where they are and stop being readable.
+
+     Peak blur is a scale token, not a typed number, so it cannot land off
+     the 3px grid. JS only sets --hud-k, a unitless 0..1; swapping the peak
+     between 006 and 009 is a one-token edit. */
   .hud {
+    --hud-peak: var(--ol8-dimension-scale-009);
     position: absolute; inset: 0;
     padding: var(--ol8-dimension-scale-018);
     display: flex; flex-direction: column; align-items: flex-end;
     gap: var(--ol8-dimension-scale-009);
-    pointer-events: none;
-    filter: blur(var(--hud-blur, 0px));
+    filter: blur(calc(var(--hud-k, 0) * var(--hud-peak)));
     transition: filter .18s linear;
   }
   .widget {
-    inline-size: 196px; max-inline-size: 44%;
+    inline-size: 224px; max-inline-size: 48%;
     padding: var(--ol8-dimension-scale-009) var(--ol8-dimension-scale-012);
-    display: flex; flex-direction: column; gap: 2px;
+    display: flex; flex-direction: column; gap: var(--ol8-dimension-scale-006);
   }
+  /* Lab layout only. Everything placed inside these rows is a real component. */
+  .widget__row { display: flex; align-items: center; gap: var(--ol8-dimension-scale-009); }
+  .widget__row--split { justify-content: space-between; }
+  .widget__text { display: flex; flex-direction: column; min-inline-size: 0; flex: 1 1 auto; }
   .widget__k {
     font-size: var(--ol8-font-size-012); line-height: var(--ol8-font-line-018);
-    letter-spacing: .06em; text-transform: uppercase; opacity: .6;
+    letter-spacing: .06em; text-transform: uppercase; opacity: .62;
   }
   .widget__v { font-size: var(--ol8-font-size-016); line-height: var(--ol8-font-line-024); font-weight: var(--ol8-font-weight-semibold); }
   .widget__s { font-size: var(--ol8-font-size-012); line-height: var(--ol8-font-line-018); opacity: .74; }
+  /* The HUD is a simulation, not a live surface — nothing in it takes a click. */
+  .hud button, .hud a, .hud input { pointer-events: none; }
 
   .caption {
     position: absolute; inset-inline-start: var(--ol8-dimension-scale-018);
@@ -1636,12 +2153,8 @@
 
   <div class="stage" id="stage">
     <canvas id="scene"></canvas>
-    <div class="hud" id="hud">
-      <article class="ol8-gem widget"><span class="widget__k">Now playing</span><span class="widget__v">Sundara</span><span class="widget__s">Anoushka Shankar</span></article>
-      <article class="ol8-gem widget"><span class="widget__k">Kabir Rao</span><span class="widget__v">Still coming by?</span><span class="widget__s">I&rsquo;ll wait at the north gate</span></article>
-      <article class="ol8-gem widget"><span class="widget__k">Navigation</span><span class="widget__v">400 m</span><span class="widget__s">Left onto Ferry Rd</span></article>
-      <article class="ol8-gem widget"><span class="widget__k">Heart rate</span><span class="widget__v" id="hr">68 bpm</span><span class="widget__s" id="hrs">Resting</span></article>
-    </div>
+    <!-- Built in script from the system's own components. -->
+    <div class="hud" id="hud"></div>
     <p class="caption" id="caption">Standing</p>
   </div>
 
@@ -2548,9 +3061,537 @@ function escapeAttr(v) { return String(v).replace(/&/g,'&amp;').replace(/"/g,'&q
   Object.assign(__x, { OL8_SEGMENT_BEHAVIORS, OL8_SEGMENT_PRESENTATIONS, renderSegmentedControl, hydrateSegmentedControls });
 });
 
+__def("packages/core/src/molecules/button/button.js", (__x, __req) => {
+/**
+ * Oneli8 · Button — headless behavior.
+ *
+ * The Figma component description is explicit that native semantics, disabled,
+ * loading, pressed and fullWidth "remain implemented and tested in code; they
+ * must not become fake visual axes." This module is that code.
+ */
+const { renderIcon, renderIconSvg, isOl8IconName } = __req("packages/core/src/atoms/icon/icon.js");
+const OL8_BUTTON_VARIANTS = ['primary', 'secondary', 'quiet', 'destructive'];
+const OL8_BUTTON_SIZES = ['compact', 'standard', 'comfortable', 'large'];
+const OL8_MATERIALS = ['regular', 'gem'];
+/** Gem is approved for Primary and Secondary only (Figma 100:3). */
+const GEM_VARIANTS = ['primary', 'secondary'];
+
+/** Compact+Standard take the 18px icon; Comfortable+Large take 24px. */
+function iconSizeForButton(size) {
+  return size === 'comfortable' || size === 'large' ? 24 : 18;
+}
+
+/**
+ * @param {string} label
+ * @param {{variant?:string,size?:string,leadingIcon?:string,trailingIcon?:string,
+ *          disabled?:boolean,loading?:boolean,pressed?:boolean,fullWidth?:boolean,
+ *          href?:string,type?:string,className?:string}} [options]
+ */
+function renderButton(label, options = {}) {
+  const {
+    variant = 'primary', size = 'standard', leadingIcon, trailingIcon,
+    disabled = false, loading = false, pressed, fullWidth = false,
+    href, type = 'button', className, material = 'regular',
+    keepLeadingIconWhileLoading = false,
+  } = options;
+
+  if (!OL8_BUTTON_VARIANTS.includes(variant)) throw new Error(`[ol8] unknown button variant "${variant}"`);
+  if (!OL8_BUTTON_SIZES.includes(size)) throw new Error(`[ol8] unknown button size "${size}"`);
+  if (!OL8_MATERIALS.includes(material)) throw new Error(`[ol8] unknown material "${material}"`);
+  if (material === 'gem' && !GEM_VARIANTS.includes(variant)) {
+    throw new Error(`[ol8] Gem has no approved treatment for "${variant}" — Figma 100:3 says Quiet and Destructive use the regular material.`);
+  }
+
+  const isLink = typeof href === 'string';
+  const inert = disabled || loading;
+  const iconSize = iconSizeForButton(size);
+
+  const attrs = [
+    `class="ol8-btn ol8-btn--${variant}${className ? ` ${className}` : ''}"`,
+    `data-ol8-size="${size}"`,
+    isLink ? (inert ? 'role="button" aria-disabled="true" tabindex="-1"' : `href="${escapeAttr(href)}"`)
+           : `type="${type}"`,
+    !isLink && inert ? 'disabled' : '',
+    loading ? 'data-ol8-loading="true" aria-busy="true"' : '',
+    pressed !== undefined ? `aria-pressed="${pressed}"` : '',
+    fullWidth ? 'data-ol8-fullwidth="true"' : '',
+    material === 'gem' ? 'data-ol8-material="gem"' : '',
+    loading && keepLeadingIconWhileLoading ? 'data-ol8-loading-keep-icon="true"' : '',
+  ].filter(Boolean).join(' ');
+
+  // Loading + leading icon is genuinely ambiguous in the source. Figma's
+  // codegen emits BOTH the leading icon and the spinner, but the measured
+  // Loading widths (101/107/122/134 = default + spinner + gap) come from
+  // variants that carry no leading icon, so they do not disambiguate.
+  //
+  // Default here: the spinner TAKES the leading slot, so the button never
+  // shows two competing leading glyphs and its width stays predictable.
+  // Pass keepLeadingIconWhileLoading to get Figma's literal reading.
+  const spinner = `<span class="ol8-btn__spinner ol8-icon" aria-hidden="true">${renderIconSvg('loading')}</span>`;
+  const leadingGlyph = leadingIcon ? renderIcon(leadingIcon, { size: iconSize }) : '';
+  const leading = loading
+    ? (keepLeadingIconWhileLoading ? leadingGlyph + spinner : spinner)
+    : leadingGlyph;
+  const trailing = trailingIcon ? renderIcon(trailingIcon, { size: iconSize }) : '';
+
+  const tag = isLink ? 'a' : 'button';
+  return `<${tag} ${attrs}>${leading}<span class="ol8-btn__label">${escapeText(label)}</span>${trailing}</${tag}>`;
+}
+
+/**
+ * Enforces the runtime contract on existing `.ol8-btn` markup. Idempotent.
+ *   - <button> gets an explicit type (default "button", never a stray submit)
+ *   - [data-ol8-loading] implies disabled + aria-busy and grows a spinner
+ *   - links can't be natively disabled, so they get aria-disabled + tabindex=-1
+ *     and their activation is swallowed
+ */
+function hydrateButtons(root = document) {
+  for (const el of root.querySelectorAll('.ol8-btn')) {
+    const isLink = el.tagName === 'A';
+    const loading = el.dataset.ol8Loading === 'true';
+
+    if (!isLink && !el.hasAttribute('type')) el.setAttribute('type', 'button');
+
+    if (loading) {
+      el.setAttribute('aria-busy', 'true');
+      if (isLink) { el.setAttribute('aria-disabled', 'true'); el.setAttribute('tabindex', '-1'); }
+      else el.disabled = true;
+
+      if (!el.querySelector('.ol8-btn__spinner')) {
+        // Same call as renderButton: the spinner takes the leading slot unless
+        // data-ol8-loading-keep-icon opts into Figma's literal both-glyphs read.
+        if (el.dataset.ol8LoadingKeepIcon !== 'true') {
+          el.querySelector(':scope > .ol8-icon:first-child')?.remove();
+        }
+        const spinner = document.createElement('span');
+        spinner.className = 'ol8-btn__spinner ol8-icon';
+        spinner.setAttribute('aria-hidden', 'true');
+        spinner.innerHTML = renderIconSvg('loading');
+        const keep = el.dataset.ol8LoadingKeepIcon === 'true';
+        const after = keep ? el.querySelector(':scope > .ol8-icon:first-child') : null;
+        if (after) after.after(spinner); else el.prepend(spinner);
+      }
+    } else {
+      el.removeAttribute('aria-busy');
+      el.querySelector('.ol8-btn__spinner')?.remove();
+    }
+
+    if (isLink && (el.getAttribute('aria-disabled') === 'true') && !el.dataset.ol8InertBound) {
+      el.addEventListener('click', swallow);
+      el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') swallow(e); });
+      el.dataset.ol8InertBound = 'true';
+    }
+  }
+}
+
+function swallow(event) { event.preventDefault(); event.stopPropagation(); }
+
+/** Flip a button into or out of its loading state at runtime. */
+function setButtonLoading(el, loading) {
+  if (loading) el.dataset.ol8Loading = 'true';
+  else delete el.dataset.ol8Loading;
+  hydrateButtons(el.parentNode ?? document);
+}
+
+function escapeAttr(v) { return String(v).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+function escapeText(v) { return String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  Object.assign(__x, { OL8_BUTTON_VARIANTS, OL8_BUTTON_SIZES, OL8_MATERIALS, GEM_VARIANTS, iconSizeForButton, renderButton, hydrateButtons, setButtonLoading });
+});
+
+__def("packages/core/src/molecules/icon-button/icon-button.js", (__x, __req) => {
+/**
+ * Oneli8 · Icon Button — headless behavior.
+ *
+ * Figma (86:2): "Icon is an INSTANCE_SWAP sourced from the governed 24px Icon
+ * Library atom and resized only through Icon Frame; Accessible Name is
+ * mandatory. Size and State are deterministic visual evidence. Runtime
+ * disabled, loading, pressed, motion, tooltip policy, and native button
+ * semantics live in code."
+ *
+ * "Accessible Name is mandatory" is enforced here, not left to reviewers.
+ */
+const { renderIcon, renderIconSvg, isOl8IconName } = __req("packages/core/src/atoms/icon/icon.js");
+const { GEM_VARIANTS } = __req("packages/core/src/molecules/button/button.js");
+const OL8_ICON_BUTTON_VARIANTS = ['primary', 'secondary', 'quiet', 'destructive'];
+const OL8_ICON_BUTTON_SIZES = ['compact', 'standard', 'comfortable', 'large'];
+const OL8_ICON_BUTTON_SHAPES = ['rounded', 'circle'];
+
+/** Artwork sizes as BUILT in Figma: 18 / 18 / 24 / 24. */
+function artworkSizeForIconButton(size) {
+  return size === 'comfortable' || size === 'large' ? 24 : 18;
+}
+
+/**
+ * @param {string} icon    registry name, e.g. "add"
+ * @param {string} label   accessible name — REQUIRED
+ * @param {{variant?:string,size?:string,shape?:string,disabled?:boolean,
+ *          loading?:boolean,pressed?:boolean,type?:string,className?:string}} [options]
+ */
+function renderIconButton(icon, label, options = {}) {
+  const {
+    variant = 'primary', size = 'standard', shape = 'rounded',
+    disabled = false, loading = false, pressed, type = 'button', className, material = 'regular',
+  } = options;
+
+  if (!isOl8IconName(icon)) throw new Error(`[ol8] unknown icon "${icon}"`);
+  if (!OL8_ICON_BUTTON_VARIANTS.includes(variant)) throw new Error(`[ol8] unknown icon-button variant "${variant}"`);
+  if (!OL8_ICON_BUTTON_SIZES.includes(size)) throw new Error(`[ol8] unknown icon-button size "${size}"`);
+  if (!OL8_ICON_BUTTON_SHAPES.includes(shape)) throw new Error(`[ol8] unknown icon-button shape "${shape}"`);
+  if (material === 'gem' && !GEM_VARIANTS.includes(variant)) {
+    throw new Error(`[ol8] Gem has no approved treatment for "${variant}" — Figma 100:3 says Quiet and Destructive use the regular material.`);
+  }
+  if (!label || !String(label).trim()) {
+    throw new Error('[ol8] Icon Button requires an accessible name — Figma marks it mandatory (86:2).');
+  }
+
+  const artwork = artworkSizeForIconButton(size);
+  const glyph = loading
+    ? `<span class="ol8-icon" aria-hidden="true">${renderIconSvg('loading')}</span>`
+    : renderIcon(icon, { size: artwork });
+
+  const attrs = [
+    `class="ol8-icon-btn ol8-icon-btn--${variant}${className ? ` ${className}` : ''}"`,
+    `type="${type}"`,
+    `data-ol8-size="${size}"`,
+    shape === 'circle' ? 'data-ol8-shape="circle"' : '',
+    `aria-label="${escapeAttr(label)}"`,
+    disabled || loading ? 'disabled' : '',
+    loading ? 'data-ol8-loading="true" aria-busy="true"' : '',
+    pressed !== undefined ? `aria-pressed="${pressed}"` : '',
+    material === 'gem' ? 'data-ol8-material="gem"' : '',
+  ].filter(Boolean).join(' ');
+
+  return `<button ${attrs}><span class="ol8-icon-btn__surface">${glyph}</span></button>`;
+}
+
+/**
+ * Enforces the runtime contract on existing `.ol8-icon-btn` markup. Idempotent.
+ * Wraps a bare glyph in the required surface, and reports any button that has
+ * no accessible name — the one rule Figma calls mandatory.
+ */
+function hydrateIconButtons(root = document) {
+  const unnamed = [];
+  for (const el of root.querySelectorAll('.ol8-icon-btn')) {
+    if (!el.hasAttribute('type') && el.tagName === 'BUTTON') el.setAttribute('type', 'button');
+
+    // The protected target must always wrap a visible surface.
+    if (!el.querySelector(':scope > .ol8-icon-btn__surface')) {
+      const surface = document.createElement('span');
+      surface.className = 'ol8-icon-btn__surface';
+      while (el.firstChild) surface.appendChild(el.firstChild);
+      el.appendChild(surface);
+    }
+
+    const loading = el.dataset.ol8Loading === 'true';
+    if (loading) {
+      el.setAttribute('aria-busy', 'true');
+      el.disabled = true;
+      const surface = el.querySelector(':scope > .ol8-icon-btn__surface');
+      if (!surface.querySelector('[data-ol8-loading-glyph]')) {
+        surface.innerHTML = `<span class="ol8-icon" aria-hidden="true" data-ol8-loading-glyph="true">${renderIconSvg('loading')}</span>`;
+      }
+    } else {
+      el.removeAttribute('aria-busy');
+    }
+
+    if (!accessibleName(el)) unnamed.push(el);
+  }
+  if (unnamed.length) {
+    console.error(`[ol8] ${unnamed.length} icon button(s) have no accessible name; Figma marks it mandatory.`, unnamed);
+  }
+  return { unnamed };
+}
+
+function accessibleName(el) {
+  const aria = el.getAttribute('aria-label');
+  if (aria && aria.trim()) return aria.trim();
+  const labelledby = el.getAttribute('aria-labelledby');
+  if (labelledby) {
+    const text = labelledby.split(/\s+/)
+      .map(id => el.ownerDocument.getElementById(id)?.textContent ?? '')
+      .join(' ').trim();
+    if (text) return text;
+  }
+  // Visible text that is not aria-hidden also names the control.
+  const clone = el.cloneNode(true);
+  for (const h of clone.querySelectorAll('[aria-hidden="true"]')) h.remove();
+  return clone.textContent.trim();
+}
+
+function escapeAttr(v) { return String(v).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+  Object.assign(__x, { OL8_ICON_BUTTON_VARIANTS, OL8_ICON_BUTTON_SIZES, OL8_ICON_BUTTON_SHAPES, artworkSizeForIconButton, renderIconButton, hydrateIconButtons });
+});
+
+__def("packages/core/src/molecules/choice-chip/choice-chip.js", (__x, __req) => {
+/**
+ * Oneli8 · Choice Chip (MOLECULE) — the Soft Hexagon.
+ *
+ * Figma: Select and Combobox / Choice Chip / Soft Hexagon 636:847 (8 variants,
+ * Size x Selection, plus a Label text property and a Show Mark boolean).
+ *
+ * From the Figma description:
+ *   "Compact/Standard/Comfortable/Large use approved 30/36/42/42px visible
+ *    geometry inside protected 48/48/48/60px targets. Fixed 12px terminals and
+ *    tokenized 9/12/15/15px inner rail insets preserve one silhouette at every
+ *    label width."
+ *
+ * Figma builds the silhouette from three boxes, and so does this: a fixed 12px
+ * left terminal, a centre rail that grows with the label, and a mirrored right
+ * terminal. Only the rail grows, which is why a short chip and a long chip keep
+ * the same shoulder depth and side angle. The contract is explicit that ends
+ * which scale with the text are prohibited.
+ *
+ * WHY SVG RATHER THAN clip-path
+ * The terminals are not polygons. Each has three small curves softening the
+ * shoulders and the point, and the contract rejects approximating that softness
+ * with extra vertices because it reads as an Octagon. `clip-path: polygon()`
+ * can only draw straight vertices, so the terminals are real paths.
+ *
+ * HOW ONE PATH SERVES FOUR HEIGHTS
+ * Read from Figma, every terminal path at 30, 36 and 42 has identical X values
+ * and Y values that scale exactly with the height: 1/36, 1/12, 5/12, 11/24,
+ * 13/24, 7/12, 11/12, 35/36 of the height, at every size. So one viewBox of
+ * 12 x 30 with `preserveAspectRatio="none"` and a fixed 12px width reproduces
+ * Figma at all four sizes: the height stretches, the width cannot.
+ * `vector-effect="non-scaling-stroke"` keeps the edge an even 2px through that
+ * uneven stretch.
+ *
+ * THE OPEN EDGE
+ * Figma draws two vectors per terminal: a closed fill and an open outline that
+ * "deliberately omits the hidden vertical closing edge", so the rail's own top
+ * and bottom borders continue the perimeter without a doubled seam. This keeps
+ * that construction. Figma reaches an inside stroke by scaling the outline path
+ * to 98.75% of the width; here the edge is clipped to the fill instead, which
+ * is the same rendered result stated directly.
+ */
+const { renderIconSvg } = __req("packages/core/src/atoms/icon/icon.js");
+const OL8_CHIP_SIZES = ['compact', 'standard', 'comfortable', 'large'];
+
+/**
+ * The terminal, in the 12 x 30 space Figma draws it in. The closed path is the
+ * fill; the open one is the perimeter, missing the seam edge at x=12.
+ */
+const OL8_CHIP_TERMINAL_FILL =
+  'M12 0 L8.96202541 0 C7.44303812 0 6.43037944 0.83333333 5.92405035 2.5 ' +
+  'L0.45569618 12.5 C-0.15189877 13.75 -0.15189877 16.25 0.45569618 17.5 ' +
+  'L5.92405035 27.5 C6.43037944 29.16666667 7.44303812 30 8.96202541 30 L12 30 Z';
+const OL8_CHIP_TERMINAL_EDGE =
+  'M12 0 L8.96202541 0 C7.44303812 0 6.43037944 0.83333333 5.92405035 2.5 ' +
+  'L0.45569618 12.5 C-0.15189877 13.75 -0.15189877 16.25 0.45569618 17.5 ' +
+  'L5.92405035 27.5 C6.43037944 29.16666667 7.44303812 30 8.96202541 30 L12 30';
+
+/**
+ * One terminal. `side` only picks a class; the right terminal is the left one
+ * mirrored in CSS, so the two can never drift apart.
+ *
+ * The focus bands are strokes on the same path, painted before the fill and at
+ * double width, so their inner half lands under the fill and the visible half
+ * sits outside the silhouette. That is how a ring follows a hexagon instead of
+ * boxing it.
+ */
+function renderTerminal(uid, side) {
+  const clip = `${uid}-clip-${side}`;
+  return `<svg class="ol8-chip__terminal ol8-chip__terminal--${side}" viewBox="0 0 12 30" ` +
+    `preserveAspectRatio="none" aria-hidden="true" focusable="false">` +
+    `<clipPath id="${clip}"><path d="${OL8_CHIP_TERMINAL_FILL}"/></clipPath>` +
+    `<path class="ol8-chip__focus-outer" d="${OL8_CHIP_TERMINAL_EDGE}"/>` +
+    `<path class="ol8-chip__focus-inner" d="${OL8_CHIP_TERMINAL_EDGE}"/>` +
+    `<path class="ol8-chip__fill" d="${OL8_CHIP_TERMINAL_FILL}"/>` +
+    `<path class="ol8-chip__edge" d="${OL8_CHIP_TERMINAL_EDGE}" clip-path="url(#${clip})"/>` +
+    `</svg>`;
+}
+
+/**
+ * The silhouette plus its rail contents. Private: Figma names this the
+ * "Choice Chip / Geometry Owner" and both the public chip and the Token
+ * instantiate it rather than redrawing it.
+ *
+ * `mark` is markup for the rail's trailing slot, or an empty string. The mark
+ * follows the label, which is the anatomy the contract writes down as "Label +
+ * optional Remove mark", and one position serves Check and Remove alike so
+ * peer marks never end up on opposite sides.
+ */
+function renderChipShape(uid, label, mark = '') {
+  return renderTerminal(uid, 'leading') +
+    `<span class="ol8-chip__rail">` +
+      `<span class="ol8-chip__label">${escapeText(label)}</span>` +
+      mark +
+    `</span>` +
+    renderTerminal(uid, 'trailing');
+}
+
+/**
+ * A Choice Chip is a real checkbox. The contract is explicit: "Every option is
+ * a real Checkbox rendered with the approved quiet Choice Chip appearance",
+ * with "native checked state" among the redundant cues, so selection is never
+ * carried by colour alone.
+ *
+ * @param {string} label
+ * @param {{size?:string,selected?:boolean,showMark?:boolean,disabled?:boolean,
+ *          name?:string,value?:string,id?:string,className?:string}} [options]
+ */
+function renderChoiceChip(label, options = {}) {
+  const {
+    size = 'standard', selected = false, showMark = false, disabled = false,
+    name, value, id, className,
+  } = options;
+
+  if (!OL8_CHIP_SIZES.includes(size)) throw new Error(`[ol8] unknown chip size "${size}"`);
+  if (!label || !String(label).trim()) throw new Error('[ol8] Choice Chip requires a label');
+
+  const uid = id ?? `ol8-chip-${Math.random().toString(36).slice(2, 9)}`;
+  const mark = showMark
+    ? `<span class="ol8-chip__mark" aria-hidden="true">${renderIconSvg('check')}</span>`
+    : '';
+
+  const inputAttrs = [
+    'type="checkbox"', 'class="ol8-chip__input"', `id="${uid}"`,
+    name ? `name="${escapeAttr(name)}"` : '',
+    value !== undefined ? `value="${escapeAttr(value)}"` : '',
+    selected ? 'checked' : '', disabled ? 'disabled' : '',
+  ].filter(Boolean).join(' ');
+
+  const rowAttrs = [
+    `class="ol8-chip${className ? ` ${className}` : ''}"`,
+    `for="${uid}"`,
+    `data-ol8-size="${size}"`,
+    `data-ol8-selection="${selected ? 'selected' : 'inactive'}"`,
+    `data-ol8-availability="${disabled ? 'disabled' : 'enabled'}"`,
+  ].filter(Boolean).join(' ');
+
+  return `<label ${rowAttrs}><input ${inputAttrs}>${renderChipShape(uid, label, mark)}</label>`;
+}
+
+/**
+ * Keeps each chip's Selection attribute in step with its input. A chip in a
+ * group is an ordinary checkbox, so the browser owns the toggling; this only
+ * mirrors the result onto the attribute the stylesheet reads.
+ */
+function hydrateChoiceChips(root = document) {
+  const chips = [...root.querySelectorAll('.ol8-chip')];
+  for (const chip of chips) {
+    const input = chip.querySelector(':scope > .ol8-chip__input');
+    if (!input) continue;
+    syncChip(chip);
+    if (chip.dataset.ol8ChipBound === 'true') continue;
+    input.addEventListener('change', () => syncChip(chip));
+    chip.dataset.ol8ChipBound = 'true';
+  }
+  return chips.length;
+}
+
+/** Repaints one chip from the live state of its input. */
+function syncChip(chip) {
+  const input = chip.querySelector(':scope > .ol8-chip__input');
+  if (!input) return;
+  chip.dataset.ol8Selection = input.checked ? 'selected' : 'inactive';
+  chip.dataset.ol8Availability = input.disabled ? 'disabled' : 'enabled';
+}
+
+/* Private. Exported only so Token can reuse the same escaping; neither name
+   reaches the package index. */
+function escapeAttr(v) { return String(v).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+function escapeText(v) { return String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  Object.assign(__x, { OL8_CHIP_SIZES, OL8_CHIP_TERMINAL_FILL, OL8_CHIP_TERMINAL_EDGE, renderChipShape, renderChoiceChip, hydrateChoiceChips, syncChip, escapeAttr });
+});
+
+__def("packages/core/src/molecules/token/token.js", (__x, __req) => {
+/**
+ * Oneli8 · Token (MOLECULE) — a committed value.
+ *
+ * Figma: Select and Combobox / Molecule / Token 897:2106 (24 variants,
+ * Size x Selection x Mark).
+ *
+ * From the Figma description:
+ *   "Compact/Standard/Comfortable/Large delegate all 30/36/42/42px geometry to
+ *    the Soft Hexagon Choice Chip owner. Selection and None/Check/Remove mark
+ *    contracts remain independent; governed Check and Close atoms are reused
+ *    instead of duplicated."
+ *
+ * So this draws no silhouette of its own. It instantiates the Choice Chip's
+ * geometry exactly as the Figma component instantiates the Geometry Owner, and
+ * adds the one thing that is genuinely its own: the Mark axis.
+ *
+ * A Token is not a Choice Chip. A chip is a checkbox a person toggles; a token
+ * is a value that has already been committed, so it is ordinary content with an
+ * optional Remove button rather than a form control.
+ *
+ * MARK
+ * Figma's axis is the concrete None / Check / Remove. The contract adds `auto`
+ * as the public default, which resolves rather than draws: "Remove for
+ * removable committed values, Check for selected Choice Chips, and None for
+ * unselected or informational chips." A variant cannot be `auto`, which is why
+ * Figma has no such option and code does.
+ */
+const { renderIconSvg } = __req("packages/core/src/atoms/icon/icon.js");
+const { renderChipShape, escapeAttr, OL8_CHIP_SIZES } = __req("packages/core/src/molecules/choice-chip/choice-chip.js");
+const OL8_TOKEN_SIZES = OL8_CHIP_SIZES;
+/** Figma draws the last three. `auto` resolves to one of them. */
+const OL8_TOKEN_MARKS = ['auto', 'none', 'check', 'remove'];
+
+/** The contract's resolution, stated once so both packages agree. */
+function resolveTokenMark(mark, { removable = true, selected = false } = {}) {
+  if (mark !== 'auto') return mark;
+  if (removable) return 'remove';
+  return selected ? 'check' : 'none';
+}
+
+/**
+ * @param {string} label
+ * @param {{size?:string,selected?:boolean,mark?:string,removable?:boolean,
+ *          removeLabel?:string,id?:string,className?:string}} [options]
+ */
+function renderToken(label, options = {}) {
+  const {
+    size = 'standard', selected = false, mark = 'auto', removable = true,
+    removeLabel, focusable = true, id, className,
+  } = options;
+
+  if (!OL8_TOKEN_SIZES.includes(size)) throw new Error(`[ol8] unknown token size "${size}"`);
+  if (!OL8_TOKEN_MARKS.includes(mark)) throw new Error(`[ol8] unknown token mark "${mark}"`);
+  if (!label || !String(label).trim()) throw new Error('[ol8] Token requires a label');
+  if (mark === 'remove' && !removable) {
+    throw new Error('[ol8] mark "remove" offers a removal path a non removable token does not have');
+  }
+
+  const uid = id ?? `ol8-token-${Math.random().toString(36).slice(2, 9)}`;
+  const resolved = resolveTokenMark(mark, { removable, selected });
+
+  // The Remove mark is the only interactive part, so it is a real button with
+  // its own accessible name. It follows the label, which is the anatomy the
+  // contract writes down, and the label stays the token's content: the complete
+  // value must remain readable, never shortened or overlaid by its mark.
+  const markup = resolved === 'remove'
+    ? `<button type="button" class="ol8-chip__mark ol8-token__remove" ` +
+      (focusable ? '' : 'tabindex="-1" ') +
+      `aria-label="${escapeAttr(removeLabel ?? `Remove ${label}`)}">${renderIconSvg('close')}</button>`
+    : resolved === 'check'
+      ? `<span class="ol8-chip__mark" aria-hidden="true">${renderIconSvg('check')}</span>`
+      : '';
+
+  const attrs = [
+    `class="ol8-token ol8-chip${className ? ` ${className}` : ''}"`,
+    `data-ol8-size="${size}"`,
+    `data-ol8-selection="${selected ? 'selected' : 'inactive'}"`,
+    `data-ol8-mark="${resolved}"`,
+  ].join(' ');
+
+  return `<span ${attrs}>${renderChipShape(uid, label, markup)}</span>`;
+}
+  Object.assign(__x, { OL8_TOKEN_SIZES, OL8_TOKEN_MARKS, resolveTokenMark, renderToken });
+});
+
 const { renderSegmentedControl, hydrateSegmentedControls } = __req("packages/core/src/organisms/segmented-control/segmented-control.js");
+const { renderIcon } = __req("packages/core/src/atoms/icon/icon.js");
+const { renderButton, hydrateButtons } = __req("packages/core/src/molecules/button/button.js");
+const { renderIconButton, hydrateIconButtons } = __req("packages/core/src/molecules/icon-button/icon-button.js");
+const { renderToken } = __req("packages/core/src/molecules/token/token.js");
 
 /* ===== lab ===== */
+
+
+
+
 const $ = id => document.getElementById(id);
 const clamp = (v,a,b) => Math.min(b, Math.max(a,v));
 const lerp  = (a,b,t) => a + (b-a)*t;
@@ -2570,9 +3611,50 @@ $('beats').innerHTML = renderSegmentedControl({
 });
 hydrateSegmentedControls();
 
+/* The HUD is composed from the system, not from bare spans. Each widget is an
+   ol8-gem surface holding real components — icons, buttons, icon buttons and a
+   token — so the study shows the actual UI under motion rather than a mock of
+   it. Only the row/stack layout is lab-local. */
+const stack = (k, v, s) =>
+  `<span class="widget__text"><span class="widget__k">${k}</span>` +
+  `<span class="widget__v">${v}</span>` +
+  (s ? `<span class="widget__s">${s}</span>` : '') + `</span>`;
+
+$('hud').innerHTML = [
+  // Now playing — an icon button owns the only action.
+  `<article class="ol8-gem widget"><div class="widget__row widget__row--split">
+     ${stack('Now playing', 'Sundara', 'Anoushka Shankar')}
+     ${renderIconButton('forward', 'Skip track', { variant: 'quiet', size: 'compact' })}
+   </div></article>`,
+
+  // Message — a real secondary button and a quiet dismiss.
+  `<article class="ol8-gem widget">
+     ${stack('Kabir Rao', 'Still coming by?', 'I&rsquo;ll wait at the north gate')}
+     <div class="widget__row widget__row--split">
+       ${renderButton('Reply', { variant: 'secondary', size: 'compact' })}
+       ${renderIconButton('close', 'Dismiss', { variant: 'quiet', size: 'compact' })}
+     </div>
+   </article>`,
+
+  // Navigation — a leading icon from the canonical pool.
+  `<article class="ol8-gem widget"><div class="widget__row">
+     ${renderIcon('forward', { size: 24 })}
+     ${stack('Navigation', '400 m', 'Left onto Ferry Rd')}
+   </div></article>`,
+
+  // Heart rate — the effort tier is a Token, not styled text.
+  `<article class="ol8-gem widget" id="vitals"><div class="widget__row widget__row--split">
+     ${stack('Heart rate', '<span id="hr">68 bpm</span>', '')}
+     <span id="hrChip">${renderToken('Resting', { size: 'compact', removable: false, focusable: false })}</span>
+   </div></article>`,
+].join('');
+
+hydrateButtons();
+hydrateIconButtons();
+
 const els = {
   stage: $('stage'), scene: $('scene'), hud: $('hud'), caption: $('caption'),
-  speed: $('speed'), hr: $('hr'), hrs: $('hrs'),
+  speed: $('speed'), hr: $('hr'), hrChip: $('hrChip'),
   roSpeed: $('roSpeed'), roFace: $('roFace'), roBlur: $('roBlur'),
 };
 const widgets = [...document.querySelectorAll('.widget')];
@@ -2705,6 +3787,10 @@ function furniture(hz, f) {
 
 /* ---------------- frame ---------------- */
 const FACE_SWITCH = 0.34;   // fraction of top speed where the face flips
+let lastTier = 'Resting';
+// Read the peak back from the token, so the readout can never disagree with
+// what is actually rendered. Swap --hud-peak and this follows.
+const PEAK_BLUR = parseFloat(getComputedStyle(els.hud).getPropertyValue('--hud-peak')) || 9;
 let last = performance.now();
 
 function frame(now) {
@@ -2721,8 +3807,9 @@ function frame(now) {
   sky(hz); clouds(hz, dt * 60); ground(hz); lanes(hz, f); furniture(hz, f);
 
   // The UI blurs. It does not move, shrink, fade or disappear.
-  const uiBlur = lerp(0, 7, k);
-  els.hud.style.setProperty('--hud-blur', uiBlur.toFixed(2) + 'px');
+  // Only the 0..1 factor is set here; the peak is --hud-peak, a scale token,
+  // so the rendered blur is on the 3px grid by construction.
+  els.hud.style.setProperty('--hud-k', k.toFixed(3));
 
   const environmental = k > FACE_SWITCH;
   for (const w of widgets) {
@@ -2731,10 +3818,15 @@ function frame(now) {
   }
 
   els.hr.textContent = Math.round(lerp(68, 178, k)) + ' bpm';
-  els.hrs.textContent = k < .1 ? 'Resting' : k < .45 ? 'Elevated' : 'Peak';
+  const tier = k < .1 ? 'Resting' : k < .45 ? 'Elevated' : 'Peak';
+  if (tier !== lastTier) {
+    lastTier = tier;
+    els.hrChip.innerHTML = renderToken(tier, { size: 'compact', removable: false, focusable: false });
+  }
+
   els.roSpeed.innerHTML = v.toFixed(1) + '<small> m/s</small>';
   els.roFace.textContent = environmental ? 'Environmental' : 'Stabilized';
-  els.roBlur.innerHTML = uiBlur.toFixed(1) + '<small> px</small>';
+  els.roBlur.innerHTML = (k * PEAK_BLUR).toFixed(1) + '<small> px</small>';
 
   requestAnimationFrame(frame);
 }

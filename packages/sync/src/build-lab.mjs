@@ -44,10 +44,11 @@ function walk(file) {
   order.push(file);
 }
 
-const entry = html.match(/import\s+(\{[^}]+\})\s*from\s+'(\.\.\/[^']+)'/);
-if (!entry) { console.error('no module import found in', LAB); process.exit(1); }
-const entryFile = resolve(dirname(srcPath), entry[2]);
-walk(entryFile);
+// A lab may import from several entry points; walk every one of them.
+const entries = [...html.matchAll(/import\s+(\{[^}]+\})\s*from\s+'(\.\.\/[^']+)'\s*;?/g)]
+  .map(m => ({ binding: m[1].replace(/\s+/g, ' ').trim(), file: resolve(dirname(srcPath), m[2]) }));
+if (!entries.length) { console.error('no module import found in', LAB); process.exit(1); }
+for (const e of entries) walk(e.file);
 
 const idOf = f => relative(ROOT, f);
 
@@ -115,7 +116,7 @@ const __req = id => {
 
 ${modules}
 
-const ${entry[1]} = __req(${JSON.stringify(idOf(entryFile))});`;
+${entries.map(e => `const ${e.binding} = __req(${JSON.stringify(idOf(e.file))});`).join('\n')}`;
 
 /* ---- 4. splice it into the page --------------------------------------- */
 html = html.replace(/<script type="module">[\s\S]*?<\/script>/, block => {

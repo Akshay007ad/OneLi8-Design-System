@@ -13,6 +13,11 @@
 <link rel="stylesheet" href="../../packages/tokens/build/css/tokens.css">
 <link rel="stylesheet" href="../../packages/core/src/atoms/icon/icon.css">
 <link rel="stylesheet" href="../../packages/core/src/molecules/button/button.css">
+<link rel="stylesheet" href="../../packages/core/src/molecules/icon-button/icon-button.css">
+<!-- Token layers onto the chip: .ol8-chip geometry lives in choice-chip.css,
+     so a page using renderToken needs both or the terminals stretch. -->
+<link rel="stylesheet" href="../../packages/core/src/molecules/choice-chip/choice-chip.css">
+<link rel="stylesheet" href="../../packages/core/src/molecules/token/token.css">
 <link rel="stylesheet" href="../../packages/core/src/organisms/segmented-control/segmented-control.css">
 <link rel="stylesheet" href="../../packages/core/src/materials/gem/gem.css">
 
@@ -66,27 +71,37 @@
   #scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
   /* The HUD blurs as a whole. Nothing is removed, nothing fades out —
-     the widgets stay exactly where they are and stop being readable. */
+     the widgets stay exactly where they are and stop being readable.
+
+     Peak blur is a scale token, not a typed number, so it cannot land off
+     the 3px grid. JS only sets --hud-k, a unitless 0..1; swapping the peak
+     between 006 and 009 is a one-token edit. */
   .hud {
+    --hud-peak: var(--ol8-dimension-scale-009);
     position: absolute; inset: 0;
     padding: var(--ol8-dimension-scale-018);
     display: flex; flex-direction: column; align-items: flex-end;
     gap: var(--ol8-dimension-scale-009);
-    pointer-events: none;
-    filter: blur(var(--hud-blur, 0px));
+    filter: blur(calc(var(--hud-k, 0) * var(--hud-peak)));
     transition: filter .18s linear;
   }
   .widget {
-    inline-size: 196px; max-inline-size: 44%;
+    inline-size: 224px; max-inline-size: 48%;
     padding: var(--ol8-dimension-scale-009) var(--ol8-dimension-scale-012);
-    display: flex; flex-direction: column; gap: 2px;
+    display: flex; flex-direction: column; gap: var(--ol8-dimension-scale-006);
   }
+  /* Lab layout only. Everything placed inside these rows is a real component. */
+  .widget__row { display: flex; align-items: center; gap: var(--ol8-dimension-scale-009); }
+  .widget__row--split { justify-content: space-between; }
+  .widget__text { display: flex; flex-direction: column; min-inline-size: 0; flex: 1 1 auto; }
   .widget__k {
     font-size: var(--ol8-font-size-012); line-height: var(--ol8-font-line-018);
-    letter-spacing: .06em; text-transform: uppercase; opacity: .6;
+    letter-spacing: .06em; text-transform: uppercase; opacity: .62;
   }
   .widget__v { font-size: var(--ol8-font-size-016); line-height: var(--ol8-font-line-024); font-weight: var(--ol8-font-weight-semibold); }
   .widget__s { font-size: var(--ol8-font-size-012); line-height: var(--ol8-font-line-018); opacity: .74; }
+  /* The HUD is a simulation, not a live surface — nothing in it takes a click. */
+  .hud button, .hud a, .hud input { pointer-events: none; }
 
   .caption {
     position: absolute; inset-inline-start: var(--ol8-dimension-scale-018);
@@ -156,12 +171,8 @@
 
   <div class="stage" id="stage">
     <canvas id="scene"></canvas>
-    <div class="hud" id="hud">
-      <article class="ol8-gem widget"><span class="widget__k">Now playing</span><span class="widget__v">Sundara</span><span class="widget__s">Anoushka Shankar</span></article>
-      <article class="ol8-gem widget"><span class="widget__k">Kabir Rao</span><span class="widget__v">Still coming by?</span><span class="widget__s">I&rsquo;ll wait at the north gate</span></article>
-      <article class="ol8-gem widget"><span class="widget__k">Navigation</span><span class="widget__v">400 m</span><span class="widget__s">Left onto Ferry Rd</span></article>
-      <article class="ol8-gem widget"><span class="widget__k">Heart rate</span><span class="widget__v" id="hr">68 bpm</span><span class="widget__s" id="hrs">Resting</span></article>
-    </div>
+    <!-- Built in script from the system's own components. -->
+    <div class="hud" id="hud"></div>
     <p class="caption" id="caption">Standing</p>
   </div>
 
@@ -182,6 +193,10 @@
 <script type="module">
 import { renderSegmentedControl, hydrateSegmentedControls }
   from '../../packages/core/src/organisms/segmented-control/segmented-control.js';
+import { renderIcon } from '../../packages/core/src/atoms/icon/icon.js';
+import { renderButton, hydrateButtons } from '../../packages/core/src/molecules/button/button.js';
+import { renderIconButton, hydrateIconButtons } from '../../packages/core/src/molecules/icon-button/icon-button.js';
+import { renderToken } from '../../packages/core/src/molecules/token/token.js';
 
 const $ = id => document.getElementById(id);
 const clamp = (v,a,b) => Math.min(b, Math.max(a,v));
@@ -202,9 +217,50 @@ $('beats').innerHTML = renderSegmentedControl({
 });
 hydrateSegmentedControls();
 
+/* The HUD is composed from the system, not from bare spans. Each widget is an
+   ol8-gem surface holding real components — icons, buttons, icon buttons and a
+   token — so the study shows the actual UI under motion rather than a mock of
+   it. Only the row/stack layout is lab-local. */
+const stack = (k, v, s) =>
+  `<span class="widget__text"><span class="widget__k">${k}</span>` +
+  `<span class="widget__v">${v}</span>` +
+  (s ? `<span class="widget__s">${s}</span>` : '') + `</span>`;
+
+$('hud').innerHTML = [
+  // Now playing — an icon button owns the only action.
+  `<article class="ol8-gem widget"><div class="widget__row widget__row--split">
+     ${stack('Now playing', 'Sundara', 'Anoushka Shankar')}
+     ${renderIconButton('forward', 'Skip track', { variant: 'quiet', size: 'compact' })}
+   </div></article>`,
+
+  // Message — a real secondary button and a quiet dismiss.
+  `<article class="ol8-gem widget">
+     ${stack('Kabir Rao', 'Still coming by?', 'I&rsquo;ll wait at the north gate')}
+     <div class="widget__row widget__row--split">
+       ${renderButton('Reply', { variant: 'secondary', size: 'compact' })}
+       ${renderIconButton('close', 'Dismiss', { variant: 'quiet', size: 'compact' })}
+     </div>
+   </article>`,
+
+  // Navigation — a leading icon from the canonical pool.
+  `<article class="ol8-gem widget"><div class="widget__row">
+     ${renderIcon('forward', { size: 24 })}
+     ${stack('Navigation', '400 m', 'Left onto Ferry Rd')}
+   </div></article>`,
+
+  // Heart rate — the effort tier is a Token, not styled text.
+  `<article class="ol8-gem widget" id="vitals"><div class="widget__row widget__row--split">
+     ${stack('Heart rate', '<span id="hr">68 bpm</span>', '')}
+     <span id="hrChip">${renderToken('Resting', { size: 'compact', removable: false, focusable: false })}</span>
+   </div></article>`,
+].join('');
+
+hydrateButtons();
+hydrateIconButtons();
+
 const els = {
   stage: $('stage'), scene: $('scene'), hud: $('hud'), caption: $('caption'),
-  speed: $('speed'), hr: $('hr'), hrs: $('hrs'),
+  speed: $('speed'), hr: $('hr'), hrChip: $('hrChip'),
   roSpeed: $('roSpeed'), roFace: $('roFace'), roBlur: $('roBlur'),
 };
 const widgets = [...document.querySelectorAll('.widget')];
@@ -337,6 +393,10 @@ function furniture(hz, f) {
 
 /* ---------------- frame ---------------- */
 const FACE_SWITCH = 0.34;   // fraction of top speed where the face flips
+let lastTier = 'Resting';
+// Read the peak back from the token, so the readout can never disagree with
+// what is actually rendered. Swap --hud-peak and this follows.
+const PEAK_BLUR = parseFloat(getComputedStyle(els.hud).getPropertyValue('--hud-peak')) || 9;
 let last = performance.now();
 
 function frame(now) {
@@ -353,8 +413,9 @@ function frame(now) {
   sky(hz); clouds(hz, dt * 60); ground(hz); lanes(hz, f); furniture(hz, f);
 
   // The UI blurs. It does not move, shrink, fade or disappear.
-  const uiBlur = lerp(0, 7, k);
-  els.hud.style.setProperty('--hud-blur', uiBlur.toFixed(2) + 'px');
+  // Only the 0..1 factor is set here; the peak is --hud-peak, a scale token,
+  // so the rendered blur is on the 3px grid by construction.
+  els.hud.style.setProperty('--hud-k', k.toFixed(3));
 
   const environmental = k > FACE_SWITCH;
   for (const w of widgets) {
@@ -363,10 +424,15 @@ function frame(now) {
   }
 
   els.hr.textContent = Math.round(lerp(68, 178, k)) + ' bpm';
-  els.hrs.textContent = k < .1 ? 'Resting' : k < .45 ? 'Elevated' : 'Peak';
+  const tier = k < .1 ? 'Resting' : k < .45 ? 'Elevated' : 'Peak';
+  if (tier !== lastTier) {
+    lastTier = tier;
+    els.hrChip.innerHTML = renderToken(tier, { size: 'compact', removable: false, focusable: false });
+  }
+
   els.roSpeed.innerHTML = v.toFixed(1) + '<small> m/s</small>';
   els.roFace.textContent = environmental ? 'Environmental' : 'Stabilized';
-  els.roBlur.innerHTML = uiBlur.toFixed(1) + '<small> px</small>';
+  els.roBlur.innerHTML = (k * PEAK_BLUR).toFixed(1) + '<small> px</small>';
 
   requestAnimationFrame(frame);
 }
