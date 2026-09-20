@@ -273,7 +273,7 @@ function ground(hz) {
 function lanes(hz, f) {
   ctx.fillStyle = 'rgba(252,250,243,.17)';
   for (let i = 0; i < 26; i++) {
-    const z = ((i * 4 - state.dist % 4) + 100) % 100 + 2;
+    const z = ((i * 4 - state.dist % 4) + 100) % 100 + 6;
     const y = hz + f / z, s = f / z;
     if (y > H + 30 || s < .4) continue;
     ctx.fillRect(W / 2 - s * .06, y, s * .12, s * .5);
