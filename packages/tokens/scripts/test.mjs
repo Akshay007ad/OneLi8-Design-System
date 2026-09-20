@@ -92,6 +92,9 @@ ok(component.component.choiceChip.inset.compact.$value.value===21&&component.com
 ok(component.component.choiceChip.markTarget.$value.value===24&&component.component.choiceChip.markTarget.$extensions["oneli8.geometry"]==="approved-component-recipe","The Remove mark target must stay a governed 24, not an enlarged 18px mark");
 ok(component.component.suggestionRail.gap.$value==="{component.choiceChip.gap}"&&component.component.suggestionRail.fieldSeparation.$value==="{spacing.stack.tight}","Suggested Values rail must reuse Choice Chip and structural spacing roles");
 ok(component.component.tabBar.gap.$value==="{spacing.none}"&&component.component.tabBar.inlineInset.$value==="{spacing.inline.minimal}","Tab Bar spacing must map to canonical zero gap and 3px Inline protection");
-ok(manifest.counts.primitive===170&&manifest.counts.semantic===270&&manifest.counts.component===161&&manifest.counts.componentStatuses===10&&manifest.counts.figmaVariables===587&&manifest.counts.figmaElevationStyles===5,"Navigation spacing and contextual token output counts must remain deterministic");
+// semantic 270 -> 273 and figmaVariables 587 -> 590: material.gem.color.quiet
+// gained content and contentGlow, and material.gem.blur gained contentGlow,
+// when the quiet face was flipped to tint dark like every gem family.
+ok(manifest.counts.primitive===170&&manifest.counts.semantic===273&&manifest.counts.component===161&&manifest.counts.componentStatuses===10&&manifest.counts.figmaVariables===590&&manifest.counts.figmaElevationStyles===5,"Navigation spacing and contextual token output counts must remain deterministic");
 
 console.log(`PASS ${checks}/${checks} canonical token package checks.`);

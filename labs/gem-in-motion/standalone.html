@@ -312,9 +312,11 @@
   --ol8-material-control-gem--gradient-start: 14.639%;
   --ol8-material-control-gem--gradient-mid: 48.586%;
   --ol8-material-control-gem--gradient-end: 85.361%;
-  --ol8-material-gem-color-quiet-environmentalface: color-mix(in srgb, var(--ol8-color-neutral-030) 48%, transparent);
-  --ol8-material-gem-color-quiet-stabilizedface: color-mix(in srgb, var(--ol8-color-neutral-060) 27%, transparent);
-  --ol8-material-gem-color-quiet-opaqueequivalent: var(--ol8-color-neutral-030);
+  --ol8-material-gem-color-quiet-environmentalface: color-mix(in srgb, var(--ol8-color-neutral-930) 48%, transparent);
+  --ol8-material-gem-color-quiet-stabilizedface: color-mix(in srgb, var(--ol8-color-neutral-930) 27%, transparent);
+  --ol8-material-gem-color-quiet-content: var(--ol8-color-neutral-030);
+  --ol8-material-gem-color-quiet-contentglow: color-mix(in srgb, var(--ol8-color-neutral-030) 48%, transparent);
+  --ol8-material-gem-color-quiet-opaqueequivalent: var(--ol8-color-neutral-930);
   --ol8-material-gem-color-cutedge-outerhigh: color-mix(in srgb, var(--ol8-color-neutral-060) 93%, transparent);
   --ol8-material-gem-color-cutedge-outermid: color-mix(in srgb, var(--ol8-color-blue-120) 48%, transparent);
   --ol8-material-gem-color-cutedge-outerlow: color-mix(in srgb, var(--ol8-color-neutral-060) 3%, transparent);
@@ -359,6 +361,7 @@
   --ol8-material-gem-color-family-amethyst-opaqueequivalent: var(--ol8-color-violet-930);
   --ol8-material-gem-blur-environmental: 18px;
   --ol8-material-gem-blur-stabilized: 12px;
+  --ol8-material-gem-blur-contentglow: 6px;
   --ol8-material-gem-opacity-environmental: 0.48;
   --ol8-material-gem-opacity-edgehigh: 0.93;
   --ol8-material-gem-opacity-edgelow: 0.03;
@@ -1911,6 +1914,15 @@
   --_surface: var(--ol8-material-gem-color-quiet-stabilizedface);
   --_border: var(--ol8-material-gem-color-innerthincut-high);
 }
+/* Filled is the only gem field appearance that sits ON the quiet face; outline
+   leaves --_surface transparent and keeps whatever is behind it. So the
+   content colour moves here and nowhere else. */
+.ol8-field[data-ol8-material="gem"][data-ol8-appearance="filled"]:not([data-ol8-disabled]) .ol8-field__input,
+.ol8-field[data-ol8-material="gem"][data-ol8-appearance="filled"]:not([data-ol8-disabled]) .ol8-field__label {
+  color: var(--ol8-material-gem-color-quiet-content);
+  text-shadow: 0 0 var(--ol8-material-gem-blur-contentglow)
+               var(--ol8-material-gem-color-quiet-contentglow);
+}
 .ol8-field[data-ol8-material="gem"][data-ol8-readonly][data-ol8-appearance="filled"] .ol8-field__control {
   --_border: var(--ol8-material-gem-color-innerthincut-high);
 }
@@ -1986,7 +1998,14 @@
   -webkit-backdrop-filter: blur(var(--_gem-blur)) saturate(1.06);
   transition: background .4s linear, backdrop-filter .4s linear;
   border-radius: var(--ol8-shape-radius-standard);
-  color: var(--ol8-color-text-primary);
+  /* Gem carries LIGHT content. color.icon.onGem and both control gem content
+     tokens were already neutral-030; the quiet face just never had a content
+     token of its own, so surfaces using it fell back to dark body text.
+     A transparent face cannot guarantee its own backdrop, so the content
+     carries a halo rather than the surface being thickened to provide one. */
+  color: var(--ol8-material-gem-color-quiet-content);
+  text-shadow: 0 0 var(--ol8-material-gem-blur-contentglow)
+               var(--ol8-material-gem-color-quiet-contentglow);
   /* The cut edge. Invariant — it is what keeps a gem recognisable as gem. */
   box-shadow:
     inset 0 2px 1px 0 var(--ol8-material-gem-color-cutedge-high),

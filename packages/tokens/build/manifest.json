@@ -3,10 +3,10 @@
   "version": "1.0.0-beta.1",
   "counts": {
     "primitive": 170,
-    "semantic": 270,
+    "semantic": 273,
     "component": 161,
     "componentStatuses": 10,
-    "figmaVariables": 587,
+    "figmaVariables": 590,
     "figmaTypographyStyles": 9,
     "figmaElevationStyles": 5
   },

@@ -873,29 +873,45 @@
           "environmentalFace": {
             "$type": "color",
             "$value": {
+              "color": "{color.neutral.930}",
+              "alpha": 0.48
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Quiet Light Gem environmental face; transparent canonical slab material. Tints DARK like every gem family (emerald, ruby, sapphire and amethyst all use their x.930 step). It previously tinted light at neutral.030, which made it the only gem face in the system that lightened its backdrop, and left color.icon.onGem — a neutral.030 icon — invisible on it."
+          },
+          "stabilizedFace": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.neutral.930}",
+              "alpha": 0.27
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Quiet Light Gem stabilized content plane. Alpha matches the gem families (emerald, ruby and amethyst at 0.27, sapphire at 0.30); it was 0.72, the only face where stabilized was more opaque than environmental."
+          },
+          "content": {
+            "$type": "color",
+            "$value": "{color.neutral.030}",
+            "$description": "Content on a quiet Gem surface. Agrees with color.icon.onGem, material.control.gem.primary.content and secondary.content, all of which are already neutral.030 — the quiet face simply had no content token of its own."
+          },
+          "contentGlow": {
+            "$type": "color",
+            "$value": {
               "color": "{color.neutral.030}",
               "alpha": 0.48
             },
             "$extensions": {
               "oneli8.composite": "color-alpha"
             },
-            "$description": "Quiet Light Gem environmental face; transparent canonical slab material."
-          },
-          "stabilizedFace": {
-            "$type": "color",
-            "$value": {
-              "color": "{color.neutral.060}",
-              "alpha": 0.27
-            },
-            "$extensions": {
-              "oneli8.composite": "color-alpha"
-            },
-            "$description": "Quiet Light Gem stabilized content plane. Alpha matches the gem families (emerald, ruby and amethyst at 0.27, sapphire at 0.30). It was 0.72 — the only gem face in the system where stabilized was more opaque than environmental, and 2.4x the highest family value, which read as a white slab rather than glass."
+            "$description": "Halo behind content on a quiet Gem surface. A transparent face cannot guarantee its own backdrop, so content carries its own separation instead of the surface being thickened to provide it."
           },
           "opaqueEquivalent": {
             "$type": "color",
-            "$value": "{color.neutral.030}",
-            "$description": "Quiet Light Gem reduced-transparency equivalent."
+            "$value": "{color.neutral.930}",
+            "$description": "Quiet Light Gem reduced-transparency equivalent. Follows the face's tint direction so content colour does not have to change when transparency is suppressed."
           }
         },
         "cutEdge": {
@@ -1363,6 +1379,11 @@
           "$type": "dimension",
           "$value": "{dimension.scale.012}",
           "$description": "Local stabilized information-plane blur."
+        },
+        "contentGlow": {
+          "$type": "dimension",
+          "$value": "{dimension.scale.006}",
+          "$description": "Radius of the halo behind content on a Gem surface. On the 3px scale like every other blur here."
         }
       },
       "opacity": {

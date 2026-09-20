@@ -185,6 +185,15 @@
   border-radius: var(--ol8-shape-radius-standard);
   inset-inline: 0;
 }
+/* The quiet face tints dark, like every gem family, so content on it is the
+   gem content colour rather than body text — and carries its own halo,
+   because a transparent face cannot guarantee what sits behind it. */
+.ol8-choice[data-ol8-material="gem"] .ol8-choice__label,
+.ol8-choice[data-ol8-material="gem"] .ol8-choice__description {
+  color: var(--ol8-material-gem-color-quiet-content);
+  text-shadow: 0 0 var(--ol8-material-gem-blur-contentglow)
+               var(--ol8-material-gem-color-quiet-contentglow);
+}
 @media (prefers-reduced-transparency: reduce) {
   .ol8-choice[data-ol8-material="gem"] > .ol8-choice__surface {
     background: var(--ol8-material-gem-color-quiet-opaqueequivalent);

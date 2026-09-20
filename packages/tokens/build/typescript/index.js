@@ -2162,25 +2162,40 @@ export const tokens = {
   "material.gem.color.quiet.environmentalFace": {
     "type": "color",
     "value": {
-      "color": "#FCFAF3",
+      "color": "#151817",
       "alpha": 0.48
     },
-    "description": "Quiet Light Gem environmental face; transparent canonical slab material.",
+    "description": "Quiet Light Gem environmental face; transparent canonical slab material. Tints DARK like every gem family (emerald, ruby, sapphire and amethyst all use their x.930 step). It previously tinted light at neutral.030, which made it the only gem face in the system that lightened its backdrop, and left color.icon.onGem — a neutral.030 icon — invisible on it.",
     "tier": "semantic"
   },
   "material.gem.color.quiet.stabilizedFace": {
     "type": "color",
     "value": {
-      "color": "#F5F1E6",
+      "color": "#151817",
       "alpha": 0.27
     },
-    "description": "Quiet Light Gem stabilized content plane. Alpha matches the gem families (emerald, ruby and amethyst at 0.27, sapphire at 0.30). It was 0.72 — the only gem face in the system where stabilized was more opaque than environmental, and 2.4x the highest family value, which read as a white slab rather than glass.",
+    "description": "Quiet Light Gem stabilized content plane. Alpha matches the gem families (emerald, ruby and amethyst at 0.27, sapphire at 0.30); it was 0.72, the only face where stabilized was more opaque than environmental.",
+    "tier": "semantic"
+  },
+  "material.gem.color.quiet.content": {
+    "type": "color",
+    "value": "#FCFAF3",
+    "description": "Content on a quiet Gem surface. Agrees with color.icon.onGem, material.control.gem.primary.content and secondary.content, all of which are already neutral.030 — the quiet face simply had no content token of its own.",
+    "tier": "semantic"
+  },
+  "material.gem.color.quiet.contentGlow": {
+    "type": "color",
+    "value": {
+      "color": "#FCFAF3",
+      "alpha": 0.48
+    },
+    "description": "Halo behind content on a quiet Gem surface. A transparent face cannot guarantee its own backdrop, so content carries its own separation instead of the surface being thickened to provide it.",
     "tier": "semantic"
   },
   "material.gem.color.quiet.opaqueEquivalent": {
     "type": "color",
-    "value": "#FCFAF3",
-    "description": "Quiet Light Gem reduced-transparency equivalent.",
+    "value": "#151817",
+    "description": "Quiet Light Gem reduced-transparency equivalent. Follows the face's tint direction so content colour does not have to change when transparency is suppressed.",
     "tier": "semantic"
   },
   "material.gem.color.cutEdge.outerHigh": {
@@ -2565,6 +2580,15 @@ export const tokens = {
       "unit": "px"
     },
     "description": "Local stabilized information-plane blur.",
+    "tier": "semantic"
+  },
+  "material.gem.blur.contentGlow": {
+    "type": "dimension",
+    "value": {
+      "value": 6,
+      "unit": "px"
+    },
+    "description": "Radius of the halo behind content on a Gem surface. On the 3px scale like every other blur here.",
     "tier": "semantic"
   },
   "material.gem.opacity.environmental": {
@@ -5425,6 +5449,7 @@ export const tokenPaths = [
   "material.control.gem.secondary.loadingMid",
   "material.control.gem.secondary.low",
   "material.control.gem.secondary.mid",
+  "material.gem.blur.contentGlow",
   "material.gem.blur.environmental",
   "material.gem.blur.stabilized",
   "material.gem.color.cutEdge.high",
@@ -5469,6 +5494,8 @@ export const tokenPaths = [
   "material.gem.color.innerThinCut.high",
   "material.gem.color.innerThinCut.low",
   "material.gem.color.innerThinCut.mid",
+  "material.gem.color.quiet.content",
+  "material.gem.color.quiet.contentGlow",
   "material.gem.color.quiet.environmentalFace",
   "material.gem.color.quiet.opaqueEquivalent",
   "material.gem.color.quiet.stabilizedFace",
