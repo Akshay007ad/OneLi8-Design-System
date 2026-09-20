@@ -2204,11 +2204,13 @@
        flip every semantic token on the page chrome too. -->
   <div class="stage" id="stage" data-ol8-color-scheme="dark">
     <canvas id="scene"></canvas>
-    <!-- Drop a photo at labs/gem-in-motion/plate.jpg and it replaces the
-         synthetic street automatically. If it is missing, the canvas stays. -->
+    <!-- Drop a photo at labs/gem-in-motion/plate.webp (or .jpg) and it
+         replaces the synthetic street automatically. If neither is there,
+         the canvas stays. alt="" because the plate is the simulated world,
+         not content — the study is about the gem on top of it. -->
     <div class="plate" id="plate" hidden>
-      <img class="plate__layer" src="plate.jpg" alt="" id="plateA">
-      <img class="plate__layer" src="plate.jpg" alt="" id="plateB">
+      <img class="plate__layer" src="plate.webp" alt="" id="plateA">
+      <img class="plate__layer" src="plate.webp" alt="" id="plateB">
     </div>
     <!-- Built in script from the system's own components. -->
     <div class="hud" id="hud"></div>
@@ -3861,6 +3863,17 @@ function enablePlate() {
   plateEl.hidden = false;
   els.scene.style.display = 'none';
 }
+/* WebP is the canonical plate — a 2400px street photo lands around 250-400KB
+   at q80, against 1.5-2MB as JPEG, and the whole page has to fit inside the
+   16MB publish cap once the image is embedded. JPEG stays as a fallback for
+   whatever you already have on disk. */
+let triedJpeg = false;
+pA.addEventListener('error', () => {
+  if (triedJpeg) return;          // both formats missing: keep the canvas
+  triedJpeg = true;
+  pA.src = 'plate.jpg';
+  pB.src = 'plate.jpg';
+});
 if (pA.complete && pA.naturalWidth > 0) enablePlate();
 else pA.addEventListener('load', enablePlate, { once: true });
 

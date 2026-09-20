@@ -5,7 +5,8 @@
 The stage runs on a real photo when one is present, and falls back to a
 synthetic canvas street when it is not.
 
-1. Drop a photo at `labs/gem-in-motion/plate.jpg`
+1. Drop a photo at `labs/gem-in-motion/plate.webp` (or `.jpg` — WebP is
+   just tried first)
 2. `node packages/sync/src/build-lab.mjs labs/gem-in-motion`
 
 ### What the photo needs to be
@@ -16,9 +17,17 @@ somewhere near the middle of the frame. POV motion is produced by zooming
 about that point, so a photo shot across a road, or one with no depth, will
 slide rather than travel.
 
-- Landscape, roughly 16:9. 2000–2600px wide is plenty.
-- Keep it under about 2 MB. The published page embeds the image as a data
-  URI and the publish cap is 16 MB; the build fails loudly if you exceed it.
+- Landscape, roughly 16:9. 2400px wide is plenty — the plate is zoomed into,
+  so resolution buys you sharpness at the far end of the cycle.
+- **WebP at q80.** A 2400px street photo lands around 250–400 KB, against
+  1.5–2 MB as JPEG. That matters because the published page embeds the image
+  as a base64 data URI, which costs about a third more again, and the publish
+  cap is 16 MB. The build prints the page size and fails loudly if it goes
+  over.
+
+  ```
+  cwebp -q 80 -resize 2400 0 road.jpg -o plate.webp
+  ```
 - Shoot or pick it at the eye height of someone wearing the glasses.
 
 ### Pointing the zoom at the right place

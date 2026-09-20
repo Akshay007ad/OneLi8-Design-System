@@ -1,0 +1,7 @@
+# The plate is your photograph, not a repo asset. Drop it here and the build
+# embeds it; without it the lab falls back to the canvas street.
+plate.webp
+plate.avif
+plate.jpg
+plate.jpeg
+plate.png

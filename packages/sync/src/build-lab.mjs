@@ -40,14 +40,21 @@ html = html.replace(/[ \t]*<link rel="stylesheet" href="(\.\.\/[^"]+)">\n?/g, (_
 const MIME = { '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png',
                '.webp': 'image/webp', '.avif': 'image/avif' };
 let images = 0, missing = [];
+// Preference order, smallest first. The page asks for .webp; if only another
+// format is on disk the runtime fallback cannot help a published page — it
+// has no network — so resolve it here instead.
+const FORMATS = ['.webp', '.avif', '.jpg', '.jpeg', '.png'];
 html = html.replace(/src="([^"]+\.(?:jpe?g|png|webp|avif))"/gi, (whole, src) => {
   if (/^(?:https?:|data:)/i.test(src)) return whole;
-  const file = resolve(dirname(srcPath), src);
-  if (!existsSync(file)) { missing.push(src); return whole; }
-  const ext = src.slice(src.lastIndexOf('.')).toLowerCase();
-  const b64 = readFileSync(file).toString('base64');
+  const stem = src.slice(0, src.lastIndexOf('.'));
+  const found = [src, ...FORMATS.map(e => stem + e)]
+    .find(candidate => existsSync(resolve(dirname(srcPath), candidate)));
+  if (!found) { missing.push(src); return whole; }
+  const ext = found.slice(found.lastIndexOf('.')).toLowerCase();
+  const bytes = readFileSync(resolve(dirname(srcPath), found));
   images++;
-  return `src="data:${MIME[ext] ?? 'image/jpeg'};base64,${b64}"`;
+  if (found !== src) console.log(`  · ${src} not found, embedded ${found} instead`);
+  return `src="data:${MIME[ext] ?? 'image/jpeg'};base64,${bytes.toString('base64')}"`;
 });
 
 /* ---- 2. resolve the module graph -------------------------------------- */
