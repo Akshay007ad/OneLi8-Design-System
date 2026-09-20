@@ -72,8 +72,8 @@ Link is not the unreleased NavigationList component.
 ## Icon — reuse the pool
 
 ```jsx
-import {Icon, iconNames} from '@oneli8/react';
-// iconNames is the authoritative list; do not invent names.
+import { Icon, OL8_ICONS, isOl8IconName } from '@oneli8/react';
+// OL8_ICONS is the authoritative pool; isOl8IconName guards one. Do not invent names.
 <Icon name="forward" />
 ```
 

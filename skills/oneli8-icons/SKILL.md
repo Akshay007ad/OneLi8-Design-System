@@ -4,10 +4,13 @@ description: Reuse or propose additions to the OneLi8 public beta neutral 24px i
 ---
 
 Locate the public beta bundle. Read PRINCIPLES.md, packages/react/src/atoms/Icon.js,
-packages/react/src/atoms/IconFrame.js and packages/react/src/Icon.d.ts. These are
-the actual drawing and presentation owners, not templates to copy into controls.
+packages/react/src/foundations/icons.generated.js and packages/react/src/styles/icon.css.
+Icon owns drawing AND presentation: its `size` prop plus that stylesheet set the
+frame, so there is no separate IconFrame module and no Icon.d.ts — types live in
+index.d.ts and foundations/icons.generated.d.ts. These are the actual owners, not
+templates to copy into controls.
 
-Search iconNames first. Existing meaning uses its existing identity. For a missing
+Search OL8_ICONS first; isOl8IconName guards a name. Existing meaning uses its existing identity. For a missing
 meaning, propose one neutral 24×24 source definition in the pool and update the
 IconName type; no size-, color-, Gem- or consumer-specific duplicate masters.
 Follow adjacent approved geometry and the shared semantic stroke token. Icons
