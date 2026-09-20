@@ -225,17 +225,23 @@
    about what the surface contains.
 
    The face axis is Figma's own vocabulary, not an invention:
-     stabilizedface     neutral-060 @ 72%   at rest
+     stabilizedface     neutral-060 @ 27%   at rest
      environmentalface  neutral-030 @ 48%   when the environment matters
    Motion study 01 (labs/gem-in-motion) drives data-ol8-face along it. */
 .ol8-gem {
   --_gem-face: var(--ol8-material-gem-color-quiet-stabilizedface);
+  /* material.gem.blur.* existed in the tokens and nothing consumed it —
+     every gem surface was using the CONTROL blur instead, which is a flat
+     12px. These are the surface pair, and they move with the face:
+     stabilized 12px, environmental 18px. That step is the dynamic blur. */
+  --_gem-blur: var(--ol8-material-gem-blur-stabilized);
 
   box-sizing: border-box;
   position: relative;
   background: var(--_gem-face);
-  backdrop-filter: blur(var(--ol8-material-control-gem--blur)) saturate(1.06);
-  -webkit-backdrop-filter: blur(var(--ol8-material-control-gem--blur)) saturate(1.06);
+  backdrop-filter: blur(var(--_gem-blur)) saturate(1.06);
+  -webkit-backdrop-filter: blur(var(--_gem-blur)) saturate(1.06);
+  transition: background .4s linear, backdrop-filter .4s linear;
   border-radius: var(--ol8-shape-radius-standard);
   color: var(--ol8-color-text-primary);
   /* The cut edge. Invariant — it is what keeps a gem recognisable as gem. */
@@ -247,6 +253,7 @@
 
 .ol8-gem[data-ol8-face="environmental"] {
   --_gem-face: var(--ol8-material-gem-color-quiet-environmentalface);
+  --_gem-blur: var(--ol8-material-gem-blur-environmental);
 }
 
 /* Same contract as every other gem consumer: transparency is the variable,

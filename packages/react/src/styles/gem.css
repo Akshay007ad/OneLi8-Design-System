@@ -218,3 +218,52 @@
   .ol8-btn--primary[data-ol8-material="gem"] { --_fg: var(--ol8-color-actionprimary-content); }
   .ol8-btn[data-ol8-material="gem"]:active { filter: none; }
 }
+
+/* ---- Generic gem surface ---------------------------------------------
+   Until now Gem was reachable only through ol8-btn, ol8-icon-btn and
+   ol8-field. Anything else needing the material — a panel, a widget, a
+   sheet — had nowhere to go, which is exactly how hand-rolled gem starts.
+   This is the primitive: the quiet gem face plus the cut edge, and nothing
+   about what the surface contains.
+
+   The face axis is Figma's own vocabulary, not an invention:
+     stabilizedface     neutral-060 @ 27%   at rest
+     environmentalface  neutral-030 @ 48%   when the environment matters
+   Motion study 01 (labs/gem-in-motion) drives data-ol8-face along it. */
+.ol8-gem {
+  --_gem-face: var(--ol8-material-gem-color-quiet-stabilizedface);
+  /* material.gem.blur.* existed in the tokens and nothing consumed it —
+     every gem surface was using the CONTROL blur instead, which is a flat
+     12px. These are the surface pair, and they move with the face:
+     stabilized 12px, environmental 18px. That step is the dynamic blur. */
+  --_gem-blur: var(--ol8-material-gem-blur-stabilized);
+
+  box-sizing: border-box;
+  position: relative;
+  background: var(--_gem-face);
+  backdrop-filter: blur(var(--_gem-blur)) saturate(1.06);
+  -webkit-backdrop-filter: blur(var(--_gem-blur)) saturate(1.06);
+  transition: background .4s linear, backdrop-filter .4s linear;
+  border-radius: var(--ol8-shape-radius-standard);
+  color: var(--ol8-color-text-primary);
+  /* The cut edge. Invariant — it is what keeps a gem recognisable as gem. */
+  box-shadow:
+    inset 0 2px 1px 0 var(--ol8-material-gem-color-cutedge-high),
+    inset 0 0 0 1px var(--ol8-material-gem-color-cutedge-mid),
+    0 9px 12px var(--ol8-material-gem-color-cutedge-shadow);
+}
+
+.ol8-gem[data-ol8-face="environmental"] {
+  --_gem-face: var(--ol8-material-gem-color-quiet-environmentalface);
+  --_gem-blur: var(--ol8-material-gem-blur-environmental);
+}
+
+/* Same contract as every other gem consumer: transparency is the variable,
+   the opaque equivalent is the floor. */
+@media (prefers-reduced-transparency: reduce) {
+  .ol8-gem {
+    background: var(--ol8-material-gem-color-quiet-opaqueequivalent);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

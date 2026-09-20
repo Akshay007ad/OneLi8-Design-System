@@ -169,7 +169,10 @@
     resolves through it while the UI stops asking to be read.</p>
   </header>
 
-  <div class="stage" id="stage">
+  <!-- The scheme is scoped to the STAGE, not the document: the street is dark,
+       so the gem inside it must use the dark faces. Scoping it to <html> would
+       flip every semantic token on the page chrome too. -->
+  <div class="stage" id="stage" data-ol8-color-scheme="dark">
     <canvas id="scene"></canvas>
     <!-- Built in script from the system's own components. -->
     <div class="hud" id="hud"></div>

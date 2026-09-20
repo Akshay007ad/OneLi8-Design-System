@@ -300,7 +300,7 @@
   --ol8-material-control-gem--gradient-mid: 48.586%;
   --ol8-material-control-gem--gradient-end: 85.361%;
   --ol8-material-gem-color-quiet-environmentalface: color-mix(in srgb, var(--ol8-color-neutral-030) 48%, transparent);
-  --ol8-material-gem-color-quiet-stabilizedface: color-mix(in srgb, var(--ol8-color-neutral-060) 72%, transparent);
+  --ol8-material-gem-color-quiet-stabilizedface: color-mix(in srgb, var(--ol8-color-neutral-060) 27%, transparent);
   --ol8-material-gem-color-quiet-opaqueequivalent: var(--ol8-color-neutral-030);
   --ol8-material-gem-color-cutedge-outerhigh: color-mix(in srgb, var(--ol8-color-neutral-060) 93%, transparent);
   --ol8-material-gem-color-cutedge-outermid: color-mix(in srgb, var(--ol8-color-blue-120) 48%, transparent);
@@ -732,7 +732,7 @@
   --ol8-material-control-gem--primary-hover-mid: var(--ol8-color-primary-840);
   --ol8-material-control-gem--primary-hover-end: var(--ol8-color-primary-930);
   --ol8-material-gem-color-quiet-environmentalface: color-mix(in srgb, var(--ol8-color-neutral-930) 48%, transparent);
-  --ol8-material-gem-color-quiet-stabilizedface: color-mix(in srgb, var(--ol8-color-neutral-840) 72%, transparent);
+  --ol8-material-gem-color-quiet-stabilizedface: color-mix(in srgb, var(--ol8-color-neutral-840) 27%, transparent);
   --ol8-material-gem-color-quiet-opaqueequivalent: var(--ol8-color-neutral-840);
   --ol8-material-gem-color-cutedge-high: color-mix(in srgb, var(--ol8-color-neutral-120) 42%, transparent);
   --ol8-material-gem-color-cutedge-mid: color-mix(in srgb, var(--ol8-color-blue-120) 20%, transparent);

@@ -885,12 +885,12 @@
             "$type": "color",
             "$value": {
               "color": "{color.neutral.060}",
-              "alpha": 0.72
+              "alpha": 0.27
             },
             "$extensions": {
               "oneli8.composite": "color-alpha"
             },
-            "$description": "Quiet Light Gem stabilized content plane."
+            "$description": "Quiet Light Gem stabilized content plane. Alpha matches the gem families (emerald, ruby and amethyst at 0.27, sapphire at 0.30). It was 0.72 — the only gem face in the system where stabilized was more opaque than environmental, and 2.4x the highest family value, which read as a white slab rather than glass."
           },
           "opaqueEquivalent": {
             "$type": "color",

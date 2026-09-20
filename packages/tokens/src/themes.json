@@ -494,12 +494,12 @@
             "$type": "color",
             "$value": {
               "color": "{color.neutral.840}",
-              "alpha": 0.72
+              "alpha": 0.27
             },
             "$extensions": {
               "oneli8.composite": "color-alpha"
             },
-            "$description": "Quiet Dark Gem stabilized plane."
+            "$description": "Quiet Dark Gem stabilized plane. Tracks the light value; see semantic.json for why this moved from 0.72."
           },
           "material.gem.color.quiet.opaqueEquivalent": {
             "$type": "color",

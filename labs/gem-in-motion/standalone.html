@@ -313,7 +313,7 @@
   --ol8-material-control-gem--gradient-mid: 48.586%;
   --ol8-material-control-gem--gradient-end: 85.361%;
   --ol8-material-gem-color-quiet-environmentalface: color-mix(in srgb, var(--ol8-color-neutral-030) 48%, transparent);
-  --ol8-material-gem-color-quiet-stabilizedface: color-mix(in srgb, var(--ol8-color-neutral-060) 72%, transparent);
+  --ol8-material-gem-color-quiet-stabilizedface: color-mix(in srgb, var(--ol8-color-neutral-060) 27%, transparent);
   --ol8-material-gem-color-quiet-opaqueequivalent: var(--ol8-color-neutral-030);
   --ol8-material-gem-color-cutedge-outerhigh: color-mix(in srgb, var(--ol8-color-neutral-060) 93%, transparent);
   --ol8-material-gem-color-cutedge-outermid: color-mix(in srgb, var(--ol8-color-blue-120) 48%, transparent);
@@ -745,7 +745,7 @@
   --ol8-material-control-gem--primary-hover-mid: var(--ol8-color-primary-840);
   --ol8-material-control-gem--primary-hover-end: var(--ol8-color-primary-930);
   --ol8-material-gem-color-quiet-environmentalface: color-mix(in srgb, var(--ol8-color-neutral-930) 48%, transparent);
-  --ol8-material-gem-color-quiet-stabilizedface: color-mix(in srgb, var(--ol8-color-neutral-840) 72%, transparent);
+  --ol8-material-gem-color-quiet-stabilizedface: color-mix(in srgb, var(--ol8-color-neutral-840) 27%, transparent);
   --ol8-material-gem-color-quiet-opaqueequivalent: var(--ol8-color-neutral-840);
   --ol8-material-gem-color-cutedge-high: color-mix(in srgb, var(--ol8-color-neutral-120) 42%, transparent);
   --ol8-material-gem-color-cutedge-mid: color-mix(in srgb, var(--ol8-color-blue-120) 20%, transparent);
@@ -1968,17 +1968,23 @@
    about what the surface contains.
 
    The face axis is Figma's own vocabulary, not an invention:
-     stabilizedface     neutral-060 @ 72%   at rest
+     stabilizedface     neutral-060 @ 27%   at rest
      environmentalface  neutral-030 @ 48%   when the environment matters
    Motion study 01 (labs/gem-in-motion) drives data-ol8-face along it. */
 .ol8-gem {
   --_gem-face: var(--ol8-material-gem-color-quiet-stabilizedface);
+  /* material.gem.blur.* existed in the tokens and nothing consumed it —
+     every gem surface was using the CONTROL blur instead, which is a flat
+     12px. These are the surface pair, and they move with the face:
+     stabilized 12px, environmental 18px. That step is the dynamic blur. */
+  --_gem-blur: var(--ol8-material-gem-blur-stabilized);
 
   box-sizing: border-box;
   position: relative;
   background: var(--_gem-face);
-  backdrop-filter: blur(var(--ol8-material-control-gem--blur)) saturate(1.06);
-  -webkit-backdrop-filter: blur(var(--ol8-material-control-gem--blur)) saturate(1.06);
+  backdrop-filter: blur(var(--_gem-blur)) saturate(1.06);
+  -webkit-backdrop-filter: blur(var(--_gem-blur)) saturate(1.06);
+  transition: background .4s linear, backdrop-filter .4s linear;
   border-radius: var(--ol8-shape-radius-standard);
   color: var(--ol8-color-text-primary);
   /* The cut edge. Invariant — it is what keeps a gem recognisable as gem. */
@@ -1990,6 +1996,7 @@
 
 .ol8-gem[data-ol8-face="environmental"] {
   --_gem-face: var(--ol8-material-gem-color-quiet-environmentalface);
+  --_gem-blur: var(--ol8-material-gem-blur-environmental);
 }
 
 /* Same contract as every other gem consumer: transparency is the variable,
@@ -2151,7 +2158,10 @@
     resolves through it while the UI stops asking to be read.</p>
   </header>
 
-  <div class="stage" id="stage">
+  <!-- The scheme is scoped to the STAGE, not the document: the street is dark,
+       so the gem inside it must use the dark faces. Scoping it to <html> would
+       flip every semantic token on the page chrome too. -->
+  <div class="stage" id="stage" data-ol8-color-scheme="dark">
     <canvas id="scene"></canvas>
     <!-- Built in script from the system's own components. -->
     <div class="hud" id="hud"></div>

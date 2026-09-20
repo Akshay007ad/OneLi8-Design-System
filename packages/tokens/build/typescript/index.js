@@ -2172,9 +2172,9 @@ export const tokens = {
     "type": "color",
     "value": {
       "color": "#F5F1E6",
-      "alpha": 0.72
+      "alpha": 0.27
     },
-    "description": "Quiet Light Gem stabilized content plane.",
+    "description": "Quiet Light Gem stabilized content plane. Alpha matches the gem families (emerald, ruby and amethyst at 0.27, sapphire at 0.30). It was 0.72 — the only gem face in the system where stabilized was more opaque than environmental, and 2.4x the highest family value, which read as a white slab rather than glass.",
     "tier": "semantic"
   },
   "material.gem.color.quiet.opaqueEquivalent": {
@@ -6375,10 +6375,10 @@ export const themeModes = {
         "type": "color",
         "value": {
           "color": "#20201E",
-          "alpha": 0.72
+          "alpha": 0.27
         },
         "reference": null,
-        "description": "Quiet Dark Gem stabilized plane."
+        "description": "Quiet Dark Gem stabilized plane. Tracks the light value; see semantic.json for why this moved from 0.72."
       },
       {
         "path": "material.gem.color.quiet.opaqueEquivalent",
