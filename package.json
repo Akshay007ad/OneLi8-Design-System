@@ -11,11 +11,12 @@
     "sync:icons": "node packages/sync/src/build-icons.mjs",
     "test:tokens": "node packages/tokens/scripts/test.mjs --standalone",
     "build": "npm run sync:tokens && npm run sync:styles && npm run sync:icons && npm run sync:context && npm run check",
-    "check": "node packages/sync/src/check-structure.mjs && npm run test:tokens && npm run test:components && npm run test:react",
+    "check": "node packages/sync/src/check-structure.mjs && npm run test:tokens && npm run test:components && npm run test:react && npm run check:docs",
     "sync:styles": "node packages/sync/src/build-styles.mjs",
     "sync:context": "node packages/sync/src/build-package-context.mjs",
     "test:components": "node packages/core/scripts/test-components.mjs",
     "test:react": "node packages/react/scripts/test-render.mjs",
-    "release": "npm run build && npm publish --workspace @oneli8/tokens --tag latest && npm publish --workspace @oneli8/core --tag latest && npm publish --workspace @oneli8/react --tag latest"
+    "release": "npm run build && npm publish --workspace @oneli8/tokens --tag latest && npm publish --workspace @oneli8/core --tag latest && npm publish --workspace @oneli8/react --tag latest",
+    "check:docs": "node packages/sync/src/check-docs.mjs"
   }
 }

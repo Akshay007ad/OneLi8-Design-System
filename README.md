@@ -424,8 +424,16 @@ a change is visible immediately.
 parents rather than components, atoms compose nothing, and every pixel token
 sits on the 3px grid.
 
-Tokens are generated. Edit `packages/tokens/src/tokens.json` and rebuild. Never
-edit anything under `dist/`.
+It also gates the prose. `check:docs` asserts that every repo path these
+documents name exists, every code symbol they name is exported, every
+documented import would actually resolve, and that no document enumerates a
+closed list of public exports — a list is wrong the moment the library grows,
+so the rule is not "keep the list current" but "do not keep a list".
+
+Tokens are generated. Edit the sources in `packages/tokens/src/` — `primitive.json`
+for the raw palette and scale, `semantic.json` for roles, `component.json` for
+component recipes, `themes.json` for the colour-scheme and primary-family
+overrides — then rebuild. Never edit anything under `packages/tokens/build/`.
 
 ## For AI agents
 
