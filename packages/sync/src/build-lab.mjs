@@ -13,7 +13,7 @@
  *
  *   node packages/sync/src/build-lab.mjs labs/gem-in-motion
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, statSync } from 'node:fs';
 import { resolve, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -31,6 +31,23 @@ html = html.replace(/[ \t]*<link rel="stylesheet" href="(\.\.\/[^"]+)">\n?/g, (_
   const css = readFileSync(resolve(dirname(srcPath), href), 'utf8');
   sheets++;
   return `<style>/* inlined from ${href} */\n${css}</style>\n`;
+});
+
+/* ---- 1b. embed local images -------------------------------------------
+   A published page cannot fetch anything, so any local image has to travel
+   with it as a data URI. A missing one is left alone deliberately: the lab
+   falls back to its canvas scene rather than the build failing. */
+const MIME = { '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png',
+               '.webp': 'image/webp', '.avif': 'image/avif' };
+let images = 0, missing = [];
+html = html.replace(/src="([^"]+\.(?:jpe?g|png|webp|avif))"/gi, (whole, src) => {
+  if (/^(?:https?:|data:)/i.test(src)) return whole;
+  const file = resolve(dirname(srcPath), src);
+  if (!existsSync(file)) { missing.push(src); return whole; }
+  const ext = src.slice(src.lastIndexOf('.')).toLowerCase();
+  const b64 = readFileSync(file).toString('base64');
+  images++;
+  return `src="data:${MIME[ext] ?? 'image/jpeg'};base64,${b64}"`;
 });
 
 /* ---- 2. resolve the module graph -------------------------------------- */
@@ -128,4 +145,10 @@ html = html.replace(/<script type="module">[\s\S]*?<\/script>/, block => {
 });
 
 writeFileSync(outPath, html);
-console.log(`✓ ${relative(ROOT, outPath)} — ${sheets} stylesheets, ${order.length} modules inlined`);
+const bytes = statSync(outPath).size;
+console.log(`✓ ${relative(ROOT, outPath)} — ${sheets} stylesheets, ${order.length} modules, ${images} image(s) — ${(bytes / 1048576).toFixed(2)} MB`);
+if (missing.length) console.log(`  · not embedded, lab falls back: ${missing.join(', ')}`);
+if (bytes > 16 * 1048576) {
+  console.error('✗ over the 16MB publish cap — compress the plate or drop its resolution');
+  process.exit(1);
+}

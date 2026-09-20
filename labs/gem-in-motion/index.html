@@ -70,6 +70,28 @@
   }
   #scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
+  /* ---- photographic plate ----------------------------------------------
+     A still shot down a road or footpath, turned into POV motion. Forward
+     travel is a dolly zoom about the photo's vanishing point: each layer
+     scales up on an exponential ramp (linear in depth, not in pixels) and
+     the two layers run half a cycle apart, so the loop never shows a seam.
+     Set --vp-x / --vp-y to where the road actually converges in YOUR photo;
+     the default assumes a centred shot with the horizon slightly high. */
+  .plate {
+    --vp-x: 50%;
+    --vp-y: 52%;
+    position: absolute; inset: 0; overflow: hidden;
+  }
+  .plate__layer {
+    position: absolute; inset: 0;
+    inline-size: 100%; block-size: 100%;
+    object-fit: cover;
+    transform-origin: var(--vp-x) var(--vp-y);
+    will-change: transform, opacity;
+  }
+  /* Sits under the HUD but over nothing — the plate IS the world. */
+  .plate[hidden] { display: none !important; }
+
   /* The HUD blurs as a whole. Nothing is removed, nothing fades out —
      the widgets stay exactly where they are and stop being readable.
 
@@ -174,6 +196,12 @@
        flip every semantic token on the page chrome too. -->
   <div class="stage" id="stage" data-ol8-color-scheme="dark">
     <canvas id="scene"></canvas>
+    <!-- Drop a photo at labs/gem-in-motion/plate.jpg and it replaces the
+         synthetic street automatically. If it is missing, the canvas stays. -->
+    <div class="plate" id="plate" hidden>
+      <img class="plate__layer" src="plate.jpg" alt="" id="plateA">
+      <img class="plate__layer" src="plate.jpg" alt="" id="plateB">
+    </div>
     <!-- Built in script from the system's own components. -->
     <div class="hud" id="hud"></div>
     <p class="caption" id="caption">Standing</p>
@@ -395,6 +423,43 @@ function furniture(hz, f) {
 }
 
 /* ---------------- frame ---------------- */
+/* ---- photographic plate ------------------------------------------------
+   Forward travel from a single still. Each layer rides an exponential zoom
+   about the vanishing point — exponential because depth is what should be
+   linear, not pixels — and the two layers run half a cycle apart, so one is
+   always arriving as the other leaves and the loop has no seam.
+
+   The canvas street stays as the fallback. If plate.jpg is missing the lab
+   still runs, which is the point of a fallback rather than a hard dependency. */
+const PLATE = { ready: false, phase: 0 };
+const PLATE_ZOOM = Math.log(2.2);   // one cycle travels 1x -> 2.2x
+const plateEl = $('plate'), pA = $('plateA'), pB = $('plateB');
+
+function enablePlate() {
+  if (PLATE.ready) return;
+  PLATE.ready = true;
+  plateEl.hidden = false;
+  els.scene.style.display = 'none';
+}
+if (pA.complete && pA.naturalWidth > 0) enablePlate();
+else pA.addEventListener('load', enablePlate, { once: true });
+
+function drawPlate(dt, k) {
+  // Creeps at rest so the world is never frozen, then tracks speed.
+  PLATE.phase = (PLATE.phase + dt * lerp(0.035, 0.85, k)) % 1;
+  const amp  = lerp(0, 1.5, k);                                   // % of frame
+  const bob  = Math.sin(state.t * lerp(2, 11, k)) * amp;
+  const sway = Math.cos(state.t * lerp(1.4, 7, k)) * amp * 0.45;
+
+  for (const [el, offset] of [[pA, 0], [pB, 0.5]]) {
+    const p = (PLATE.phase + offset) % 1;
+    const scale = Math.exp(p * PLATE_ZOOM);
+    el.style.transform =
+      `translate(${sway.toFixed(3)}%, ${bob.toFixed(3)}%) scale(${scale.toFixed(4)})`;
+    el.style.opacity = Math.sin(Math.PI * p).toFixed(3);
+  }
+}
+
 const FACE_SWITCH = 0.34;   // fraction of top speed where the face flips
 let lastTier = 'Resting';
 // Read the peak back from the token, so the readout can never disagree with
@@ -413,7 +478,8 @@ function frame(now) {
   const bob = Math.sin(state.t * lerp(2, 11, k)) * lerp(0, 5, k);
   const hz = H * .44 + bob, f = H * .78;
 
-  sky(hz); clouds(hz, dt * 60); ground(hz); lanes(hz, f); furniture(hz, f);
+  if (PLATE.ready) drawPlate(dt, k);
+  else { sky(hz); clouds(hz, dt * 60); ground(hz); lanes(hz, f); furniture(hz, f); }
 
   // The UI blurs. It does not move, shrink, fade or disappear.
   // Only the 0..1 factor is set here; the peak is --hud-peak, a scale token,
