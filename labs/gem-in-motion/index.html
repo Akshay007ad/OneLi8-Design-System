@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oneli8 · Motion study 01 — Gem under locomotion</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=AR+One+Sans:wght@400..700&display=swap">
+
+<!-- The system. Nothing below re-declares a token or a component. -->
+<link rel="stylesheet" href="../../packages/tokens/build/css/tokens.css">
+<link rel="stylesheet" href="../../packages/core/src/atoms/icon/icon.css">
+<link rel="stylesheet" href="../../packages/core/src/molecules/button/button.css">
+<link rel="stylesheet" href="../../packages/core/src/organisms/segmented-control/segmented-control.css">
+<link rel="stylesheet" href="../../packages/core/src/materials/gem/gem.css">
+
+<style>
+  /* Lab-local layout only. Every colour, radius, space and face below is a
+     token or an ol8 class — the point of this study is the material, and a
+     study that re-invents the material proves nothing. */
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--ol8-color-background-inverse);
+    color: var(--ol8-color-text-inverse);
+    font-family: var(--ol8-font-family-functional);
+    font-variant-numeric: tabular-nums;
+    overflow: hidden;              /* one page, no scroll */
+  }
+
+  .lab {
+    height: 100%;
+    max-width: 1080px;
+    margin-inline: auto;
+    padding: var(--ol8-dimension-scale-018);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: var(--ol8-dimension-scale-012);
+  }
+
+  /* ---- head ---- */
+  .lab__head { display: flex; align-items: baseline; gap: var(--ol8-dimension-scale-012); flex-wrap: wrap; }
+  .lab__head h1 {
+    margin: 0; font-family: var(--ol8-font-family-display);
+    font-size: var(--ol8-font-size-021); line-height: var(--ol8-font-line-030);
+    font-weight: var(--ol8-font-weight-semibold); letter-spacing: -.01em;
+  }
+  .lab__head p {
+    margin: 0; flex: 1 1 320px; min-width: 0;
+    font-size: var(--ol8-font-size-012); line-height: var(--ol8-font-line-018);
+    color: var(--ol8-color-neutral-120);
+  }
+  .lab__head b { color: var(--ol8-color-text-inverse); font-weight: var(--ol8-font-weight-semibold); }
+
+  /* ---- stage ---- */
+  .stage {
+    position: relative; min-height: 0;
+    border-radius: var(--ol8-shape-radius-container);
+    overflow: hidden;
+    border: 1px solid var(--ol8-color-border-strong);
+    background: var(--ol8-color-neutral-930);
+  }
+  #scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+  /* The HUD blurs as a whole. Nothing is removed, nothing fades out —
+     the widgets stay exactly where they are and stop being readable. */
+  .hud {
+    position: absolute; inset: 0;
+    padding: var(--ol8-dimension-scale-018);
+    display: flex; flex-direction: column; align-items: flex-end;
+    gap: var(--ol8-dimension-scale-009);
+    pointer-events: none;
+    filter: blur(var(--hud-blur, 0px));
+    transition: filter .18s linear;
+  }
+  .widget {
+    inline-size: 196px; max-inline-size: 44%;
+    padding: var(--ol8-dimension-scale-009) var(--ol8-dimension-scale-012);
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .widget__k {
+    font-size: var(--ol8-font-size-012); line-height: var(--ol8-font-line-018);
+    letter-spacing: .06em; text-transform: uppercase; opacity: .6;
+  }
+  .widget__v { font-size: var(--ol8-font-size-016); line-height: var(--ol8-font-line-024); font-weight: var(--ol8-font-weight-semibold); }
+  .widget__s { font-size: var(--ol8-font-size-012); line-height: var(--ol8-font-line-018); opacity: .74; }
+
+  .caption {
+    position: absolute; inset-inline-start: var(--ol8-dimension-scale-018);
+    inset-block-start: var(--ol8-dimension-scale-018);
+    font-size: var(--ol8-font-size-012); letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ol8-color-neutral-060); text-shadow: 0 1px 4px var(--ol8-color-neutral-930);
+  }
+
+  /* ---- dock ---- */
+  .dock {
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: var(--ol8-dimension-scale-012) var(--ol8-dimension-scale-018);
+    padding: var(--ol8-dimension-scale-012);
+    border: 1px solid var(--ol8-color-border-strong);
+    border-radius: var(--ol8-shape-radius-medium);
+    background: var(--ol8-color-neutral-840);
+  }
+  .dock__speed { flex: 1 1 180px; min-width: 150px; display: flex; flex-direction: column; gap: 3px; }
+  .dock__speed label {
+    font-size: var(--ol8-font-size-012); letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ol8-color-neutral-240);
+  }
+  .readout { display: flex; gap: var(--ol8-dimension-scale-018); margin: 0; }
+  .readout div { display: flex; flex-direction: column; gap: 1px; }
+  .readout dt {
+    font-size: var(--ol8-font-size-012); letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ol8-color-neutral-240);
+  }
+  .readout dd {
+    margin: 0; font-family: var(--ol8-font-family-display);
+    font-size: var(--ol8-font-size-016); font-weight: var(--ol8-font-weight-semibold);
+  }
+  .readout dd small { font-size: var(--ol8-font-size-012); font-weight: var(--ol8-font-weight-regular); color: var(--ol8-color-neutral-240); }
+
+  /* No Slider atom exists in the system yet, so this is a native range
+     dressed only in tokens. Flagged as a gap, not quietly invented. */
+  input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 20px; background: transparent; cursor: pointer; margin: 0; }
+  input[type="range"]::-webkit-slider-runnable-track { height: 3px; border-radius: 2px; background: var(--ol8-color-border-strong); }
+  input[type="range"]::-moz-range-track { height: 3px; border-radius: 2px; background: var(--ol8-color-border-strong); }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 15px; height: 15px; border-radius: var(--ol8-shape-radius-full);
+    background: var(--ol8-color-text-inverse); border: 3px solid var(--ol8-color-neutral-840); margin-top: -6px;
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 15px; height: 15px; border-radius: var(--ol8-shape-radius-full);
+    background: var(--ol8-color-text-inverse); border: 3px solid var(--ol8-color-neutral-840);
+  }
+  input[type="range"]:focus-visible { outline: var(--ol8-focus-ring-outerwidth) solid var(--ol8-color-focus-outer); outline-offset: 2px; }
+
+  @media (max-width: 640px) {
+    .lab__head p { display: none; }
+    .readout { width: 100%; justify-content: space-between; }
+  }
+  @media (prefers-reduced-motion: reduce) { .hud { transition: none; } }
+</style>
+</head>
+<body>
+
+<div class="lab">
+
+  <header class="lab__head">
+    <h1>Gem under locomotion</h1>
+    <p>Motion study 01 &middot; the widgets never leave. Speed moves the gem face from
+    <b>stabilized</b> to <b>environmental</b> and blurs the whole surface, so the street
+    resolves through it while the UI stops asking to be read.</p>
+  </header>
+
+  <div class="stage" id="stage">
+    <canvas id="scene"></canvas>
+    <div class="hud" id="hud">
+      <article class="ol8-gem widget"><span class="widget__k">Now playing</span><span class="widget__v">Sundara</span><span class="widget__s">Anoushka Shankar</span></article>
+      <article class="ol8-gem widget"><span class="widget__k">Kabir Rao</span><span class="widget__v">Still coming by?</span><span class="widget__s">I&rsquo;ll wait at the north gate</span></article>
+      <article class="ol8-gem widget"><span class="widget__k">Navigation</span><span class="widget__v">400 m</span><span class="widget__s">Left onto Ferry Rd</span></article>
+      <article class="ol8-gem widget"><span class="widget__k">Heart rate</span><span class="widget__v" id="hr">68 bpm</span><span class="widget__s" id="hrs">Resting</span></article>
+    </div>
+    <p class="caption" id="caption">Standing</p>
+  </div>
+
+  <div class="dock">
+    <div id="beats"></div>
+    <div class="dock__speed">
+      <label for="speed">Speed</label>
+      <input type="range" id="speed" min="0" max="7" step="0.1" value="0">
+    </div>
+    <dl class="readout">
+      <div><dt>Speed</dt><dd id="roSpeed">0.0<small> m/s</small></dd></div>
+      <div><dt>Face</dt><dd id="roFace">Stabilized</dd></div>
+      <div><dt>UI blur</dt><dd id="roBlur">0.0<small> px</small></dd></div>
+    </dl>
+  </div>
+</div>
+
+<script type="module">
+import { renderSegmentedControl, hydrateSegmentedControls }
+  from '../../packages/core/src/organisms/segmented-control/segmented-control.js';
+
+const $ = id => document.getElementById(id);
+const clamp = (v,a,b) => Math.min(b, Math.max(a,v));
+const lerp  = (a,b,t) => a + (b-a)*t;
+
+const BEATS = [
+  { id: 'stand',  label: 'Standing',  v: 0.0, c: 'Standing' },
+  { id: 'walk',   label: 'Walking',   v: 1.4, c: 'Walking · north gate, two streets away' },
+  { id: 'spot',   label: 'Dog seen',  v: 2.2, c: 'A dog breaks the fence line behind you' },
+  { id: 'run',    label: 'Running',   v: 4.5, c: 'Running · it is keeping pace' },
+  { id: 'sprint', label: 'Sprinting', v: 6.5, c: 'Sprinting · signal ahead' },
+];
+
+// The control is the system's, not a lab invention.
+$('beats').innerHTML = renderSegmentedControl({
+  label: 'Locomotion beat', behavior: 'single', presentation: 'soft-pill',
+  size: 'compact', items: BEATS.map(({ id, label }) => ({ id, label })), selected: 'stand',
+});
+hydrateSegmentedControls();
+
+const els = {
+  stage: $('stage'), scene: $('scene'), hud: $('hud'), caption: $('caption'),
+  speed: $('speed'), hr: $('hr'), hrs: $('hrs'),
+  roSpeed: $('roSpeed'), roFace: $('roFace'), roBlur: $('roBlur'),
+};
+const widgets = [...document.querySelectorAll('.widget')];
+const state = { target: 0, speed: 0, dist: 0, t: 0 };
+
+document.addEventListener('ol8:segmentchange', e => {
+  const b = BEATS.find(x => x.id === e.detail?.value);
+  if (!b) return;
+  state.target = b.v; els.speed.value = String(b.v); els.caption.textContent = b.c;
+});
+els.speed.addEventListener('input', () => {
+  state.target = parseFloat(els.speed.value);
+  const near = BEATS.reduce((best,b,i) =>
+    Math.abs(b.v - state.target) < Math.abs(BEATS[best].v - state.target) ? i : best, 0);
+  els.caption.textContent = BEATS[near].c;
+});
+
+/* ---------------- street ---------------- */
+const ctx = els.scene.getContext('2d');
+let W = 0, H = 0, DPR = 1;
+
+const POLES   = Array.from({ length: 12 }, (_, i) => ({ z: 8 + i * 13, side: i % 2 ? 1 : -1 }));
+const SIGNS   = [ { z: 26, side: -1, kind: 'ferry' }, { z: 74, side: 1, kind: 'school' }, { z: 122, side: -1, kind: 'ferry' } ];
+const SIGNALS = [ { z: 48, side: 1 }, { z: 110, side: -1 } ];
+const CLOUDS  = Array.from({ length: 7 }, (_, i) => ({
+  x: (i * 173) % 1000 / 1000, y: 0.06 + (i % 3) * 0.09, s: 0.55 + (i % 4) * 0.22, d: 0.004 + (i % 3) * 0.003,
+}));
+
+function resize() {
+  DPR = Math.min(window.devicePixelRatio || 1, 2);
+  const r = els.stage.getBoundingClientRect();
+  W = r.width; H = r.height;
+  els.scene.width = Math.round(W * DPR); els.scene.height = Math.round(H * DPR);
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+}
+new ResizeObserver(resize).observe(els.stage);
+
+function sky(hz) {
+  const g = ctx.createLinearGradient(0, 0, 0, hz);
+  g.addColorStop(0, '#20313b'); g.addColorStop(.62, '#3f5560'); g.addColorStop(1, '#6b7b7e');
+  ctx.fillStyle = g; ctx.fillRect(-20, -20, W + 40, hz + 20);
+}
+function clouds(hz, dt) {
+  ctx.fillStyle = 'rgba(252,250,243,.13)';
+  for (const c of CLOUDS) {
+    c.x = (c.x + c.d * dt) % 1.25;
+    const x = (c.x * 1.25 - .12) * W, y = c.y * hz, r = 15 * c.s * (H / 380);
+    ctx.beginPath();
+    ctx.ellipse(x, y, r * 2.6, r, 0, 0, Math.PI * 2);
+    ctx.ellipse(x + r * 1.5, y + r * .3, r * 1.7, r * .8, 0, 0, Math.PI * 2);
+    ctx.ellipse(x - r * 1.6, y + r * .35, r * 1.4, r * .7, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+function ground(hz) {
+  const g = ctx.createLinearGradient(0, hz, 0, H);
+  g.addColorStop(0, '#34302a'); g.addColorStop(1, '#181613');
+  ctx.fillStyle = g; ctx.fillRect(-20, hz, W + 40, H - hz + 40);
+  // kerbs
+  ctx.strokeStyle = 'rgba(252,250,243,.10)'; ctx.lineWidth = 1.5;
+  for (const s of [-1, 1]) {
+    ctx.beginPath(); ctx.moveTo(W / 2 + s * 2, hz);
+    ctx.lineTo(W / 2 + s * W * .9, H); ctx.stroke();
+  }
+}
+function lanes(hz, f) {
+  ctx.fillStyle = 'rgba(252,250,243,.17)';
+  for (let i = 0; i < 26; i++) {
+    const z = ((i * 4 - state.dist % 4) + 100) % 100 + 2;
+    const y = hz + f / z, s = f / z;
+    if (y > H + 30 || s < .4) continue;
+    ctx.fillRect(W / 2 - s * .06, y, s * .12, s * .5);
+  }
+}
+function post(x, yBase, hgt, wdt, shade) {
+  ctx.fillStyle = `rgba(22,20,18,${(.55 + shade * .4).toFixed(3)})`;
+  ctx.fillRect(x - wdt / 2, yBase - hgt, wdt, hgt);
+  ctx.fillStyle = `rgba(252,250,243,${(shade * .16).toFixed(3)})`;
+  ctx.fillRect(x - wdt / 2, yBase - hgt, wdt * .3, hgt);
+}
+function furniture(hz, f) {
+  const cx = W / 2;
+  const items = [
+    ...POLES.map(p => ({ ...p, kind: 'pole' })),
+    ...SIGNS.map(p => ({ ...p, kind: 'sign' })),
+    ...SIGNALS.map(p => ({ ...p, kind: 'signal' })),
+  ];
+  // far to near, so nearer objects overlap correctly
+  const drawn = items.map(it => {
+    const z = ((it.z - state.dist) % 150 + 150) % 150 + 2;
+    return { ...it, z };
+  }).filter(it => it.z < 95 && it.z > 4).sort((a, b) => b.z - a.z);
+
+  for (const it of drawn) {
+    const y = hz + f / it.z, s = f / it.z, shade = clamp(1 - it.z / 95, .1, 1);
+    const x = cx + it.side * s * (it.kind === 'pole' ? 1.55 : 1.25);
+    if (x < -80 || x > W + 80) continue;
+
+    if (it.kind === 'pole') {
+      post(x, y, s * 3.0, Math.max(1.4, s * .11), shade);
+    } else if (it.kind === 'sign') {
+      const hgt = s * 1.9, w = Math.max(1.2, s * .07);
+      post(x, y, hgt, w, shade);
+      const bw = s * .72, bh = s * .34, by = y - hgt;
+      ctx.fillStyle = it.kind === 'sign' && it.side === 1
+        ? `rgba(240,185,11,${(.35 + shade * .55).toFixed(3)})`
+        : `rgba(44,67,139,${(.4 + shade * .55).toFixed(3)})`;
+      ctx.fillRect(x - bw / 2, by - bh, bw, bh);
+      ctx.fillStyle = `rgba(252,250,243,${(shade * .5).toFixed(3)})`;
+      ctx.fillRect(x - bw * .34, by - bh * .68, bw * .68, Math.max(1, bh * .12));
+      ctx.fillRect(x - bw * .34, by - bh * .42, bw * .46, Math.max(1, bh * .12));
+    } else {
+      const hgt = s * 2.5, w = Math.max(1.4, s * .09);
+      post(x, y, hgt, w, shade);
+      const bw = s * .3, bh = s * .74, by = y - hgt;
+      ctx.fillStyle = `rgba(18,17,15,${(.6 + shade * .35).toFixed(3)})`;
+      ctx.fillRect(x - bw / 2, by - bh, bw, bh);
+      const lamps = [['rgba(237,106,97,', 0], ['rgba(255,209,61,', 1], ['rgba(88,185,130,', 2]];
+      const lit = state.speed > 5.6 ? 0 : state.speed > 2.0 ? 1 : 2;
+      for (const [rgba, i] of lamps) {
+        const on = i === lit;
+        ctx.beginPath();
+        ctx.arc(x, by - bh + bh * (.22 + i * .28), Math.max(.9, bw * .26), 0, Math.PI * 2);
+        ctx.fillStyle = rgba + (on ? (.35 + shade * .65).toFixed(3) : (shade * .12).toFixed(3)) + ')';
+        ctx.fill();
+      }
+    }
+  }
+}
+
+/* ---------------- frame ---------------- */
+const FACE_SWITCH = 0.34;   // fraction of top speed where the face flips
+let last = performance.now();
+
+function frame(now) {
+  const dt = Math.min(.05, (now - last) / 1000); last = now;
+  state.t += dt;
+  state.speed += (state.target - state.speed) * Math.min(1, dt * 2.6);
+
+  const v = state.speed, k = clamp(v / 6.5, 0, 1);
+  state.dist += v * dt * 1.7;
+
+  const bob = Math.sin(state.t * lerp(2, 11, k)) * lerp(0, 5, k);
+  const hz = H * .44 + bob, f = H * .78;
+
+  sky(hz); clouds(hz, dt * 60); ground(hz); lanes(hz, f); furniture(hz, f);
+
+  // The UI blurs. It does not move, shrink, fade or disappear.
+  const uiBlur = lerp(0, 7, k);
+  els.hud.style.setProperty('--hud-blur', uiBlur.toFixed(2) + 'px');
+
+  const environmental = k > FACE_SWITCH;
+  for (const w of widgets) {
+    if (environmental) w.dataset.ol8Face = 'environmental';
+    else delete w.dataset.ol8Face;
+  }
+
+  els.hr.textContent = Math.round(lerp(68, 178, k)) + ' bpm';
+  els.hrs.textContent = k < .1 ? 'Resting' : k < .45 ? 'Elevated' : 'Peak';
+  els.roSpeed.innerHTML = v.toFixed(1) + '<small> m/s</small>';
+  els.roFace.textContent = environmental ? 'Environmental' : 'Stabilized';
+  els.roBlur.innerHTML = uiBlur.toFixed(1) + '<small> px</small>';
+
+  requestAnimationFrame(frame);
+}
+resize();
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
