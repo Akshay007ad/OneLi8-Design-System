@@ -43,6 +43,20 @@ const REGISTRY = {
   'search':            { category: 'action',     figmaNode: '557:2',   mirrorInRTL: false },
   'clear':             { category: 'action',     figmaNode: '557:4',   mirrorInRTL: false },
   'close':             { category: 'action',     figmaNode: '894:123', mirrorInRTL: false },
+
+  // ---- CANDIDATES ------------------------------------------------------
+  // skills/oneli8-icons: "A new icon is a candidate until Akshay approves it;
+  // an AI-generated candidate is not automatically canonical." figmaNode is
+  // null on purpose — PRINCIPLES.md: a missing mapping is an explicit gap,
+  // never assumed synchronisation.
+  'play':              { category: 'transport', figmaNode: null, mirrorInRTL: false, candidate: true },
+  'pause':             { category: 'transport', figmaNode: null, mirrorInRTL: false, candidate: true },
+  'skip-forward':      { category: 'transport', figmaNode: null, mirrorInRTL: true,  candidate: true },
+  'skip-back':         { category: 'transport', figmaNode: null, mirrorInRTL: true,  candidate: true },
+  'heart':             { category: 'vitals',    figmaNode: null, mirrorInRTL: false, candidate: true },
+  // Maneuver is a SIGN register, not a line icon: solid body, no stroke, the
+  // way road signage reads. Proposed as a new category for that reason.
+  'maneuver-right':    { category: 'maneuver',  figmaNode: null, mirrorInRTL: true,  candidate: true },
   // Two sheets offset on a diagonal rather than a reading direction, so it
   // does not mirror. Candidate until Akshay approves the shape.
   'copy':              { category: 'action',     figmaNode: '1291:153', mirrorInRTL: false },
@@ -192,9 +206,12 @@ export const OL8_ICONS = ${JSON.stringify(icons, null, 2)};
 writeFileSync(join(OUT, 'icons.generated.d.ts'), banner + `
 export interface Ol8IconEntry {
   /** Figma category segment: "Icon / <Category> / <Name>". */
-  readonly category: 'action' | 'navigation' | 'status' | 'selection';
-  /** Node id of the 24px master in the Figma source file. */
-  readonly figmaNode: string;
+  readonly category: 'action' | 'navigation' | 'status' | 'selection'
+    | 'transport' | 'vitals' | 'maneuver';
+  /** Node id of the 24px master in Figma, or null while it is a candidate. */
+  readonly figmaNode: string | null;
+  /** True until the master is approved and mapped to a Figma node. */
+  readonly candidate?: boolean;
   /** Semantic registry controls RTL mirroring (per Iconography documentation). */
   readonly mirrorInRTL: boolean;
   /** The ink Figma baked into the master, discarded in favour of currentColor. */

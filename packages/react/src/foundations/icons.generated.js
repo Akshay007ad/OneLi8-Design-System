@@ -223,6 +223,26 @@ export const OL8_ICONS = {
       }
     ]
   },
+  "heart": {
+    "category": "vitals",
+    "figmaNode": null,
+    "mirrorInRTL": false,
+    "candidate": true,
+    "sourceInk": "#151817",
+    "body": "<path id=\"glyph-path\" d=\"M12 21C12 21 3 15.6 3 9.6C3 6.6 5.4 4.5 8.1 4.5C9.9 4.5 11.4 5.55 12 6.9C12.6 5.55 14.1 4.5 15.9 4.5C18.6 4.5 21 6.6 21 9.6C21 15.6 12 21 12 21Z\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+    "elements": [
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M12 21C12 21 3 15.6 3 9.6C3 6.6 5.4 4.5 8.1 4.5C9.9 4.5 11.4 5.55 12 6.9C12.6 5.55 14.1 4.5 15.9 4.5C18.6 4.5 21 6.6 21 9.6C21 15.6 12 21 12 21Z",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      }
+    ]
+  },
   "informative": {
     "category": "status",
     "figmaNode": "440:11",
@@ -278,6 +298,23 @@ export const OL8_ICONS = {
       }
     ]
   },
+  "maneuver-right": {
+    "category": "maneuver",
+    "figmaNode": null,
+    "mirrorInRTL": true,
+    "candidate": true,
+    "sourceInk": "#151817",
+    "body": "<path id=\"sign-body\" d=\"M4.5 19.5V10.5C4.5 8.85 5.85 7.5 7.5 7.5H13.5V4.5L19.5 9L13.5 13.5V10.5H7.5V19.5Z\" fill=\"currentColor\"/>",
+    "elements": [
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M4.5 19.5V10.5C4.5 8.85 5.85 7.5 7.5 7.5H13.5V4.5L19.5 9L13.5 13.5V10.5H7.5V19.5Z",
+          "fill": "currentColor"
+        }
+      }
+    ]
+  },
   "mixed": {
     "category": "selection",
     "figmaNode": "391:9",
@@ -294,6 +331,46 @@ export const OL8_ICONS = {
           "height": "1.8",
           "rx": "0.9",
           "fill": "currentColor"
+        }
+      }
+    ]
+  },
+  "pause": {
+    "category": "transport",
+    "figmaNode": null,
+    "mirrorInRTL": false,
+    "candidate": true,
+    "sourceInk": "#151817",
+    "body": "<path id=\"glyph-path\" d=\"M9 6V18M15 6V18\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+    "elements": [
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M9 6V18M15 6V18",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      }
+    ]
+  },
+  "play": {
+    "category": "transport",
+    "figmaNode": null,
+    "mirrorInRTL": false,
+    "candidate": true,
+    "sourceInk": "#151817",
+    "body": "<path id=\"glyph-path\" d=\"M9 6L18 12L9 18Z\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+    "elements": [
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M9 6L18 12L9 18Z",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
         }
       }
     ]
@@ -360,6 +437,66 @@ export const OL8_ICONS = {
           "cy": "12",
           "r": "6",
           "fill": "currentColor"
+        }
+      }
+    ]
+  },
+  "skip-back": {
+    "category": "transport",
+    "figmaNode": null,
+    "mirrorInRTL": true,
+    "candidate": true,
+    "sourceInk": "#151817",
+    "body": "<path id=\"artwork\" d=\"M18 6L9 12L18 18Z\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path id=\"rail\" d=\"M6 6V18\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+    "elements": [
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M18 6L9 12L18 18Z",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      },
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M6 6V18",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      }
+    ]
+  },
+  "skip-forward": {
+    "category": "transport",
+    "figmaNode": null,
+    "mirrorInRTL": true,
+    "candidate": true,
+    "sourceInk": "#151817",
+    "body": "<path id=\"artwork\" d=\"M6 6L15 12L6 18Z\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path id=\"rail\" d=\"M18 6V18\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+    "elements": [
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M6 6L15 12L6 18Z",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      },
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M18 6V18",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
         }
       }
     ]

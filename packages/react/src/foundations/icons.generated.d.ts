@@ -4,9 +4,12 @@
 
 export interface Ol8IconEntry {
   /** Figma category segment: "Icon / <Category> / <Name>". */
-  readonly category: 'action' | 'navigation' | 'status' | 'selection';
-  /** Node id of the 24px master in the Figma source file. */
-  readonly figmaNode: string;
+  readonly category: 'action' | 'navigation' | 'status' | 'selection'
+    | 'transport' | 'vitals' | 'maneuver';
+  /** Node id of the 24px master in Figma, or null while it is a candidate. */
+  readonly figmaNode: string | null;
+  /** True until the master is approved and mapped to a Figma node. */
+  readonly candidate?: boolean;
   /** Semantic registry controls RTL mirroring (per Iconography documentation). */
   readonly mirrorInRTL: boolean;
   /** The ink Figma baked into the master, discarded in favour of currentColor. */
@@ -27,12 +30,18 @@ export declare const OL8_ICONS: {
   readonly "copy": Ol8IconEntry;
   readonly "critical": Ol8IconEntry;
   readonly "forward": Ol8IconEntry;
+  readonly "heart": Ol8IconEntry;
   readonly "informative": Ol8IconEntry;
   readonly "loading": Ol8IconEntry;
+  readonly "maneuver-right": Ol8IconEntry;
   readonly "mixed": Ol8IconEntry;
+  readonly "pause": Ol8IconEntry;
+  readonly "play": Ol8IconEntry;
   readonly "positive": Ol8IconEntry;
   readonly "search": Ol8IconEntry;
   readonly "selected-dot": Ol8IconEntry;
+  readonly "skip-back": Ol8IconEntry;
+  readonly "skip-forward": Ol8IconEntry;
   readonly "visibility-closed": Ol8IconEntry;
   readonly "visibility-open": Ol8IconEntry;
 };
