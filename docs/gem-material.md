@@ -149,6 +149,26 @@ Only what sits physically on the face.
 - Disabled never takes gem ink in either component; it resolves to the opaque
   equivalent, where the regular disabled ink applies.
 
+## If you clone a variant, the property references do not come with it
+
+`component.clone()` produces a variant whose every layer has
+`componentPropertyReferences: {}`. The layers are there, the fills are there,
+and the instance still reports its property values — but nothing is wired, so
+the variant renders the baked defaults. Cloning the 56 Gem=On variants left
+`Label`, `Description`, `Show Description`, `Hover`, `Pressed`,
+`Focus Visible` and `Invalid` all inert, and the slab rows rendered
+"Checkbox label" while `componentProperties` still said "Default".
+
+The repair is to copy `componentPropertyReferences` from the Gem=Off twin
+layer by layer, in parallel tree order, dropping any reference whose property
+no longer exists. 340 references across the three sets.
+
+`Gem Surface` was also absolutely positioned at a fixed 360x48 with MIN/MIN
+constraints in every variant, On and Off. It never stretched with the row. That
+predates the axis conversion and nobody saw it because the layer was always
+hidden; as soon as gem became visible the surface overflowed the row by 105px.
+It is `STRETCH/STRETCH` now, on all 112 variants.
+
 ## Gem is a variant axis, not a boolean
 
 `Choice Item / Checkbox` (`252:301`), `Choice Item / Radio` (`331:1309`) and
