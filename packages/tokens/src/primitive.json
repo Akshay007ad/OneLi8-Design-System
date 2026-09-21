@@ -1,6 +1,6 @@
 {
   "$schema": "../schema/token-file.schema.json",
-  "$description": "Approved Oneli8 primitive values. Product code should prefer Semantic or Component tokens.",
+  "$description": "Approved OneLi8 primitive values. Product code should prefer Semantic or Component tokens.",
   "color": {
     "blue": {
       "120": {

@@ -1,7 +1,7 @@
 /**
- * Oneli8 · Form Message — headless behavior.
+ * OneLi8 · Form Message — headless behavior.
  *
- * Figma (177:13): "Canonical Oneli8 Form Message molecule. Tone maps to
+ * Figma (177:13): "Canonical OneLi8 Form Message molecule. Tone maps to
  * semantic message tone; Pending is resolved through validationStatus rather
  * than treated as a fifth error tone. Icon and Message remain modular content
  * atoms. Runtime role, status announcement and relationships live in code."

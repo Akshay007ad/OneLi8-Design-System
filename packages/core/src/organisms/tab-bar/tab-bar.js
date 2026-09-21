@@ -1,5 +1,5 @@
 /**
- * Oneli8 · Tab Bar — headless behavior.
+ * OneLi8 · Tab Bar — headless behavior.
  *
  * Figma (701:460): "Production uses native destination links, requires a non
  * empty navigation name, resolves exactly one current destination, and rejects

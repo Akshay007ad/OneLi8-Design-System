@@ -1,4 +1,4 @@
-# Oneli8 Design System
+# OneLi8 Design System
 
 OneLi8 means One Light.
 
@@ -462,4 +462,4 @@ repeat them.
 
 Apache 2.0. Created by Akshay Dhore. See `LICENSE` and `NOTICE`, and preserve the
 attribution notices when redistributing. Nothing here requires a visible badge in
-your product, and nothing implies Oneli8 endorsement.
+your product, and nothing implies OneLi8 endorsement.

@@ -1,5 +1,5 @@
 /**
- * Oneli8 · Segmented Control — headless behavior.
+ * OneLi8 · Segmented Control — headless behavior.
  *
  * Figma (698:4792): "Behavior is a consuming contract: single = Radio Group,
  * multi = independent Toggle Buttons, momentary = grouped actions."

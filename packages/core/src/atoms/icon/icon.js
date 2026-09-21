@@ -1,5 +1,5 @@
 /**
- * Oneli8 · Icon atom — headless behavior.
+ * OneLi8 · Icon atom — headless behavior.
  *
  * Two entry points, one output:
  *   renderIcon(name, opts)  -> markup string (build time / SSR)

@@ -1,12 +1,12 @@
 {
   "$schema": "./ai-context.schema.json",
-  "system": "Oneli8 Design System",
+  "system": "OneLi8 Design System",
   "version": "1.0.0-beta.10",
   "tokenPrefix": "--ol8-",
   "figma": {
     "fileKey": "0wRnp6ulIEA8PCV6wqGmAJ",
     "url": "https://www.figma.com/design/0wRnp6ulIEA8PCV6wqGmAJ/",
-    "name": "One Li8 Design System",
+    "name": "OneLi8 Design System",
     "pages": {
       "Foundations": "9:7",
       "Iconography": "84:9",
@@ -402,7 +402,7 @@
           "destructive": "15:826"
         },
         "componentCount": 96,
-        "description": "Oneli8 canonical Button molecule. Figma maps Size -> size, State -> deterministic visual evidence, Label -> children, Show Leading/Trailing Icon -> icon presence. Runtime-only native button semantics, disabled, loading, pressed, fullWidth and iconMotion remain implemented and tested in code; they must not become fake visual axes."
+        "description": "OneLi8 canonical Button molecule. Figma maps Size -> size, State -> deterministic visual evidence, Label -> children, Show Leading/Trailing Icon -> icon presence. Runtime-only native button semantics, disabled, loading, pressed, fullWidth and iconMotion remain implemented and tested in code; they must not become fake visual axes."
       },
       "code": {
         "package": "@oneli8/core",

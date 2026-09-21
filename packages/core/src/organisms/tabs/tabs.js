@@ -1,5 +1,5 @@
 /**
- * Oneli8 · Tabs — headless behavior.
+ * OneLi8 · Tabs — headless behavior.
  *
  * Figma (693:171): "Production emits tablist, tab and tabpanel, requires a non
  * empty accessible region name, retains one enabled Tab stop, mirrors

@@ -1,5 +1,5 @@
 /**
- * Oneli8 · Choice Picker (ORGANISM)
+ * OneLi8 · Choice Picker (ORGANISM)
  *
  * Figma: Organism / Choice Picker / Soft Hexagon 906:2898 (16 variants,
  * Material x Commitment x Size).

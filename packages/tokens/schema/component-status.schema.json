@@ -1,7 +1,7 @@
 {
   "$schema":"https://json-schema.org/draft/2020-12/schema",
   "$id":"https://oneli8.org/schema/component-status.schema.json",
-  "title":"Oneli8 component status registry",
+  "title":"OneLi8 component status registry",
   "type":"object",
   "required":["version","components"],
   "properties":{

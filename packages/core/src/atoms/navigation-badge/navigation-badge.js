@@ -1,5 +1,5 @@
 /**
- * Oneli8 · Navigation Badge — headless behavior.
+ * OneLi8 · Navigation Badge — headless behavior.
  *
  * Figma (989:484): "Canonical optional navigation badge. Content comes from
  * item.badge; geometry and colors are semantic token controlled."

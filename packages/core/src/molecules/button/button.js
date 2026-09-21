@@ -1,5 +1,5 @@
 /**
- * Oneli8 · Button — headless behavior.
+ * OneLi8 · Button — headless behavior.
  *
  * The Figma component description is explicit that native semantics, disabled,
  * loading, pressed and fullWidth "remain implemented and tested in code; they

@@ -1,5 +1,5 @@
 /**
- * Oneli8 · Link — headless behavior.
+ * OneLi8 · Link — headless behavior.
  *
  * The Figma component description is explicit that "runtime href, native anchor
  * behavior, visited resolution, aria-current, motion preference and navigation

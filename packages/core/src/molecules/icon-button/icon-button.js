@@ -1,5 +1,5 @@
 /**
- * Oneli8 · Icon Button — headless behavior.
+ * OneLi8 · Icon Button — headless behavior.
  *
  * Figma (86:2): "Icon is an INSTANCE_SWAP sourced from the governed 24px Icon
  * Library atom and resized only through Icon Frame; Accessible Name is

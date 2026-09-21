@@ -1,5 +1,5 @@
 /**
- * Oneli8 · Navigation Item — the shared internal molecule.
+ * OneLi8 · Navigation Item — the shared internal molecule.
  *
  * Figma draws three of these: Tab Item (688:51), Segment Item (695:167) and
  * Destination Item (700:292). They are the same molecule with three selection

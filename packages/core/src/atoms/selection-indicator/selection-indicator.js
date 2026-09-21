@@ -1,5 +1,5 @@
 /**
- * Oneli8 · Selection Indicator (ATOM) — headless.
+ * OneLi8 · Selection Indicator (ATOM) — headless.
  *
  * Presentational only. It renders the mark a checkbox, radio or switch shows;
  * it never owns state, role or focus. The native <input> in Choice Item does.

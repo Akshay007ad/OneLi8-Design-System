@@ -1,5 +1,5 @@
 /**
- * Oneli8 · Combobox — headless behavior.
+ * OneLi8 · Combobox — headless behavior.
  *
  * Figma (883:2159): "Reuses approved Text Field, Selection Popup and governed
  * icon atoms", and "Expanded remains Boolean" so the design does not explode

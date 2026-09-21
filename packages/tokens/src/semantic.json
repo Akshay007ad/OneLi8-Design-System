@@ -1,6 +1,6 @@
 {
   "$schema": "../schema/token-file.schema.json",
-  "$description": "Approved Oneli8 semantic roles consumed by products and components.",
+  "$description": "Approved OneLi8 semantic roles consumed by products and components.",
   "color": {
     "primary": {
       "120": {

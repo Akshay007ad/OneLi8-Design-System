@@ -1,5 +1,5 @@
 /**
- * Oneli8 · Selection Option (MOLECULE) — headless.
+ * OneLi8 · Selection Option (MOLECULE) — headless.
  *
  * Figma (570:122): "Description is associated through aria-describedby and
  * remains outside the option accessible name. Selection Popup composes this

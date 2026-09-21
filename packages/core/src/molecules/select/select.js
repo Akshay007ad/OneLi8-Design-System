@@ -1,5 +1,5 @@
 /**
- * Oneli8 · Select — headless behavior.
+ * OneLi8 · Select — headless behavior.
  *
  * Figma (583:338 Trigger, 875:1778 Select): "Geometry and appearance reuse
  * approved Text Field tokens; focus remains inward."
@@ -11,7 +11,7 @@
  *
  * So this renders a real <select>. The user agent owns the keyboard, the type
  * ahead, the picker and the announcements, which is exactly what the contract
- * asks for: "Oneli8 does not intercept native keys to imitate a different
+ * asks for: "OneLi8 does not intercept native keys to imitate a different
  * platform." A custom listbox is available, but only when the caller says
  * native="custom-allowed" and therefore accepts the whole contract that comes
  * with it.

@@ -1,6 +1,6 @@
 {
   "$schema": "../schema/token-file.schema.json",
-  "$description": "Independent Oneli8 mode axes. Compact typography is the semantic default.",
+  "$description": "Independent OneLi8 mode axes. Compact typography is the semantic default.",
   "$extensions": {
     "oneli8.axes": {
       "colorScheme": [

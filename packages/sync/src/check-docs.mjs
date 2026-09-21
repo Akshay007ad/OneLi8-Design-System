@@ -139,10 +139,29 @@ for (const file of DOCS) {
     'is linked from no other document; a page nobody can navigate to is stale by default');
 }
 
+/* ---- rule 6: one spelling of the name --------------------------------
+ * The system was spelled three ways: OneLi8 21 times, Oneli8 3 times, and
+ * "One Li8" once the Figma file was renamed. For a design system whose premise
+ * is that the rules travel with the package, a name that renders three ways is
+ * the first thing a newcomer notices.
+ *
+ * OneLi8 is canonical. The rule is cheap to state because identifiers are all
+ * lowercase — @oneli8/tokens, skills/oneli8-ui, --ol8-* — so any capital-O
+ * spelling is prose by definition and must be the canonical one.
+ */
+const NAME_WRONG = /Oneli8|One Li8|OneLI8|ONELi8/;
+for (const file of DOCS) {
+  const lines = readFileSync(file, 'utf8').split('\n');
+  lines.forEach((line, i) => {
+    const m = line.match(NAME_WRONG);
+    if (m) fail(relative(ROOT, file), i + 1, `spells the name "${m[0]}"; it is OneLi8 everywhere`);
+  });
+}
+
 if (failures.length) {
   console.error(`✗ docs check failed — ${failures.length} stale claim(s):`);
   for (const f of failures) console.error('  · ' + f);
   console.error('\n  These are what an agent reads before it reads any code.');
   process.exit(1);
 }
-console.log(`✓ docs check: ${DOCS.length} documents, every path, symbol and import resolves`);
+console.log(`✓ docs check: ${DOCS.length} documents, every path, symbol and import resolves, none orphaned, one spelling of the name`);

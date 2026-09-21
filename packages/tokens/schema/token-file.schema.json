@@ -1,7 +1,7 @@
 {
   "$schema":"https://json-schema.org/draft/2020-12/schema",
   "$id":"https://oneli8.org/schema/token-file.schema.json",
-  "title":"Oneli8 DTCG-compatible token file",
+  "title":"OneLi8 DTCG-compatible token file",
   "type":"object",
   "properties":{
     "$schema":{"type":"string"},

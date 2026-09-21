@@ -1,5 +1,5 @@
 /**
- * Oneli8 · Choice Group (ORGANISM) — headless behavior.
+ * OneLi8 · Choice Group (ORGANISM) — headless behavior.
  *
  * Figma (273:603): "Aggregate None/Some/All is computed from nested Checkbox
  * molecules; Mixed is never a third preference. Runtime recursion,

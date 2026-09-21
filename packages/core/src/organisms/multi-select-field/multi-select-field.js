@@ -1,5 +1,5 @@
 /**
- * Oneli8 · Multi-select Field (ORGANISM)
+ * OneLi8 · Multi-select Field (ORGANISM)
  *
  * Figma: Select and Combobox
  *   Organism / Multi-select Field / Outline · Soft Hexagon 904:2507 (16)

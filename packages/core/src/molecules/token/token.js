@@ -1,5 +1,5 @@
 /**
- * Oneli8 · Token (MOLECULE) — a committed value.
+ * OneLi8 · Token (MOLECULE) — a committed value.
  *
  * Figma: Select and Combobox / Molecule / Token 897:2106 (24 variants,
  * Size x Selection x Mark).

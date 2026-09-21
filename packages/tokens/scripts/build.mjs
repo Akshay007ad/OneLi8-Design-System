@@ -243,4 +243,4 @@ if(uncontracted.size>0){
   for(const p of [...uncontracted].sort().slice(0,10))console.log(`  \u00b7 ${p}`);
 }
 if(figmaAhead.length>0)console.log(`\u2139 Figma defines ${figmaAhead.length} variables this build does not emit yet (see src/figma-code-syntax.txt)`);
-console.log(`Built ${tokenPaths.length} Oneli8 tokens for CSS, TypeScript, Tailwind, and Figma.`);
+console.log(`Built ${tokenPaths.length} OneLi8 tokens for CSS, TypeScript, Tailwind, and Figma.`);

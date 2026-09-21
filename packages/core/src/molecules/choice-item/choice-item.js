@@ -1,5 +1,5 @@
 /**
- * Oneli8 · Choice Item (MOLECULE) — headless behavior.
+ * OneLi8 · Choice Item (MOLECULE) — headless behavior.
  *
  * Figma (252:301): "Native input, name/value, required, reset, form
  * submission, and onCheckedChange live in code." This module is that code —

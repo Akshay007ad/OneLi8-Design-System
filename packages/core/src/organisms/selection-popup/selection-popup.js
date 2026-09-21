@@ -1,5 +1,5 @@
 /**
- * Oneli8 · Selection Popup — headless behavior.
+ * OneLi8 · Selection Popup — headless behavior.
  *
  * Figma (574:534): "Width and Size govern layout only; content must be
  * canonical Selection Option instances. Runtime listbox naming, ownership,

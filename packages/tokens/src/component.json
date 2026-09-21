@@ -1,6 +1,6 @@
 {
   "$schema": "../schema/token-file.schema.json",
-  "$description": "Approved Oneli8 component recipes. Component tokens map Semantic roles and approved non-duplicative geometry; they never create private foundation scales.",
+  "$description": "Approved OneLi8 component recipes. Component tokens map Semantic roles and approved non-duplicative geometry; they never create private foundation scales.",
   "$extensions": {
     "oneli8.status": "component-slice-01"
   },
