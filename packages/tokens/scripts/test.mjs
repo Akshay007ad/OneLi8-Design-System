@@ -61,7 +61,15 @@ ok(semantic.elevation.surface.floating.$value.length===2&&semantic.elevation.sur
 ok(themes.colorScheme.dark.overrides["elevation.surface.blocking"].$value[0].alpha===0.72,"Dark Blocking elevation must retain its 72% Cyan 840 cue");
 ok(Object.values(semantic.layer.stack).map(token=>token.$value).join(",")==="0,300,600,900,1200","Stacking tiers must retain the approved 300-step progression");
 ok(css.includes("--ol8-elevation-surface-overlay: 0px 12px 36px -6px rgb(22 63 75 / 0.24), 0px 6px 12px 0px rgb(22 63 75 / 0.18)"),"CSS must serialize approved multi-layer Elevation");
-ok(semantic.material.gem.color.quiet.environmentalFace.$value.alpha===0.48&&themes.colorScheme.dark.overrides["material.gem.color.quiet.environmentalFace"].$value.alpha===0.48&&semantic.material.gem.color.family.emerald.environmentalFace.$value.alpha===0.48&&semantic.material.gem.color.family.sapphire.stabilizedFace.$value.alpha===0.30,"Gem environmental and stabilized alpha values must remain approved");
+// Light quiet environmental moved 0.48 -> 0.18. Light Gem is clear glass: the
+// face is the most transparent state it has, and legibility is carried by the
+// content halo (material.gem.color.quiet.contentGlow) rather than by
+// thickening the face. Dark stays 0.48, and the coloured families are
+// untouched — they are saturated accents, not clear glass.
+ok(semantic.material.gem.color.quiet.environmentalFace.$value.alpha===0.18&&themes.colorScheme.dark.overrides["material.gem.color.quiet.environmentalFace"].$value.alpha===0.48&&semantic.material.gem.color.family.emerald.environmentalFace.$value.alpha===0.48&&semantic.material.gem.color.family.sapphire.stabilizedFace.$value.alpha===0.30,"Gem environmental and stabilized alpha values must remain approved");
+// The whole point of the transparent light face: content brings its own
+// contrast. Both must alias the mode-flipping text roles, never a primitive.
+ok(semantic.material.gem.color.quiet.content.$value==="{color.text.primary}"&&semantic.material.gem.color.quiet.contentGlow.$value.color==="{color.text.inverse}","Quiet Gem content and its halo must alias the text roles so they flip with the mode");
 ok(semantic.material.gem.color.family.sapphire.innerHigh.$value.alpha===0.39,"Sapphire Thin-Cut highlight must retain its 39% cap");
 ok(semantic.material.control.gem.primary.start.$value==="{color.primary.480}"&&themes.colorScheme.dark.overrides["material.control.gem.primary.start"].$value==="{color.primary.600}","Gem controls must keep Light and Dark theme-aware leading stops");
 ok(semantic.material.control.gem.secondary.high.$value.alpha===0.22&&semantic.material.control.gem.rim.default.$value.alpha===0.24,"Gem Secondary transparency and inset rim must retain the approved quiet material recipe");

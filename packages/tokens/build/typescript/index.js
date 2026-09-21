@@ -2162,40 +2162,40 @@ export const tokens = {
   "material.gem.color.quiet.environmentalFace": {
     "type": "color",
     "value": {
-      "color": "#151817",
-      "alpha": 0.48
+      "color": "#FCFAF3",
+      "alpha": 0.18
     },
-    "description": "Quiet Light Gem environmental face; transparent canonical slab material. Tints DARK like every gem family (emerald, ruby, sapphire and amethyst all use their x.930 step). It previously tinted light at neutral.030, which made it the only gem face in the system that lightened its backdrop, and left color.icon.onGem — a neutral.030 icon — invisible on it.",
+    "description": "Quiet Light Gem environmental face. Clear glass: a light tint at 0.18, the most transparent state, because this is the face shown when the environment behind the surface is what matters. Legibility is carried by the content halo, not by thickening the face — thickening is how this reached 0.72 before.",
     "tier": "semantic"
   },
   "material.gem.color.quiet.stabilizedFace": {
     "type": "color",
     "value": {
-      "color": "#151817",
+      "color": "#FCFAF3",
       "alpha": 0.27
     },
-    "description": "Quiet Light Gem stabilized content plane. Alpha matches the gem families (emerald, ruby and amethyst at 0.27, sapphire at 0.30); it was 0.72, the only face where stabilized was more opaque than environmental.",
+    "description": "Quiet Light Gem stabilized content plane. Slightly more present than the environmental face at 0.27, matching the gem families' stabilized alpha, because at rest the surface is being read rather than looked through.",
     "tier": "semantic"
   },
   "material.gem.color.quiet.content": {
     "type": "color",
-    "value": "#FCFAF3",
-    "description": "Content on a quiet Gem surface. Agrees with color.icon.onGem, material.control.gem.primary.content and secondary.content, all of which are already neutral.030 — the quiet face simply had no content token of its own.",
+    "value": "#151817",
+    "description": "Content on a quiet Gem surface. Aliases the text role rather than a primitive, so it is dark ink on clear glass in light mode and light ink on smoked glass in dark mode with no override needed.",
     "tier": "semantic"
   },
   "material.gem.color.quiet.contentGlow": {
     "type": "color",
     "value": {
       "color": "#FCFAF3",
-      "alpha": 0.48
+      "alpha": 0.72
     },
-    "description": "Halo behind content on a quiet Gem surface. A transparent face cannot guarantee its own backdrop, so content carries its own separation instead of the surface being thickened to provide it.",
+    "description": "Halo behind content on a quiet Gem surface. Aliases the inverse text role, so it is always the opposite of the ink it sits behind and flips with the mode automatically. This is what holds contrast on a transparent face: the face cannot guarantee its own backdrop, so the content brings its own.",
     "tier": "semantic"
   },
   "material.gem.color.quiet.opaqueEquivalent": {
     "type": "color",
-    "value": "#151817",
-    "description": "Quiet Light Gem reduced-transparency equivalent. Follows the face's tint direction so content colour does not have to change when transparency is suppressed.",
+    "value": "#FCFAF3",
+    "description": "Quiet Light Gem reduced-transparency equivalent. The opaque form of the light face.",
     "tier": "semantic"
   },
   "material.gem.color.cutEdge.outerHigh": {
