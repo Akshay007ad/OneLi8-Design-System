@@ -324,6 +324,14 @@
     0 9px 12px var(--ol8-material-gem-color-cutedge-shadow);
 }
 
+/* Disabled on a generic Gem surface, same single grey, same absent halo. */
+.ol8-gem [data-ol8-availability="disabled"] .ol8-selection,
+.ol8-gem [disabled] .ol8-selection {
+  --_edge: var(--ol8-material-gem-color-quiet-contentdisabled);
+  --_ink: var(--ol8-material-gem-color-quiet-contentdisabled);
+  filter: none;
+}
+
 /* Content on a generic Gem surface, same rule as the Choice Item carries:
    glyphs and control geometry both take the gem ink and share one halo
    definition, so a label's glow and a control's glow are the same field. Text

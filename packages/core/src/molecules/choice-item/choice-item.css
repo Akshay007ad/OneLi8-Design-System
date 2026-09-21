@@ -211,6 +211,24 @@
     drop-shadow(var(--_gem-glow));
 }
 
+/* DISABLED ON GEM IS ONE GREY, SHARED.
+   color.text.disabled is dark in the Light appearance, so a disabled row on
+   glass whose enabled content is near-white ended up with a dark label beside
+   a dark box — it read broken rather than unavailable. On Gem, disabled text
+   and disabled control geometry take the SAME whitish grey, and neither takes
+   the halo: the absence of the glow is part of how unavailable reads.
+   Disabled content is exempt from 1.4.3, which excludes inactive controls. */
+.ol8-choice[data-ol8-material="gem"][data-ol8-availability="disabled"] .ol8-choice__label,
+.ol8-choice[data-ol8-material="gem"][data-ol8-availability="disabled"] .ol8-choice__description {
+  color: var(--ol8-material-gem-color-quiet-contentdisabled);
+  text-shadow: none;
+}
+.ol8-choice[data-ol8-material="gem"][data-ol8-availability="disabled"] .ol8-selection {
+  --_edge: var(--ol8-material-gem-color-quiet-contentdisabled);
+  --_ink: var(--ol8-material-gem-color-quiet-contentdisabled);
+  filter: none;
+}
+
 /* The unselected control boundary is content, not chrome. It was
    color.border.strong, which is dark in the Light appearance and left the
    checkbox reading as a dark hole in a surface whose text had gone near-white.

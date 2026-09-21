@@ -227,8 +227,21 @@ The rule, in both directions:
   glass
 - iconography takes `color.icon.onGem`, which already exists for exactly this
   and is already stable across appearances
-- **disabled takes none of it**, in either mode: it resolves to the opaque
-  equivalent where the regular disabled ink applies, so no gem ink and no halo
+- **disabled takes one shared grey and no halo**: `quiet.contentDisabled`,
+  `neutral.030` at 0.48, rendering about `rgb(200,197,192)` over the face —
+  the same value for the label and the control geometry, because a disabled
+  label and a disabled indicator in different greys makes a row look broken
+  rather than unavailable. It is deliberately not `color.text.disabled`, which
+  is dark in the Light appearance and would put a dark glyph on glass whose
+  enabled content is near-white. Disabled content is exempt from 1.4.3, which
+  excludes inactive controls, and the absent glow is part of how unavailable
+  reads
+
+The halo alpha is `0.78`, which is the **floor**, not a preference: at 3px in
+four stacks it reads 4.62:1 on the brightest region, where 0.72 reads 4.21:1
+and fails 1.4.3. It was 0.84 (5.06:1) and read harsh. Anything softer than 0.78
+trades away AA for text, so if a softer glow is ever wanted the thing that has
+to give is the near-white ink or the transparency, not this number.
 
 Text takes four repetitions, control geometry takes **three**. WCAG 1.4.11 asks
 3:1 of a graphical object where 1.4.3 asks 4.5:1 of text, so the boundary does

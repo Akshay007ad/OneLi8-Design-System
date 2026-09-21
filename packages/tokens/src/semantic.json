@@ -908,16 +908,27 @@
             "$value": "{color.neutral.030}",
             "$description": "Content on a quiet Gem surface. Near-white in BOTH appearances, exactly as color.icon.onGem and color.control.thumb already are \u2014 'remains stable across Light and Dark appearances'. Gem sits over imagery whose brightness is unknown, so the ink cannot follow the app's appearance; it stays white and the halo does the work."
           },
-          "contentGlow": {
+          "contentDisabled": {
             "$type": "color",
             "$value": {
-              "color": "{color.neutral.930}",
-              "alpha": 0.84
+              "color": "{color.neutral.030}",
+              "alpha": 0.48
             },
             "$extensions": {
               "oneli8.composite": "color-alpha"
             },
-            "$description": "Halo behind content on a quiet Gem surface. 0.84, and applied as FOUR stacked shadows rather than one. This is the only thing carrying legibility on a transparent light face, so it is the term that was solved for: at 0.72 in three stacks the brightest plate reads 3.18:1, and at 0.84 in four it reads about 4.9:1, clearing WCAG 1.4.3 for normal text. Stacking is required because a single shadow spreads a fixed alpha budget -- widening the radius makes it weaker, repeating it accumulates: 1 - (1 - a)^n. See proof/gem-halo-contrast.html."
+            "$description": "Disabled content on a quiet Gem surface, text and control geometry alike. A whitish grey: the same near-white ink at 0.48, which renders around rgb(200,197,192) over the face. One value for both, because a disabled label and a disabled indicator reading different greys is the thing that makes a row look broken rather than unavailable. It does NOT use color.text.disabled, which is dark in the Light appearance and would put a dark glyph on glass whose enabled content is near-white. Exempt from 1.4.3, which excludes inactive controls, and it carries no halo -- the absence of the glow is part of how unavailable reads."
+          },
+          "contentGlow": {
+            "$type": "color",
+            "$value": {
+              "color": "{color.neutral.930}",
+              "alpha": 0.78
+            },
+            "$extensions": {
+              "oneli8.composite": "color-alpha"
+            },
+            "$description": "Halo behind content on a quiet Gem surface, applied as four stacked shadows for text and three for control geometry. 0.78 is the SOFTEST alpha that still holds WCAG 1.4.3: at 3px in four stacks it reads 4.62:1 on the brightest region of the daylight plate, where 0.72 reads 4.21:1 and fails. It was 0.84, which measured 5.06:1 but read harsh. Anything softer than this trades away AA for text, so this is the floor, not a preference. See proof/gem-halo-contrast.html."
           },
           "opaqueEquivalent": {
             "$type": "color",

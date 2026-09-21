@@ -73,7 +73,7 @@ ok(semantic.material.gem.color.quiet.environmentalFace.$value.alpha===0.09&&sema
 // cannot follow the app's appearance; the dark halo carries contrast instead.
 // Asserting the absence of a dark override is the part that matters: adding
 // one would silently reintroduce mode-dependent ink.
-ok(semantic.material.gem.color.quiet.content.$value==="{color.neutral.030}"&&semantic.material.gem.color.quiet.contentGlow.$value.color==="{color.neutral.930}"&&semantic.material.gem.color.quiet.contentGlow.$value.alpha===0.84,"Quiet Gem ink must stay near-white with a dark halo in both appearances");
+ok(semantic.material.gem.color.quiet.content.$value==="{color.neutral.030}"&&semantic.material.gem.color.quiet.contentGlow.$value.color==="{color.neutral.930}"&&semantic.material.gem.color.quiet.contentGlow.$value.alpha===0.78,"Quiet Gem ink must stay near-white with a dark halo in both appearances");
 ok(!("material.gem.color.quiet.content"in themes.colorScheme.dark.overrides)&&!("material.gem.color.quiet.contentGlow"in themes.colorScheme.dark.overrides)&&!("color.icon.onGem"in themes.colorScheme.dark.overrides),"Content on Gem must carry no dark override, matching color.icon.onGem");
 ok(semantic.material.gem.color.family.sapphire.innerHigh.$value.alpha===0.39,"Sapphire Thin-Cut highlight must retain its 39% cap");
 ok(semantic.material.control.gem.primary.start.$value==="{color.primary.480}"&&themes.colorScheme.dark.overrides["material.control.gem.primary.start"].$value==="{color.primary.600}","Gem controls must keep Light and Dark theme-aware leading stops");
@@ -131,6 +131,6 @@ ok(component.component.tabBar.gap.$value==="{spacing.none}"&&component.component
 // needs help reading the interface most. 0.72 leaves 28% of the scene
 // visible and still measures 7.70:1 in the worst region of a real daylight
 // plate, which is AAA.
-ok(manifest.counts.primitive===170&&manifest.counts.semantic===274&&manifest.counts.component===161&&manifest.counts.componentStatuses===10&&manifest.counts.figmaVariables===591&&manifest.counts.figmaElevationStyles===5,"Navigation spacing and contextual token output counts must remain deterministic");
+ok(manifest.counts.primitive===170&&manifest.counts.semantic===275&&manifest.counts.component===161&&manifest.counts.componentStatuses===10&&manifest.counts.figmaVariables===592&&manifest.counts.figmaElevationStyles===5,"Navigation spacing and contextual token output counts must remain deterministic");
 
 console.log(`PASS ${checks}/${checks} canonical token package checks.`);
