@@ -192,8 +192,9 @@
      only 1.71:1 against near-white ink on a bright plate, and widening the
      radius makes it WEAKER because blur spreads a fixed alpha budget over more
      area. Repeating the same shadow accumulates alpha instead of spreading it:
-     1 - (1 - a)^3. Measured in proof/gem-halo-contrast.html. */
+     1 - (1 - a)^4. Measured in proof/gem-halo-contrast.html. */
   text-shadow:
+    0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow),
     0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow),
     0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow),
     0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow);
@@ -291,8 +292,9 @@
      only 1.71:1 against near-white ink on a bright plate, and widening the
      radius makes it WEAKER because blur spreads a fixed alpha budget over more
      area. Repeating the same shadow accumulates alpha instead of spreading it:
-     1 - (1 - a)^3. Measured in proof/gem-halo-contrast.html. */
+     1 - (1 - a)^4. Measured in proof/gem-halo-contrast.html. */
   text-shadow:
+    0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow),
     0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow),
     0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow),
     0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow);

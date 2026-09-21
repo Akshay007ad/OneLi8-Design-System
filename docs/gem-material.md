@@ -122,28 +122,45 @@ Figma bakes a per-instance degree value, and every one of them satisfies
 the keyword; a baked degree value is only correct at the one width it was
 measured at. `proof/gem.html` proves this with a difference blend.
 
-## The two faces differ by appearance, and by job
+## Six stacks: three transparent, three opaque fallback
+
+The Choice Controls page carries two parallel sets of three, and they answer
+different questions. Do not make one look like the other.
+
+| | Gem Material (297:607) | Gem Opaque Fallback |
+|---|---|---|
+| face | `quiet.environmentalFace` | `quiet.opaqueEquivalent` |
+| backdrop blur | yes, `blur.environmental` 9px | none |
+| content | stable near-white + stacked halo | `Color / Text / Primary` / `Secondary` |
+| job | push transparency to the limit | be unconditionally legible |
+
+The fallback is already the WCAG-safe mode by construction: an appearance-aware
+solid under appearance-aware text, so Light is a light card with dark text and
+Dark is a dark card with light text. It needs no halo and must not be given
+near-white ink. Because the fallback covers the conservative case, the
+transparent set is free to push.
+
+## The face is nearly free; the halo is the whole constraint
 
 | face | Light | Dark | content on it |
 |---|---|---|---|
-| `quiet.environmentalFace` | `neutral.030` @ 0.18 | `neutral.930` @ 0.48 | stable near-white |
+| `quiet.environmentalFace` | `neutral.030` @ 0.09 | `neutral.930` @ 0.48 | stable near-white |
 | `quiet.stabilizedFace` | `neutral.030` @ 0.15 | `neutral.840` @ 0.27 | ordinary dark text |
 
-A dark tint belongs to the Dark appearance. The Light appearance stays light —
-the environmental face was briefly inverted to a dark smoked tint in Light
-because that made near-white ink measure well, and that was wrong: it made
-Light look like Dark.
+Measured against near-white ink on the brightest region of a daylight plate, a
+0.12 face reads 3.24:1 and a 0.18 face reads 3.18:1. A 0.06 change in tint
+moves contrast by 0.06:1 — the face is almost irrelevant to legibility, so it
+is free to be as thin as the appearance wants. Light is therefore at 0.09, the
+most transparent value on the 0.03 grid.
 
-Legibility on the light face is therefore carried entirely by the content halo,
-which is **stacked three times**. A single shadow reaches only 1.71:1 against
-near-white ink on a bright plate, and widening the radius makes it weaker,
-because blur spreads a fixed alpha budget over more area rather than adding
-one. Repeating the same shadow accumulates instead: `1 - (1 - a)^3`, which
-measures about 3.0:1. That is short of 4.5:1 and the shortfall is real — over
-the brightest region of a daylight plate, near-white ink on a light face is
-soft. The levers that close it without darkening the Light appearance are a
-denser `contentGlow` alpha or a fourth stacked shadow, not a wider radius.
+What legibility actually depends on is the halo, so that is the term to solve.
+`quiet.contentGlow` is `neutral.930` @ **0.84**, applied as **four stacked
+shadows**. At 0.72 in three stacks the bright plate reads 3.18:1; at 0.84 in
+four it reads about 4.9:1, clearing WCAG 1.4.3 for normal text. Stacking is
+mandatory: a single shadow spreads a fixed alpha budget, so widening the radius
+makes it weaker, while repeating it accumulates — `1 - (1 - a)^n`.
 
+A dark tint belongs to the Dark appearance. Light stays light.
 `quiet.opaqueEquivalent` follows its own face: `neutral.030` in Light,
 `neutral.840` in Dark.
 

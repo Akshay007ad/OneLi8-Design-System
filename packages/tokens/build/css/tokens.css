@@ -299,10 +299,10 @@
   --ol8-material-control-gem--gradient-start: 14.639%;
   --ol8-material-control-gem--gradient-mid: 48.586%;
   --ol8-material-control-gem--gradient-end: 85.361%;
-  --ol8-material-gem-color-quiet-environmentalface: color-mix(in srgb, var(--ol8-color-neutral-030) 18%, transparent);
+  --ol8-material-gem-color-quiet-environmentalface: color-mix(in srgb, var(--ol8-color-neutral-030) 9%, transparent);
   --ol8-material-gem-color-quiet-stabilizedface: color-mix(in srgb, var(--ol8-color-neutral-030) 15%, transparent);
   --ol8-material-gem-color-quiet-content: var(--ol8-color-neutral-030);
-  --ol8-material-gem-color-quiet-contentglow: color-mix(in srgb, var(--ol8-color-neutral-930) 72%, transparent);
+  --ol8-material-gem-color-quiet-contentglow: color-mix(in srgb, var(--ol8-color-neutral-930) 84%, transparent);
   --ol8-material-gem-color-quiet-opaqueequivalent: var(--ol8-color-neutral-030);
   --ol8-material-gem-color-cutedge-outerhigh: color-mix(in srgb, var(--ol8-color-neutral-060) 93%, transparent);
   --ol8-material-gem-color-cutedge-outermid: color-mix(in srgb, var(--ol8-color-blue-120) 48%, transparent);

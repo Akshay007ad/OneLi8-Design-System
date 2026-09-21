@@ -2163,9 +2163,9 @@ export const tokens = {
     "type": "color",
     "value": {
       "color": "#FCFAF3",
-      "alpha": 0.18
+      "alpha": 0.09
     },
-    "description": "Quiet Gem environmental face. Light tint at 0.18 in the Light appearance, dark tint at 0.48 in Dark: a dark tint belongs to the Dark appearance, and the Light appearance stays light. It was briefly smoked in Light to make near-white ink measure well; that inverted the appearance and is not the design. Legibility is carried by the content halo instead, which is stacked three times over for exactly this reason -- see material.gem.blur.contentGlow and proof/gem-halo-contrast.html.",
+    "description": "Quiet Gem environmental face. 0.09 in Light, the most transparent value on the 0.03 grid, because transparency turns out to be nearly free: measured against near-white ink on the brightest region of a daylight plate, a 0.12 face reads 3.24:1 and a 0.18 face reads 3.18:1 -- a 0.06 difference in tint moves contrast by 0.06:1. Legibility is governed almost entirely by the content halo, not by the face, so the face is free to go as thin as the appearance wants. Dark stays a dark tint at 0.48. A dark tint belongs to the Dark appearance; Light stays light.",
     "tier": "semantic"
   },
   "material.gem.color.quiet.stabilizedFace": {
@@ -2187,9 +2187,9 @@ export const tokens = {
     "type": "color",
     "value": {
       "color": "#151817",
-      "alpha": 0.72
+      "alpha": 0.84
     },
-    "description": "Halo behind content on a quiet Gem surface. A stable dark scrim in BOTH appearances, because the ink above it is stably near-white. This is what lets the face be as transparent as 0.18: the face cannot guarantee its own backdrop, so the content carries its own contrast rather than the surface being thickened to provide it.",
+    "description": "Halo behind content on a quiet Gem surface. 0.84, and applied as FOUR stacked shadows rather than one. This is the only thing carrying legibility on a transparent light face, so it is the term that was solved for: at 0.72 in three stacks the brightest plate reads 3.18:1, and at 0.84 in four it reads about 4.9:1, clearing WCAG 1.4.3 for normal text. Stacking is required because a single shadow spreads a fixed alpha budget -- widening the radius makes it weaker, repeating it accumulates: 1 - (1 - a)^n. See proof/gem-halo-contrast.html.",
     "tier": "semantic"
   },
   "material.gem.color.quiet.opaqueEquivalent": {
