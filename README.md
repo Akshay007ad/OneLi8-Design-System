@@ -14,6 +14,20 @@ reasoning as well, so that when you need something it does not ship, you can
 build it and it still belongs. The rules travel inside the package, not in a
 wiki someone forgets to read.
 
+## Where everything is
+
+The rules travel with the package, so this is the whole map.
+
+| | |
+|---|---|
+| [PRINCIPLES.md](PRINCIPLES.md) | Service, clarity, harmony, proportion, restraint, evolution — the reasoning the rest defers to |
+| [AGENTS.md](AGENTS.md) | What an agent must read and must not invent before touching this repo |
+| [docs/components.md](docs/components.md) | Every public component, its props and its enforced errors |
+| [docs/theming.md](docs/theming.md) | Themes, token tiers, Tailwind adapters, and Gem Morphism as a material |
+| [docs/gem-material.md](docs/gem-material.md) | How Figma actually builds Gem: measured values, node identifiers, and the face/content pairing |
+| [docs/ai-and-figma.md](docs/ai-and-figma.md) | The Figma-to-code contract, without Code Connect |
+| `llms.txt`, `ai-context.json` | The machine-readable surface an agent reads first |
+
 ## Install
 
 Pick by what you are building. All three carry the same design decisions.
@@ -170,7 +184,10 @@ Primary and Secondary only. These are errors rather than review comments by
 design.
 
 Test Gem against the backdrop it will actually sit on. Content that is close to
-white cannot guarantee readable contrast on its own.
+white cannot guarantee readable contrast on its own — on Gem it is the stacked
+content halo that carries it, and which halo depends on which face the surface
+uses. [docs/gem-material.md](docs/gem-material.md) has the measured numbers and
+the face/content pairing.
 
 ## Component notes
 

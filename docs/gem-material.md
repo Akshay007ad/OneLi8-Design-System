@@ -1,5 +1,7 @@
 # The Gem material, as Figma actually builds it
 
+[Back to OneLi8](../README.md) · [Themes and Gem](theming.md) · [Design principles](../PRINCIPLES.md)
+
 Every number here was read off the Figma nodes named beside it, not inferred.
 Three separate chats have re-derived this and got it wrong each time, so it
 lives here and `npm run check:docs` gates it.

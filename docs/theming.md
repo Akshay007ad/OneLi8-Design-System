@@ -1,6 +1,6 @@
 # Themes, tokens and Gem Morphism
 
-[Back to OneLi8](../README.md)
+[Back to OneLi8](../README.md) · [Gem material, measured](gem-material.md) · [Components](components.md)
 
 Import `@oneli8/react/styles.css` once; it also imports the token stylesheet.
 Choose independent theme axes on an ancestor:
@@ -41,6 +41,23 @@ or make every transparent surface faceted.
 Gem does not dynamically sample the background and flip its text color. Test
 the actual backdrop; transparency and near-white content alone do not guarantee
 contrast. XR is a design direction, not physical-device certification.
+
+Which content a Gem surface carries depends on which face it uses, and getting
+that pairing wrong is the most common Gem mistake in both directions:
+
+| face | where it is used | its content |
+|---|---|---|
+| `quiet.environmentalFace` | over imagery or the real world | stable near-white `quiet.content` plus the stacked `quiet.contentGlow` halo; disabled takes `quiet.contentDisabled` with no halo |
+| `quiet.stabilizedFace` | app chrome, including the filled field, Select and Combobox | ordinary `color.text.*`, no halo |
+| `quiet.legibilityFace` | reduced transparency — denser, never opaque | same content as the environmental face |
+
+Near-white ink on a stabilized face over a light page is invisible; ordinary
+dark ink on an environmental face over daylight scenery is unreadable. The
+reduced mode is deliberately not opaque, because Gem is worn and a solid
+surface would occlude the world for the person who needs help reading it.
+
+[docs/gem-material.md](gem-material.md) carries the measured values, the Figma
+node each was read from, and why widening a halo makes it weaker.
 
 ## Tailwind adapters
 

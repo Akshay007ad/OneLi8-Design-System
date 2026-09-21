@@ -116,6 +116,29 @@ for (const file of DOCS) {
   }
 }
 
+/* ---- rule 5: no orphaned document ---------------------------------------
+ * The four rules above check what a document CLAIMS. None of them noticed that
+ * docs/gem-material.md was reachable from nowhere, or that README.md — the
+ * front door — contained zero markdown links at all, so PRINCIPLES.md,
+ * AGENTS.md and every docs/ page were unreachable from it. A document nobody
+ * can navigate to is stale by default, however accurate its contents.
+ *
+ * Every document in the rule surface must be linked from at least one other
+ * document. README.md is the root and is exempt from needing an inbound link.
+ */
+const linkedTo = new Set();
+for (const file of DOCS) {
+  const dir = dirname(file);
+  for (const m of readFileSync(file, 'utf8').matchAll(/\]\(([^)#]+\.md)(?:#[^)]*)?\)/g))
+    linkedTo.add(resolve(dir, m[1]));
+}
+for (const file of DOCS) {
+  if (file === join(ROOT, 'README.md')) continue;
+  if (linkedTo.has(resolve(file))) continue;
+  fail(relative(ROOT, file), 1,
+    'is linked from no other document; a page nobody can navigate to is stale by default');
+}
+
 if (failures.length) {
   console.error(`✗ docs check failed — ${failures.length} stale claim(s):`);
   for (const f of failures) console.error('  · ' + f);
