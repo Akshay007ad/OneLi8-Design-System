@@ -300,6 +300,31 @@ because blur spreads a fixed alpha budget, and wider also reads as fog rather
 than as an edge — so the tight radius is what stops a Gem surface looking
 over-glowed while giving the most headroom.
 
+## Disabled is a state, not a material change
+
+`quiet.opaqueEquivalent` answers `prefers-reduced-transparency`, which is a user
+preference. Disabled is a component state. Conflating them made a disabled Gem
+field stop being Gem — Figma filled it with the opaque equivalent at full
+opacity, stroked it `Color / Border / Disabled` and stripped every effect, and
+code mirrored that faithfully. Both were wrong for the same reason the reduced
+mode is translucent: Gem is worn, so an opaque disabled field punches a hole in
+the wearer's view.
+
+The field now keeps the body and the backdrop blur and drops only the lit
+bezel: the rim inner shadows and the angular cut go, and the boundary falls to
+`color.border.disabled`. It is still glass; it has stopped catching light. That
+matches Choice Item, which keeps its Gem surface and only dims its content.
+
+**Gem buttons do not follow this yet.** A disabled Gem button keeps its
+`::before` body and blur, but that layer sits at `z-index: -1` behind the
+element's own opaque disabled background, so the glass is occluded and the
+result matches Figma's opaque slab. Aligning them means changing the button's
+stacking, and the negative `z-index` is deliberate — it is what lets the
+canonical opaque background show through when the Gem layer is suppressed. So
+this is a contract decision on the most-used component, not a CSS tweak, and it
+is left open rather than guessed at. The Figma note on the Button adapter says
+so plainly instead of claiming parity.
+
 ## Which nodes take gem ink
 
 Only what sits physically on the face.
