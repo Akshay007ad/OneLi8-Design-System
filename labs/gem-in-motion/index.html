@@ -211,6 +211,7 @@
 
   <div class="dock">
     <div id="beats"></div>
+    <div id="appearance"></div>
     <div class="dock__speed">
       <label for="speed">Speed</label>
       <input type="range" id="speed" min="0" max="7" step="0.1" value="0">
@@ -247,6 +248,13 @@ const BEATS = [
 $('beats').innerHTML = renderSegmentedControl({
   label: 'Locomotion beat', behavior: 'single', presentation: 'soft-pill',
   size: 'compact', items: BEATS.map(({ id, label }) => ({ id, label })), selected: 'stand',
+});
+// The stage carries its own appearance so BOTH can be inspected. Without a
+// control here the lab only ever showed one of them, which made light-mode
+// token changes invisible — the reason this control exists.
+$('appearance').innerHTML = renderSegmentedControl({
+  label: 'Appearance', behavior: 'single', presentation: 'soft-pill', size: 'compact',
+  items: [{ id: 'light', label: 'Light' }, { id: 'dark', label: 'Dark' }], selected: 'dark',
 });
 hydrateSegmentedControls();
 
@@ -300,7 +308,13 @@ const widgets = [...document.querySelectorAll('.widget')];
 const state = { target: 0, speed: 0, dist: 0, t: 0 };
 
 document.addEventListener('ol8:segmentchange', e => {
-  const b = BEATS.find(x => x.id === e.detail?.value);
+  const value = e.detail?.value;
+  if (e.target.closest('#appearance')) {
+    if (value === 'light') delete els.stage.dataset.ol8ColorScheme;
+    else els.stage.dataset.ol8ColorScheme = 'dark';
+    return;
+  }
+  const b = BEATS.find(x => x.id === value);
   if (!b) return;
   state.target = b.v; els.speed.value = String(b.v); els.caption.textContent = b.c;
 });

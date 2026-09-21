@@ -2179,17 +2179,17 @@ export const tokens = {
   },
   "material.gem.color.quiet.content": {
     "type": "color",
-    "value": "#151817",
-    "description": "Content on a quiet Gem surface. Aliases the text role rather than a primitive, so it is dark ink on clear glass in light mode and light ink on smoked glass in dark mode with no override needed.",
+    "value": "#FCFAF3",
+    "description": "Content on a quiet Gem surface. Near-white in BOTH appearances, exactly as color.icon.onGem and color.control.thumb already are — 'remains stable across Light and Dark appearances'. Gem sits over imagery whose brightness is unknown, so the ink cannot follow the app's appearance; it stays white and the halo does the work.",
     "tier": "semantic"
   },
   "material.gem.color.quiet.contentGlow": {
     "type": "color",
     "value": {
-      "color": "#FCFAF3",
+      "color": "#151817",
       "alpha": 0.72
     },
-    "description": "Halo behind content on a quiet Gem surface. Aliases the inverse text role, so it is always the opposite of the ink it sits behind and flips with the mode automatically. This is what holds contrast on a transparent face: the face cannot guarantee its own backdrop, so the content brings its own.",
+    "description": "Halo behind content on a quiet Gem surface. A stable dark scrim in BOTH appearances, because the ink above it is stably near-white. This is what lets the face be as transparent as 0.18: the face cannot guarantee its own backdrop, so the content carries its own contrast rather than the surface being thickened to provide it.",
     "tier": "semantic"
   },
   "material.gem.color.quiet.opaqueEquivalent": {

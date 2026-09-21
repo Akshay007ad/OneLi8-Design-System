@@ -312,11 +312,11 @@
   --ol8-material-control-gem--gradient-start: 14.639%;
   --ol8-material-control-gem--gradient-mid: 48.586%;
   --ol8-material-control-gem--gradient-end: 85.361%;
-  --ol8-material-gem-color-quiet-environmentalface: color-mix(in srgb, var(--ol8-color-neutral-930) 48%, transparent);
-  --ol8-material-gem-color-quiet-stabilizedface: color-mix(in srgb, var(--ol8-color-neutral-930) 27%, transparent);
+  --ol8-material-gem-color-quiet-environmentalface: color-mix(in srgb, var(--ol8-color-neutral-030) 18%, transparent);
+  --ol8-material-gem-color-quiet-stabilizedface: color-mix(in srgb, var(--ol8-color-neutral-030) 27%, transparent);
   --ol8-material-gem-color-quiet-content: var(--ol8-color-neutral-030);
-  --ol8-material-gem-color-quiet-contentglow: color-mix(in srgb, var(--ol8-color-neutral-030) 48%, transparent);
-  --ol8-material-gem-color-quiet-opaqueequivalent: var(--ol8-color-neutral-930);
+  --ol8-material-gem-color-quiet-contentglow: color-mix(in srgb, var(--ol8-color-neutral-930) 72%, transparent);
+  --ol8-material-gem-color-quiet-opaqueequivalent: var(--ol8-color-neutral-030);
   --ol8-material-gem-color-cutedge-outerhigh: color-mix(in srgb, var(--ol8-color-neutral-060) 93%, transparent);
   --ol8-material-gem-color-cutedge-outermid: color-mix(in srgb, var(--ol8-color-blue-120) 48%, transparent);
   --ol8-material-gem-color-cutedge-outerlow: color-mix(in srgb, var(--ol8-color-neutral-060) 3%, transparent);
@@ -2219,6 +2219,7 @@
 
   <div class="dock">
     <div id="beats"></div>
+    <div id="appearance"></div>
     <div class="dock__speed">
       <label for="speed">Speed</label>
       <input type="range" id="speed" min="0" max="7" step="0.1" value="0">
@@ -2468,6 +2469,26 @@ const OL8_ICONS = {
       }
     ]
   },
+  "heart": {
+    "category": "vitals",
+    "figmaNode": null,
+    "mirrorInRTL": false,
+    "candidate": true,
+    "sourceInk": "#151817",
+    "body": "<path id=\"glyph-path\" d=\"M12 21C12 21 3 15.6 3 9.6C3 6.6 5.4 4.5 8.1 4.5C9.9 4.5 11.4 5.55 12 6.9C12.6 5.55 14.1 4.5 15.9 4.5C18.6 4.5 21 6.6 21 9.6C21 15.6 12 21 12 21Z\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+    "elements": [
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M12 21C12 21 3 15.6 3 9.6C3 6.6 5.4 4.5 8.1 4.5C9.9 4.5 11.4 5.55 12 6.9C12.6 5.55 14.1 4.5 15.9 4.5C18.6 4.5 21 6.6 21 9.6C21 15.6 12 21 12 21Z",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      }
+    ]
+  },
   "informative": {
     "category": "status",
     "figmaNode": "440:11",
@@ -2523,6 +2544,23 @@ const OL8_ICONS = {
       }
     ]
   },
+  "maneuver-right": {
+    "category": "maneuver",
+    "figmaNode": null,
+    "mirrorInRTL": true,
+    "candidate": true,
+    "sourceInk": "#151817",
+    "body": "<path id=\"sign-body\" d=\"M4.5 19.5V10.5C4.5 8.85 5.85 7.5 7.5 7.5H13.5V4.5L19.5 9L13.5 13.5V10.5H7.5V19.5Z\" fill=\"currentColor\"/>",
+    "elements": [
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M4.5 19.5V10.5C4.5 8.85 5.85 7.5 7.5 7.5H13.5V4.5L19.5 9L13.5 13.5V10.5H7.5V19.5Z",
+          "fill": "currentColor"
+        }
+      }
+    ]
+  },
   "mixed": {
     "category": "selection",
     "figmaNode": "391:9",
@@ -2539,6 +2577,46 @@ const OL8_ICONS = {
           "height": "1.8",
           "rx": "0.9",
           "fill": "currentColor"
+        }
+      }
+    ]
+  },
+  "pause": {
+    "category": "transport",
+    "figmaNode": null,
+    "mirrorInRTL": false,
+    "candidate": true,
+    "sourceInk": "#151817",
+    "body": "<path id=\"glyph-path\" d=\"M9 6V18M15 6V18\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+    "elements": [
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M9 6V18M15 6V18",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      }
+    ]
+  },
+  "play": {
+    "category": "transport",
+    "figmaNode": null,
+    "mirrorInRTL": false,
+    "candidate": true,
+    "sourceInk": "#151817",
+    "body": "<path id=\"glyph-path\" d=\"M9 6L18 12L9 18Z\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+    "elements": [
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M9 6L18 12L9 18Z",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
         }
       }
     ]
@@ -2605,6 +2683,66 @@ const OL8_ICONS = {
           "cy": "12",
           "r": "6",
           "fill": "currentColor"
+        }
+      }
+    ]
+  },
+  "skip-back": {
+    "category": "transport",
+    "figmaNode": null,
+    "mirrorInRTL": true,
+    "candidate": true,
+    "sourceInk": "#151817",
+    "body": "<path id=\"artwork\" d=\"M18 6L9 12L18 18Z\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path id=\"rail\" d=\"M6 6V18\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+    "elements": [
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M18 6L9 12L18 18Z",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      },
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M6 6V18",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      }
+    ]
+  },
+  "skip-forward": {
+    "category": "transport",
+    "figmaNode": null,
+    "mirrorInRTL": true,
+    "candidate": true,
+    "sourceInk": "#151817",
+    "body": "<path id=\"artwork\" d=\"M6 6L15 12L6 18Z\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path id=\"rail\" d=\"M18 6V18\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+    "elements": [
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M6 6L15 12L6 18Z",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      },
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M18 6V18",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
         }
       }
     ]
@@ -3668,6 +3806,13 @@ $('beats').innerHTML = renderSegmentedControl({
   label: 'Locomotion beat', behavior: 'single', presentation: 'soft-pill',
   size: 'compact', items: BEATS.map(({ id, label }) => ({ id, label })), selected: 'stand',
 });
+// The stage carries its own appearance so BOTH can be inspected. Without a
+// control here the lab only ever showed one of them, which made light-mode
+// token changes invisible — the reason this control exists.
+$('appearance').innerHTML = renderSegmentedControl({
+  label: 'Appearance', behavior: 'single', presentation: 'soft-pill', size: 'compact',
+  items: [{ id: 'light', label: 'Light' }, { id: 'dark', label: 'Dark' }], selected: 'dark',
+});
 hydrateSegmentedControls();
 
 /* The HUD is composed from the system, not from bare spans. Each widget is an
@@ -3720,7 +3865,13 @@ const widgets = [...document.querySelectorAll('.widget')];
 const state = { target: 0, speed: 0, dist: 0, t: 0 };
 
 document.addEventListener('ol8:segmentchange', e => {
-  const b = BEATS.find(x => x.id === e.detail?.value);
+  const value = e.detail?.value;
+  if (e.target.closest('#appearance')) {
+    if (value === 'light') delete els.stage.dataset.ol8ColorScheme;
+    else els.stage.dataset.ol8ColorScheme = 'dark';
+    return;
+  }
+  const b = BEATS.find(x => x.id === value);
   if (!b) return;
   state.target = b.v; els.speed.value = String(b.v); els.caption.textContent = b.c;
 });
