@@ -235,6 +235,77 @@
 .ol8-field[data-ol8-material="gem"][data-ol8-disabled] .ol8-field__control::before,
 .ol8-field[data-ol8-material="gem"][data-ol8-disabled] .ol8-field__control::after { display: none; }
 
+/* THE ANGULAR CUT — the bezel stroke, at last implemented.
+ *
+ * Figma puts a 1px INSIDE stroke on the Control frame, and it is not a flat
+ * colour: it is a GRADIENT_ANGULAR with five stops, symmetric about 0.54, so
+ * the cut catches light at the top and fades at the bottom-left. The family
+ * depends on the appearance — Inner Thin Cut on Filled, Cut Edge on Outline —
+ * read off 214:132 and 210:112 respectively.
+ *
+ * CSS has no gradient border that follows border-radius, so the ring is a
+ * conic gradient clipped to a 1px inset band by two masks composited apart.
+ * It lives on .ol8-field__control-stack::before because that box is identical
+ * to the control's (both take --_height, the control is inline-size: 100%) and
+ * because the control's own two pseudo-elements are already spent: ::before is
+ * the body and backdrop blur, ::after is the pair of rim inner shadows. The
+ * stack's ::after is the focus edge. ::before was the one free layer, which is
+ * why this needs no markup change — an earlier read of this file concluded it
+ * did, and that was wrong.
+ *
+ * The flat --_border stays underneath. It is what shows when the ring cannot
+ * paint, and it is what Reduced Transparency falls back to. */
+.ol8-field[data-ol8-material="gem"] {
+  --_bezel-high: var(--ol8-material-gem-color-cutedge-high);
+  --_bezel-mid: var(--ol8-material-gem-color-cutedge-mid);
+  --_bezel-low: var(--ol8-material-gem-color-cutedge-low);
+}
+.ol8-field[data-ol8-material="gem"][data-ol8-appearance="filled"] {
+  --_bezel-high: var(--ol8-material-gem-color-innerthincut-high);
+  --_bezel-mid: var(--ol8-material-gem-color-innerthincut-mid);
+  --_bezel-low: var(--ol8-material-gem-color-innerthincut-low);
+}
+
+.ol8-field[data-ol8-material="gem"] > .ol8-field__control-stack::before,
+.ol8-gem::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  padding: var(--ol8-border-width-hairline);
+  /* the five Figma stops, at their Figma positions */
+  background:
+    conic-gradient(from 0deg,
+      var(--_bezel-high) 0%,
+      var(--_bezel-mid) 30%,
+      var(--_bezel-low) 54%,
+      var(--_bezel-mid) 78%,
+      var(--_bezel-high) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+.ol8-field[data-ol8-material="gem"] > .ol8-field__control-stack::before {
+  border-radius: var(--_radius);
+}
+.ol8-gem {
+  --_bezel-high: var(--ol8-material-gem-color-cutedge-high);
+  --_bezel-mid: var(--ol8-material-gem-color-cutedge-mid);
+  --_bezel-low: var(--ol8-material-gem-color-cutedge-low);
+}
+.ol8-gem::before { border-radius: inherit; }
+
+/* Disabled and Reduced Transparency both drop to the flat boundary. */
+.ol8-field[data-ol8-material="gem"][data-ol8-disabled] > .ol8-field__control-stack::before {
+  display: none;
+}
+@media (prefers-reduced-transparency: reduce) {
+  .ol8-field[data-ol8-material="gem"] > .ol8-field__control-stack::before,
+  .ol8-gem::before { display: none; }
+}
+
 /* Content must sit above the ::before body. */
 .ol8-btn[data-ol8-material="gem"] > *,
 .ol8-icon-btn[data-ol8-material="gem"] .ol8-icon,

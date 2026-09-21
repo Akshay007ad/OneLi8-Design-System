@@ -72,13 +72,31 @@ mixed up:
 `Cut Edge / High` is `0.72`. `Cut Edge / Outer High` is `0.93` — a different
 token. Do not substitute one for the other.
 
-**This stroke has no CSS implementation yet.** CSS has no gradient border that
-follows `border-radius`, so it needs either a masked pseudo-element or a new
-DOM node, and on `.ol8-field__control` both pseudo-elements are already spoken
-for: `::before` carries the body gradient and the backdrop blur, `::after`
-carries the two inner shadows, and `.ol8-field__control-stack::after` is the
-focus edge. Adding it is a component-contract decision, not a CSS tweak. Until
-it is made, a flat `--_border` colour stands in for the gradient.
+CSS has no gradient border that follows `border-radius`, so the ring is a conic
+gradient clipped to a hairline band by two masks composited apart:
+
+```css
+padding: var(--ol8-border-width-hairline);
+background: conic-gradient(from 0deg,
+  var(--_bezel-high) 0%, var(--_bezel-mid) 30%, var(--_bezel-low) 54%,
+  var(--_bezel-mid) 78%, var(--_bezel-high) 100%);
+mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+mask-composite: exclude;
+```
+
+It lives on `.ol8-field__control-stack::before` and `.ol8-gem::before`. No
+markup change was needed. An earlier reading of this file concluded one was,
+on the grounds that both of the control's pseudo-elements are spent — `::before`
+on the body and backdrop blur, `::after` on the two rim inner shadows — and
+that `.ol8-field__control-stack::after` is the focus edge. All of that is true,
+but the stack's `::before` was never used, and the stack's box is identical to
+the control's: both take `--_height`, and the control is `inline-size: 100%`.
+
+Verified in `proof/gem-bezel.html`: Outline computes
+`0.72 / 0.36 / 0.03 / 0.36 / 0.72` and Filled computes
+`0.54 / 0.18 / 0.03 / 0.18 / 0.54`, matching Cut Edge and Inner Thin Cut
+respectively. The flat `--_border` stays underneath as the fallback, and both
+Disabled and Reduced Transparency drop the ring to it.
 
 ## The face is two stacked layers, not one
 

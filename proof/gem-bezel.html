@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Oneli8 · Gem angular bezel</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=AR+One+Sans:wght@400..700&display=swap">
+<link rel="stylesheet" href="../packages/tokens/build/css/tokens.css">
+<link rel="stylesheet" href="../packages/core/src/atoms/icon/icon.css">
+<link rel="stylesheet" href="../packages/core/src/molecules/text-field/text-field.css">
+<link rel="stylesheet" href="../packages/core/src/molecules/form-message/form-message.css">
+<link rel="stylesheet" href="../packages/core/src/materials/gem/gem.css">
+<style>
+  body { margin:0; padding:24px; background:var(--ol8-color-background-canvas);
+         color:var(--ol8-color-text-primary); font-family:var(--ol8-font-family-functional); }
+  h1 { font-family:var(--ol8-font-family-expressive); font-size:19px; margin:0 0 6px; }
+  .note { font-size:12px; color:var(--ol8-color-text-muted); max-width:78ch; line-height:1.6; }
+  h2 { font-size:12px; font-weight:400; color:var(--ol8-color-text-muted); margin:22px 0 8px;
+       text-transform:uppercase; letter-spacing:.08em; }
+  /* a mid-tone plate so a 1px light ring is actually visible */
+  .plate { padding:24px; border-radius:24px;
+           background:linear-gradient(135deg,#3a5a7a,#7a4a5a 60%,#c8a068); }
+</style>
+</head>
+<body>
+<h1>Gem angular bezel</h1>
+<p class="note">Figma puts a 1px INSIDE GRADIENT_ANGULAR stroke on the Control frame with five
+stops symmetric about 0.54 — Inner Thin Cut on Filled (214:132), Cut Edge on Outline (210:112).
+CSS has no gradient border that follows border-radius, so this is a conic gradient masked to a
+hairline band on <code>.ol8-field__control-stack::before</code>. The plate is mid-tone because a
+1px near-white ring is invisible against the page.</p>
+<section><h2>Outline · Gem</h2><div class="plate"><div class="ol8-field" data-ol8-size="standard" data-ol8-appearance="outline" data-ol8-material="gem"><div class="ol8-field__label-row"><label class="ol8-field__label" for="f0">Ferry Road</label></div><div class="ol8-field__control-stack"><div class="ol8-field__control"><input class="ol8-field__input" id="f0" type="text" value="One Light"></div></div></div></div></section>
+<section><h2>Filled · Gem</h2><div class="plate"><div class="ol8-field" data-ol8-size="standard" data-ol8-appearance="filled" data-ol8-material="gem"><div class="ol8-field__label-row"><label class="ol8-field__label" for="f1">Ferry Road</label></div><div class="ol8-field__control-stack"><div class="ol8-field__control"><input class="ol8-field__input" id="f1" type="text" value="One Light"></div></div></div></div></section>
+<section><h2>Outline · Gem · Large</h2><div class="plate"><div class="ol8-field" data-ol8-size="large" data-ol8-appearance="outline" data-ol8-material="gem"><div class="ol8-field__label-row"><label class="ol8-field__label" for="f2">Ferry Road</label></div><div class="ol8-field__control-stack"><div class="ol8-field__control"><input class="ol8-field__input" id="f2" type="text" value="One Light"></div></div></div></div></section>
+<section><h2>Filled · Gem · Disabled</h2><div class="plate"><div class="ol8-field" data-ol8-size="standard" data-ol8-appearance="filled" data-ol8-material="gem" data-ol8-disabled="true"><div class="ol8-field__label-row"><label class="ol8-field__label" for="f3">Ferry Road</label></div><div class="ol8-field__control-stack"><div class="ol8-field__control"><input class="ol8-field__input" id="f3" type="text" value="One Light" disabled></div></div></div></div></section>
+<section><h2>Outline · Regular (no ring expected)</h2><div class="plate"><div class="ol8-field" data-ol8-size="standard" data-ol8-appearance="outline"><div class="ol8-field__label-row"><label class="ol8-field__label" for="f4">Ferry Road</label></div><div class="ol8-field__control-stack"><div class="ol8-field__control"><input class="ol8-field__input" id="f4" type="text" value="One Light"></div></div></div></div></section>
+</body>
+</html>
