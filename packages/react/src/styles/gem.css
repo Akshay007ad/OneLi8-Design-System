@@ -228,11 +228,23 @@
 }
 /* Disabled resolves to the opaque equivalent, which is the same answer Reduced
    Transparency gives. */
+/* DISABLED IS A STATE, NOT A MATERIAL CHANGE.
+   This used to swap the face for quiet.opaqueEquivalent and hide both painted
+   layers, so a disabled Gem field stopped being glass and became a solid slab.
+   That mirrored the Figma source faithfully and was wrong in both places:
+   opaqueEquivalent is the answer to prefers-reduced-transparency, a user
+   preference, not to a component state. Gem is worn, so an opaque disabled
+   field punches a solid hole in the wearer's view of the street — the same
+   objection that makes the reduced mode translucent rather than solid.
+   It also disagreed with Choice Item, which keeps its Gem surface when
+   disabled and only dims its content.
+
+   So the body and the backdrop blur stay. What goes is the lit bezel: the rim
+   inner shadows and the angular cut both drop, and the boundary falls to the
+   flat disabled border. The surface stays glass; it stops catching light. */
 .ol8-field[data-ol8-material="gem"][data-ol8-disabled] .ol8-field__control {
-  --_surface: var(--ol8-material-gem-color-quiet-opaqueequivalent);
   --_border: var(--ol8-color-border-disabled);
 }
-.ol8-field[data-ol8-material="gem"][data-ol8-disabled] .ol8-field__control::before,
 .ol8-field[data-ol8-material="gem"][data-ol8-disabled] .ol8-field__control::after { display: none; }
 
 /* THE ANGULAR CUT — the bezel stroke, at last implemented.
