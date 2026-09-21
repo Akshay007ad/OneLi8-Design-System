@@ -2818,6 +2818,16 @@
     border-radius: var(--ol8-shape-radius-medium);
     background: var(--ol8-color-surface-default);
   }
+  /* The segmented control gives every segment flex: 1 1 0, so all four share the
+     row's width equally and the LONGEST label decides whether any of them wrap.
+     At the width the dock was handing it, each pill got 80px — enough for
+     "Static" beside its icon, not for "Sprinting", so three of four dropped
+     their label below the icon and stood taller than the first. A floor wide
+     enough for the longest label keeps every pill on one line, and therefore
+     one height. This is the lab deciding how much room to hand the control, not
+     an override of the control: 408px is 4 x 102 and on the 3px grid. */
+  #beats .ol8-segmented { min-inline-size: 408px; }
+
   .dock__speed { flex: 1 1 180px; min-width: 150px; display: flex; flex-direction: column; gap: 3px; }
   .dock__speed label {
     font-size: var(--ol8-font-size-012); letter-spacing: .08em;
@@ -4884,22 +4894,29 @@ const lerp  = (a,b,t) => a + (b-a)*t;
    locomotion masters; "Dog seen" reuses `caution`, because the dog IS the
    hazard and that is what caution already means — the icon skill's first
    instruction is that existing meaning uses its existing identity. */
+/* Four beats, one word each, so every pill is the same shape. "Dog seen" was a
+   fifth and is gone: two words wrapped its label onto a second line and made
+   that one pill taller than its peers. The dog survives in the captions, which
+   is where the narrative belongs — it was never the control's job to carry it. */
 const BEATS = [
-  { id: 'stand',  label: 'Standing',  icon: 'figure-standing',  v: 0.0, c: 'Standing' },
+  { id: 'static', label: 'Static',    icon: 'figure-standing',  v: 0.0, c: 'Standing · the street is quiet' },
   { id: 'walk',   label: 'Walking',   icon: 'figure-walking',   v: 1.4, c: 'Walking · north gate, two streets away' },
-  { id: 'spot',   label: 'Dog seen',  icon: 'caution',          v: 2.2, c: 'A dog breaks the fence line behind you' },
-  { id: 'run',    label: 'Running',   icon: 'figure-running',   v: 4.5, c: 'Running · it is keeping pace' },
+  { id: 'run',    label: 'Running',   icon: 'figure-running',   v: 4.5, c: 'Running · a dog broke the fence line and is keeping pace' },
   { id: 'sprint', label: 'Sprinting', icon: 'figure-sprinting', v: 6.5, c: 'Sprinting · signal ahead' },
 ];
 
 // The control is the system's, not a lab invention.
-/* stacked-label puts the icon above its text and is already in
-   OL8_SEGMENT_PRESENTATIONS, so this needs no new component — only the icon
-   per item. Selection highlighting is the control's own. */
+/* soft-pill, with the icon inline before its label. This was stacked-label
+   first, which put the icon ABOVE the text and let "Dog seen" wrap onto two
+   lines — so that one segment stood taller than its peers and the row read as
+   inconsistent. Inline keeps every pill one line and the same height.
+   Choice Chip was the other candidate and is the wrong component here: it has
+   no icon slot and its input is a checkbox, so a single-select row of chips
+   would mean the lab hand-rolling radio behaviour the system does not offer. */
 $('beats').innerHTML = renderSegmentedControl({
-  label: 'Locomotion beat', behavior: 'single', presentation: 'stacked-label',
+  label: 'Locomotion beat', behavior: 'single', presentation: 'soft-pill',
   size: 'compact', items: BEATS.map(({ id, label, icon }) => ({ id, label, icon })),
-  selected: 'stand',
+  selected: 'static',
 });
 // The stage carries its own appearance so BOTH can be inspected. Without a
 // control here the lab only ever showed one of them, which made light-mode

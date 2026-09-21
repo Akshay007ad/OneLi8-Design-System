@@ -1,7 +1,7 @@
 {
   "$schema": "./ai-context.schema.json",
   "system": "OneLi8 Design System",
-  "version": "1.0.0-beta.10",
+  "version": "1.0.0-beta.11",
   "tokenPrefix": "--ol8-",
   "figma": {
     "fileKey": "0wRnp6ulIEA8PCV6wqGmAJ",
