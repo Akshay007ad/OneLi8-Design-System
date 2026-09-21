@@ -315,15 +315,28 @@ bezel: the rim inner shadows and the angular cut go, and the boundary falls to
 `color.border.disabled`. It is still glass; it has stopped catching light. That
 matches Choice Item, which keeps its Gem surface and only dims its content.
 
-**Gem buttons do not follow this yet.** A disabled Gem button keeps its
-`::before` body and blur, but that layer sits at `z-index: -1` behind the
-element's own opaque disabled background, so the glass is occluded and the
-result matches Figma's opaque slab. Aligning them means changing the button's
-stacking, and the negative `z-index` is deliberate — it is what lets the
-canonical opaque background show through when the Gem layer is suppressed. So
-this is a contract decision on the most-used component, not a CSS tweak, and it
-is left open rather than guessed at. The Figma note on the Button adapter says
-so plainly instead of claiming parity.
+Buttons follow it too, and getting there took a different mechanism. A Gem
+button's `::before` body and blur already survived Disabled, but that layer
+sits at `z-index: -1` behind the element's own `--_bg`, and the disabled `--_bg`
+is an opaque action colour — so the glass was painting and being covered. There
+was also a rule titled *"Disabled inherits the regular opaque treatment"*
+hiding both pseudo-elements outright. Removing that and setting
+`--_bg: transparent` for Gem reveals the body that was always there.
+
+The negative `z-index` stays load-bearing: it is what lets the canonical opaque
+background show through when Gem is suppressed, so the
+`prefers-reduced-transparency` block restores `--_bg` with `revert`.
+
+**Loading is excluded from the bezel suppression.** It matches `:disabled`,
+because `renderButton` sets `inert = disabled || loading`, but Loading is an
+*active* state — Figma keeps both rim inner shadows on it and gives it its own
+deep gradient stops. So Loading keeps the lit bezel and only Disabled loses it:
+
+| | body | lit bezel | own background |
+|---|---|---|---|
+| enabled | yes | yes | the action colour |
+| disabled | yes | **no** | transparent |
+| loading | yes | yes | transparent |
 
 ## Which nodes take gem ink
 

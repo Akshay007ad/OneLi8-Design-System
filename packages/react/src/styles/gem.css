@@ -323,15 +323,39 @@
 .ol8-icon-btn[data-ol8-material="gem"] .ol8-icon,
 .ol8-field[data-ol8-material="gem"] .ol8-field__control > * { position: relative; z-index: 0; }
 
-/* ---- Disabled inherits the regular opaque treatment ------------------ */
-.ol8-btn[data-ol8-material="gem"]:disabled::before,
-.ol8-btn[data-ol8-material="gem"]:disabled::after,
-.ol8-icon-btn[data-ol8-material="gem"]:disabled > .ol8-icon-btn__surface::before,
-.ol8-icon-btn[data-ol8-material="gem"]:disabled > .ol8-icon-btn__surface::after { display: none; }
-
 /* ---- Reduced Transparency -> the regular opaque equivalent -----------
    Explicitly required by the Figma description. Hiding the gem layers
    reveals the regular molecule's own background, which was never removed. */
+/* DISABLED KEEPS THE GLASS ON BUTTONS TOO.
+   Same rule the Gem field follows, and buttons needed a different mechanism to
+   reach it. A Gem button's ::before body and backdrop blur survive Disabled
+   already — but ::before sits at z-index -1, behind the element's own --_bg,
+   and the disabled --_bg is an opaque action colour. So the glass was there and
+   occluded: the button looked like Figma's opaque slab even though the layer
+   was painting underneath it.
+
+   Making --_bg transparent for Gem reveals the body that was always there. The
+   lit bezel still goes, exactly as on the field. Loading resolves through the
+   same rule because loading is inert — renderButton sets inert = disabled ||
+   loading — which means a loading Gem button now shows its own loading
+   gradient stops rather than hiding them behind the disabled colour.
+
+   The negative z-index stays load-bearing: it is what lets the canonical
+   opaque background show through when Gem is suppressed for Reduced
+   Transparency, so that media query restores --_bg below. */
+.ol8-btn[data-ol8-material="gem"]:disabled,
+.ol8-icon-btn[data-ol8-material="gem"]:disabled > .ol8-icon-btn__surface {
+  --_bg: transparent;
+}
+/* Loading is excluded. It matches :disabled because renderButton sets
+   inert = disabled || loading, but Loading is an ACTIVE state — Figma keeps
+   both rim inner shadows on it and gives it its own deep gradient stops, so it
+   keeps the lit bezel. Only Disabled loses it. */
+.ol8-btn[data-ol8-material="gem"]:disabled:not([data-ol8-loading])::after,
+.ol8-icon-btn[data-ol8-material="gem"]:disabled:not([data-ol8-loading]) > .ol8-icon-btn__surface::after {
+  display: none;
+}
+
 @media (prefers-reduced-transparency: reduce) {
   .ol8-btn[data-ol8-material="gem"]::before,
   .ol8-btn[data-ol8-material="gem"]::after,
@@ -339,6 +363,12 @@
   .ol8-icon-btn[data-ol8-material="gem"] > .ol8-icon-btn__surface::after,
   .ol8-field[data-ol8-material="gem"] .ol8-field__control::before,
   .ol8-field[data-ol8-material="gem"] .ol8-field__control::after { display: none; }
+  /* With the Gem layers suppressed there is nothing behind a transparent
+     background, so the canonical disabled colour comes back. */
+  .ol8-btn[data-ol8-material="gem"]:disabled,
+  .ol8-icon-btn[data-ol8-material="gem"]:disabled > .ol8-icon-btn__surface {
+    --_bg: revert;
+  }
   .ol8-field[data-ol8-material="gem"] .ol8-field__control {
     --_surface: var(--ol8-material-gem-color-quiet-opaqueequivalent);
   }
