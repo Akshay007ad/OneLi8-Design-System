@@ -124,6 +124,13 @@ ok(component.component.tabBar.gap.$value==="{spacing.none}"&&component.component
 // semantic 270 -> 273 and figmaVariables 587 -> 590: material.gem.color.quiet
 // gained content and contentGlow, and material.gem.blur gained contentGlow,
 // when the quiet face was flipped to tint dark like every gem family.
-ok(manifest.counts.primitive===170&&manifest.counts.semantic===273&&manifest.counts.component===161&&manifest.counts.componentStatuses===10&&manifest.counts.figmaVariables===590&&manifest.counts.figmaElevationStyles===5,"Navigation spacing and contextual token output counts must remain deterministic");
+// semantic 273 -> 274 and figmaVariables 590 -> 591: quiet.legibilityFace,
+// the reduced-transparency face. It is a new token rather than a reuse of
+// opaqueEquivalent because the reduced mode must stay SEE-THROUGH: Gem is
+// worn, so an opaque panel would occlude the street for the person who
+// needs help reading the interface most. 0.72 leaves 28% of the scene
+// visible and still measures 7.70:1 in the worst region of a real daylight
+// plate, which is AAA.
+ok(manifest.counts.primitive===170&&manifest.counts.semantic===274&&manifest.counts.component===161&&manifest.counts.componentStatuses===10&&manifest.counts.figmaVariables===591&&manifest.counts.figmaElevationStyles===5,"Navigation spacing and contextual token output counts must remain deterministic");
 
 console.log(`PASS ${checks}/${checks} canonical token package checks.`);

@@ -2168,6 +2168,15 @@ export const tokens = {
     "description": "Quiet Gem environmental face. 0.09 in Light, the most transparent value on the 0.03 grid, because transparency turns out to be nearly free: measured against near-white ink on the brightest region of a daylight plate, a 0.12 face reads 3.24:1 and a 0.18 face reads 3.18:1 -- a 0.06 difference in tint moves contrast by 0.06:1. Legibility is governed almost entirely by the content halo, not by the face, so the face is free to go as thin as the appearance wants. Dark stays a dark tint at 0.48. A dark tint belongs to the Dark appearance; Light stays light.",
     "tier": "semantic"
   },
+  "material.gem.color.quiet.legibilityFace": {
+    "type": "color",
+    "value": {
+      "color": "#151817",
+      "alpha": 0.72
+    },
+    "description": "Reduced-transparency Gem face. NOT an opaque panel: 0.72 leaves 28 percent of the scene reaching the eye, which is the whole point. Gem is worn, so the background is the real world; a fully opaque surface would occlude the street for the person who needs help reading it most. Solved against the actual daylight plate, whose regions run from rgb(9,9,9) to rgb(229,226,223): at 0.72 near-white ink reads 7.70:1 in the WORST region, which is WCAG AAA, with no credit taken for the halo. The same value in both appearances, because when legibility is the priority there is one answer rather than a light and a dark preference. On a head-mounted display prefers-reduced-transparency should resolve HERE, not to opaqueEquivalent.",
+    "tier": "semantic"
+  },
   "material.gem.color.quiet.stabilizedFace": {
     "type": "color",
     "value": {
@@ -5497,6 +5506,7 @@ export const tokenPaths = [
   "material.gem.color.quiet.content",
   "material.gem.color.quiet.contentGlow",
   "material.gem.color.quiet.environmentalFace",
+  "material.gem.color.quiet.legibilityFace",
   "material.gem.color.quiet.opaqueEquivalent",
   "material.gem.color.quiet.stabilizedFace",
   "material.gem.opacity.cutDark",

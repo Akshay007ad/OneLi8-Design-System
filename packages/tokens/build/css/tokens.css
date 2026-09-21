@@ -300,6 +300,7 @@
   --ol8-material-control-gem--gradient-mid: 48.586%;
   --ol8-material-control-gem--gradient-end: 85.361%;
   --ol8-material-gem-color-quiet-environmentalface: color-mix(in srgb, var(--ol8-color-neutral-030) 9%, transparent);
+  --ol8-material-gem-color-quiet-legibilityface: color-mix(in srgb, var(--ol8-color-neutral-930) 72%, transparent);
   --ol8-material-gem-color-quiet-stabilizedface: color-mix(in srgb, var(--ol8-color-neutral-030) 15%, transparent);
   --ol8-material-gem-color-quiet-content: var(--ol8-color-neutral-030);
   --ol8-material-gem-color-quiet-contentglow: color-mix(in srgb, var(--ol8-color-neutral-930) 84%, transparent);

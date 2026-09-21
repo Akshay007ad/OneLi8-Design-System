@@ -122,23 +122,39 @@ Figma bakes a per-instance degree value, and every one of them satisfies
 the keyword; a baked degree value is only correct at the one width it was
 measured at. `proof/gem.html` proves this with a difference blend.
 
-## Six stacks: three transparent, three opaque fallback
+## Six stacks over one photograph, and why the fallback is not opaque
 
-The Choice Controls page carries two parallel sets of three, and they answer
-different questions. Do not make one look like the other.
+Gem is worn. The background is the real world, so every stack is judged against
+the same photograph — all six, both modes. A flat surface behind a glass
+demonstration proves nothing, and two different plates make the two appearances
+incomparable. The plate's regions run from `rgb(9,9,9)` to `rgb(229,226,223)`,
+so one image covers the best and worst case at once.
 
-| | Gem Material (297:607) | Gem Opaque Fallback |
+| | Gem Material (297:607) | Gem Reduced Transparency (306:825) |
 |---|---|---|
-| face | `quiet.environmentalFace` | `quiet.opaqueEquivalent` |
-| backdrop blur | yes, `blur.environmental` 9px | none |
-| content | stable near-white + stacked halo | `Color / Text / Primary` / `Secondary` |
-| job | push transparency to the limit | be unconditionally legible |
+| face | `quiet.environmentalFace` | `quiet.legibilityFace` |
+| Light / Dark | 0.09 light tint / 0.48 dark tint | 0.72 dark, both appearances |
+| backdrop blur | `blur.environmental` 9px | none |
+| content | stable near-white + 4 stacked halos | identical |
+| scene still visible | 91% / 52% | 28% |
+| worst region measured | 4.67:1, AA | 7.70:1, AAA |
 
-The fallback is already the WCAG-safe mode by construction: an appearance-aware
-solid under appearance-aware text, so Light is a light card with dark text and
-Dark is a dark card with light text. It needs no halo and must not be given
-near-white ink. Because the fallback covers the conservative case, the
-transparent set is free to push.
+**The reduced mode is not an opaque panel, and that is the whole point.** A
+solid surface would occlude the street for the person who needs help reading
+the interface most — the same hazard as blurring the view during a sprint. So
+the reduced mode is *denser*, not solid: 0.72 keeps 28% of the scene reaching
+the eye and still measures 7.70:1 against near-white ink in the worst region of
+the plate, with no credit taken for the halo. That is AAA while remaining
+background-aware.
+
+It is the same value in both appearances, because when legibility is the
+priority there is one answer rather than a light preference and a dark one.
+
+`quiet.opaqueEquivalent` still exists for conventional screens, where the
+platform's `prefers-reduced-transparency` genuinely means remove the effect. On
+a head-mounted display that flag should resolve to `legibilityFace` instead.
+`.ol8-gem[data-ol8-transparency="reduced"]` is the per-surface opt-in, because
+a media query cannot tell a phone from a lens.
 
 ## The face is nearly free; the halo is the whole constraint
 
