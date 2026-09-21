@@ -38,7 +38,7 @@
 .ol8-field[data-ol8-material="gem"] > .ol8-field__control-stack > .ol8-field__control {
   position: relative;
   isolation: isolate;
-  --_rim: var(--ol8-material-control-gem-rim-default);
+  --_rim: var(--ol8-material-control-gem--rim-default);
 }
 
 /* The regular opaque background stays underneath on purpose — it is what
@@ -52,13 +52,13 @@
   z-index: -1;
   border-radius: inherit;
   pointer-events: none;
-  backdrop-filter: blur(var(--ol8-material-control-gem-blur));
-  -webkit-backdrop-filter: blur(var(--ol8-material-control-gem-blur));
+  backdrop-filter: blur(var(--ol8-material-control-gem--blur));
+  -webkit-backdrop-filter: blur(var(--ol8-material-control-gem--blur));
   background-image: linear-gradient(
     to bottom right,
-    var(--_g1) var(--ol8-material-control-gem-gradient-start),
-    var(--_g2) var(--ol8-material-control-gem-gradient-mid),
-    var(--_g3) var(--ol8-material-control-gem-gradient-end));
+    var(--_g1) var(--ol8-material-control-gem--gradient-start),
+    var(--_g2) var(--ol8-material-control-gem--gradient-mid),
+    var(--_g3) var(--ol8-material-control-gem--gradient-end));
 }
 
 .ol8-btn[data-ol8-material="gem"]::after,
@@ -69,36 +69,42 @@
   inset: 0;
   border-radius: inherit;
   pointer-events: none;
+  /* Figma's two inner shadows on the Control frame, in order:
+       INNER_SHADOW offset 0,2  radius 1  spread 0  -> Rim / Specular
+       INNER_SHADOW offset 0,0  radius 0  spread 1  -> Rim / Default
+     The second one was written with spread 0, which draws nothing, so the
+     integrated light rim never painted even once the variable names were
+     right. It is the 1px edge that reads as the bezel. */
   box-shadow:
-    inset 0 2px 1px 0 var(--ol8-material-control-gem-rim-specular),
-    inset 0 0 0 0 var(--_rim);
+    inset 0 2px 1px 0 var(--ol8-material-control-gem--rim-specular),
+    inset 0 0 0 1px var(--_rim);
 }
 
 /* ---- Primary · three-stop same-hue body ------------------------------ */
 .ol8-btn--primary[data-ol8-material="gem"],
 .ol8-icon-btn--primary[data-ol8-material="gem"] > .ol8-icon-btn__surface {
-  --_g1: var(--ol8-material-control-gem-primary-start);
-  --_g2: var(--ol8-material-control-gem-primary-mid);
-  --_g3: var(--ol8-material-control-gem-primary-end);
-  --_fg: var(--ol8-material-control-gem-primary-content);
-  --_ink: var(--ol8-material-control-gem-primary-content);
+  --_g1: var(--ol8-material-control-gem--primary-start);
+  --_g2: var(--ol8-material-control-gem--primary-mid);
+  --_g3: var(--ol8-material-control-gem--primary-end);
+  --_fg: var(--ol8-material-control-gem--primary-content);
+  --_ink: var(--ol8-material-control-gem--primary-content);
 }
 .ol8-btn--primary[data-ol8-material="gem"]:hover:not(:disabled):not([data-ol8-loading]),
 .ol8-icon-btn--primary[data-ol8-material="gem"]:hover:not(:disabled):not([data-ol8-loading]) > .ol8-icon-btn__surface {
-  --_g1: var(--ol8-material-control-gem-primary-hoverstart);
-  --_g2: var(--ol8-material-control-gem-primary-hovermid);
-  --_g3: var(--ol8-material-control-gem-primary-hoverend);
-  --_rim: var(--ol8-material-control-gem-rim-hover);
+  --_g1: var(--ol8-material-control-gem--primary-hover-start);
+  --_g2: var(--ol8-material-control-gem--primary-hover-mid);
+  --_g3: var(--ol8-material-control-gem--primary-hover-end);
+  --_rim: var(--ol8-material-control-gem--rim-hover);
 }
 /* Pressed reuses the HOVER stops and adds the cut-edge drop shadow. */
 .ol8-btn--primary[data-ol8-material="gem"]:active:not(:disabled),
 .ol8-btn--primary[data-ol8-material="gem"][aria-pressed="true"]:not(:disabled),
 .ol8-icon-btn--primary[data-ol8-material="gem"]:active:not(:disabled) > .ol8-icon-btn__surface,
 .ol8-icon-btn--primary[data-ol8-material="gem"][aria-pressed="true"]:not(:disabled) > .ol8-icon-btn__surface {
-  --_g1: var(--ol8-material-control-gem-primary-hoverstart);
-  --_g2: var(--ol8-material-control-gem-primary-hovermid);
-  --_g3: var(--ol8-material-control-gem-primary-hoverend);
-  --_rim: var(--ol8-material-control-gem-rim-hover);
+  --_g1: var(--ol8-material-control-gem--primary-hover-start);
+  --_g2: var(--ol8-material-control-gem--primary-hover-mid);
+  --_g3: var(--ol8-material-control-gem--primary-hover-end);
+  --_rim: var(--ol8-material-control-gem--rim-hover);
 }
 .ol8-btn--primary[data-ol8-material="gem"]:active:not(:disabled),
 .ol8-btn--primary[data-ol8-material="gem"][aria-pressed="true"]:not(:disabled) {
@@ -106,9 +112,9 @@
 }
 .ol8-btn--primary[data-ol8-material="gem"][data-ol8-loading],
 .ol8-icon-btn--primary[data-ol8-material="gem"][data-ol8-loading] > .ol8-icon-btn__surface {
-  --_g1: var(--ol8-material-control-gem-primary-loadingstart);
-  --_g2: var(--ol8-material-control-gem-primary-loadingmid);
-  --_g3: var(--ol8-material-control-gem-primary-loadingend);
+  --_g1: var(--ol8-material-control-gem--primary-loading-start);
+  --_g2: var(--ol8-material-control-gem--primary-loading-mid);
+  --_g3: var(--ol8-material-control-gem--primary-loading-end);
 }
 
 /* ---- Secondary · transparent body with an integrated light rim -------
@@ -117,35 +123,35 @@
 .ol8-btn--secondary[data-ol8-material="gem"] { --_bw: 0px; }
 .ol8-btn--secondary[data-ol8-material="gem"],
 .ol8-icon-btn--secondary[data-ol8-material="gem"] > .ol8-icon-btn__surface {
-  --_g1: var(--ol8-material-control-gem-secondary-high);
-  --_g2: var(--ol8-material-control-gem-secondary-mid);
-  --_g3: var(--ol8-material-control-gem-secondary-low);
-  --_fg: var(--ol8-material-control-gem-secondary-content);
-  --_ink: var(--ol8-material-control-gem-secondary-content);
+  --_g1: var(--ol8-material-control-gem--secondary-high);
+  --_g2: var(--ol8-material-control-gem--secondary-mid);
+  --_g3: var(--ol8-material-control-gem--secondary-low);
+  --_fg: var(--ol8-material-control-gem--secondary-content);
+  --_ink: var(--ol8-material-control-gem--secondary-content);
   --_bd: transparent;
 }
 .ol8-btn--secondary[data-ol8-material="gem"]:hover:not(:disabled):not([data-ol8-loading]),
 .ol8-icon-btn--secondary[data-ol8-material="gem"]:hover:not(:disabled):not([data-ol8-loading]) > .ol8-icon-btn__surface {
-  --_g1: var(--ol8-material-control-gem-secondary-hoverhigh);
-  --_g2: var(--ol8-material-control-gem-secondary-hovermid);
-  --_g3: var(--ol8-material-control-gem-secondary-hoverlow);
-  --_rim: var(--ol8-material-control-gem-rim-hover);
-  --_fg: var(--ol8-material-control-gem-secondary-content);
+  --_g1: var(--ol8-material-control-gem--secondary-hover-high);
+  --_g2: var(--ol8-material-control-gem--secondary-hover-mid);
+  --_g3: var(--ol8-material-control-gem--secondary-hover-low);
+  --_rim: var(--ol8-material-control-gem--rim-hover);
+  --_fg: var(--ol8-material-control-gem--secondary-content);
 }
 .ol8-btn--secondary[data-ol8-material="gem"]:active:not(:disabled),
 .ol8-btn--secondary[data-ol8-material="gem"][aria-pressed="true"]:not(:disabled),
 .ol8-icon-btn--secondary[data-ol8-material="gem"]:active:not(:disabled) > .ol8-icon-btn__surface {
-  --_g1: var(--ol8-material-control-gem-secondary-hoverhigh);
-  --_g2: var(--ol8-material-control-gem-secondary-hovermid);
-  --_g3: var(--ol8-material-control-gem-secondary-hoverlow);
-  --_rim: var(--ol8-material-control-gem-rim-hover);
-  --_fg: var(--ol8-material-control-gem-secondary-content);
+  --_g1: var(--ol8-material-control-gem--secondary-hover-high);
+  --_g2: var(--ol8-material-control-gem--secondary-hover-mid);
+  --_g3: var(--ol8-material-control-gem--secondary-hover-low);
+  --_rim: var(--ol8-material-control-gem--rim-hover);
+  --_fg: var(--ol8-material-control-gem--secondary-content);
 }
 .ol8-btn--secondary[data-ol8-material="gem"][data-ol8-loading],
 .ol8-icon-btn--secondary[data-ol8-material="gem"][data-ol8-loading] > .ol8-icon-btn__surface {
-  --_g1: var(--ol8-material-control-gem-secondary-loadinghigh);
-  --_g2: var(--ol8-material-control-gem-secondary-loadingmid);
-  --_g3: var(--ol8-material-control-gem-secondary-loadinglow);
+  --_g1: var(--ol8-material-control-gem--secondary-loading-high);
+  --_g2: var(--ol8-material-control-gem--secondary-loading-mid);
+  --_g3: var(--ol8-material-control-gem--secondary-loading-low);
 }
 
 /* ---- Text Field · the same Secondary body, per Figma 211:36 and 215:226 ---
@@ -153,17 +159,17 @@
    the Inner Thin Cut. Hover moves Filled onto the Cut Edge. Invalid keeps the
    critical boundary, because a material must never hide a validation result. */
 .ol8-field[data-ol8-material="gem"] .ol8-field__control {
-  --_g1: var(--ol8-material-control-gem-secondary-high);
-  --_g2: var(--ol8-material-control-gem-secondary-mid);
-  --_g3: var(--ol8-material-control-gem-secondary-low);
+  --_g1: var(--ol8-material-control-gem--secondary-high);
+  --_g2: var(--ol8-material-control-gem--secondary-mid);
+  --_g3: var(--ol8-material-control-gem--secondary-low);
   --_surface: transparent;
   --_border: var(--ol8-material-gem-color-cutedge-high);
 }
 .ol8-field[data-ol8-material="gem"]:hover:not([data-ol8-disabled]) .ol8-field__control {
-  --_g1: var(--ol8-material-control-gem-secondary-hoverhigh);
-  --_g2: var(--ol8-material-control-gem-secondary-hovermid);
-  --_g3: var(--ol8-material-control-gem-secondary-hoverlow);
-  --_rim: var(--ol8-material-control-gem-rim-hover);
+  --_g1: var(--ol8-material-control-gem--secondary-hover-high);
+  --_g2: var(--ol8-material-control-gem--secondary-hover-mid);
+  --_g3: var(--ol8-material-control-gem--secondary-hover-low);
+  --_rim: var(--ol8-material-control-gem--rim-hover);
   --_border: var(--ol8-material-gem-color-cutedge-high);
 }
 .ol8-field[data-ol8-material="gem"][data-ol8-appearance="filled"] .ol8-field__control {

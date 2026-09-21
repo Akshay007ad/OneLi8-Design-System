@@ -2400,10 +2400,10 @@
         "type": "color",
         "value": {
           "color": "#FCFAF3",
-          "alpha": 0.22
+          "alpha": 0.09
         },
         "reference": null,
-        "description": "Gem Secondary leading transparent highlight."
+        "description": "Quiet Gem glass leading stop in the Light appearance. 0.09, down from 0.22: the gem field face is TWO stacked near-white layers, this gradient over material.gem.color.quiet.stabilizedFace, which composited to 31-43% white and is what made light Gem read as milk rather than glass. Dark keeps 0.22 via an override, because the same near-white gradient over a dark environment is the sheen that makes the material legible as glass. Every state on this ladder is one 0.03 step apart, which is the 3-point rhythm expressed in alpha."
       },
       {
         "path": "material.control.gem.secondary.mid",
@@ -2411,7 +2411,7 @@
         "type": "color",
         "value": {
           "color": "#FCFAF3",
-          "alpha": 0.05
+          "alpha": 0.03
         },
         "reference": null,
         "description": "Gem Secondary quiet middle transparency."
@@ -2422,7 +2422,7 @@
         "type": "color",
         "value": {
           "color": "#FCFAF3",
-          "alpha": 0.12
+          "alpha": 0.06
         },
         "reference": null,
         "description": "Gem Secondary trailing transparent tint."
@@ -2433,7 +2433,7 @@
         "type": "color",
         "value": {
           "color": "#FCFAF3",
-          "alpha": 0.3
+          "alpha": 0.12
         },
         "reference": null,
         "description": "Gem Secondary Hover leading transparent highlight."
@@ -2444,7 +2444,7 @@
         "type": "color",
         "value": {
           "color": "#FCFAF3",
-          "alpha": 0.09
+          "alpha": 0.06
         },
         "reference": null,
         "description": "Gem Secondary Hover middle transparency."
@@ -2455,7 +2455,7 @@
         "type": "color",
         "value": {
           "color": "#FCFAF3",
-          "alpha": 0.18
+          "alpha": 0.09
         },
         "reference": null,
         "description": "Gem Secondary Hover trailing transparent tint."
@@ -2466,7 +2466,7 @@
         "type": "color",
         "value": {
           "color": "#FCFAF3",
-          "alpha": 0.39
+          "alpha": 0.15
         },
         "reference": null,
         "description": "Shared Button and Icon Button Gem Secondary Loading highlight."
@@ -2477,7 +2477,7 @@
         "type": "color",
         "value": {
           "color": "#FCFAF3",
-          "alpha": 0.12
+          "alpha": 0.09
         },
         "reference": null,
         "description": "Shared Button and Icon Button Gem Secondary Loading middle transparency."
@@ -2488,7 +2488,7 @@
         "type": "color",
         "value": {
           "color": "#FCFAF3",
-          "alpha": 0.24
+          "alpha": 0.12
         },
         "reference": null,
         "description": "Shared Button and Icon Button Gem Secondary Loading trailing tint."
@@ -2595,10 +2595,10 @@
         "type": "color",
         "value": {
           "color": "#FCFAF3",
-          "alpha": 0.27
+          "alpha": 0.15
         },
         "reference": null,
-        "description": "Quiet Light Gem stabilized content plane. Slightly more present than the environmental face at 0.27, matching the gem families' stabilized alpha, because at rest the surface is being read rather than looked through."
+        "description": "Quiet Light Gem stabilized content plane. 0.15, because it is not seen alone: the filled Gem field stacks the Control Gem Secondary gradient on top of it, and 0.15 under that ladder composites to 0.18-0.23 white — the same presence as the 0.18 environmental face, which is the transparency that was approved. At the previous 0.27 the composite was 0.31-0.43 and the surface read as milk. The Gem families keep their own stabilized alphas (sapphire 0.30 and so on); this one no longer tracks them, because they are not stacked under a second layer."
       },
       {
         "path": "material.gem.color.quiet.content",
@@ -7138,6 +7138,105 @@
           },
           "reference": null,
           "description": "Dark optional warm facet tint."
+        },
+        {
+          "path": "material.control.gem.secondary.high",
+          "name": "Material / Control / Gem / Secondary / High",
+          "type": "color",
+          "value": {
+            "color": "#FCFAF3",
+            "alpha": 0.22
+          },
+          "reference": null,
+          "description": "Deep Gem Secondary leading stop in Dark appearance. Holds the value the Light appearance moved off: a near-white gradient over a dark environment is the sheen that reads as glass, where over a light one it read as milk. Dark is unchanged by that fix."
+        },
+        {
+          "path": "material.control.gem.secondary.mid",
+          "name": "Material / Control / Gem / Secondary / Mid",
+          "type": "color",
+          "value": {
+            "color": "#FCFAF3",
+            "alpha": 0.05
+          },
+          "reference": null,
+          "description": "Deep Gem Secondary middle stop in Dark appearance. Holds the value the Light appearance moved off: a near-white gradient over a dark environment is the sheen that reads as glass, where over a light one it read as milk. Dark is unchanged by that fix."
+        },
+        {
+          "path": "material.control.gem.secondary.low",
+          "name": "Material / Control / Gem / Secondary / Low",
+          "type": "color",
+          "value": {
+            "color": "#FCFAF3",
+            "alpha": 0.12
+          },
+          "reference": null,
+          "description": "Deep Gem Secondary trailing stop in Dark appearance. Holds the value the Light appearance moved off: a near-white gradient over a dark environment is the sheen that reads as glass, where over a light one it read as milk. Dark is unchanged by that fix."
+        },
+        {
+          "path": "material.control.gem.secondary.hoverHigh",
+          "name": "Material / Control / Gem / Secondary / Hover High",
+          "type": "color",
+          "value": {
+            "color": "#FCFAF3",
+            "alpha": 0.3
+          },
+          "reference": null,
+          "description": "Deep Gem Secondary Hover leading stop in Dark appearance. Holds the value the Light appearance moved off: a near-white gradient over a dark environment is the sheen that reads as glass, where over a light one it read as milk. Dark is unchanged by that fix."
+        },
+        {
+          "path": "material.control.gem.secondary.hoverMid",
+          "name": "Material / Control / Gem / Secondary / Hover Mid",
+          "type": "color",
+          "value": {
+            "color": "#FCFAF3",
+            "alpha": 0.09
+          },
+          "reference": null,
+          "description": "Deep Gem Secondary Hover middle stop in Dark appearance. Holds the value the Light appearance moved off: a near-white gradient over a dark environment is the sheen that reads as glass, where over a light one it read as milk. Dark is unchanged by that fix."
+        },
+        {
+          "path": "material.control.gem.secondary.hoverLow",
+          "name": "Material / Control / Gem / Secondary / Hover Low",
+          "type": "color",
+          "value": {
+            "color": "#FCFAF3",
+            "alpha": 0.18
+          },
+          "reference": null,
+          "description": "Deep Gem Secondary Hover trailing stop in Dark appearance. Holds the value the Light appearance moved off: a near-white gradient over a dark environment is the sheen that reads as glass, where over a light one it read as milk. Dark is unchanged by that fix."
+        },
+        {
+          "path": "material.control.gem.secondary.loadingHigh",
+          "name": "Material / Control / Gem / Secondary / Loading High",
+          "type": "color",
+          "value": {
+            "color": "#FCFAF3",
+            "alpha": 0.39
+          },
+          "reference": null,
+          "description": "Deep Gem Secondary Loading leading stop in Dark appearance. Holds the value the Light appearance moved off: a near-white gradient over a dark environment is the sheen that reads as glass, where over a light one it read as milk. Dark is unchanged by that fix."
+        },
+        {
+          "path": "material.control.gem.secondary.loadingMid",
+          "name": "Material / Control / Gem / Secondary / Loading Mid",
+          "type": "color",
+          "value": {
+            "color": "#FCFAF3",
+            "alpha": 0.12
+          },
+          "reference": null,
+          "description": "Deep Gem Secondary Loading middle stop in Dark appearance. Holds the value the Light appearance moved off: a near-white gradient over a dark environment is the sheen that reads as glass, where over a light one it read as milk. Dark is unchanged by that fix."
+        },
+        {
+          "path": "material.control.gem.secondary.loadingLow",
+          "name": "Material / Control / Gem / Secondary / Loading Low",
+          "type": "color",
+          "value": {
+            "color": "#FCFAF3",
+            "alpha": 0.24
+          },
+          "reference": null,
+          "description": "Deep Gem Secondary Loading trailing stop in Dark appearance. Holds the value the Light appearance moved off: a near-white gradient over a dark environment is the sheen that reads as glass, where over a light one it read as milk. Dark is unchanged by that fix."
         }
       ]
     },

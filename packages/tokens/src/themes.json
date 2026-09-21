@@ -3,13 +3,32 @@
   "$description": "Independent Oneli8 mode axes. Compact typography is the semantic default.",
   "$extensions": {
     "oneli8.axes": {
-      "colorScheme":["light","dark"],
-      "primaryFamily":["blue","orange","green"],
-      "typographyViewport":["compact","medium","expanded"],
-      "accessibilityPreferences":["reducedMotion","reducedTransparency","increasedContrast","largerText"],
-      "direction":["ltr","rtl"]
+      "colorScheme": [
+        "light",
+        "dark"
+      ],
+      "primaryFamily": [
+        "blue",
+        "orange",
+        "green"
+      ],
+      "typographyViewport": [
+        "compact",
+        "medium",
+        "expanded"
+      ],
+      "accessibilityPreferences": [
+        "reducedMotion",
+        "reducedTransparency",
+        "increasedContrast",
+        "largerText"
+      ],
+      "direction": [
+        "ltr",
+        "rtl"
+      ]
     },
-    "oneli8.rule":"Axes remain independent; adapters must not author a Cartesian product of modes."
+    "oneli8.rule": "Axes remain independent; adapters must not author a Cartesian product of modes."
   },
   "colorScheme": {
     "light": {
@@ -379,76 +398,76 @@
           "$value": "{color.primary.930}",
           "$description": "Dark selected content qualified by the active Primary family."
         },
-          "elevation.surface.flat": {
-            "$type": "shadow",
-            "$value": [],
-            "$description": "Dark mode has no Flat shadow."
-          },
-          "elevation.surface.raised": {
-            "$type": "shadow",
-            "$value": [
-              {
-                "color": "{color.cyan.840}",
-                "offsetX": "{dimension.scale.000}",
-                "offsetY": "{dimension.scale.003}",
-                "blur": "{dimension.scale.006}",
-                "spread": "{dimension.scale.000}",
-                "alpha": 0.36
-              }
-            ],
-            "$description": "Dark Raised ambient-lift cue."
-          },
-          "elevation.surface.floating": {
-            "$type": "shadow",
-            "$value": [
-              {
-                "color": "{color.cyan.840}",
-                "offsetX": "{dimension.scale.000}",
-                "offsetY": "{dimension.scale.006}",
-                "blur": "{dimension.scale.018}",
-                "spread": {
-                  "value": -3,
-                  "unit": "px"
-                },
-                "alpha": 0.48
-              }
-            ],
-            "$description": "Dark Floating ambient-lift cue."
-          },
-          "elevation.surface.overlay": {
-            "$type": "shadow",
-            "$value": [
-              {
-                "color": "{color.cyan.840}",
-                "offsetX": "{dimension.scale.000}",
-                "offsetY": "{dimension.scale.012}",
-                "blur": "{dimension.scale.036}",
-                "spread": {
-                  "value": -6,
-                  "unit": "px"
-                },
-                "alpha": 0.6
-              }
-            ],
-            "$description": "Dark Overlay ambient-lift cue."
-          },
-          "elevation.surface.blocking": {
-            "$type": "shadow",
-            "$value": [
-              {
-                "color": "{color.cyan.840}",
-                "offsetX": "{dimension.scale.000}",
-                "offsetY": "{dimension.scale.024}",
-                "blur": "{dimension.scale.072}",
-                "spread": {
-                  "value": -12,
-                  "unit": "px"
-                },
-                "alpha": 0.72
-              }
-            ],
-            "$description": "Dark Blocking ambient-lift cue."
-          },
+        "elevation.surface.flat": {
+          "$type": "shadow",
+          "$value": [],
+          "$description": "Dark mode has no Flat shadow."
+        },
+        "elevation.surface.raised": {
+          "$type": "shadow",
+          "$value": [
+            {
+              "color": "{color.cyan.840}",
+              "offsetX": "{dimension.scale.000}",
+              "offsetY": "{dimension.scale.003}",
+              "blur": "{dimension.scale.006}",
+              "spread": "{dimension.scale.000}",
+              "alpha": 0.36
+            }
+          ],
+          "$description": "Dark Raised ambient-lift cue."
+        },
+        "elevation.surface.floating": {
+          "$type": "shadow",
+          "$value": [
+            {
+              "color": "{color.cyan.840}",
+              "offsetX": "{dimension.scale.000}",
+              "offsetY": "{dimension.scale.006}",
+              "blur": "{dimension.scale.018}",
+              "spread": {
+                "value": -3,
+                "unit": "px"
+              },
+              "alpha": 0.48
+            }
+          ],
+          "$description": "Dark Floating ambient-lift cue."
+        },
+        "elevation.surface.overlay": {
+          "$type": "shadow",
+          "$value": [
+            {
+              "color": "{color.cyan.840}",
+              "offsetX": "{dimension.scale.000}",
+              "offsetY": "{dimension.scale.012}",
+              "blur": "{dimension.scale.036}",
+              "spread": {
+                "value": -6,
+                "unit": "px"
+              },
+              "alpha": 0.6
+            }
+          ],
+          "$description": "Dark Overlay ambient-lift cue."
+        },
+        "elevation.surface.blocking": {
+          "$type": "shadow",
+          "$value": [
+            {
+              "color": "{color.cyan.840}",
+              "offsetX": "{dimension.scale.000}",
+              "offsetY": "{dimension.scale.024}",
+              "blur": "{dimension.scale.072}",
+              "spread": {
+                "value": -12,
+                "unit": "px"
+              },
+              "alpha": 0.72
+            }
+          ],
+          "$description": "Dark Blocking ambient-lift cue."
+        },
         "material.control.gem.primary.start": {
           "$type": "color",
           "$value": "{color.primary.600}",
@@ -480,142 +499,241 @@
           "$description": "Deep Gem Primary Hover trailing stop in Dark appearance."
         },
         "material.gem.color.quiet.environmentalFace": {
-            "$type": "color",
-            "$value": {
-              "color": "{color.neutral.930}",
-              "alpha": 0.48
-            },
-            "$extensions": {
-              "oneli8.composite": "color-alpha"
-            },
-            "$description": "Quiet Dark Gem environmental face; transparent canonical slab material."
+          "$type": "color",
+          "$value": {
+            "color": "{color.neutral.930}",
+            "alpha": 0.48
           },
-          "material.gem.color.quiet.stabilizedFace": {
-            "$type": "color",
-            "$value": {
-              "color": "{color.neutral.840}",
-              "alpha": 0.27
-            },
-            "$extensions": {
-              "oneli8.composite": "color-alpha"
-            },
-            "$description": "Quiet Dark Gem stabilized plane. Tracks the light value; see semantic.json for why this moved from 0.72."
+          "$extensions": {
+            "oneli8.composite": "color-alpha"
           },
-          "material.gem.color.quiet.opaqueEquivalent": {
-            "$type": "color",
-            "$value": "{color.neutral.840}",
-            "$description": "Quiet Dark Gem opaque equivalent."
+          "$description": "Quiet Dark Gem environmental face; transparent canonical slab material."
+        },
+        "material.gem.color.quiet.stabilizedFace": {
+          "$type": "color",
+          "$value": {
+            "color": "{color.neutral.840}",
+            "alpha": 0.27
           },
-          "material.gem.color.cutEdge.high": {
-            "$type": "color",
-            "$value": {
-              "color": "{color.neutral.120}",
-              "alpha": 0.42
-            },
-            "$extensions": {
-              "oneli8.composite": "color-alpha"
-            },
-            "$description": "Dark directional bevel high stop."
+          "$extensions": {
+            "oneli8.composite": "color-alpha"
           },
-          "material.gem.color.cutEdge.mid": {
-            "$type": "color",
-            "$value": {
-              "color": "{color.blue.120}",
-              "alpha": 0.2
-            },
-            "$extensions": {
-              "oneli8.composite": "color-alpha"
-            },
-            "$description": "Dark directional bevel middle stop."
+          "$description": "Quiet Dark Gem stabilized plane. Tracks the light value; see semantic.json for why this moved from 0.72."
+        },
+        "material.gem.color.quiet.opaqueEquivalent": {
+          "$type": "color",
+          "$value": "{color.neutral.840}",
+          "$description": "Quiet Dark Gem opaque equivalent."
+        },
+        "material.gem.color.cutEdge.high": {
+          "$type": "color",
+          "$value": {
+            "color": "{color.neutral.120}",
+            "alpha": 0.42
           },
-          "material.gem.color.cutEdge.low": {
-            "$type": "color",
-            "$value": {
-              "color": "{color.neutral.120}",
-              "alpha": 0.03
-            },
-            "$extensions": {
-              "oneli8.composite": "color-alpha"
-            },
-            "$description": "Dark directional bevel fade."
+          "$extensions": {
+            "oneli8.composite": "color-alpha"
           },
-          "material.gem.color.cutEdge.shadow": {
-            "$type": "color",
-            "$value": {
-              "color": "{color.cyan.930}",
-              "alpha": 0.36
-            },
-            "$extensions": {
-              "oneli8.composite": "color-alpha"
-            },
-            "$description": "Dark directional bevel shadow."
+          "$description": "Dark directional bevel high stop."
+        },
+        "material.gem.color.cutEdge.mid": {
+          "$type": "color",
+          "$value": {
+            "color": "{color.blue.120}",
+            "alpha": 0.2
           },
-          "material.gem.color.innerThinCut.face": {
-            "$type": "color",
-            "$value": {
-              "color": "{color.neutral.840}",
-              "alpha": 0.72
-            },
-            "$extensions": {
-              "oneli8.composite": "color-alpha"
-            },
-            "$description": "Dark quiet inner face."
+          "$extensions": {
+            "oneli8.composite": "color-alpha"
           },
-          "material.gem.color.innerThinCut.high": {
-            "$type": "color",
-            "$value": {
-              "color": "{color.neutral.120}",
-              "alpha": 0.27
-            },
-            "$extensions": {
-              "oneli8.composite": "color-alpha"
-            },
-            "$description": "Dark inner Thin-Cut highlight."
+          "$description": "Dark directional bevel middle stop."
+        },
+        "material.gem.color.cutEdge.low": {
+          "$type": "color",
+          "$value": {
+            "color": "{color.neutral.120}",
+            "alpha": 0.03
           },
-          "material.gem.color.innerThinCut.mid": {
-            "$type": "color",
-            "$value": {
-              "color": "{color.blue.120}",
-              "alpha": 0.12
-            },
-            "$extensions": {
-              "oneli8.composite": "color-alpha"
-            },
-            "$description": "Dark inner Thin-Cut middle tint."
+          "$extensions": {
+            "oneli8.composite": "color-alpha"
           },
-          "material.gem.color.innerThinCut.low": {
-            "$type": "color",
-            "$value": {
-              "color": "{color.neutral.120}",
-              "alpha": 0.03
-            },
-            "$extensions": {
-              "oneli8.composite": "color-alpha"
-            },
-            "$description": "Dark inner Thin-Cut fade."
+          "$description": "Dark directional bevel fade."
+        },
+        "material.gem.color.cutEdge.shadow": {
+          "$type": "color",
+          "$value": {
+            "color": "{color.cyan.930}",
+            "alpha": 0.36
           },
-          "material.gem.color.facet.cool": {
-            "$type": "color",
-            "$value": {
-              "color": "{color.blue.120}",
-              "alpha": 0.14
-            },
-            "$extensions": {
-              "oneli8.composite": "color-alpha"
-            },
-            "$description": "Dark optional cool facet tint."
+          "$extensions": {
+            "oneli8.composite": "color-alpha"
           },
-          "material.gem.color.facet.warm": {
-            "$type": "color",
-            "$value": {
-              "color": "{color.orange.120}",
-              "alpha": 0.09
-            },
-            "$extensions": {
-              "oneli8.composite": "color-alpha"
-            },
-            "$description": "Dark optional warm facet tint."
-          }
+          "$description": "Dark directional bevel shadow."
+        },
+        "material.gem.color.innerThinCut.face": {
+          "$type": "color",
+          "$value": {
+            "color": "{color.neutral.840}",
+            "alpha": 0.72
+          },
+          "$extensions": {
+            "oneli8.composite": "color-alpha"
+          },
+          "$description": "Dark quiet inner face."
+        },
+        "material.gem.color.innerThinCut.high": {
+          "$type": "color",
+          "$value": {
+            "color": "{color.neutral.120}",
+            "alpha": 0.27
+          },
+          "$extensions": {
+            "oneli8.composite": "color-alpha"
+          },
+          "$description": "Dark inner Thin-Cut highlight."
+        },
+        "material.gem.color.innerThinCut.mid": {
+          "$type": "color",
+          "$value": {
+            "color": "{color.blue.120}",
+            "alpha": 0.12
+          },
+          "$extensions": {
+            "oneli8.composite": "color-alpha"
+          },
+          "$description": "Dark inner Thin-Cut middle tint."
+        },
+        "material.gem.color.innerThinCut.low": {
+          "$type": "color",
+          "$value": {
+            "color": "{color.neutral.120}",
+            "alpha": 0.03
+          },
+          "$extensions": {
+            "oneli8.composite": "color-alpha"
+          },
+          "$description": "Dark inner Thin-Cut fade."
+        },
+        "material.gem.color.facet.cool": {
+          "$type": "color",
+          "$value": {
+            "color": "{color.blue.120}",
+            "alpha": 0.14
+          },
+          "$extensions": {
+            "oneli8.composite": "color-alpha"
+          },
+          "$description": "Dark optional cool facet tint."
+        },
+        "material.gem.color.facet.warm": {
+          "$type": "color",
+          "$value": {
+            "color": "{color.orange.120}",
+            "alpha": 0.09
+          },
+          "$extensions": {
+            "oneli8.composite": "color-alpha"
+          },
+          "$description": "Dark optional warm facet tint."
+        },
+        "material.control.gem.secondary.high": {
+          "$type": "color",
+          "$value": {
+            "color": "{color.neutral.030}",
+            "alpha": 0.22
+          },
+          "$extensions": {
+            "oneli8.composite": "color-alpha"
+          },
+          "$description": "Deep Gem Secondary leading stop in Dark appearance. Holds the value the Light appearance moved off: a near-white gradient over a dark environment is the sheen that reads as glass, where over a light one it read as milk. Dark is unchanged by that fix."
+        },
+        "material.control.gem.secondary.mid": {
+          "$type": "color",
+          "$value": {
+            "color": "{color.neutral.030}",
+            "alpha": 0.05
+          },
+          "$extensions": {
+            "oneli8.composite": "color-alpha"
+          },
+          "$description": "Deep Gem Secondary middle stop in Dark appearance. Holds the value the Light appearance moved off: a near-white gradient over a dark environment is the sheen that reads as glass, where over a light one it read as milk. Dark is unchanged by that fix."
+        },
+        "material.control.gem.secondary.low": {
+          "$type": "color",
+          "$value": {
+            "color": "{color.neutral.030}",
+            "alpha": 0.12
+          },
+          "$extensions": {
+            "oneli8.composite": "color-alpha"
+          },
+          "$description": "Deep Gem Secondary trailing stop in Dark appearance. Holds the value the Light appearance moved off: a near-white gradient over a dark environment is the sheen that reads as glass, where over a light one it read as milk. Dark is unchanged by that fix."
+        },
+        "material.control.gem.secondary.hoverHigh": {
+          "$type": "color",
+          "$value": {
+            "color": "{color.neutral.030}",
+            "alpha": 0.3
+          },
+          "$extensions": {
+            "oneli8.composite": "color-alpha"
+          },
+          "$description": "Deep Gem Secondary Hover leading stop in Dark appearance. Holds the value the Light appearance moved off: a near-white gradient over a dark environment is the sheen that reads as glass, where over a light one it read as milk. Dark is unchanged by that fix."
+        },
+        "material.control.gem.secondary.hoverMid": {
+          "$type": "color",
+          "$value": {
+            "color": "{color.neutral.030}",
+            "alpha": 0.09
+          },
+          "$extensions": {
+            "oneli8.composite": "color-alpha"
+          },
+          "$description": "Deep Gem Secondary Hover middle stop in Dark appearance. Holds the value the Light appearance moved off: a near-white gradient over a dark environment is the sheen that reads as glass, where over a light one it read as milk. Dark is unchanged by that fix."
+        },
+        "material.control.gem.secondary.hoverLow": {
+          "$type": "color",
+          "$value": {
+            "color": "{color.neutral.030}",
+            "alpha": 0.18
+          },
+          "$extensions": {
+            "oneli8.composite": "color-alpha"
+          },
+          "$description": "Deep Gem Secondary Hover trailing stop in Dark appearance. Holds the value the Light appearance moved off: a near-white gradient over a dark environment is the sheen that reads as glass, where over a light one it read as milk. Dark is unchanged by that fix."
+        },
+        "material.control.gem.secondary.loadingHigh": {
+          "$type": "color",
+          "$value": {
+            "color": "{color.neutral.030}",
+            "alpha": 0.39
+          },
+          "$extensions": {
+            "oneli8.composite": "color-alpha"
+          },
+          "$description": "Deep Gem Secondary Loading leading stop in Dark appearance. Holds the value the Light appearance moved off: a near-white gradient over a dark environment is the sheen that reads as glass, where over a light one it read as milk. Dark is unchanged by that fix."
+        },
+        "material.control.gem.secondary.loadingMid": {
+          "$type": "color",
+          "$value": {
+            "color": "{color.neutral.030}",
+            "alpha": 0.12
+          },
+          "$extensions": {
+            "oneli8.composite": "color-alpha"
+          },
+          "$description": "Deep Gem Secondary Loading middle stop in Dark appearance. Holds the value the Light appearance moved off: a near-white gradient over a dark environment is the sheen that reads as glass, where over a light one it read as milk. Dark is unchanged by that fix."
+        },
+        "material.control.gem.secondary.loadingLow": {
+          "$type": "color",
+          "$value": {
+            "color": "{color.neutral.030}",
+            "alpha": 0.24
+          },
+          "$extensions": {
+            "oneli8.composite": "color-alpha"
+          },
+          "$description": "Deep Gem Secondary Loading trailing stop in Dark appearance. Holds the value the Light appearance moved off: a near-white gradient over a dark environment is the sheen that reads as glass, where over a light one it read as milk. Dark is unchanged by that fix."
+        }
       }
     }
   },
@@ -802,22 +920,139 @@
     }
   },
   "typographyViewport": {
-    "compact":{"$description":"Default semantic typography values; no override required.","overrides":{}},
-    "medium":{"$description":"Medium viewport typography mapping selected by the consuming layout adapter.","overrides":{
-      "typography.display.large":{"$type":"typography","$value":{"fontFamily":"{font.family.display}","fontSize":"{font.size.090}","fontWeight":"{font.weight.bold}","letterSpacing":"{font.tracking.tight}","lineHeight":"{font.line.096}"}},
-      "typography.display.medium":{"$type":"typography","$value":{"fontFamily":"{font.family.display}","fontSize":"{font.size.066}","fontWeight":"{font.weight.bold}","letterSpacing":"{font.tracking.snug}","lineHeight":"{font.line.072}"}},
-      "typography.display.small":{"$type":"typography","$value":{"fontFamily":"{font.family.display}","fontSize":"{font.size.051}","fontWeight":"{font.weight.semibold}","letterSpacing":"{font.tracking.displaySoft}","lineHeight":"{font.line.060}"}},
-      "typography.title.large":{"$type":"typography","$value":{"fontFamily":"{font.family.functional}","fontSize":"{font.size.051}","fontWeight":"{font.weight.semibold}","letterSpacing":"{font.tracking.titleTight}","lineHeight":"{font.line.060}"}},
-      "typography.title.medium":{"$type":"typography","$value":{"fontFamily":"{font.family.functional}","fontSize":"{font.size.039}","fontWeight":"{font.weight.semibold}","letterSpacing":"{font.tracking.titleSoft}","lineHeight":"{font.line.048}"}},
-      "typography.title.small":{"$type":"typography","$value":{"fontFamily":"{font.family.functional}","fontSize":"{font.size.030}","fontWeight":"{font.weight.semibold}","letterSpacing":"{font.tracking.normal}","lineHeight":"{font.line.039}"}}
-    }},
-    "expanded":{"$description":"Expanded viewport typography mapping selected by the consuming layout adapter.","overrides":{
-      "typography.display.large":{"$type":"typography","$value":{"fontFamily":"{font.family.display}","fontSize":"{font.size.120}","fontWeight":"{font.weight.bold}","letterSpacing":"{font.tracking.tighter}","lineHeight":"{font.line.126}"}},
-      "typography.display.medium":{"$type":"typography","$value":{"fontFamily":"{font.family.display}","fontSize":"{font.size.090}","fontWeight":"{font.weight.bold}","letterSpacing":"{font.tracking.tight}","lineHeight":"{font.line.096}"}},
-      "typography.display.small":{"$type":"typography","$value":{"fontFamily":"{font.family.display}","fontSize":"{font.size.066}","fontWeight":"{font.weight.semibold}","letterSpacing":"{font.tracking.snug}","lineHeight":"{font.line.072}"}},
-      "typography.title.large":{"$type":"typography","$value":{"fontFamily":"{font.family.functional}","fontSize":"{font.size.051}","fontWeight":"{font.weight.semibold}","letterSpacing":"{font.tracking.titleTight}","lineHeight":"{font.line.060}"}},
-      "typography.title.medium":{"$type":"typography","$value":{"fontFamily":"{font.family.functional}","fontSize":"{font.size.039}","fontWeight":"{font.weight.semibold}","letterSpacing":"{font.tracking.titleSoft}","lineHeight":"{font.line.048}"}},
-      "typography.title.small":{"$type":"typography","$value":{"fontFamily":"{font.family.functional}","fontSize":"{font.size.030}","fontWeight":"{font.weight.semibold}","letterSpacing":"{font.tracking.normal}","lineHeight":"{font.line.039}"}}
-    }}
+    "compact": {
+      "$description": "Default semantic typography values; no override required.",
+      "overrides": {}
+    },
+    "medium": {
+      "$description": "Medium viewport typography mapping selected by the consuming layout adapter.",
+      "overrides": {
+        "typography.display.large": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{font.family.display}",
+            "fontSize": "{font.size.090}",
+            "fontWeight": "{font.weight.bold}",
+            "letterSpacing": "{font.tracking.tight}",
+            "lineHeight": "{font.line.096}"
+          }
+        },
+        "typography.display.medium": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{font.family.display}",
+            "fontSize": "{font.size.066}",
+            "fontWeight": "{font.weight.bold}",
+            "letterSpacing": "{font.tracking.snug}",
+            "lineHeight": "{font.line.072}"
+          }
+        },
+        "typography.display.small": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{font.family.display}",
+            "fontSize": "{font.size.051}",
+            "fontWeight": "{font.weight.semibold}",
+            "letterSpacing": "{font.tracking.displaySoft}",
+            "lineHeight": "{font.line.060}"
+          }
+        },
+        "typography.title.large": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{font.family.functional}",
+            "fontSize": "{font.size.051}",
+            "fontWeight": "{font.weight.semibold}",
+            "letterSpacing": "{font.tracking.titleTight}",
+            "lineHeight": "{font.line.060}"
+          }
+        },
+        "typography.title.medium": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{font.family.functional}",
+            "fontSize": "{font.size.039}",
+            "fontWeight": "{font.weight.semibold}",
+            "letterSpacing": "{font.tracking.titleSoft}",
+            "lineHeight": "{font.line.048}"
+          }
+        },
+        "typography.title.small": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{font.family.functional}",
+            "fontSize": "{font.size.030}",
+            "fontWeight": "{font.weight.semibold}",
+            "letterSpacing": "{font.tracking.normal}",
+            "lineHeight": "{font.line.039}"
+          }
+        }
+      }
+    },
+    "expanded": {
+      "$description": "Expanded viewport typography mapping selected by the consuming layout adapter.",
+      "overrides": {
+        "typography.display.large": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{font.family.display}",
+            "fontSize": "{font.size.120}",
+            "fontWeight": "{font.weight.bold}",
+            "letterSpacing": "{font.tracking.tighter}",
+            "lineHeight": "{font.line.126}"
+          }
+        },
+        "typography.display.medium": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{font.family.display}",
+            "fontSize": "{font.size.090}",
+            "fontWeight": "{font.weight.bold}",
+            "letterSpacing": "{font.tracking.tight}",
+            "lineHeight": "{font.line.096}"
+          }
+        },
+        "typography.display.small": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{font.family.display}",
+            "fontSize": "{font.size.066}",
+            "fontWeight": "{font.weight.semibold}",
+            "letterSpacing": "{font.tracking.snug}",
+            "lineHeight": "{font.line.072}"
+          }
+        },
+        "typography.title.large": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{font.family.functional}",
+            "fontSize": "{font.size.051}",
+            "fontWeight": "{font.weight.semibold}",
+            "letterSpacing": "{font.tracking.titleTight}",
+            "lineHeight": "{font.line.060}"
+          }
+        },
+        "typography.title.medium": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{font.family.functional}",
+            "fontSize": "{font.size.039}",
+            "fontWeight": "{font.weight.semibold}",
+            "letterSpacing": "{font.tracking.titleSoft}",
+            "lineHeight": "{font.line.048}"
+          }
+        },
+        "typography.title.small": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{font.family.functional}",
+            "fontSize": "{font.size.030}",
+            "fontWeight": "{font.weight.semibold}",
+            "letterSpacing": "{font.tracking.normal}",
+            "lineHeight": "{font.line.039}"
+          }
+        }
+      }
+    }
   }
 }

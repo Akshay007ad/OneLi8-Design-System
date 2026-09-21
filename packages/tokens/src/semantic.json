@@ -698,18 +698,18 @@
             "$type": "color",
             "$value": {
               "color": "{color.neutral.030}",
-              "alpha": 0.22
+              "alpha": 0.09
             },
             "$extensions": {
               "oneli8.composite": "color-alpha"
             },
-            "$description": "Gem Secondary leading transparent highlight."
+            "$description": "Quiet Gem glass leading stop in the Light appearance. 0.09, down from 0.22: the gem field face is TWO stacked near-white layers, this gradient over material.gem.color.quiet.stabilizedFace, which composited to 31-43% white and is what made light Gem read as milk rather than glass. Dark keeps 0.22 via an override, because the same near-white gradient over a dark environment is the sheen that makes the material legible as glass. Every state on this ladder is one 0.03 step apart, which is the 3-point rhythm expressed in alpha."
           },
           "mid": {
             "$type": "color",
             "$value": {
               "color": "{color.neutral.030}",
-              "alpha": 0.05
+              "alpha": 0.03
             },
             "$extensions": {
               "oneli8.composite": "color-alpha"
@@ -720,7 +720,7 @@
             "$type": "color",
             "$value": {
               "color": "{color.neutral.030}",
-              "alpha": 0.12
+              "alpha": 0.06
             },
             "$extensions": {
               "oneli8.composite": "color-alpha"
@@ -731,7 +731,7 @@
             "$type": "color",
             "$value": {
               "color": "{color.neutral.030}",
-              "alpha": 0.3
+              "alpha": 0.12
             },
             "$extensions": {
               "oneli8.composite": "color-alpha"
@@ -742,7 +742,7 @@
             "$type": "color",
             "$value": {
               "color": "{color.neutral.030}",
-              "alpha": 0.09
+              "alpha": 0.06
             },
             "$extensions": {
               "oneli8.composite": "color-alpha"
@@ -753,7 +753,7 @@
             "$type": "color",
             "$value": {
               "color": "{color.neutral.030}",
-              "alpha": 0.18
+              "alpha": 0.09
             },
             "$extensions": {
               "oneli8.composite": "color-alpha"
@@ -764,7 +764,7 @@
             "$type": "color",
             "$value": {
               "color": "{color.neutral.030}",
-              "alpha": 0.39
+              "alpha": 0.15
             },
             "$extensions": {
               "oneli8.composite": "color-alpha"
@@ -775,7 +775,7 @@
             "$type": "color",
             "$value": {
               "color": "{color.neutral.030}",
-              "alpha": 0.12
+              "alpha": 0.09
             },
             "$extensions": {
               "oneli8.composite": "color-alpha"
@@ -786,7 +786,7 @@
             "$type": "color",
             "$value": {
               "color": "{color.neutral.030}",
-              "alpha": 0.24
+              "alpha": 0.12
             },
             "$extensions": {
               "oneli8.composite": "color-alpha"
@@ -885,12 +885,12 @@
             "$type": "color",
             "$value": {
               "color": "{color.neutral.030}",
-              "alpha": 0.27
+              "alpha": 0.15
             },
             "$extensions": {
               "oneli8.composite": "color-alpha"
             },
-            "$description": "Quiet Light Gem stabilized content plane. Slightly more present than the environmental face at 0.27, matching the gem families' stabilized alpha, because at rest the surface is being read rather than looked through."
+            "$description": "Quiet Light Gem stabilized content plane. 0.15, because it is not seen alone: the filled Gem field stacks the Control Gem Secondary gradient on top of it, and 0.15 under that ladder composites to 0.18-0.23 white \u2014 the same presence as the 0.18 environmental face, which is the transparency that was approved. At the previous 0.27 the composite was 0.31-0.43 and the surface read as milk. The Gem families keep their own stabilized alphas (sapphire 0.30 and so on); this one no longer tracks them, because they are not stacked under a second layer."
           },
           "content": {
             "$type": "color",

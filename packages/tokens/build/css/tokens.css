@@ -282,15 +282,15 @@
   --ol8-material-control-gem--primary-loading-mid: var(--ol8-color-primary-840);
   --ol8-material-control-gem--primary-loading-end: var(--ol8-color-primary-930);
   --ol8-material-control-gem--primary-content: var(--ol8-color-neutral-030);
-  --ol8-material-control-gem--secondary-high: color-mix(in srgb, var(--ol8-color-neutral-030) 22%, transparent);
-  --ol8-material-control-gem--secondary-mid: color-mix(in srgb, var(--ol8-color-neutral-030) 5%, transparent);
-  --ol8-material-control-gem--secondary-low: color-mix(in srgb, var(--ol8-color-neutral-030) 12%, transparent);
-  --ol8-material-control-gem--secondary-hover-high: color-mix(in srgb, var(--ol8-color-neutral-030) 30%, transparent);
-  --ol8-material-control-gem--secondary-hover-mid: color-mix(in srgb, var(--ol8-color-neutral-030) 9%, transparent);
-  --ol8-material-control-gem--secondary-hover-low: color-mix(in srgb, var(--ol8-color-neutral-030) 18%, transparent);
-  --ol8-material-control-gem--secondary-loading-high: color-mix(in srgb, var(--ol8-color-neutral-030) 39%, transparent);
-  --ol8-material-control-gem--secondary-loading-mid: color-mix(in srgb, var(--ol8-color-neutral-030) 12%, transparent);
-  --ol8-material-control-gem--secondary-loading-low: color-mix(in srgb, var(--ol8-color-neutral-030) 24%, transparent);
+  --ol8-material-control-gem--secondary-high: color-mix(in srgb, var(--ol8-color-neutral-030) 9%, transparent);
+  --ol8-material-control-gem--secondary-mid: color-mix(in srgb, var(--ol8-color-neutral-030) 3%, transparent);
+  --ol8-material-control-gem--secondary-low: color-mix(in srgb, var(--ol8-color-neutral-030) 6%, transparent);
+  --ol8-material-control-gem--secondary-hover-high: color-mix(in srgb, var(--ol8-color-neutral-030) 12%, transparent);
+  --ol8-material-control-gem--secondary-hover-mid: color-mix(in srgb, var(--ol8-color-neutral-030) 6%, transparent);
+  --ol8-material-control-gem--secondary-hover-low: color-mix(in srgb, var(--ol8-color-neutral-030) 9%, transparent);
+  --ol8-material-control-gem--secondary-loading-high: color-mix(in srgb, var(--ol8-color-neutral-030) 15%, transparent);
+  --ol8-material-control-gem--secondary-loading-mid: color-mix(in srgb, var(--ol8-color-neutral-030) 9%, transparent);
+  --ol8-material-control-gem--secondary-loading-low: color-mix(in srgb, var(--ol8-color-neutral-030) 12%, transparent);
   --ol8-material-control-gem--secondary-content: var(--ol8-color-neutral-030);
   --ol8-material-control-gem--rim-default: color-mix(in srgb, var(--ol8-color-neutral-030) 24%, transparent);
   --ol8-material-control-gem--rim-hover: color-mix(in srgb, var(--ol8-color-neutral-030) 36%, transparent);
@@ -300,7 +300,7 @@
   --ol8-material-control-gem--gradient-mid: 48.586%;
   --ol8-material-control-gem--gradient-end: 85.361%;
   --ol8-material-gem-color-quiet-environmentalface: color-mix(in srgb, var(--ol8-color-neutral-030) 18%, transparent);
-  --ol8-material-gem-color-quiet-stabilizedface: color-mix(in srgb, var(--ol8-color-neutral-030) 27%, transparent);
+  --ol8-material-gem-color-quiet-stabilizedface: color-mix(in srgb, var(--ol8-color-neutral-030) 15%, transparent);
   --ol8-material-gem-color-quiet-content: var(--ol8-color-neutral-030);
   --ol8-material-gem-color-quiet-contentglow: color-mix(in srgb, var(--ol8-color-neutral-930) 72%, transparent);
   --ol8-material-gem-color-quiet-opaqueequivalent: var(--ol8-color-neutral-030);
@@ -747,6 +747,15 @@
   --ol8-material-gem-color-innerthincut-low: color-mix(in srgb, var(--ol8-color-neutral-120) 3%, transparent);
   --ol8-material-gem-color-facet-cool: color-mix(in srgb, var(--ol8-color-blue-120) 14.000000000000002%, transparent);
   --ol8-material-gem-color-facet-warm: color-mix(in srgb, var(--ol8-color-orange-120) 9%, transparent);
+  --ol8-material-control-gem--secondary-high: color-mix(in srgb, var(--ol8-color-neutral-030) 22%, transparent);
+  --ol8-material-control-gem--secondary-mid: color-mix(in srgb, var(--ol8-color-neutral-030) 5%, transparent);
+  --ol8-material-control-gem--secondary-low: color-mix(in srgb, var(--ol8-color-neutral-030) 12%, transparent);
+  --ol8-material-control-gem--secondary-hover-high: color-mix(in srgb, var(--ol8-color-neutral-030) 30%, transparent);
+  --ol8-material-control-gem--secondary-hover-mid: color-mix(in srgb, var(--ol8-color-neutral-030) 9%, transparent);
+  --ol8-material-control-gem--secondary-hover-low: color-mix(in srgb, var(--ol8-color-neutral-030) 18%, transparent);
+  --ol8-material-control-gem--secondary-loading-high: color-mix(in srgb, var(--ol8-color-neutral-030) 39%, transparent);
+  --ol8-material-control-gem--secondary-loading-mid: color-mix(in srgb, var(--ol8-color-neutral-030) 12%, transparent);
+  --ol8-material-control-gem--secondary-loading-low: color-mix(in srgb, var(--ol8-color-neutral-030) 24%, transparent);
 }
 
 [data-ol8-primary="blue"] {

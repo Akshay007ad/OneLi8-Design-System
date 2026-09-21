@@ -77,9 +77,25 @@ ok(semantic.material.gem.color.quiet.content.$value==="{color.neutral.030}"&&sem
 ok(!("material.gem.color.quiet.content"in themes.colorScheme.dark.overrides)&&!("material.gem.color.quiet.contentGlow"in themes.colorScheme.dark.overrides)&&!("color.icon.onGem"in themes.colorScheme.dark.overrides),"Content on Gem must carry no dark override, matching color.icon.onGem");
 ok(semantic.material.gem.color.family.sapphire.innerHigh.$value.alpha===0.39,"Sapphire Thin-Cut highlight must retain its 39% cap");
 ok(semantic.material.control.gem.primary.start.$value==="{color.primary.480}"&&themes.colorScheme.dark.overrides["material.control.gem.primary.start"].$value==="{color.primary.600}","Gem controls must keep Light and Dark theme-aware leading stops");
-ok(semantic.material.control.gem.secondary.high.$value.alpha===0.22&&semantic.material.control.gem.rim.default.$value.alpha===0.24,"Gem Secondary transparency and inset rim must retain the approved quiet material recipe");
+ok(semantic.material.control.gem.secondary.high.$value.alpha===0.09&&themes.colorScheme.dark.overrides["material.control.gem.secondary.high"].$value.alpha===0.22&&semantic.material.control.gem.rim.default.$value.alpha===0.24,"Gem Secondary glass must be 0.09 in Light and 0.22 in Dark, and the inset rim must not move with it");
 ok(semantic.material.control.gem.primary.loadingStart.$value==="{color.primary.720}"&&semantic.material.control.gem.primary.loadingEnd.$value==="{color.primary.930}","Gem Loading must use a distinct shared deep tonal state");
-ok(semantic.material.control.gem.secondary.loadingHigh.$value.alpha===0.39&&semantic.material.control.gem.secondary.loadingLow.$value.alpha===0.24,"Gem Secondary Loading must remain transparent but visibly distinct");
+ok(semantic.material.control.gem.secondary.loadingHigh.$value.alpha===0.15&&semantic.material.control.gem.secondary.loadingLow.$value.alpha===0.12&&themes.colorScheme.dark.overrides["material.control.gem.secondary.loadingHigh"].$value.alpha===0.39,"Gem Secondary Loading must stay transparent but visibly distinct in both appearances");
+// The Light appearance face is two stacked near-white layers: the Control Gem
+// Secondary gradient over material.gem.color.quiet.stabilizedFace. Neither
+// number means anything alone, so the composite is what is pinned. 0.15 under
+// the 0.09 ladder composites to 0.2265, which is the presence of the approved
+// 0.18 environmental face; at the previous 0.27 and 0.22 it was 0.4306 and the
+// surface read as milk. See proof/gem-halo-contrast.html for the measurement
+// that showed this costs no text contrast.
+const gemFilledComposite=(q,g)=>q+g*(1-q);
+ok(Math.abs(gemFilledComposite(semantic.material.gem.color.quiet.stabilizedFace.$value.alpha,semantic.material.control.gem.secondary.high.$value.alpha)-0.2265)<1e-9,"The Light filled Gem face must composite to 0.2265, the approved clear-glass presence");
+// Every Secondary state sits one 0.03 step from the next, which is the 3-point
+// rhythm in alpha rather than in px.
+ok([["high","hoverHigh","loadingHigh"],["mid","hoverMid","loadingMid"],["low","hoverLow","loadingLow"]].every(([a,b,c])=>{const v=k=>semantic.material.control.gem.secondary[k].$value.alpha;return Math.abs(v(b)-v(a)-0.03)<1e-9&&Math.abs(v(c)-v(b)-0.03)<1e-9;}),"Gem Secondary must climb Default -> Hover -> Loading in single 0.03 steps on every stop");
+// The bezel is a different token family and the transparency fix must never
+// reach it: the rim inset shadows and the Inner Thin Cut / Cut Edge angular
+// stroke stops are what make a Gem recognisable as a Gem.
+ok(semantic.material.control.gem.rim.specular.$value.alpha===0.54&&semantic.material.gem.color.innerThinCut.high.$value.alpha===0.54&&semantic.material.gem.color.cutEdge.high.$value.alpha===0.72&&!Object.keys(themes.colorScheme.dark.overrides).some(k=>k.startsWith("material.control.gem.rim.")),"The Gem bezel families must hold their approved values and stay appearance-stable");
 ok(css.includes("--ol8-material-gem-color-family-amethyst-environmentalface: color-mix(in srgb, var(--ol8-color-violet-930) 48%, transparent)"),"Gem CSS colors must preserve Primitive references and approved alpha");
 ok(tw.includes('"overlay": "var(--ol8-elevation-surface-overlay)"')&&tw.includes('"notification": "1200"'),"Tailwind v3 must expose Elevation and stacking roles");
 ok(tw4.includes("--shadow-ol8-blocking: var(--ol8-elevation-surface-blocking)")&&tw4.includes("--z-ol8-modal: 900"),"Tailwind v4 must expose Elevation and stacking roles");
