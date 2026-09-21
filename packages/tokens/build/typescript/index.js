@@ -2162,10 +2162,10 @@ export const tokens = {
   "material.gem.color.quiet.environmentalFace": {
     "type": "color",
     "value": {
-      "color": "#151817",
-      "alpha": 0.36
+      "color": "#FCFAF3",
+      "alpha": 0.18
     },
-    "description": "Quiet Gem environmental face. SMOKED glass, not milky: a dark tint at 0.36 in Light, because this is the face used when the surface sits over imagery whose brightness is unknown, and the content on it is stably near-white. A near-white face over bright scenery gives white ink 1.40:1 and no halo radius fixes that; a dark face at 0.36 gives 2.97:1 bare and clears 4.5:1 under the halo, while staying transparent enough that the scene reads straight through. The Light and Dark appearances now differ only in how present the smoke is (0.36 and 0.48), not in its hue.",
+    "description": "Quiet Gem environmental face. Light tint at 0.18 in the Light appearance, dark tint at 0.48 in Dark: a dark tint belongs to the Dark appearance, and the Light appearance stays light. It was briefly smoked in Light to make near-white ink measure well; that inverted the appearance and is not the design. Legibility is carried by the content halo instead, which is stacked three times over for exactly this reason -- see material.gem.blur.contentGlow and proof/gem-halo-contrast.html.",
     "tier": "semantic"
   },
   "material.gem.color.quiet.stabilizedFace": {
@@ -2194,8 +2194,8 @@ export const tokens = {
   },
   "material.gem.color.quiet.opaqueEquivalent": {
     "type": "color",
-    "value": "#20201E",
-    "description": "Quiet Gem reduced-transparency equivalent. A dark neutral in both appearances, because it must be the opaque form of a smoked face carrying near-white content. It was neutral.030 while the face was milky; a light solid under white ink would be unreadable the moment transparency is switched off.",
+    "value": "#FCFAF3",
+    "description": "Quiet Light Gem reduced-transparency equivalent. The opaque form of the light face, so it follows the face back to a light neutral; Dark keeps neutral.840 through its override.",
     "tier": "semantic"
   },
   "material.gem.color.cutEdge.outerHigh": {
@@ -6413,7 +6413,7 @@ export const themeModes = {
         "type": "color",
         "value": "#20201E",
         "reference": "color.neutral.840",
-        "description": "Quiet Dark Gem opaque equivalent. Same dark neutral as Light; the opaque form of a smoked face does not need to change by appearance."
+        "description": "Quiet Dark Gem opaque equivalent. The opaque form of the dark face."
       },
       {
         "path": "material.gem.color.cutEdge.high",

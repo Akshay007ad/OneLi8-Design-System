@@ -196,8 +196,15 @@
 .ol8-choice[data-ol8-material="gem"]:not([data-ol8-availability="disabled"]) .ol8-choice__label,
 .ol8-choice[data-ol8-material="gem"]:not([data-ol8-availability="disabled"]) .ol8-choice__description {
   color: var(--ol8-material-gem-color-quiet-content);
-  text-shadow: 0 0 var(--ol8-material-gem-blur-contentglow)
-               var(--ol8-material-gem-color-quiet-contentglow);
+  /* Stacked three times on purpose. A single shadow at this radius reaches
+     only 1.71:1 against near-white ink on a bright plate, and widening the
+     radius makes it WEAKER because blur spreads a fixed alpha budget over more
+     area. Repeating the same shadow accumulates alpha instead of spreading it:
+     1 - (1 - a)^3. Measured in proof/gem-halo-contrast.html. */
+  text-shadow:
+    0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow),
+    0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow),
+    0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow);
 }
 @media (prefers-reduced-transparency: reduce) {
   .ol8-choice[data-ol8-material="gem"] > .ol8-choice__surface {
