@@ -211,6 +211,43 @@ wider radius makes it weaker, because blur spreads a fixed alpha budget over
 more area. `proof/gem-halo-contrast.html` sweeps it. Light gem needs a local
 scrim behind content to reach 4.5:1; no halo radius gets there.
 
+## One glow, shared by glyphs and control geometry
+
+Content on Gem means **all** content. A near-white label beside a dark
+checkbox outline is the material half-applied, and it was: the unselected
+indicator boundary bound `Color / Border / Strong`, dark in the Light
+appearance, long after the labels went near-white.
+
+The rule, in both directions:
+
+- the **unselected** control boundary takes `quiet.content`, the same ink as
+  the label, because an empty checkbox is a glyph rather than chrome
+- **selected** and **mixed** indicators are left alone — they fill with the
+  primary action family and carry their own white mark, which already reads on
+  glass
+- iconography takes `color.icon.onGem`, which already exists for exactly this
+  and is already stable across appearances
+- **disabled takes none of it**, in either mode: it resolves to the opaque
+  equivalent where the regular disabled ink applies, so no gem ink and no halo
+
+The halo is one definition, expressed in two syntaxes because the platform
+forces it. Text can take `text-shadow`; an SVG stroke cannot, so control
+geometry takes the identical halo through chained `drop-shadow()` filters:
+
+```css
+--_gem-glow: 0 0 var(--ol8-material-gem-blur-contentglow)
+             var(--ol8-material-gem-color-quiet-contentglow);
+--_gem-glow-filter:
+  drop-shadow(var(--_gem-glow)) drop-shadow(var(--_gem-glow))
+  drop-shadow(var(--_gem-glow)) drop-shadow(var(--_gem-glow));
+```
+
+Both are built from the same two tokens and repeated the same four times, which
+is what makes a label's glow and a control's glow read as one field instead of
+two near-misses. Change the radius or the colour and both follow. The
+definitions live on every Gem surface — button, icon button, field control,
+`.ol8-gem` and the Choice Item — because descendants read them.
+
 ## Which nodes take gem ink
 
 Only what sits physically on the face.

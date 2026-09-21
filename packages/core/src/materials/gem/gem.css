@@ -37,6 +37,16 @@
   position: relative;
   isolation: isolate;
   --_rim: var(--ol8-material-control-gem--rim-default);
+  /* Defined on every Gem surface, not just one, because the halo is read by
+     descendants: text through text-shadow and control geometry through chained
+     drop-shadow filters. Both are built from the same two tokens and repeated
+     the same four times, which is what makes a label's glow and a control's
+     glow one field instead of two near-misses. */
+  --_gem-glow: 0 0 var(--ol8-material-gem-blur-contentglow)
+               var(--ol8-material-gem-color-quiet-contentglow);
+  --_gem-glow-filter:
+    drop-shadow(var(--_gem-glow)) drop-shadow(var(--_gem-glow))
+    drop-shadow(var(--_gem-glow)) drop-shadow(var(--_gem-glow));
 }
 
 /* The regular opaque background stays underneath on purpose — it is what
@@ -193,11 +203,8 @@
      radius makes it WEAKER because blur spreads a fixed alpha budget over more
      area. Repeating the same shadow accumulates alpha instead of spreading it:
      1 - (1 - a)^4. Measured in proof/gem-halo-contrast.html. */
-  text-shadow:
-    0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow),
-    0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow),
-    0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow),
-    0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow);
+  text-shadow: var(--_gem-glow), var(--_gem-glow),
+               var(--_gem-glow), var(--_gem-glow);
 }
 /* Icons on the face take the token that already exists for exactly this and
    is already stable across appearances. */
@@ -287,22 +294,38 @@
      token of its own, so surfaces using it fell back to dark body text.
      A transparent face cannot guarantee its own backdrop, so the content
      carries a halo rather than the surface being thickened to provide one. */
+  --_gem-glow: 0 0 var(--ol8-material-gem-blur-contentglow)
+               var(--ol8-material-gem-color-quiet-contentglow);
+  --_gem-glow-filter:
+    drop-shadow(var(--_gem-glow)) drop-shadow(var(--_gem-glow))
+    drop-shadow(var(--_gem-glow)) drop-shadow(var(--_gem-glow));
   color: var(--ol8-material-gem-color-quiet-content);
   /* Stacked three times on purpose. A single shadow at this radius reaches
      only 1.71:1 against near-white ink on a bright plate, and widening the
      radius makes it WEAKER because blur spreads a fixed alpha budget over more
      area. Repeating the same shadow accumulates alpha instead of spreading it:
      1 - (1 - a)^4. Measured in proof/gem-halo-contrast.html. */
-  text-shadow:
-    0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow),
-    0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow),
-    0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow),
-    0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow);
+  text-shadow: var(--_gem-glow), var(--_gem-glow),
+               var(--_gem-glow), var(--_gem-glow);
   /* The cut edge. Invariant — it is what keeps a gem recognisable as gem. */
   box-shadow:
     inset 0 2px 1px 0 var(--ol8-material-gem-color-cutedge-high),
     inset 0 0 0 1px var(--ol8-material-gem-color-cutedge-mid),
     0 9px 12px var(--ol8-material-gem-color-cutedge-shadow);
+}
+
+/* Content on a generic Gem surface, same rule as the Choice Item carries:
+   glyphs and control geometry both take the gem ink and share one halo
+   definition, so a label's glow and a control's glow are the same field. Text
+   uses text-shadow; an SVG stroke cannot, so it uses chained drop-shadow
+   filters built from the identical two tokens. */
+.ol8-gem .ol8-selection {
+  --_edge: var(--ol8-material-gem-color-quiet-content);
+  filter: var(--_gem-glow-filter);
+}
+.ol8-gem .ol8-icon {
+  color: var(--ol8-color-icon-on-gem);
+  filter: var(--_gem-glow-filter);
 }
 
 .ol8-gem[data-ol8-face="environmental"] {

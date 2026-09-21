@@ -193,6 +193,39 @@
    description here really are on the face: .ol8-choice__surface spans the row
    beneath them. Disabled is excluded — it resolves to the opaque equivalent,
    where the regular disabled ink applies and no halo is wanted. */
+/* ONE GLOW, TWO SYNTAXES.
+   Content on Gem means ALL content — glyphs and control geometry alike. Text
+   takes the halo through text-shadow; an SVG stroke cannot, so the indicator
+   takes the identical halo through chained drop-shadow filters. Both are built
+   from the same two tokens and the same four repetitions, which is what makes
+   the label's glow and the checkbox's glow read as one field rather than two
+   near-misses. Change the radius or the colour and both follow. */
+.ol8-choice[data-ol8-material="gem"] {
+  --_gem-glow: 0 0 var(--ol8-material-gem-blur-contentglow)
+               var(--ol8-material-gem-color-quiet-contentglow);
+  --_gem-glow-filter:
+    drop-shadow(var(--_gem-glow)) drop-shadow(var(--_gem-glow))
+    drop-shadow(var(--_gem-glow)) drop-shadow(var(--_gem-glow));
+}
+
+/* The unselected control boundary is content, not chrome. It was
+   color.border.strong, which is dark in the Light appearance and left the
+   checkbox reading as a dark hole in a surface whose text had gone near-white.
+   On Gem it takes the same ink as the label. Selected and mixed are untouched:
+   those fill with the primary action family and carry their own white mark,
+   which already reads on glass. */
+.ol8-choice[data-ol8-material="gem"]:not([data-ol8-availability="disabled"]) .ol8-selection {
+  --_edge: var(--ol8-material-gem-color-quiet-content);
+  filter: var(--_gem-glow-filter);
+}
+
+/* Any iconography sitting on the face takes the token that already exists for
+   exactly this and is already stable across appearances. */
+.ol8-choice[data-ol8-material="gem"]:not([data-ol8-availability="disabled"]) .ol8-icon {
+  color: var(--ol8-color-icon-on-gem);
+  filter: var(--_gem-glow-filter);
+}
+
 .ol8-choice[data-ol8-material="gem"]:not([data-ol8-availability="disabled"]) .ol8-choice__label,
 .ol8-choice[data-ol8-material="gem"]:not([data-ol8-availability="disabled"]) .ol8-choice__description {
   color: var(--ol8-material-gem-color-quiet-content);
@@ -201,11 +234,8 @@
      radius makes it WEAKER because blur spreads a fixed alpha budget over more
      area. Repeating the same shadow accumulates alpha instead of spreading it:
      1 - (1 - a)^4. Measured in proof/gem-halo-contrast.html. */
-  text-shadow:
-    0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow),
-    0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow),
-    0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow),
-    0 0 var(--ol8-material-gem-blur-contentglow) var(--ol8-material-gem-color-quiet-contentglow);
+  text-shadow: var(--_gem-glow), var(--_gem-glow),
+               var(--_gem-glow), var(--_gem-glow);
 }
 @media (prefers-reduced-transparency: reduce) {
   .ol8-choice[data-ol8-material="gem"] > .ol8-choice__surface {

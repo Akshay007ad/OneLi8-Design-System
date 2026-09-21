@@ -52,6 +52,32 @@ for (const sheet of sheets) {
   }
 }
 
+/* --- component-local properties ------------------------------------------
+ * The rule above only covers --ol8-* tokens, and that gap bit immediately: a
+ * shared --_gem-glow was defined on .ol8-gem while the gem text field read it
+ * too, so the field's halo silently evaluated to nothing and every check still
+ * passed. A local property is as silent as a token when it is missing.
+ *
+ * Definitions are pooled across sheets on purpose: one sheet legitimately SETS
+ * a property another sheet declares and reads (gem.css sets --_edge, which
+ * selection-indicator.css declares). What cannot be allowed is a property no
+ * sheet defines anywhere. */
+const localDefined = new Set();
+for (const sheet of sheets)
+  for (const m of readFileSync(sheet, 'utf8').matchAll(/(--_[a-z0-9-]+)\s*:/gmi))
+    localDefined.add(m[1]);
+
+for (const sheet of sheets) {
+  const css = readFileSync(sheet, 'utf8');
+  for (const m of css.matchAll(/var\(\s*(--_[a-z0-9-]+)\s*([,)])/gmi)) {
+    const [, name, next] = m;
+    if (next === ',') continue;
+    if (localDefined.has(name)) continue;
+    const line = css.slice(0, m.index).split('\n').length;
+    failures.push(`${relative(ROOT, sheet)}:${line} reads ${name}, which no stylesheet defines`);
+  }
+}
+
 if (failures.length) {
   console.error('✗ css variable check failed:');
   for (const f of failures) console.error('  · ' + f);
