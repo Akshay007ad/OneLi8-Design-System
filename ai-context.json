@@ -6,7 +6,7 @@
   "figma": {
     "fileKey": "0wRnp6ulIEA8PCV6wqGmAJ",
     "url": "https://www.figma.com/design/0wRnp6ulIEA8PCV6wqGmAJ/",
-    "name": "Oneli8 Design System",
+    "name": "One Li8 Design system",
     "pages": {
       "Foundations": "9:7",
       "Iconography": "84:9",
@@ -16,7 +16,7 @@
         "Gem Button": "1034:9969"
       }
     },
-    "$comment": "The file title carries no version on purpose. The plugin API can neither read it (figma.root.name returns \"Document\") nor set it (\"Setting the document name is currently not supported\"), so any version here would be an ungateable claim that rots at the next release. Use the top-level version field instead."
+    "$comment": "The file title carries no version on purpose. The plugin API can neither read it (figma.root.name returns \"Document\") nor set it (\"Setting the document name is currently not supported\"), so a version here would be an ungateable claim that rots at the next release. Use the top-level version field, which IS gated against package.json. The name itself is stable, so citing it is safe."
   },
   "foundations": {
     "source": {
