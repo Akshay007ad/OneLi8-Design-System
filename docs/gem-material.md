@@ -230,6 +230,18 @@ The rule, in both directions:
 - **disabled takes none of it**, in either mode: it resolves to the opaque
   equivalent where the regular disabled ink applies, so no gem ink and no halo
 
+Text takes four repetitions, control geometry takes **three**. WCAG 1.4.11 asks
+3:1 of a graphical object where 1.4.3 asks 4.5:1 of text, so the boundary does
+not need the fourth — and leaving it off is what keeps the indicator blended
+into the glass rather than ringed. At 3px: text in four stacks is 5.06:1, the
+boundary in three is 3.75:1.
+
+A softer "white yet grey" ink was measured and does not survive. Diluting the
+boundary to 0.84, 0.72 or 0.66 alpha reads 1.18:1, 1.15:1 and 1.14:1 against
+the brightest region — the stroke simply disappears into bright sky. The ink
+stays at full `quiet.content` and the softness comes from the glass beneath it
+and the tight halo around it, not from thinning the paint.
+
 The halo is one definition, expressed in two syntaxes because the platform
 forces it. Text can take `text-shadow`; an SVG stroke cannot, so control
 geometry takes the identical halo through chained `drop-shadow()` filters:
@@ -242,11 +254,18 @@ geometry takes the identical halo through chained `drop-shadow()` filters:
   drop-shadow(var(--_gem-glow)) drop-shadow(var(--_gem-glow));
 ```
 
-Both are built from the same two tokens and repeated the same four times, which
-is what makes a label's glow and a control's glow read as one field instead of
-two near-misses. Change the radius or the colour and both follow. The
-definitions live on every Gem surface — button, icon button, field control,
-`.ol8-gem` and the Choice Item — because descendants read them.
+Both are built from the same two tokens, which is what makes a label's glow and
+a control's glow read as one field instead of two near-misses. Change the
+radius or the colour and both follow. The definitions live on every Gem surface
+— button, icon button, field control, `.ol8-gem` and the Choice Item — because
+descendants read them.
+
+The radius is `dimension.scale.003`, the tightest on the scale, and it is both
+the crispest and the strongest. In four stacks a 3px halo reads 5.06:1 on the
+brightest region against 4.74:1 at 6px and 4.16:1 at 9px. Wider is weaker
+because blur spreads a fixed alpha budget, and wider also reads as fog rather
+than as an edge — so the tight radius is what stops a Gem surface looking
+over-glowed while giving the most headroom.
 
 ## Which nodes take gem ink
 

@@ -39,6 +39,21 @@
   position: relative;
   isolation: isolate;
   --_rim: var(--ol8-material-control-gem--rim-default);
+  /* Defined on every Gem surface, not just one, because the halo is read by
+     descendants: text through text-shadow and control geometry through chained
+     drop-shadow filters. Both are built from the same two tokens and repeated
+     the same four times, which is what makes a label's glow and a control's
+     glow one field instead of two near-misses. */
+  --_gem-glow: 0 0 var(--ol8-material-gem-blur-contentglow)
+               var(--ol8-material-gem-color-quiet-contentglow);
+  /* Control geometry takes one stack FEWER than text, on purpose. WCAG 1.4.11
+     asks 3:1 of a graphical object where 1.4.3 asks 4.5:1 of text, so the
+     boundary does not need the fourth repetition — and leaving it off is what
+     keeps the indicator blended into the glass instead of ringed. Measured at
+     3px: text in four stacks is 5.06:1, the boundary in three is 3.75:1. */
+  --_gem-glow-filter:
+    drop-shadow(var(--_gem-glow)) drop-shadow(var(--_gem-glow))
+    drop-shadow(var(--_gem-glow));
 }
 
 /* The regular opaque background stays underneath on purpose — it is what
@@ -288,9 +303,14 @@
      carries a halo rather than the surface being thickened to provide one. */
   --_gem-glow: 0 0 var(--ol8-material-gem-blur-contentglow)
                var(--ol8-material-gem-color-quiet-contentglow);
+  /* Control geometry takes one stack FEWER than text, on purpose. WCAG 1.4.11
+     asks 3:1 of a graphical object where 1.4.3 asks 4.5:1 of text, so the
+     boundary does not need the fourth repetition — and leaving it off is what
+     keeps the indicator blended into the glass instead of ringed. Measured at
+     3px: text in four stacks is 5.06:1, the boundary in three is 3.75:1. */
   --_gem-glow-filter:
     drop-shadow(var(--_gem-glow)) drop-shadow(var(--_gem-glow))
-    drop-shadow(var(--_gem-glow)) drop-shadow(var(--_gem-glow));
+    drop-shadow(var(--_gem-glow));
   color: var(--ol8-material-gem-color-quiet-content);
   /* Stacked three times on purpose. A single shadow at this radius reaches
      only 1.71:1 against near-white ink on a bright plate, and widening the

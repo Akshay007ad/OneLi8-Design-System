@@ -3115,11 +3115,11 @@
         "name": "Material / Gem / Blur / Content Glow",
         "type": "dimension",
         "value": {
-          "value": 6,
+          "value": 3,
           "unit": "px"
         },
-        "reference": "dimension.scale.006",
-        "description": "Radius of the halo behind content on a Gem surface. 6px, and the reason is measured, not assumed: proof/gem-halo-contrast.html sweeps the radius and the halo gets WEAKER as it widens, because blur spreads a fixed alpha budget over more area. In the 1px ring touching the glyph stems, on a bright plate, 21px/600 reads 1.86:1 at 3px, 2.03:1 at 6px, 2.01:1 at 7.5px, 1.97:1 at 9px, 1.87:1 at 12px. 6px is the best value on the 3px scale across both the heading and the 12px secondary line. 4.5px measures a hair better still and 7.5px sits between 6 and 9, but neither is on the scale and the build rejects an off-scale primitive outright. None of these reach 4.5:1 on a light plate: the halo is a style, not a contrast mechanism, and light Gem needs a local scrim behind content to be compliant."
+        "reference": "dimension.scale.003",
+        "description": "Radius of the halo behind content on a Gem surface. 3px, the tightest value on the scale, and it is both the crispest AND the strongest: measured in the ring touching the glyph stems, a 3px halo in four stacks reads 5.06:1 on the brightest region of the daylight plate against 4.74:1 at 6px and 4.16:1 at 9px. Wider is weaker, because blur spreads a fixed alpha budget over more area, and wider also reads as fog rather than as an edge. So the tight radius is what stops the surface looking over-glowed while giving the most headroom. See proof/gem-halo-contrast.html."
       },
       {
         "path": "material.gem.opacity.environmental",
