@@ -735,7 +735,7 @@
   --ol8-material-control-gem--primary-hover-start: var(--ol8-color-primary-720);
   --ol8-material-control-gem--primary-hover-mid: var(--ol8-color-primary-840);
   --ol8-material-control-gem--primary-hover-end: var(--ol8-color-primary-930);
-  --ol8-material-gem-color-quiet-environmentalface: color-mix(in srgb, var(--ol8-color-neutral-930) 48%, transparent);
+  --ol8-material-gem-color-quiet-environmentalface: color-mix(in srgb, var(--ol8-color-neutral-930) 9%, transparent);
   --ol8-material-gem-color-quiet-stabilizedface: color-mix(in srgb, var(--ol8-color-neutral-840) 27%, transparent);
   --ol8-material-gem-color-quiet-opaqueequivalent: var(--ol8-color-neutral-840);
   --ol8-material-gem-color-cutedge-high: color-mix(in srgb, var(--ol8-color-neutral-120) 42%, transparent);

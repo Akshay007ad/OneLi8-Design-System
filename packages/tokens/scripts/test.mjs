@@ -66,7 +66,7 @@ ok(css.includes("--ol8-elevation-surface-overlay: 0px 12px 36px -6px rgb(22 63 7
 // content halo (material.gem.color.quiet.contentGlow) rather than by
 // thickening the face. Dark stays 0.48, and the coloured families are
 // untouched — they are saturated accents, not clear glass.
-ok(semantic.material.gem.color.quiet.environmentalFace.$value.alpha===0.09&&semantic.material.gem.color.quiet.environmentalFace.$value.color==="{color.neutral.030}"&&themes.colorScheme.dark.overrides["material.gem.color.quiet.environmentalFace"].$value.color==="{color.neutral.930}"&&themes.colorScheme.dark.overrides["material.gem.color.quiet.environmentalFace"].$value.alpha===0.48&&semantic.material.gem.color.family.emerald.environmentalFace.$value.alpha===0.48&&semantic.material.gem.color.family.sapphire.stabilizedFace.$value.alpha===0.30,"Gem environmental and stabilized alpha values must remain approved");
+ok(semantic.material.gem.color.quiet.environmentalFace.$value.alpha===0.09&&semantic.material.gem.color.quiet.environmentalFace.$value.color==="{color.neutral.030}"&&themes.colorScheme.dark.overrides["material.gem.color.quiet.environmentalFace"].$value.color==="{color.neutral.930}"&&themes.colorScheme.dark.overrides["material.gem.color.quiet.environmentalFace"].$value.alpha===0.09&&semantic.material.gem.color.family.emerald.environmentalFace.$value.alpha===0.48&&semantic.material.gem.color.family.sapphire.stabilizedFace.$value.alpha===0.30,"Gem environmental and stabilized alpha values must remain approved");
 // Gem content is near-white in BOTH appearances, exactly as color.icon.onGem
 // and color.control.thumb already declare — "remains stable across Light and
 // Dark appearances". Gem sits over imagery of unknown brightness, so the ink

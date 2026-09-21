@@ -133,11 +133,11 @@ so one image covers the best and worst case at once.
 | | Gem Material (297:607) | Gem Reduced Transparency (306:825) |
 |---|---|---|
 | face | `quiet.environmentalFace` | `quiet.legibilityFace` |
-| Light / Dark | 0.09 light tint / 0.48 dark tint | 0.72 dark, both appearances |
+| Light / Dark | 0.09 light tint / 0.09 dark tint | 0.72 dark, both appearances |
 | backdrop blur | `blur.environmental` 9px | none |
 | content | stable near-white + 4 stacked halos | identical |
-| scene still visible | 91% / 52% | 28% |
-| worst region measured | 4.67:1, AA | 7.70:1, AAA |
+| scene still visible | 91% in both | 28% |
+| worst region measured | 4.67:1 Light, 5.32:1 Dark, AA | 7.70:1, AAA |
 
 **The reduced mode is not an opaque panel, and that is the whole point.** A
 solid surface would occlude the street for the person who needs help reading
@@ -176,9 +176,26 @@ four it reads about 4.9:1, clearing WCAG 1.4.3 for normal text. Stacking is
 mandatory: a single shadow spreads a fixed alpha budget, so widening the radius
 makes it weaker, while repeating it accumulates — `1 - (1 - a)^n`.
 
-A dark tint belongs to the Dark appearance. Light stays light.
+Both appearances are equally transparent at 0.09 and differ only in hue — a
+near-white tint in Light, a near-black one in Dark. Dark was 0.48, which made
+it half as see-through as Light for no reason contrast could justify: measured
+with the four-stack halo, a dark face at 0.09 reads **5.32:1** in the worst
+region, *better* than the light face at the same alpha (4.67:1), because a dark
+tint helps near-white ink rather than fighting it. A dark tint still belongs to
+the Dark appearance; it just does not need to be thicker.
+
 `quiet.opaqueEquivalent` follows its own face: `neutral.030` in Light,
 `neutral.840` in Dark.
+
+## Eight stacks, not six
+
+The Radio proof carries its own pair — `Light Gem Slab` (`343:1181`) and
+`Dark Gem Slab` (`343:1201`) under `Template Proof / Radio / Gem Material`.
+They were on flat `Surface / Raised` with pastel blob rectangles and dark text
+long after the Checkbox stacks moved to a photograph, which is the drift that
+comes from treating one proof as the canonical one. Both now sit over the same
+plate with the same ink and halo. Radio has no Reduced Transparency
+counterpart; Checkbox is the only family with all six.
 
 ## Content on gem
 

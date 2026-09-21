@@ -502,12 +502,12 @@
           "$type": "color",
           "$value": {
             "color": "{color.neutral.930}",
-            "alpha": 0.48
+            "alpha": 0.09
           },
           "$extensions": {
             "oneli8.composite": "color-alpha"
           },
-          "$description": "Quiet Dark Gem environmental face; transparent canonical slab material."
+          "$description": "Quiet Dark Gem environmental face. 0.09, matching the Light appearance exactly, so the two are equally transparent and differ only in hue: a near-white tint in Light, a near-black one in Dark. It was 0.48, which made Dark half as see-through as Light for no reason contrast could justify -- measured against the daylight plate with the four-stack halo, a dark face at 0.09 reads 5.32:1 in the worst region, BETTER than the light face at the same alpha (4.67:1), because a dark tint helps near-white ink rather than fighting it. 91 percent of the scene reaches the eye in both appearances."
         },
         "material.gem.color.quiet.stabilizedFace": {
           "$type": "color",
