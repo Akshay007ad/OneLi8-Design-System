@@ -29,6 +29,10 @@ export declare const OL8_ICONS: {
   readonly "close": Ol8IconEntry;
   readonly "copy": Ol8IconEntry;
   readonly "critical": Ol8IconEntry;
+  readonly "figure-running": Ol8IconEntry;
+  readonly "figure-sprinting": Ol8IconEntry;
+  readonly "figure-standing": Ol8IconEntry;
+  readonly "figure-walking": Ol8IconEntry;
   readonly "forward": Ol8IconEntry;
   readonly "heart": Ol8IconEntry;
   readonly "informative": Ol8IconEntry;

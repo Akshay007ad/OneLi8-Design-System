@@ -54,6 +54,21 @@ const REGISTRY = {
   'skip-forward':      { category: 'transport', figmaNode: null, mirrorInRTL: true,  candidate: true },
   'skip-back':         { category: 'transport', figmaNode: null, mirrorInRTL: true,  candidate: true },
   'heart':             { category: 'vitals',    figmaNode: null, mirrorInRTL: false, candidate: true },
+  // Locomotion is a new category, and it earns one rather than stretching
+  // transport: transport here is MEDIA transport — play, pause, skip — and a
+  // body state is not a transport control. Approved as a category by Akshay
+  // alongside the four figures, for the motion and smart-glass work.
+  //
+  // One anatomy across all four — filled head, torso, arms, legs — so they
+  // read as a family and the SPEED is carried by lean and stride rather than
+  // by speed lines, which would not survive 18px. "Dog seen" deliberately has
+  // no figure: it reuses `caution`, because the dog is the hazard and that is
+  // what caution already means. The skill's first instruction is that existing
+  // meaning uses its existing identity.
+  'figure-standing':   { category: 'locomotion', figmaNode: null, mirrorInRTL: false, candidate: true },
+  'figure-walking':    { category: 'locomotion', figmaNode: null, mirrorInRTL: true,  candidate: true },
+  'figure-running':    { category: 'locomotion', figmaNode: null, mirrorInRTL: true,  candidate: true },
+  'figure-sprinting':  { category: 'locomotion', figmaNode: null, mirrorInRTL: true,  candidate: true },
   // Maneuver is a SIGN register, not a line icon: solid body, no stroke, the
   // way road signage reads. Proposed as a new category for that reason.
   'maneuver-right':    { category: 'maneuver',  figmaNode: null, mirrorInRTL: true,  candidate: true },

@@ -250,18 +250,26 @@ const $ = id => document.getElementById(id);
 const clamp = (v,a,b) => Math.min(b, Math.max(a,v));
 const lerp  = (a,b,t) => a + (b-a)*t;
 
+/* Each beat carries an icon as well as its text. The four figures are new
+   locomotion masters; "Dog seen" reuses `caution`, because the dog IS the
+   hazard and that is what caution already means — the icon skill's first
+   instruction is that existing meaning uses its existing identity. */
 const BEATS = [
-  { id: 'stand',  label: 'Standing',  v: 0.0, c: 'Standing' },
-  { id: 'walk',   label: 'Walking',   v: 1.4, c: 'Walking · north gate, two streets away' },
-  { id: 'spot',   label: 'Dog seen',  v: 2.2, c: 'A dog breaks the fence line behind you' },
-  { id: 'run',    label: 'Running',   v: 4.5, c: 'Running · it is keeping pace' },
-  { id: 'sprint', label: 'Sprinting', v: 6.5, c: 'Sprinting · signal ahead' },
+  { id: 'stand',  label: 'Standing',  icon: 'figure-standing',  v: 0.0, c: 'Standing' },
+  { id: 'walk',   label: 'Walking',   icon: 'figure-walking',   v: 1.4, c: 'Walking · north gate, two streets away' },
+  { id: 'spot',   label: 'Dog seen',  icon: 'caution',          v: 2.2, c: 'A dog breaks the fence line behind you' },
+  { id: 'run',    label: 'Running',   icon: 'figure-running',   v: 4.5, c: 'Running · it is keeping pace' },
+  { id: 'sprint', label: 'Sprinting', icon: 'figure-sprinting', v: 6.5, c: 'Sprinting · signal ahead' },
 ];
 
 // The control is the system's, not a lab invention.
+/* stacked-label puts the icon above its text and is already in
+   OL8_SEGMENT_PRESENTATIONS, so this needs no new component — only the icon
+   per item. Selection highlighting is the control's own. */
 $('beats').innerHTML = renderSegmentedControl({
-  label: 'Locomotion beat', behavior: 'single', presentation: 'soft-pill',
-  size: 'compact', items: BEATS.map(({ id, label }) => ({ id, label })), selected: 'stand',
+  label: 'Locomotion beat', behavior: 'single', presentation: 'stacked-label',
+  size: 'compact', items: BEATS.map(({ id, label, icon }) => ({ id, label, icon })),
+  selected: 'stand',
 });
 // The stage carries its own appearance so BOTH can be inspected. Without a
 // control here the lab only ever showed one of them, which made light-mode

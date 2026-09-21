@@ -204,6 +204,202 @@ export const OL8_ICONS = {
       }
     ]
   },
+  "figure-running": {
+    "category": "locomotion",
+    "figmaNode": null,
+    "mirrorInRTL": true,
+    "candidate": true,
+    "sourceInk": "#151817",
+    "body": "<circle id=\"head\" cx=\"10.5\" cy=\"3.9\" r=\"2.1\" fill=\"currentColor\"/><path id=\"torso\" d=\"M10.5 6L12.3 12\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path id=\"arms\" d=\"M7.8 11.1L11.1 9M14.4 7.5L12 9.3\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path id=\"legs\" d=\"M7.5 18.6L12.3 12L16.2 17.4\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+    "elements": [
+      {
+        "tag": "circle",
+        "attrs": {
+          "cx": "10.5",
+          "cy": "3.9",
+          "r": "2.1",
+          "fill": "currentColor"
+        }
+      },
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M10.5 6L12.3 12",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      },
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M7.8 11.1L11.1 9M14.4 7.5L12 9.3",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      },
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M7.5 18.6L12.3 12L16.2 17.4",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      }
+    ]
+  },
+  "figure-sprinting": {
+    "category": "locomotion",
+    "figmaNode": null,
+    "mirrorInRTL": true,
+    "candidate": true,
+    "sourceInk": "#151817",
+    "body": "<circle id=\"head\" cx=\"9.9\" cy=\"4.2\" r=\"2.1\" fill=\"currentColor\"/><path id=\"torso\" d=\"M9.9 6.3L12.6 11.7\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path id=\"arms\" d=\"M6.9 10.2L10.5 9M15.6 6.6L12 9.3\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path id=\"legs\" d=\"M6 17.7L12.6 11.7L17.1 16.2\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+    "elements": [
+      {
+        "tag": "circle",
+        "attrs": {
+          "cx": "9.9",
+          "cy": "4.2",
+          "r": "2.1",
+          "fill": "currentColor"
+        }
+      },
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M9.9 6.3L12.6 11.7",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      },
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M6.9 10.2L10.5 9M15.6 6.6L12 9.3",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      },
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M6 17.7L12.6 11.7L17.1 16.2",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      }
+    ]
+  },
+  "figure-standing": {
+    "category": "locomotion",
+    "figmaNode": null,
+    "mirrorInRTL": false,
+    "candidate": true,
+    "sourceInk": "#151817",
+    "body": "<circle id=\"head\" cx=\"12\" cy=\"3.6\" r=\"2.1\" fill=\"currentColor\"/><path id=\"torso\" d=\"M12 5.7V12.6\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path id=\"arms\" d=\"M9.9 12.3L11.4 9M14.1 12.3L12.6 9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path id=\"legs\" d=\"M11.1 19.5L12 12.6L12.9 19.5\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+    "elements": [
+      {
+        "tag": "circle",
+        "attrs": {
+          "cx": "12",
+          "cy": "3.6",
+          "r": "2.1",
+          "fill": "currentColor"
+        }
+      },
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M12 5.7V12.6",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      },
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M9.9 12.3L11.4 9M14.1 12.3L12.6 9",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      },
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M11.1 19.5L12 12.6L12.9 19.5",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      }
+    ]
+  },
+  "figure-walking": {
+    "category": "locomotion",
+    "figmaNode": null,
+    "mirrorInRTL": true,
+    "candidate": true,
+    "sourceInk": "#151817",
+    "body": "<circle id=\"head\" cx=\"11.4\" cy=\"3.6\" r=\"2.1\" fill=\"currentColor\"/><path id=\"torso\" d=\"M11.4 5.7L12 12.3\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path id=\"arms\" d=\"M9.3 11.7L11.1 9M14.4 11.1L12.3 9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path id=\"legs\" d=\"M9.3 19.5L12 12.3L14.7 18.9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+    "elements": [
+      {
+        "tag": "circle",
+        "attrs": {
+          "cx": "11.4",
+          "cy": "3.6",
+          "r": "2.1",
+          "fill": "currentColor"
+        }
+      },
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M11.4 5.7L12 12.3",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      },
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M9.3 11.7L11.1 9M14.4 11.1L12.3 9",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      },
+      {
+        "tag": "path",
+        "attrs": {
+          "d": "M9.3 19.5L12 12.3L14.7 18.9",
+          "stroke": "currentColor",
+          "strokeWidth": "1.8",
+          "strokeLinecap": "round",
+          "strokeLinejoin": "round"
+        }
+      }
+    ]
+  },
   "forward": {
     "category": "navigation",
     "figmaNode": "418:16",
