@@ -5,6 +5,7 @@
   "tokenPrefix": "--ol8-",
   "figma": {
     "fileKey": "0wRnp6ulIEA8PCV6wqGmAJ",
+    "url": "https://www.figma.com/design/0wRnp6ulIEA8PCV6wqGmAJ/",
     "name": "Oneli8 Design System",
     "pages": {
       "Foundations": "9:7",
@@ -14,7 +15,8 @@
         "Icon Button": "1034:10546",
         "Gem Button": "1034:9969"
       }
-    }
+    },
+    "$comment": "The file title carries no version on purpose. The plugin API can neither read it (figma.root.name returns \"Document\") nor set it (\"Setting the document name is currently not supported\"), so any version here would be an ungateable claim that rots at the next release. Use the top-level version field instead."
   },
   "foundations": {
     "source": {

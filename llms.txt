@@ -2,6 +2,11 @@
 
 Headless, vanilla HTML/CSS/JS design system synced from Figma.
 Figma file: 0wRnp6ulIEA8PCV6wqGmAJ
+  https://www.figma.com/design/0wRnp6ulIEA8PCV6wqGmAJ/
+  The file title is deliberately NOT cited with a version. The plugin API cannot read the
+  file title (figma.root.name returns "Document") and cannot set it, so a version written
+  here could never be gated and would rot at the next release. The package version above
+  is the single source of truth for which release this is.
 
 ## Rules for AI agents
 
