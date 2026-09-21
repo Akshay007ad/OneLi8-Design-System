@@ -4249,12 +4249,20 @@ function enablePlate() {
    16MB publish cap once the image is embedded. JPEG stays as a fallback for
    whatever you already have on disk. */
 let triedJpeg = false;
-pA.addEventListener('error', () => {
+function tryJpeg() {
   if (triedJpeg) return;          // both formats missing: keep the canvas
   triedJpeg = true;
   pA.src = 'plate.jpg';
   pB.src = 'plate.jpg';
-});
+}
+pA.addEventListener('error', tryJpeg);
+/* An <img> in the markup starts loading while the HTML is still parsing, so by
+   the time this module runs the .webp request may already have failed and its
+   error event is long gone. The load path below always checked for an
+   already-settled image; the error path did not, so dropping a plate.jpg did
+   nothing on the live page even though the markup comment promised it worked.
+   Both paths check now. */
+if (pA.complete && pA.naturalWidth === 0) tryJpeg();
 if (pA.complete && pA.naturalWidth > 0) enablePlate();
 else pA.addEventListener('load', enablePlate, { once: true });
 
