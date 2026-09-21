@@ -483,6 +483,8 @@ material.gem.color.innerThinCut.low|--ol8-material-gem-color-innerthincut-low
 material.gem.color.innerThinCut.mid|--ol8-material-gem-color-innerthincut-mid
 material.gem.color.quiet.contentGlow|--ol8-material-gem-color-quiet-contentglow
 material.gem.color.quiet.content|--ol8-material-gem-color-quiet-content
+material.gem.color.quiet.legibilityFace|--ol8-material-gem-color-quiet-legibilityface
+material.gem.color.quiet.contentDisabled|--ol8-material-gem-color-quiet-contentdisabled
 material.gem.color.quiet.environmentalFace|--ol8-material-gem-color-quiet-environmentalface
 material.gem.color.quiet.opaqueEquivalent|--ol8-material-gem-color-quiet-opaqueequivalent
 material.gem.color.quiet.stabilizedFace|--ol8-material-gem-color-quiet-stabilizedface
