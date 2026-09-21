@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Oneli8 · Gem content halo, measured</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=AR+One+Sans:wght@400..700&display=swap">
+<link rel="stylesheet" href="../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin:0; padding:24px; background:var(--ol8-color-background-canvas);
+         color:var(--ol8-color-text-primary); font-family:var(--ol8-font-family-functional); }
+  h1 { font-family:var(--ol8-font-family-expressive); font-size:19px; margin:0 0 10px; }
+  h2 { margin:26px 0 8px; font-size:14px; }
+  .note { font-size:12px; color:var(--ol8-color-text-muted); margin:0 0 14px; max-width:78ch; line-height:1.6; }
+  table { border-collapse:collapse; font-size:11px; margin-bottom:8px; }
+  th { text-align:left; font-weight:400; color:var(--ol8-color-text-muted);
+       font-size:10px; letter-spacing:.08em; text-transform:uppercase; padding:6px 16px 6px 0; }
+  td { padding:6px 16px 6px 0; font-variant-numeric:tabular-nums; }
+  tr[data-live] td { font-weight:600; }
+  .pass { color:var(--ol8-color-feedbackpositive-inlinecontent); }
+  .fail { color:var(--ol8-color-feedbackcritical-inlinecontent); }
+</style>
+</head>
+<body>
+<h1>Gem content halo, measured</h1>
+<p class="note">
+  The quiet Gem face is clear glass (neutral-030 at 0.18 environmental, 0.27 stabilized), so it
+  cannot guarantee what sits behind the content. The stated mechanism is that the content carries
+  its own contrast via <code>material.gem.color.quiet.contentGlow</code> at radius
+  <code>material.gem.blur.contentGlow</code>. This page measures whether that actually holds.
+</p>
+<p class="note">
+  Method: the text is drawn to a canvas twice — once with the halo, once without — and the halo's
+  alpha is read from the pixels that carry no ink. <strong>Adjacent</strong> is the mean alpha in the
+  1px ring touching the glyph stems, which is the background WCAG 1.4.3 compares the ink against.
+  <strong>Peak</strong> is the densest halo pixel anywhere near the glyph, which flatters the result.
+  The plate is the warm end of a bright daylight scene (#FDD68C) — the worst case for near-white ink,
+  and the case the light appearance has to survive. CSS and canvas both use sigma = radius / 2.
+</p>
+<p class="note">
+  The result: <strong>a wider halo is a weaker halo.</strong> Blurring spreads a fixed alpha budget
+  over more area, so peak density falls as radius grows — a thin 12px stem convolved with a large
+  sigma produces a fringe, not a scrim. Stacking the same shadow accumulates alpha instead of
+  spreading it, and is the only single change here that moves the number materially.
+</p>
+<div id="out">measuring…</div>
+<script>
+const INK=[252,250,243], HALO=[21,24,23], HALO_A=0.72, FACE=[252,250,243], FACE_A=0.18;
+const PLATE=[253,214,140];
+const lin=c=>{c/=255;return c<=0.03928?c/12.92:Math.pow((c+0.055)/1.055,2.4)};
+const L=([r,g,b])=>0.2126*lin(r)+0.7152*lin(g)+0.0722*lin(b);
+const ratio=(a,b)=>{const x=L(a),y=L(b);return (Math.max(x,y)+0.05)/(Math.min(x,y)+0.05)};
+const over=(fg,a,bg)=>fg.map((c,i)=>c*a+bg[i]*(1-a));
+const faceOver=over(FACE,FACE_A,PLATE);
+
+function haloAlpha(text,px,weight,radius,stack,RING){
+  const W=700,H=60, mk=()=>{const c=document.createElement('canvas');c.width=W;c.height=H;return c};
+  const A=mk(),B=mk(),ca=A.getContext('2d'),cb=B.getContext('2d');
+  for(const g of [ca,cb]){g.font=weight+' '+px+'px "AR One Sans", system-ui, sans-serif';g.textBaseline='middle';g.fillStyle='#fff'}
+  ca.shadowColor='rgba('+HALO.join(',')+','+HALO_A+')'; ca.shadowBlur=radius;
+  for(let i=0;i<stack;i++) ca.fillText(text,10,H/2);
+  cb.fillText(text,10,H/2);
+  const a=ca.getImageData(0,0,W,H).data, b=cb.getImageData(0,0,W,H).data;
+  const inkAt=(x,y)=>b[(y*W+x)*4+3]>8;
+  let peak=0,sum=0,n=0;
+  for(let y=1;y<H-1;y++)for(let x=1;x<W-1;x++){
+    if(inkAt(x,y))continue;
+    let near=false;
+    for(let dy=-RING;dy<=RING&&!near;dy++)for(let dx=-RING;dx<=RING;dx++){
+      const yy=y+dy,xx=x+dx;
+      if(yy>0&&yy<H&&xx>0&&xx<W&&inkAt(xx,yy)){near=true;break}
+    }
+    if(!near)continue;
+    const al=a[(y*W+x)*4+3]/255;
+    if(al>peak)peak=al; sum+=al; n++;
+  }
+  return {peak, mean:n?sum/n:0};
+}
+
+const CONFIGS=[[3,1],[6,1],[9,1],[6,2],[6,3],[3,3]];
+const CASES=[
+  ['Secondary · 12px / 400','400 m  ·  near-white ink, dark halo',12,'400'],
+  ['Heading · 21px / 600','Ferry Road',21,'600']];
+
+let html='';
+for(const [label,text,px,weight] of CASES){
+  html+='<h2>'+label+'</h2><table><tr><th>halo radius</th><th>shadows</th>'
+      +'<th>adjacent alpha</th><th>contrast (adjacent)</th><th>1.4.3</th>'
+      +'<th>peak alpha</th><th>contrast (peak)</th></tr>';
+  for(const [r,s] of CONFIGS){
+    const adj=haloAlpha(text,px,weight,r,s,1), pk=haloAlpha(text,px,weight,r,s,3);
+    const cA=ratio(INK,over(HALO,adj.mean,faceOver)), cP=ratio(INK,over(HALO,pk.peak,faceOver));
+    const live = (r===9&&s===1);
+    html+='<tr'+(live?' data-live=""':'')+'><td>'+r+'px'+(live?' &larr; shipped':'')+'</td><td>&times;'+s+'</td>'
+      +'<td>'+adj.mean.toFixed(3)+'</td><td>'+cA.toFixed(2)+':1</td>'
+      +'<td class="'+(cA>=4.5?'pass':'fail')+'">'+(cA>=4.5?'pass':'fail')+'</td>'
+      +'<td>'+pk.peak.toFixed(3)+'</td><td>'+cP.toFixed(2)+':1</td></tr>';
+  }
+  html+='</table>';
+}
+html+='<p class="note">Ink on the bare face with no halo at all: <strong>'
+   +ratio(INK,faceOver).toFixed(2)+':1</strong>. Over a dark plate (#17263D) the same ink on the same '
+   +'face reaches <strong>'+ratio(INK,over(FACE,FACE_A,[23,38,61])).toFixed(2)
+   +':1</strong> with no halo whatsoever — which is why the dark appearance never exposed this and the '
+   +'light appearance does.</p>';
+document.getElementById('out').innerHTML=html;
+</script>
+</body>
+</html>

@@ -2585,10 +2585,10 @@ export const tokens = {
   "material.gem.blur.contentGlow": {
     "type": "dimension",
     "value": {
-      "value": 6,
+      "value": 9,
       "unit": "px"
     },
-    "description": "Radius of the halo behind content on a Gem surface. On the 3px scale like every other blur here.",
+    "description": "Radius of the halo behind content on a Gem surface. 9px, not 6px: at 6px the halo was too tight to build density behind small type — a 12px glyph stem is thin enough that a narrow halo reads as a fringe rather than a scrim, and the light face at 0.18 gives it no help. 9px is the next step on the 3px scale and is sized for the smallest gem text, not the largest.",
     "tier": "semantic"
   },
   "material.gem.opacity.environmental": {

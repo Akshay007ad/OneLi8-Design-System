@@ -185,11 +185,16 @@
   border-radius: var(--ol8-shape-radius-standard);
   inset-inline: 0;
 }
-/* The quiet face tints dark, like every gem family, so content on it is the
-   gem content colour rather than body text — and carries its own halo,
-   because a transparent face cannot guarantee what sits behind it. */
-.ol8-choice[data-ol8-material="gem"] .ol8-choice__label,
-.ol8-choice[data-ol8-material="gem"] .ol8-choice__description {
+/* The quiet face is clear glass — near-white at 0.18/0.27, not a dark tint —
+   so it cannot guarantee what sits behind it at all. Content on it therefore
+   takes the stable near-white gem ink rather than body text, and carries its
+   own halo, which is the only thing standing between the label and whatever
+   the environment happens to be. Unlike the gem text field, the label and
+   description here really are on the face: .ol8-choice__surface spans the row
+   beneath them. Disabled is excluded — it resolves to the opaque equivalent,
+   where the regular disabled ink applies and no halo is wanted. */
+.ol8-choice[data-ol8-material="gem"]:not([data-ol8-availability="disabled"]) .ol8-choice__label,
+.ol8-choice[data-ol8-material="gem"]:not([data-ol8-availability="disabled"]) .ol8-choice__description {
   color: var(--ol8-material-gem-color-quiet-content);
   text-shadow: 0 0 var(--ol8-material-gem-blur-contentglow)
                var(--ol8-material-gem-color-quiet-contentglow);

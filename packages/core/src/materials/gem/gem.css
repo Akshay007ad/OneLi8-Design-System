@@ -170,12 +170,26 @@
 }
 /* Filled is the only gem field appearance that sits ON the quiet face; outline
    leaves --_surface transparent and keeps whatever is behind it. So the
-   content colour moves here and nowhere else. */
+   content colour moves here and nowhere else.
+
+   WHICH NODES, EXACTLY: only what is physically inside .ol8-field__control,
+   because that box is the gem face. The label is NOT — .ol8-field__label lives
+   in .ol8-field__label-row, a SIBLING of .ol8-field__control-stack, so it sits
+   on the page background above the field. Figma agrees: "Label Row / Label" is
+   a sibling of "Control Stack" in Text Field / Filled / Gem (215:226). Giving
+   the label gem ink put near-white text on a light page — 1.26:1, invisible.
+   The affixes and icons DO sit inside the control and so do belong here. */
 .ol8-field[data-ol8-material="gem"][data-ol8-appearance="filled"]:not([data-ol8-disabled]) .ol8-field__input,
-.ol8-field[data-ol8-material="gem"][data-ol8-appearance="filled"]:not([data-ol8-disabled]) .ol8-field__label {
+.ol8-field[data-ol8-material="gem"][data-ol8-appearance="filled"]:not([data-ol8-disabled]) .ol8-field__affix {
   color: var(--ol8-material-gem-color-quiet-content);
   text-shadow: 0 0 var(--ol8-material-gem-blur-contentglow)
                var(--ol8-material-gem-color-quiet-contentglow);
+}
+/* Icons on the face take the token that already exists for exactly this and
+   is already stable across appearances. */
+.ol8-field[data-ol8-material="gem"][data-ol8-appearance="filled"]:not([data-ol8-disabled]) .ol8-field__leading-icon,
+.ol8-field[data-ol8-material="gem"][data-ol8-appearance="filled"]:not([data-ol8-disabled]) .ol8-field__trailing-action {
+  color: var(--ol8-color-icon-on-gem);
 }
 .ol8-field[data-ol8-material="gem"][data-ol8-readonly][data-ol8-appearance="filled"] .ol8-field__control {
   --_border: var(--ol8-material-gem-color-innerthincut-high);
@@ -234,8 +248,10 @@
    about what the surface contains.
 
    The face axis is Figma's own vocabulary, not an invention:
-     stabilizedface     neutral-060 @ 27%   at rest
-     environmentalface  neutral-030 @ 48%   when the environment matters
+     stabilizedface     neutral-030 @ 27%   at rest
+     environmentalface  neutral-030 @ 18%   when the environment matters
+   Both are clear glass on the same near-white tint; the pair differs only in
+   how present the face is, never in hue.
    Motion study 01 (labs/gem-in-motion) drives data-ol8-face along it. */
 .ol8-gem {
   --_gem-face: var(--ol8-material-gem-color-quiet-stabilizedface);
