@@ -332,11 +332,27 @@ because `renderButton` sets `inert = disabled || loading`, but Loading is an
 *active* state — Figma keeps both rim inner shadows on it and gives it its own
 deep gradient stops. So Loading keeps the lit bezel and only Disabled loses it:
 
-| | body | lit bezel | own background |
-|---|---|---|---|
-| enabled | yes | yes | the action colour |
-| disabled | yes | **no** | transparent |
-| loading | yes | yes | transparent |
+| | body | lit bezel | own background | ink |
+|---|---|---|---|---|
+| enabled | yes | yes | the action colour | gem content |
+| disabled | yes | **no** | transparent | `quiet.contentDisabled` |
+| loading | yes | yes | transparent | gem content |
+
+**On a button, the label and the icon always take the same value.** `--_fg` is
+the label and `--_ink` is the icon, and every Gem rule sets them together.
+Three things were violating it: the Disabled label bound
+`Color / Action Primary / Disabled Content` and the Secondary one bound
+`Color / Action Secondary / Content Disabled`, both DARK on a surface whose
+enabled content is near-white; the disabled icon-button glyph bound
+`Color / Icon / Primary`, which is the *enabled* colour and no kind of disabled
+at all; and the Loading spinner bound `Color / Icon / Primary` while its own
+label bound gem content, so icon and text disagreed inside one state. Code was
+different but no better — it kept the full near-white on Disabled, making it
+indistinguishable from Default.
+
+All of it now resolves to `quiet.contentDisabled` on Disabled and to the set's
+own gem content otherwise. No paint in any of the six Gem button sets binds
+`Color / Icon / Primary` any more.
 
 ## Which nodes take gem ink
 

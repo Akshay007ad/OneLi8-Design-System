@@ -345,6 +345,21 @@
 .ol8-icon-btn[data-ol8-material="gem"]:disabled > .ol8-icon-btn__surface {
   --_bg: transparent;
 }
+
+/* Disabled ink on Gem is already solved: quiet.contentDisabled, the whitish
+   grey shared by Choice Item's label and its control geometry. Buttons were
+   falling through to the regular action disabled-content colours, which are
+   DARK — a dark glyph on a surface whose enabled content is near-white. Code
+   was worse than that: it kept the full near-white, so Disabled was
+   indistinguishable from Default.
+   --_fg is the label and --_ink is the icon, and they take the same value,
+   because on a button the two always match. */
+.ol8-btn[data-ol8-material="gem"]:disabled:not([data-ol8-loading]),
+.ol8-icon-btn[data-ol8-material="gem"]:disabled:not([data-ol8-loading]),
+.ol8-icon-btn[data-ol8-material="gem"]:disabled:not([data-ol8-loading]) > .ol8-icon-btn__surface {
+  --_fg: var(--ol8-material-gem-color-quiet-contentdisabled);
+  --_ink: var(--ol8-material-gem-color-quiet-contentdisabled);
+}
 /* Loading is excluded. It matches :disabled because renderButton sets
    inert = disabled || loading, but Loading is an ACTIVE state — Figma keeps
    both rim inner shadows on it and gives it its own deep gradient stops, so it
