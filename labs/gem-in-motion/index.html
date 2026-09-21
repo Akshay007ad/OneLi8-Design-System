@@ -18,6 +18,11 @@
      so a page using renderToken needs both or the terminals stretch. -->
 <link rel="stylesheet" href="../../packages/core/src/molecules/choice-chip/choice-chip.css">
 <link rel="stylesheet" href="../../packages/core/src/molecules/token/token.css">
+<!-- The appearance switch is a Choice Item, and its track and thumb are the
+     Selection Indicator atom, so BOTH sheets are required. Linking one and not
+     the other is how the Token terminals ended up 64x210 earlier in this lab. -->
+<link rel="stylesheet" href="../../packages/core/src/atoms/selection-indicator/selection-indicator.css">
+<link rel="stylesheet" href="../../packages/core/src/molecules/choice-item/choice-item.css">
 <link rel="stylesheet" href="../../packages/core/src/organisms/segmented-control/segmented-control.css">
 <link rel="stylesheet" href="../../packages/core/src/materials/gem/gem.css">
 
@@ -133,13 +138,20 @@
   }
 
   /* ---- dock ---- */
+  /* The dock is a DARK surface, so it says so rather than hand-painting one.
+     It used background: var(--ol8-color-neutral-840) — a primitive, which the
+     system's own rule forbids: consume semantic roles, primitives are hidden
+     from the Figma pickers. Under the dark scheme surface-default resolves to
+     that exact neutral-840, so the colour is unchanged and everything INSIDE
+     now resolves too. That was not cosmetic: the appearance switch's label was
+     text-primary, near-black, on a near-black dock — invisible. */
   .dock {
     display: flex; flex-wrap: wrap; align-items: center;
     gap: var(--ol8-dimension-scale-012) var(--ol8-dimension-scale-018);
     padding: var(--ol8-dimension-scale-012);
     border: 1px solid var(--ol8-color-border-strong);
     border-radius: var(--ol8-shape-radius-medium);
-    background: var(--ol8-color-neutral-840);
+    background: var(--ol8-color-surface-default);
   }
   .dock__speed { flex: 1 1 180px; min-width: 150px; display: flex; flex-direction: column; gap: 3px; }
   .dock__speed label {
@@ -209,7 +221,7 @@
     <p class="caption" id="caption">Standing</p>
   </div>
 
-  <div class="dock">
+  <div class="dock" data-ol8-color-scheme="dark">
     <div id="beats"></div>
     <div id="appearance"></div>
     <div class="dock__speed">
@@ -225,6 +237,8 @@
 </div>
 
 <script type="module">
+import { renderChoiceItem, hydrateChoiceItems }
+  from '../../packages/core/src/molecules/choice-item/choice-item.js';
 import { renderSegmentedControl, hydrateSegmentedControls }
   from '../../packages/core/src/organisms/segmented-control/segmented-control.js';
 import { renderIcon } from '../../packages/core/src/atoms/icon/icon.js';
@@ -252,11 +266,15 @@ $('beats').innerHTML = renderSegmentedControl({
 // The stage carries its own appearance so BOTH can be inspected. Without a
 // control here the lab only ever showed one of them, which made light-mode
 // token changes invisible — the reason this control exists.
-$('appearance').innerHTML = renderSegmentedControl({
-  label: 'Appearance', behavior: 'single', presentation: 'soft-pill', size: 'compact',
-  items: [{ id: 'light', label: 'Light' }, { id: 'dark', label: 'Dark' }], selected: 'dark',
+/* A switch, not a two-item segmented control. Appearance is one binary thing
+   being turned on or off, which is what a switch is for; a segmented control is
+   for choosing among peers. The stage starts dark, so the switch reads "Dark
+   stage" and is on. */
+$('appearance').innerHTML = renderChoiceItem('switch', 'Dark stage', {
+  size: 'compact', checked: true, id: 'stageDark',
 });
 hydrateSegmentedControls();
+hydrateChoiceItems();
 
 /* The HUD is composed from the system, not from bare spans. Each widget is an
    ol8-gem surface holding real components — icons, buttons, icon buttons and a
@@ -307,16 +325,22 @@ const els = {
 const widgets = [...document.querySelectorAll('.widget')];
 const state = { target: 0, speed: 0, dist: 0, t: 0 };
 
+/* The beat control is a segmented control: five peers, pick one. */
 document.addEventListener('ol8:segmentchange', e => {
-  const value = e.detail?.value;
-  if (e.target.closest('#appearance')) {
-    if (value === 'light') delete els.stage.dataset.ol8ColorScheme;
-    else els.stage.dataset.ol8ColorScheme = 'dark';
-    return;
-  }
-  const b = BEATS.find(x => x.id === value);
+  const b = BEATS.find(x => x.id === e.detail?.value);
   if (!b) return;
   state.target = b.v; els.speed.value = String(b.v); els.caption.textContent = b.c;
+});
+
+/* Appearance is a switch, so it reports through the native change event on its
+   own input rather than through ol8:segmentchange. Scoped to the stage, not to
+   <html>: scoping it to the document would flip every semantic token on the
+   page chrome too, and then the readouts go invisible. */
+$('appearance').addEventListener('change', e => {
+  const input = e.target.closest('.ol8-choice__input');
+  if (!input) return;
+  if (input.checked) els.stage.dataset.ol8ColorScheme = 'dark';
+  else delete els.stage.dataset.ol8ColorScheme;
 });
 els.speed.addEventListener('input', () => {
   state.target = parseFloat(els.speed.value);
