@@ -122,6 +122,32 @@ Figma bakes a per-instance degree value, and every one of them satisfies
 the keyword; a baked degree value is only correct at the one width it was
 measured at. `proof/gem.html` proves this with a difference blend.
 
+## The environmental face is smoked glass, the stabilized face is not
+
+These two faces do different jobs and must not be made to match.
+
+| face | Light | Dark | content on it |
+|---|---|---|---|
+| `quiet.environmentalFace` | `neutral.930` @ 0.36 | `neutral.930` @ 0.48 | stable near-white |
+| `quiet.stabilizedFace` | `neutral.030` @ 0.15 | `neutral.840` @ 0.27 | ordinary dark text |
+
+The environmental face sits over imagery of unknown brightness and carries
+near-white ink, so in Light it is a **dark** tint, not a milky one. Measured
+over the brightest part of a daylight city plate, near-white ink on a milky
+face reads **1.40:1** and no halo radius improves it; on a dark face at 0.36 it
+reads **2.97:1** bare and clears 4.5:1 under the halo, while the scene still
+reads straight through. The two appearances now differ only in how present the
+smoke is, never in hue.
+
+The stabilized face stays near-white because it is the local content plane the
+text field stacks under its Control Gem Secondary gradient, and that surface
+carries dark text. Making it smoked would render the field unreadable.
+
+`quiet.opaqueEquivalent` is `neutral.840` in both appearances, because it is the
+opaque form of a smoked face carrying near-white content. It was `neutral.030`
+while the face was milky, which would have put white ink on a light solid the
+moment Reduced Transparency switched the blur off.
+
 ## Content on gem
 
 `Material / Gem / Color / Quiet / Content` is near-white in **both**

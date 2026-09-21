@@ -523,7 +523,7 @@
         "material.gem.color.quiet.opaqueEquivalent": {
           "$type": "color",
           "$value": "{color.neutral.840}",
-          "$description": "Quiet Dark Gem opaque equivalent."
+          "$description": "Quiet Dark Gem opaque equivalent. Same dark neutral as Light; the opaque form of a smoked face does not need to change by appearance."
         },
         "material.gem.color.cutEdge.high": {
           "$type": "color",

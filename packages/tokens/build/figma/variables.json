@@ -2583,11 +2583,11 @@
         "name": "Material / Gem / Color / Quiet / Environmental Face",
         "type": "color",
         "value": {
-          "color": "#FCFAF3",
-          "alpha": 0.18
+          "color": "#151817",
+          "alpha": 0.36
         },
         "reference": null,
-        "description": "Quiet Light Gem environmental face. Clear glass: a light tint at 0.18, the most transparent state, because this is the face shown when the environment behind the surface is what matters. Legibility is carried by the content halo, not by thickening the face — thickening is how this reached 0.72 before."
+        "description": "Quiet Gem environmental face. SMOKED glass, not milky: a dark tint at 0.36 in Light, because this is the face used when the surface sits over imagery whose brightness is unknown, and the content on it is stably near-white. A near-white face over bright scenery gives white ink 1.40:1 and no halo radius fixes that; a dark face at 0.36 gives 2.97:1 bare and clears 4.5:1 under the halo, while staying transparent enough that the scene reads straight through. The Light and Dark appearances now differ only in how present the smoke is (0.36 and 0.48), not in its hue."
       },
       {
         "path": "material.gem.color.quiet.stabilizedFace",
@@ -2598,7 +2598,7 @@
           "alpha": 0.15
         },
         "reference": null,
-        "description": "Quiet Light Gem stabilized content plane. 0.15, because it is not seen alone: the filled Gem field stacks the Control Gem Secondary gradient on top of it, and 0.15 under that ladder composites to 0.18-0.23 white — the same presence as the 0.18 environmental face, which is the transparency that was approved. At the previous 0.27 the composite was 0.31-0.43 and the surface read as milk. The Gem families keep their own stabilized alphas (sapphire 0.30 and so on); this one no longer tracks them, because they are not stacked under a second layer."
+        "description": "Quiet Light Gem stabilized content plane. Stays near-white at 0.15, and deliberately does NOT follow environmentalFace into smoked glass. These two faces do different jobs: the environmental face sits over imagery and carries near-white content, while this one is the local content plane the text field stacks under its Control Gem Secondary gradient, and that surface carries ordinary dark text. 0.15 under the 0.09 ladder composites to 0.2265, the approved clear-glass presence."
       },
       {
         "path": "material.gem.color.quiet.content",
@@ -2623,9 +2623,9 @@
         "path": "material.gem.color.quiet.opaqueEquivalent",
         "name": "Material / Gem / Color / Quiet / Opaque Equivalent",
         "type": "color",
-        "value": "#FCFAF3",
-        "reference": "color.neutral.030",
-        "description": "Quiet Light Gem reduced-transparency equivalent. The opaque form of the light face."
+        "value": "#20201E",
+        "reference": "color.neutral.840",
+        "description": "Quiet Gem reduced-transparency equivalent. A dark neutral in both appearances, because it must be the opaque form of a smoked face carrying near-white content. It was neutral.030 while the face was milky; a light solid under white ink would be unreadable the moment transparency is switched off."
       },
       {
         "path": "material.gem.color.cutEdge.outerHigh",
@@ -7027,7 +7027,7 @@
           "type": "color",
           "value": "#20201E",
           "reference": "color.neutral.840",
-          "description": "Quiet Dark Gem opaque equivalent."
+          "description": "Quiet Dark Gem opaque equivalent. Same dark neutral as Light; the opaque form of a smoked face does not need to change by appearance."
         },
         {
           "path": "material.gem.color.cutEdge.high",
