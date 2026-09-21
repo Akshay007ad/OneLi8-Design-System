@@ -2585,10 +2585,10 @@ export const tokens = {
   "material.gem.blur.contentGlow": {
     "type": "dimension",
     "value": {
-      "value": 9,
+      "value": 6,
       "unit": "px"
     },
-    "description": "Radius of the halo behind content on a Gem surface. 9px, not 6px: at 6px the halo was too tight to build density behind small type — a 12px glyph stem is thin enough that a narrow halo reads as a fringe rather than a scrim, and the light face at 0.18 gives it no help. 9px is the next step on the 3px scale and is sized for the smallest gem text, not the largest.",
+    "description": "Radius of the halo behind content on a Gem surface. 6px, and the reason is measured, not assumed: proof/gem-halo-contrast.html sweeps the radius and the halo gets WEAKER as it widens, because blur spreads a fixed alpha budget over more area. In the 1px ring touching the glyph stems, on a bright plate, 21px/600 reads 1.86:1 at 3px, 2.03:1 at 6px, 2.01:1 at 7.5px, 1.97:1 at 9px, 1.87:1 at 12px. 6px is the best value on the 3px scale across both the heading and the 12px secondary line. 4.5px measures a hair better still and 7.5px sits between 6 and 9, but neither is on the scale and the build rejects an off-scale primitive outright. None of these reach 4.5:1 on a light plate: the halo is a style, not a contrast mechanism, and light Gem needs a local scrim behind content to be compliant.",
     "tier": "semantic"
   },
   "material.gem.opacity.environmental": {
