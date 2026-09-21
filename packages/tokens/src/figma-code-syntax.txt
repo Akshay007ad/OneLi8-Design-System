@@ -1,10 +1,10 @@
-# GENERATED from Figma file 0wRnp6ulIEA8PCV6wqGmAJ — the naming contract.
 # Each variable in Figma carries an explicit codeSyntax.WEB. That field, not any
-# rule, decides the emitted CSS custom property name. Figma is not internally
-# regular: it writes color-icon-button-quiet-hover-surface hyphenated but
+# Format: <authored token path>|<css custom property>
+# GENERATED from Figma file 0wRnp6ulIEA8PCV6wqGmAJ — the naming contract.
 # component-iconbutton-box-compact joined. No transform derives both, so the
 # names are recorded rather than inferred.
-# Format: <authored token path>|<css custom property>
+# regular: it writes color-icon-button-quiet-hover-surface hyphenated but
+# rule, decides the emitted CSS custom property name. Figma is not internally
 border.width.hairline|--ol8-border-width-hairline
 border.width.none|--ol8-border-width-none
 border.width.standard|--ol8-border-width-standard
@@ -436,6 +436,7 @@ material.control.gem.secondary.loadingLow|--ol8-material-control-gem--secondary-
 material.control.gem.secondary.loadingMid|--ol8-material-control-gem--secondary-loading-mid
 material.control.gem.secondary.low|--ol8-material-control-gem--secondary-low
 material.control.gem.secondary.mid|--ol8-material-control-gem--secondary-mid
+material.gem.blur.contentGlow|--ol8-material-gem-blur-contentglow
 material.gem.blur.environmental|--ol8-material-gem-blur-environmental
 material.gem.blur.stabilized|--ol8-material-gem-blur-stabilized
 material.gem.color.cutEdge.high|--ol8-material-gem-color-cutedge-high
@@ -480,6 +481,8 @@ material.gem.color.innerThinCut.face|--ol8-material-gem-color-innerthincut-face
 material.gem.color.innerThinCut.high|--ol8-material-gem-color-innerthincut-high
 material.gem.color.innerThinCut.low|--ol8-material-gem-color-innerthincut-low
 material.gem.color.innerThinCut.mid|--ol8-material-gem-color-innerthincut-mid
+material.gem.color.quiet.contentGlow|--ol8-material-gem-color-quiet-contentglow
+material.gem.color.quiet.content|--ol8-material-gem-color-quiet-content
 material.gem.color.quiet.environmentalFace|--ol8-material-gem-color-quiet-environmentalface
 material.gem.color.quiet.opaqueEquivalent|--ol8-material-gem-color-quiet-opaqueequivalent
 material.gem.color.quiet.stabilizedFace|--ol8-material-gem-color-quiet-stabilizedface
