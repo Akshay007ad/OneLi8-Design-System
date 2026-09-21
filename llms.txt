@@ -1,7 +1,7 @@
-# Oneli8 Design System — 1.0.0-beta.3
+# Oneli8 Design System — 1.0.0-beta.10
 
 Headless, vanilla HTML/CSS/JS design system synced from Figma.
-Figma file: 0wRnp6ulIEA8PCV6wqGmAJ ("Oneli8 Design System — 1.0.0-beta.1")
+Figma file: 0wRnp6ulIEA8PCV6wqGmAJ
 
 ## Rules for AI agents
 
@@ -28,13 +28,44 @@ Figma file: 0wRnp6ulIEA8PCV6wqGmAJ ("Oneli8 Design System — 1.0.0-beta.1")
 
 ## Packages
 
-- `packages/tokens` — `src/tokens.json` -> `dist/tokens.css` (`--ol8-*`) + `dist/tokens.js`
+- `packages/tokens` — `src/{primitive,semantic,themes}.json` -> `build/css/tokens.css`
+  (`--ol8-*`) + `build/typescript/index.js` + `build/tailwind/preset.mjs`
 - `packages/core`   — headless components, buildless ESM + `.d.ts`, no bundler
   - `src/atoms/`     compose nothing; native elements only
   - `src/molecules/` composed of atoms
   - `src/organisms/` composed of atoms/molecules; may hold state and logic
   - `src/materials/` NOT a tier — cross-cutting surface adapters (gem)
 - `packages/sync`   — Figma extraction, normalization, and structure lint
+
+## Gem material rules
+
+Gem has two faces and they imply different content. Choosing the wrong pairing is
+the most common Gem error, in both directions.
+
+- `material.gem.color.quiet.environmentalFace` — a surface over imagery or the
+  real world. Content is `material.gem.color.quiet.content`, a stable near-white
+  in BOTH appearances, carrying the `quiet.contentGlow` halo at
+  `material.gem.blur.contentGlow`: four stacked shadows for text, three for
+  control geometry, because 1.4.11 asks 3:1 of a graphical object where 1.4.3
+  asks 4.5:1 of text. Content means every glyph AND the unselected control
+  boundary AND any icon, never the label alone.
+- `material.gem.color.quiet.stabilizedFace` — app chrome, including the filled
+  Gem text field, Select and Combobox. Content is ordinary `color.text.*`, no
+  halo.
+- `material.gem.color.quiet.legibilityFace` — the reduced-transparency mode.
+  Denser, NEVER opaque: Gem is worn, so a solid surface would occlude the
+  world for the person who needs help reading it.
+- Disabled takes `material.gem.color.quiet.contentDisabled`, one whitish grey
+  shared by text and control geometry, and no halo. It is a STATE, not a
+  material change: the body and backdrop blur stay, only the lit bezel goes.
+  Loading is an ACTIVE state and keeps the bezel.
+- On a button the label and the icon always take the same value. `--_fg` is the
+  label, `--_ink` is the icon, and every Gem rule sets them together.
+- Never thicken a face to win contrast and never widen the halo: blur spreads a
+  fixed alpha budget, so a wider halo is a WEAKER halo.
+
+`docs/gem-material.md` carries the measured values and the Figma node each was
+read from.
 
 ## Structural rules (enforced by `npm run check`)
 
@@ -43,8 +74,8 @@ Figma file: 0wRnp6ulIEA8PCV6wqGmAJ ("Oneli8 Design System — 1.0.0-beta.1")
 
 ## Foundations (page 9:7) — complete
 
-337 CSS custom properties in `packages/tokens/dist/tokens.css`:
-99 primitives, 123 semantic roles, 17 dimension steps (3px-atomic),
+606 CSS custom properties in `packages/tokens/build/css/tokens.css`:
+170 primitives, 275 semantic roles, 17 dimension steps (3px-atomic),
 9 radii, 9 typography roles, 5 elevations.
 
 - Consume SEMANTIC roles only. Primitives are hidden from Figma pickers.

@@ -245,6 +245,18 @@
         "ol8-icon-btn": [
           "primary",
           "secondary"
+        ],
+        "ol8-field": [
+          "outline",
+          "filled"
+        ],
+        "ol8-choice": [
+          "checkbox",
+          "radio",
+          "switch"
+        ],
+        "ol8-gem": [
+          "generic surface"
         ]
       }
     }

@@ -1,11 +1,11 @@
 {
   "$schema": "./ai-context.schema.json",
   "system": "Oneli8 Design System",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.10",
   "tokenPrefix": "--ol8-",
   "figma": {
     "fileKey": "0wRnp6ulIEA8PCV6wqGmAJ",
-    "name": "Oneli8 Design System \u2014 1.0.0-beta.1",
+    "name": "Oneli8 Design System",
     "pages": {
       "Foundations": "9:7",
       "Iconography": "84:9",
@@ -29,28 +29,25 @@
       }
     },
     "compiled": {
-      "source": "packages/tokens/src/tokens.json",
-      "css": "packages/tokens/dist/tokens.css",
-      "js": "packages/tokens/dist/tokens.js"
+      "source": "packages/tokens/src/{primitive,semantic,themes}.json",
+      "css": "packages/tokens/build/css/tokens.css",
+      "js": "packages/tokens/build/typescript/index.js",
+      "tailwind": "packages/tokens/build/tailwind/preset.mjs",
+      "figmaVariables": "packages/tokens/build/figma/variables.json"
     },
     "counts": {
-      "$comment": "Verified 2026-09-09 against Figma 0wRnp6ulIEA8PCV6wqGmAJ (get_variable_defs on 9:7, 1034:9969, 246:3) and packages/tokens/src/tokens.json. semanticRoles and cssCustomProperties were stale; each count now states what it counts. cssCustomProperties dropped 435 -> 384 when the orphaned --ol8-typography-<role>-<prop> duplicates were retired; the .ol8-type-<role> classes are unchanged.",
-      "primitives": 99,
-      "semanticRoles": 68,
-      "semanticRolesNote": "color.* roles excluding the 9 primitive ramps and the color-primary-* alias ramp. Figma exposes 69 — code omits color-icon-on-gem, which duplicates material-control-gem--*-content.",
-      "materialGemRoles": 45,
-      "materialControlRoles": 27,
-      "dimensionSteps": 17,
-      "radii": 9,
-      "typographyRoles": 9,
-      "elevations": 5,
-      "cssCustomProperties": 384
+      "primitive": 170,
+      "semantic": 275,
+      "component": 161,
+      "cssCustomProperties": 606,
+      "figmaVariables": 592,
+      "$comment": "Generated counts, mirrored from packages/tokens/build/manifest.json. packages/sync/src/check-ai-context.mjs fails the build when they drift."
     },
     "rules": [
       "Components consume SEMANTIC roles only. Primitives (color-<family>-<step>) are hidden from pickers in Figma and must not appear in component code.",
-      "color-primary-* is an alias ramp onto color-blue-* \u2014 identical values, distinct names. Prefer the semantic role over either.",
+      "color-primary-* is an alias ramp onto color-blue-* — identical values, distinct names. Prefer the semantic role over either.",
       "Dimension scale is 3px-atomic. Even multiples for structural layout; odd multiples are deliberate optical or micro-gap choices.",
-      "Elevation ink is cyan-840 rgb(22,63,75) \u2014 never default black.",
+      "Elevation ink is cyan-840 rgb(22,63,75) — never default black.",
       "Typography roles are composite. Apply a whole role, all five of --ol8-typography-<role>-{font-family,font-size,font-weight,line-height,letter-spacing}, rather than picking loose font vars. This package ships custom properties and no class names.",
       "shape-radius-full (999px) is reserved for pills and circles. Soft hexagons are component-specific recipes, not a radius token."
     ],
@@ -103,7 +100,7 @@
           "iconbutton-primary-circle": "119:202",
           "iconbutton-secondary-circle": "119:299"
         },
-        "description": "Material adapter \u2014 NOT a fifth semantic variant. Geometry, meaning, accessibility, protected target, Size, State, content and native behavior are inherited from the regular molecule. Material changes only the token-bound surface and inner focus edge. Reduced Transparency resolves to the regular opaque equivalent. Quiet and Destructive use the regular material until a distinct Gem treatment is explicitly approved."
+        "description": "Material adapter — NOT a fifth semantic variant. Geometry, meaning, accessibility, protected target, Size, State, content and native behavior are inherited from the regular molecule. Material changes only the token-bound surface and inner focus edge. Reduced Transparency resolves to the regular opaque equivalent. Quiet and Destructive use the regular material until a distinct Gem treatment is explicitly approved."
       },
       "code": {
         "styles": "packages/core/src/materials/gem/gem.css"
@@ -120,12 +117,25 @@
         "ol8-icon-btn": [
           "primary",
           "secondary"
+        ],
+        "ol8-field": [
+          "outline",
+          "filled"
+        ],
+        "ol8-choice": [
+          "checkbox",
+          "radio",
+          "switch"
+        ],
+        "ol8-gem": [
+          "generic surface"
         ]
       },
       "note": "Gem is an attribute on an existing button, never a new class or variant. renderButton/renderIconButton throw for quiet and destructive.",
       "layers": {
-        "::before": "three-stop body + backdrop-filter blur(12px)",
-        "::after": "rim: specular top edge + integrated light rim"
+        "::before": "three-stop body + backdrop-filter blur; on .ol8-gem also the face and its cut edge",
+        "::after": "rim: specular top edge (inset 0 2px 1px) + integrated light rim (inset 0 0 0 1px)",
+        "control-stack::before": "the angular cut — a conic gradient masked to a hairline band, five stops symmetric about 0.54, Inner Thin Cut on Filled and Cut Edge on Outline. CSS has no gradient border that follows border-radius, so it is a masked pseudo-element rather than a border."
       },
       "gradient": {
         "stops": [
@@ -150,16 +160,43 @@
         "Loading": "primary-loading-*",
         "Disabled": "gem layers suppressed; regular opaque treatment shows through"
       },
-      "reducedTransparency": {
-        "query": "@media (prefers-reduced-transparency: reduce)",
-        "behavior": "::before and ::after are hidden, revealing the regular molecule's own background, which is never removed. Secondary also regains its 2px boundary."
-      },
+      "reducedTransparency": "quiet.opaqueEquivalent on a conventional screen, where the platform flag means remove the effect. quiet.legibilityFace on a worn display. Disabled is NOT this fallback.",
       "verification": {
         "primaryDefault": "#3854ae -> #2c438b -> #23366f at 14.639/48.586/85.361%, blur(12px)",
         "rim": "inset 0 2px 1px rgba(252,250,243,.54) + inset 0 0 0 0 rgba(252,250,243,.24)",
         "secondary": "rgba(252,250,243,.22/.05/.12), border 0",
         "disabled": "gem layers display:none, opaque #e7e0d1 shows through"
-      }
+      },
+      "faces": {
+        "environmentalFace": {
+          "use": "a surface over imagery or the real world",
+          "light": "neutral.030 @ 0.09",
+          "dark": "neutral.930 @ 0.09",
+          "content": "material.gem.color.quiet.content — stable near-white in BOTH appearances",
+          "halo": "quiet.contentGlow at blur.contentGlow; 4 stacked shadows for text, 3 for control geometry"
+        },
+        "stabilizedFace": {
+          "use": "app chrome, including the filled Gem text field, Select and Combobox",
+          "light": "neutral.030 @ 0.15",
+          "dark": "neutral.840 @ 0.27",
+          "content": "ordinary color.text.* — no halo"
+        },
+        "legibilityFace": {
+          "use": "the reduced-transparency mode",
+          "value": "neutral.930 @ 0.72 in both appearances",
+          "why": "denser, never opaque: Gem is worn, so a solid surface would occlude the world for the person who needs help reading it. 28% of the scene still reaches the eye and near-white ink measures 7.70:1 in the worst region of a real daylight plate, which is AAA.",
+          "optIn": "data-ol8-transparency=\"reduced\" per surface; a media query cannot tell a phone from a lens"
+        }
+      },
+      "contentRule": "Content means every glyph AND the unselected control boundary AND any icon, never the label alone. On a button the label and the icon always take the same value: --_fg is the label, --_ink is the icon, and every Gem rule sets them together. Selected and mixed indicators are never restyled on either face; they fill with the primary action family and carry their own mark.",
+      "disabled": "A STATE, not a material change. The body and the backdrop blur stay; the lit bezel goes — rim inner shadows and the angular cut both drop and the boundary falls to the flat disabled border. Ink is material.gem.color.quiet.contentDisabled, one whitish grey shared by text and control geometry, with no halo. Never the regular action disabled-content colours, which are dark on a surface whose enabled content is near-white. Loading is an ACTIVE state and keeps the bezel and the gem content ink; it matches :disabled only because inert = disabled || loading.",
+      "neverDo": [
+        "thicken a face to win contrast — the face barely affects it; a 0.06 change in tint moves contrast by 0.06:1",
+        "widen the halo — blur spreads a fixed alpha budget, so a wider halo is a WEAKER halo",
+        "use color.text.disabled for disabled content on an environmental face — it is dark on near-white glass",
+        "restyle a selected or mixed indicator on a Gem surface"
+      ],
+      "measured": "docs/gem-material.md — every value with the Figma node it was read from"
     }
   },
   "architecture": {
@@ -171,7 +208,7 @@
       "materials": "packages/core/src/materials/"
     },
     "rules": [
-      "ATOM: composes no other component \u2014 native elements only. May hold internal state; must not read application state.",
+      "ATOM: composes no other component — native elements only. May hold internal state; must not read application state.",
       "MOLECULE: composed of one or more atoms. Reusable, more specialised.",
       "ORGANISM: composed of atoms/molecules/organisms. May hold business logic and application state.",
       "MATERIALS are not an atomic tier. They are cross-cutting surface adapters applied by attribute (data-ol8-material) to an existing component, and live outside the hierarchy.",
@@ -292,11 +329,11 @@
         }
       },
       "a11y": {
-        "default": "decorative \u2014 aria-hidden=\"true\"",
+        "default": "decorative — aria-hidden=\"true\"",
         "meaningful": "set data-ol8-icon-label; hydration promotes it to role=\"img\" + aria-label",
         "invariants": [
           "focusable=\"false\" on the svg keeps it out of the IE/Edge tab order.",
-          "An icon inside a labelled control stays decorative \u2014 the control owns the accessible name.",
+          "An icon inside a labelled control stays decorative — the control owns the accessible name.",
           "Never rely on color alone: status glyphs (critical/caution/positive/informative) have distinct silhouettes by design."
         ]
       },
@@ -336,7 +373,7 @@
             "Size": 18
           },
           "note": "mirrors under [dir=rtl] via the semantic registry",
-          "html": "<span class=\"ol8-icon\" data-ol8-icon=\"forward\" data-ol8-icon-size=\"18\" data-ol8-icon-mirror=\"true\" aria-hidden=\"true\">\u2026</span>"
+          "html": "<span class=\"ol8-icon\" data-ol8-icon=\"forward\" data-ol8-icon-size=\"18\" data-ol8-icon-mirror=\"true\" aria-hidden=\"true\">…</span>"
         },
         {
           "figma": {
@@ -350,7 +387,7 @@
       ],
       "notes": [
         "Masters bake one ink each and it is always discarded for currentColor. The neutral sources bake #151817; the selection glyphs bake #1a2a59 (check) and #e2e9ff (selected-dot). The build fails if a master carries more than one distinct ink.",
-        "The 18px Small master is an exact 0.75x geometric scale of the 24px Standard master \u2014 verified path-by-path on Add: M12 5V19M5 12H19 @1.8 -> M9 3.75V14.25M3.75 9H14.25 @1.35. Figma's own description on node 379:2 claims an 'independently drawn 18px optical master; 1.5px rounded stroke', which the built asset contradicts. Geometric scaling is correct."
+        "The 18px Small master is an exact 0.75x geometric scale of the 24px Standard master — verified path-by-path on Add: M12 5V19M5 12H19 @1.8 -> M9 3.75V14.25M3.75 9H14.25 @1.35. Figma's own description on node 379:2 claims an 'independently drawn 18px optical master; 1.5px rounded stroke', which the built asset contradicts. Geometric scaling is correct."
       ]
     },
     "ol8-btn": {
@@ -518,7 +555,7 @@
                   }
                 }
               },
-              "note": "Spinner occupies the leading slot by default; a leading icon is suppressed so the button never shows two competing leading glyphs. Figma's codegen emits both \u2014 pass keepLeadingIconWhileLoading (or data-ol8-loading-keep-icon=\"true\") for that literal reading. Rotation is opt-in and guarded by prefers-reduced-motion: Figma 379:7 says Reduced Motion keeps the static busy mark."
+              "note": "Spinner occupies the leading slot by default; a leading icon is suppressed so the button never shows two competing leading glyphs. Figma's codegen emits both — pass keepLeadingIconWhileLoading (or data-ol8-loading-keep-icon=\"true\") for that literal reading. Rotation is opt-in and guarded by prefers-reduced-motion: Figma 379:7 says Reduced Motion keeps the static busy mark."
             }
           }
         }
@@ -578,13 +615,13 @@
             "State": "Default",
             "showLeadingIcon": true
           },
-          "html": "<button type=\"button\" class=\"ol8-btn ol8-btn--secondary\" data-ol8-size=\"large\"><span class=\"ol8-icon\" data-ol8-icon=\"add\" aria-hidden=\"true\">\u2026</span><span class=\"ol8-btn__label\">Button</span></button>"
+          "html": "<button type=\"button\" class=\"ol8-btn ol8-btn--secondary\" data-ol8-size=\"large\"><span class=\"ol8-icon\" data-ol8-icon=\"add\" aria-hidden=\"true\">…</span><span class=\"ol8-btn__label\">Button</span></button>"
         }
       ],
       "verification": {
         "method": "in-browser measurement against Figma node geometry",
         "heights": "36/42/48/60 exact at all four sizes",
-        "widths": "constant -0.67px vs Figma's stored integer widths \u2014 Figma rounds its hug width up (label advance 52.33 -> 53); padding, gap and icon geometry are exact",
+        "widths": "constant -0.67px vs Figma's stored integer widths — Figma rounds its hug width up (label advance 52.33 -> 53); padding, gap and icon geometry are exact",
         "focusRing": "keyboard focus produces inset 0 0 0 3px rgb(16,27,58) with unchanged box"
       },
       "deviations": [
@@ -592,7 +629,7 @@
           "id": "loading-leading-icon",
           "figma": "codegen emits the leading icon AND the spinner",
           "here": "spinner takes the leading slot by default; opt in to both with keepLeadingIconWhileLoading / data-ol8-loading-keep-icon",
-          "reason": "the source is ambiguous \u2014 the measured Loading widths come from variants with no leading icon, so they do not disambiguate. Default avoids two competing leading glyphs and keeps width predictable.",
+          "reason": "the source is ambiguous — the measured Loading widths come from variants with no leading icon, so they do not disambiguate. Default avoids two competing leading glyphs and keeps width predictable.",
           "reversible": true,
           "commit": "see git history"
         }
@@ -686,14 +723,14 @@
             "Pressed": ":active / [aria-pressed] plus a 3px inset scrim",
             "Focus": ":focus-visible, OUTSIDE two-tone ring: inner --ol8-color-focus-inner at 3px declared FIRST, outer --ol8-color-focus-outer at 6px second, so both bands paint. Figma declares them the other way round, which occludes the inner band.",
             "Disabled": "[disabled]",
-            "Loading": "[data-ol8-loading] \u2014 paints with the HOVER colors in Figma, not the default ones"
+            "Loading": "[data-ol8-loading] — paints with the HOVER colors in Figma, not the default ones"
           }
         }
       },
       "a11y": {
         "mandatory": "Accessible name. renderIconButton throws without one; hydrateIconButtons reports any unnamed button.",
         "invariants": [
-          "The symbol never translates, rotates or scales \u2014 hover changes the container only.",
+          "The symbol never translates, rotates or scales — hover changes the container only.",
           "The protected target stays >= 48px even when the visible box is 36px."
         ]
       },
@@ -708,7 +745,7 @@
         }
       ],
       "verification": {
-        "geometry": "target 48/48/48/60, box 36/42/48/60, artwork 18/18/24/24 \u2014 all exact in-browser",
+        "geometry": "target 48/48/48/60, box 36/42/48/60, artwork 18/18/24/24 — all exact in-browser",
         "circle": "radius resolves to 999px",
         "iconContrast": {
           "primary": 8.81,
@@ -716,7 +753,7 @@
           "secondary": 8.81,
           "quiet": 8.81,
           "disabled": "4.86 primary/destructive, 6.11 secondary/quiet",
-          "note": "All families now pass WCAG 1.4.11 (3:1). Figma binds --ol8-color-icon-primary for every family, which measured 1.94:1 on Primary and 2.17:1 on Destructive; the glyph is bound to the action content role instead. This is a deliberate deviation from the source \u2014 see README."
+          "note": "All families now pass WCAG 1.4.11 (3:1). Figma binds --ol8-color-icon-primary for every family, which measured 1.94:1 on Primary and 2.17:1 on Destructive; the glyph is bound to the action content role instead. This is a deliberate deviation from the source — see README."
         }
       },
       "deviations": [
@@ -724,12 +761,12 @@
           "id": "icon-glyph-contrast",
           "figma": "glyph bound to --ol8-color-icon-primary for all families",
           "here": "glyph bound to --ol8-color-action<family>-content on Primary and Destructive",
-          "reason": "WCAG 1.4.11 \u2014 1.94:1 and 2.17:1 measured against a 3:1 minimum",
+          "reason": "WCAG 1.4.11 — 1.94:1 and 2.17:1 measured against a 3:1 minimum",
           "commit": "see git history"
         },
         {
           "id": "focus-ring-order",
-          "figma": "0 0 0 6px focus-outer, 0 0 0 3px focus-inner \u2014 dark paints over light, only one band renders",
+          "figma": "0 0 0 6px focus-outer, 0 0 0 3px focus-inner — dark paints over light, only one band renders",
           "here": "inner declared first so both bands render",
           "reason": "the two focus colour tokens describe a two-tone ring; the source order makes one of them dead",
           "commit": "see git history"
@@ -757,7 +794,7 @@
       "footprint": {
         "element": "span",
         "alwaysAriaHidden": true,
-        "note": "Purely presentational. Carries no role, no state, no focus \u2014 the native <input> in Choice Item owns all of that."
+        "note": "Purely presentational. Carries no role, no state, no focus — the native <input> in Choice Item owns all of that."
       },
       "variants": {
         "Kind": {
@@ -820,7 +857,7 @@
         }
       },
       "opticalExceptions": [
-        "The Mixed bar is a CONSTANT 9x1.8px in BOTH the 18px and 24px masters \u2014 it does not scale with the box. Verified: 9 x 1.796875 measured at both sizes.",
+        "The Mixed bar is a CONSTANT 9x1.8px in BOTH the 18px and 24px masters — it does not scale with the box. Verified: 9 x 1.796875 measured at both sizes.",
         "The check glyph and the radio dot DO scale geometrically (dot 9 -> 12; check is one 24-unit path sized to the box)."
       ],
       "forbid": [
@@ -834,7 +871,7 @@
         }
       ],
       "verification": {
-        "geometry": "checkbox/radio 18 & 24; switch 36x18 & 48x24; thumb offsets 3->21 and 3->27; dot 9 & 12 \u2014 all exact",
+        "geometry": "checkbox/radio 18 & 24; switch 36x18 & 48x24; thumb offsets 3->21 and 3->27; dot 9 & 12 — all exact",
         "mixedBar": "9 x 1.8 at both sizes, constant as designed",
         "contrast": {
           "checkboxCheckedGlyphOnFill": 11.41,
@@ -955,7 +992,7 @@
         "Hover/Pressed/Focus": {
           "strategy": "pseudo",
           "emit": null,
-          "note": "Figma booleans for review only. Focus draws two nested visible rings (3px outer, 3px inner at 2px inset) \u2014 the same two-tone ring the focus tokens describe."
+          "note": "Figma booleans for review only. Focus draws two nested visible rings (3px outer, 3px inner at 2px inset) — the same two-tone ring the focus tokens describe."
         }
       },
       "a11y": {
@@ -983,7 +1020,7 @@
       ],
       "verification": {
         "rowHeight": "exactly 48px at all four sizes; grows to 69px with a description",
-        "geometry": "gap 6/9/9/9, padding-block 15/12/12/9, indicator 18/18/24/24, slot height 18/24/24/30 \u2014 all exact",
+        "geometry": "gap 6/9/9/9, padding-block 15/12/12/9, indicator 18/18/24/24, slot height 18/24/24/30 — all exact",
         "semantics": "label[for] wraps a real input; switch carries role=switch; indeterminate applied and reflected as Selection=mixed"
       }
     },
@@ -1064,7 +1101,7 @@
           "fieldset + legend names the group natively.",
           "Instruction and message are wired through aria-describedby on the fieldset.",
           "An invalid group's message carries role=alert.",
-          "Radios share one name \u2014 that is what makes them a group."
+          "Radios share one name — that is what makes them a group."
         ]
       },
       "forbid": [
@@ -1093,7 +1130,7 @@
       "tier": "molecule",
       "figma": {
         "page": "Select and Combobox (1034:12628)",
-        "section": "01 \u00b7 Atomic Selection Building Blocks (570:123)",
+        "section": "01 · Atomic Selection Building Blocks (570:123)",
         "set": "570:122",
         "componentCount": 8,
         "description": "Label, optional supporting Description, optional Leading Icon from the canonical Icon Frame pool, Selected state, active preview, and disabled behavior map directly to code. Description is associated through aria-describedby and remains outside the option accessible name. Selection Popup composes this owner; keyboard focus remains on the Combobox input through aria-activedescendant."
@@ -1144,7 +1181,7 @@
           "emitAs": {
             "data-ol8-active": "true"
           },
-          "note": "The aria-activedescendant CURSOR \u2014 distinct from selected (data) and :hover (pointer), though all three paint the same wash."
+          "note": "The aria-activedescendant CURSOR — distinct from selected (data) and :hover (pointer), though all three paint the same wash."
         },
         "Availability": {
           "strategy": "aria",
@@ -1156,7 +1193,7 @@
       },
       "a11y": {
         "invariants": [
-          "The option is NEVER focusable \u2014 no tabindex. A listbox moves a virtual cursor with aria-activedescendant while real focus stays on the combobox input.",
+          "The option is NEVER focusable — no tabindex. A listbox moves a virtual cursor with aria-activedescendant while real focus stays on the combobox input.",
           "Accessible name is the label alone; the description is referenced, not nested.",
           "Only one option carries data-ol8-active at a time."
         ]
@@ -1176,7 +1213,7 @@
         }
       ],
       "verification": {
-        "geometry": "standard 48/12/12 and large 60/15/18 \u2014 exact",
+        "geometry": "standard 48/12/12 and large 60/15/18 — exact",
         "trailingSlot": "18px reserved in both selected and unselected states",
         "accessibleName": "aria-labelledby resolves to the label; description reachable only through aria-describedby and not contained in the name element",
         "activedescendant": "driving ArrowDown/ArrowUp/Enter kept document.activeElement on the input throughout, moved aria-activedescendant one step at a time, never left more than one option active, and Enter moved selection with the check mark following"
@@ -1187,9 +1224,9 @@
     "Select and Combobox": {
       "page": "1034:12628",
       "remaining": {
-        "02 Selection Popup (organism)": "574:534, 6 variants \u2014 Width Content|Anchor|Wide x Size Standard|Large",
-        "03 Select Trigger": "583:338, 24 variants \u2014 Size x Appearance Outline|Filled x Condition",
-        "04 Choice Chip Foundation": "612:657 \u2014 Soft Hexagon 636:847 and Neutral 983:6552",
+        "02 Selection Popup (organism)": "574:534, 6 variants — Width Content|Anchor|Wide x Size Standard|Large",
+        "03 Select Trigger": "583:338, 24 variants — Size x Appearance Outline|Filled x Condition",
+        "04 Choice Chip Foundation": "612:657 — Soft Hexagon 636:847 and Neutral 983:6552",
         "05 Mobbin-informed Compositions": "603:281 (documentation)",
         "06 Canonical Public Owners": "875:1399 (documentation)"
       }

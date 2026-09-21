@@ -32,6 +32,12 @@ text. That means every glyph AND the unselected control boundary and any icon, n
 the label alone. Disabled takes material.gem.color.quiet.contentDisabled, one
 whitish grey shared by text and control geometry, and no halo.
 
+On a button the label and the icon always take the same value: --_fg and --_ink are set
+together, in every state. Disabled on Gem takes material.gem.color.quiet.contentDisabled for
+both, never the regular action disabled-content colours, which are dark on a surface whose
+enabled content is near-white. Loading is an ACTIVE state: it keeps the lit bezel and the gem
+content ink, and it matches :disabled only because inert = disabled || loading.
+
 material.gem.color.quiet.stabilizedFace is the local content plane on app chrome,
 including the filled Gem text field, Select and Combobox. Its content is ordinary
 color.text.* and takes no halo. Selected and mixed indicators are never restyled
