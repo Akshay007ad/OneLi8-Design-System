@@ -2567,10 +2567,10 @@ export const tokens = {
   "material.gem.blur.environmental": {
     "type": "dimension",
     "value": {
-      "value": 18,
+      "value": 9,
       "unit": "px"
     },
-    "description": "Approved candidate environmental backdrop blur.",
+    "description": "Backdrop blur for the environmental Gem face. 9px, down from 18px, and the pair is no longer inverted. 18px was the larger of the two, which had the semantics backwards: the environmental face exists so the environment can be SEEN, so it must blur LESS than the stabilized plane, not more. At 18px a soft environment flattens into a single grey wash and the surface reads as opaque no matter how low its alpha is — which is why dropping the face from 0.48 to 0.18 appeared to change nothing. The blur was doing the damage, not the tint. Verified on the Light and Dark comparison in Figma (297:610): at 9px the environment reads through in both appearances.",
     "tier": "semantic"
   },
   "material.gem.blur.stabilized": {
@@ -2579,7 +2579,7 @@ export const tokens = {
       "value": 12,
       "unit": "px"
     },
-    "description": "Local stabilized information-plane blur.",
+    "description": "Local stabilized information-plane blur. 12px, and now the HIGHER of the pair, which is the point: the stabilized plane is being read rather than looked through, so it settles the background down more than the environmental face does.",
     "tier": "semantic"
   },
   "material.gem.blur.contentGlow": {

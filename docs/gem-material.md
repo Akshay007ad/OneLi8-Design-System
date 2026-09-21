@@ -98,6 +98,23 @@ pins. Dark holds the previous `0.22 / 0.05 / 0.12` through overrides in
 environment is the sheen that reads as glass, while over a light one it reads
 as milk.
 
+## The blur is what makes light Gem look opaque, not the tint
+
+`material.gem.blur.environmental` was **18px** while `material.gem.blur.stabilized`
+was 12px. That pair was inverted. The environmental face exists so the
+environment can be *seen*, so it must blur **less** than the stabilized plane,
+which is being read rather than looked through.
+
+At 18px a soft environment flattens into one grey wash and the surface reads as
+opaque at any alpha. This is why dropping the quiet face from 0.48 to 0.18
+appeared to change nothing on the Gem material adapter slabs: the tint was
+already transparent and the blur was destroying the evidence. Verified on
+`Light and Dark comparison` (`297:610`) — at 9px the blue and pink environment
+reads straight through in Light, and Dark improves too.
+
+    environmental  9px   (Dimension / Scale / 009)
+    stabilized    12px   (Dimension / Scale / 012)
+
 ## The gradient angle
 
 Figma bakes a per-instance degree value, and every one of them satisfies

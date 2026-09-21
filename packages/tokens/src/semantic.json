@@ -1372,13 +1372,13 @@
       "blur": {
         "environmental": {
           "$type": "dimension",
-          "$value": "{dimension.scale.018}",
-          "$description": "Approved candidate environmental backdrop blur."
+          "$value": "{dimension.scale.009}",
+          "$description": "Backdrop blur for the environmental Gem face. 9px, down from 18px, and the pair is no longer inverted. 18px was the larger of the two, which had the semantics backwards: the environmental face exists so the environment can be SEEN, so it must blur LESS than the stabilized plane, not more. At 18px a soft environment flattens into a single grey wash and the surface reads as opaque no matter how low its alpha is \u2014 which is why dropping the face from 0.48 to 0.18 appeared to change nothing. The blur was doing the damage, not the tint. Verified on the Light and Dark comparison in Figma (297:610): at 9px the environment reads through in both appearances."
         },
         "stabilized": {
           "$type": "dimension",
           "$value": "{dimension.scale.012}",
-          "$description": "Local stabilized information-plane blur."
+          "$description": "Local stabilized information-plane blur. 12px, and now the HIGHER of the pair, which is the point: the stabilized plane is being read rather than looked through, so it settles the background down more than the environmental face does."
         },
         "contentGlow": {
           "$type": "dimension",
