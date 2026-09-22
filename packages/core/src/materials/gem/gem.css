@@ -452,6 +452,21 @@
     0 9px 12px var(--ol8-material-gem-color-cutedge-shadow);
 }
 
+/* A Token or Choice Chip sitting ON a Gem surface.
+   Both draw the Choice Chip silhouette, whose default --_surface is
+   color.surface.sunken — an opaque plate. On glass that reads as a solid
+   lozenge stuck to the surface, and in the Light appearance its ink is dark,
+   so the label goes invisible against near-white gem content beside it.
+   The pill turns transparent and the label takes the gem ink and halo, so the
+   chip reads as a boundary around content rather than a second material. */
+.ol8-gem .ol8-chip {
+  --_surface: transparent;
+  --_edge: var(--ol8-material-gem-color-cutedge-high);
+  --_ink: var(--ol8-material-gem-color-quiet-content);
+  text-shadow: var(--_gem-glow), var(--_gem-glow),
+               var(--_gem-glow), var(--_gem-glow);
+}
+
 /* Disabled on a generic Gem surface, same single grey, same absent halo. */
 .ol8-gem [data-ol8-availability="disabled"] .ol8-selection,
 .ol8-gem [disabled] .ol8-selection {

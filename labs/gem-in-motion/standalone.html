@@ -2641,6 +2641,21 @@
     0 9px 12px var(--ol8-material-gem-color-cutedge-shadow);
 }
 
+/* A Token or Choice Chip sitting ON a Gem surface.
+   Both draw the Choice Chip silhouette, whose default --_surface is
+   color.surface.sunken — an opaque plate. On glass that reads as a solid
+   lozenge stuck to the surface, and in the Light appearance its ink is dark,
+   so the label goes invisible against near-white gem content beside it.
+   The pill turns transparent and the label takes the gem ink and halo, so the
+   chip reads as a boundary around content rather than a second material. */
+.ol8-gem .ol8-chip {
+  --_surface: transparent;
+  --_edge: var(--ol8-material-gem-color-cutedge-high);
+  --_ink: var(--ol8-material-gem-color-quiet-content);
+  text-shadow: var(--_gem-glow), var(--_gem-glow),
+               var(--_gem-glow), var(--_gem-glow);
+}
+
 /* Disabled on a generic Gem surface, same single grey, same absent halo. */
 .ol8-gem [data-ol8-availability="disabled"] .ol8-selection,
 .ol8-gem [disabled] .ol8-selection {
@@ -2847,16 +2862,34 @@
 
   /* No Slider atom exists in the system yet, so this is a native range
      dressed only in tokens. Flagged as a gap, not quietly invented. */
-  input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 20px; background: transparent; cursor: pointer; margin: 0; }
-  input[type="range"]::-webkit-slider-runnable-track { height: 3px; border-radius: 2px; background: var(--ol8-color-border-strong); }
-  input[type="range"]::-moz-range-track { height: 3px; border-radius: 2px; background: var(--ol8-color-border-strong); }
+  /* The thumb was color.text.inverse on a border of the neutral-840 PRIMITIVE.
+     Inverse means "the opposite of the surrounding text", so the moment the
+     dock declared itself dark it resolved to neutral-930 — a dark thumb on a
+     dark dock, invisible. It reads from the surface it sits on now:
+     text-primary is near-white under the dark scheme, and the ring around it
+     is surface-default, the dock's own colour, so the thumb reads as a disc
+     lifted off the track rather than a dot lost in it. Track thickened from
+     3 to 6 and thumb from 15 to 18, both on the 3px grid. */
+  input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 24px; background: transparent; cursor: pointer; margin: 0; }
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 6px; border-radius: var(--ol8-shape-radius-full);
+    background: var(--ol8-color-border-strong);
+  }
+  input[type="range"]::-moz-range-track {
+    height: 6px; border-radius: var(--ol8-shape-radius-full);
+    background: var(--ol8-color-border-strong);
+  }
   input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none; width: 15px; height: 15px; border-radius: var(--ol8-shape-radius-full);
-    background: var(--ol8-color-text-inverse); border: 3px solid var(--ol8-color-neutral-840); margin-top: -6px;
+    -webkit-appearance: none; width: 18px; height: 18px;
+    border-radius: var(--ol8-shape-radius-full);
+    background: var(--ol8-color-text-primary);
+    border: 3px solid var(--ol8-color-surface-default);
+    margin-top: -6px;
   }
   input[type="range"]::-moz-range-thumb {
-    width: 15px; height: 15px; border-radius: var(--ol8-shape-radius-full);
-    background: var(--ol8-color-text-inverse); border: 3px solid var(--ol8-color-neutral-840);
+    width: 18px; height: 18px; border-radius: var(--ol8-shape-radius-full);
+    background: var(--ol8-color-text-primary);
+    border: 3px solid var(--ol8-color-surface-default);
   }
   input[type="range"]:focus-visible { outline: var(--ol8-focus-ring-outerwidth) solid var(--ol8-color-focus-outer); outline-offset: 2px; }
 
@@ -4924,9 +4957,17 @@ $('beats').innerHTML = renderSegmentedControl({
 /* A switch, not a two-item segmented control. Appearance is one binary thing
    being turned on or off, which is what a switch is for; a segmented control is
    for choosing among peers. The stage starts dark, so the switch reads "Dark
-   stage" and is on. */
+   stage" and is on.
+
+   Comfortable, not compact: 48x24 track with an 18 thumb against 36x18 with a
+   12. The switch is the only binary control in the dock and sat smaller than
+   the pills beside it. A thumb ICON would say light/dark without the label,
+   and the atom supports one — renderSelectionIndicator('switch', { icon }) —
+   with --ol8-component-switch-thumbicon-* already in the token set. It is
+   renderChoiceItem that does not forward the option, and the pool has no sun
+   or moon master to forward. Both are gaps, neither is invention. */
 $('appearance').innerHTML = renderChoiceItem('switch', 'Dark stage', {
-  size: 'compact', checked: true, id: 'stageDark',
+  size: 'comfortable', checked: true, id: 'stageDark',
 });
 hydrateSegmentedControls();
 hydrateChoiceItems();
@@ -4947,11 +4988,15 @@ $('hud').innerHTML = [
      ${renderIconButton('forward', 'Skip track', { variant: 'quiet', size: 'compact' })}
    </div></article>`,
 
-  // Message — a real secondary button and a quiet dismiss.
+  // Message — a real secondary button and a quiet dismiss. The button carries
+  // material: 'gem' because it sits ON gem; without it Figma's regular
+  // secondary ink is dark and the button vanishes into a light gem face.
+  // The dismiss stays quiet: renderButton throws for gem on Quiet, since
+  // Figma 100:3 approves Gem for Primary and Secondary only.
   `<article class="ol8-gem widget">
      ${stack('Kabir Rao', 'Still coming by?', 'I&rsquo;ll wait at the north gate')}
      <div class="widget__row widget__row--split">
-       ${renderButton('Reply', { variant: 'secondary', size: 'compact' })}
+       ${renderButton('Reply', { variant: 'secondary', size: 'compact', material: 'gem' })}
        ${renderIconButton('close', 'Dismiss', { variant: 'quiet', size: 'compact' })}
      </div>
    </article>`,
@@ -5086,97 +5131,63 @@ function paving(hz, f) {
   }
 }
 
-/* ---- facades ------------------------------------------------------------
-   A CONTIGUOUS wall each side, not separated blocks. Blocks were the first
-   attempt and they read as leaning blades: each one spans a depth range, so in
-   1/z its near edge towers over its far edge, and with gaps between them you
-   see the taper instead of a street. Walking a real street you see an
-   unbroken run of frontage whose height steps at each building line.
+/* ---- trees --------------------------------------------------------------
+   This is a walking path, not a carriageway, so the corridor is planted rather
+   than built. The facades that were here are gone: a wall's motion is carried
+   entirely by its vertical building lines, which slide past at a different
+   apparent rate from the ground, so they read as a separate moving thing
+   rather than as the sides of the street you are walking down. A tree is a
+   point object at a single depth, so it travels at exactly the ground's rate
+   and the scene coheres.
 
-   Height comes from the segment's WORLD position, bucketed, so a given
-   building keeps its height as it approaches instead of flickering, which a
-   Math.random height would not do — it would re-roll every frame. */
-const SEG = 5;                              // world depth per wall segment
-/* 1.7 to 3.1 world units against a 1.62 road half-width. The first pass ran
-   3.0-6.7 and the frontage filled the frame — no sky, and a street with no
-   sky reads as an interior corridor rather than somewhere you could be
-   walking. Real frontage on a street this width tops out around twice the
-   carriageway. */
-const hashHeight = (i) => 1.7 + ((i * 2654435761 >>> 0) % 8) * 0.18;
-function facades(hz, f) {
-  for (const side of [-1, 1]) {
-    // near is deliberately closer than the ground plane's useful range so the
-    // frontage runs OFF the frame edge; stopping it at z=4 left a hard vertical
-    // seam with bare ground beyond it.
-    const near = 1.8, far = 84;
-    // far to near so nearer frontage overlaps
-    const segs = [];
-    for (let z = far; z > near; z -= SEG) segs.push(z);
+   Trunk, canopy and a shadow pooled at the base, all sized off the same 1/z
+   scale as everything else. Depth and side come from the index so a given tree
+   keeps its place as it approaches. */
+const TREES = Array.from({ length: 16 }, (_, i) => ({
+  z: i * 9.5 + (i % 3) * 2.4,
+  side: i % 2 ? 1 : -1,
+  h: 2.5 + ((i * 29) % 5) * 0.32,          // canopy height in world units
+  spread: 0.8 + ((i * 13) % 4) * 0.13,
+}));
+function trees(hz, f) {
+  const drawn = TREES
+    .map(t => ({ ...t, z: ((t.z - state.dist) % 152 + 152) % 152 + 3 }))
+    .filter(t => t.z < 86).sort((a, b) => b.z - a.z);
 
-    for (const zF of segs) {
-      const zN = Math.max(near, zF - SEG);
-      const idx = Math.floor((zF + state.dist) / SEG) + (side > 0 ? 977 : 0);
-      const h = hashHeight(idx);
-      const sN = f / zN, sF = f / zF;
-      const yN = hz + sN, yF = hz + sF;
-      const xN = W / 2 + side * sN * (ROAD + 0.2);
-      const xF = W / 2 + side * sF * (ROAD + 0.2);
-      const topN = yN - sN * h, topF = yF - sF * h;
-      const fade = clamp(1 - zN / 84, 0.04, 1);
+  for (const t of drawn) {
+    const y = hz + f / t.z, sc = f / t.z;
+    const x = W / 2 + t.side * sc * (ROAD + 0.42);
+    if (x < -120 || x > W + 120) continue;
+    const fade = clamp(1 - t.z / 86, 0.06, 1);
+    const trunkH = sc * t.h * 0.46, trunkW = Math.max(1.1, sc * 0.055);
 
-      ctx.beginPath();
-      ctx.moveTo(xN, yN); ctx.lineTo(xF, yF); ctx.lineTo(xF, topF); ctx.lineTo(xN, topN);
-      ctx.closePath();
-      ctx.fillStyle = `rgba(32,30,27,${(0.5 + fade * 0.42).toFixed(3)})`;
-      ctx.fill();
-      // the vertical building line, which is what makes frontage read as separate addresses
-      ctx.strokeStyle = `rgba(12,11,10,${(0.25 + fade * 0.5).toFixed(3)})`;
-      ctx.lineWidth = Math.max(0.6, sN * 0.02);
-      ctx.beginPath(); ctx.moveTo(xN, yN); ctx.lineTo(xN, topN); ctx.stroke();
+    // shadow first, so the trunk sits in it
+    ctx.beginPath();
+    ctx.ellipse(x, y, Math.max(2, sc * t.spread * 0.5), Math.max(1, sc * 0.09), 0, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(10,10,9,${(0.10 + fade * 0.26).toFixed(3)})`;
+    ctx.fill();
 
-      // two window rows, lit deterministically off the same bucket
-      /* Three thinner rows at low alpha. Two fat rows at 0.20 alpha read as
-         hazard chevrons rather than windows — on a receding wall the band is
-         sheared, so the thicker it is the more it looks like paint. */
-      /* Each row is broken into panes ALONG the segment. Drawn as one band per
-         row, the bands met across segment boundaries and ran unbroken down the
-         whole wall — they read as painted stripes rather than windows. A pane
-         needs a gap on either side of it to be a pane. */
-      const PANES = 2;
-      for (let r = 0; r < 3; r++) {
-        const t = 0.30 + r * 0.22;
-        const wyN = yN - (yN - topN) * t, wyF = yF - (yF - topF) * t;
-        const hN = (yN - topN) * 0.07, hF = (yF - topF) * 0.07;
-        if (hN < 1.2) continue;
-        for (let c = 0; c < PANES; c++) {
-          const u0 = (c + 0.18) / PANES, u1 = (c + 0.82) / PANES;   // 64% pane, 36% gap
-          const xa = xN + (xF - xN) * u0, xb = xN + (xF - xN) * u1;
-          const ya = wyN + (wyF - wyN) * u0, yb = wyN + (wyF - wyN) * u1;
-          const ha = hN + (hF - hN) * u0, hb = hN + (hF - hN) * u1;
-          ctx.beginPath();
-          ctx.moveTo(xa, ya); ctx.lineTo(xb, yb);
-          ctx.lineTo(xb, yb - hb); ctx.lineTo(xa, ya - ha);
-          ctx.closePath();
-          const lit = ((idx * 5 + r * 3 + c) % 4) !== 0;
-          ctx.fillStyle = lit
-            ? `rgba(255,209,61,${(0.03 + fade * 0.13).toFixed(3)})`
-            : `rgba(150,170,180,${(0.02 + fade * 0.07).toFixed(3)})`;
-          ctx.fill();
-        }
-      }
-    }
+    ctx.fillStyle = `rgba(38,32,26,${(0.45 + fade * 0.45).toFixed(3)})`;
+    ctx.fillRect(x - trunkW / 2, y - trunkH, trunkW, trunkH);
+
+    // canopy: three overlapping ellipses, never a circle — a circle reads as a
+    // lollipop and gives the whole avenue a cartoon register
+    const cy = y - trunkH - sc * t.h * 0.30;
+    const rx = sc * t.spread * 0.62, ry = sc * t.h * 0.34;
+    ctx.fillStyle = `rgba(34,54,38,${(0.40 + fade * 0.46).toFixed(3)})`;
+    ctx.beginPath();
+    ctx.ellipse(x, cy, rx, ry, 0, 0, Math.PI * 2);
+    ctx.ellipse(x - rx * 0.52, cy + ry * 0.30, rx * 0.66, ry * 0.72, 0, 0, Math.PI * 2);
+    ctx.ellipse(x + rx * 0.50, cy + ry * 0.26, rx * 0.62, ry * 0.68, 0, 0, Math.PI * 2);
+    ctx.fill();
+    // a lit edge on the side the sky is brightest, so the canopy has a form
+    ctx.beginPath();
+    ctx.ellipse(x - rx * 0.30, cy - ry * 0.34, rx * 0.44, ry * 0.40, 0, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(120,150,120,${(fade * 0.16).toFixed(3)})`;
+    ctx.fill();
   }
 }
 
-function lanes(hz, f) {
-  ctx.fillStyle = 'rgba(252,250,243,.17)';
-  for (let i = 0; i < 26; i++) {
-    const z = ((i * 4 - state.dist % 4) + 100) % 100 + 6;
-    const y = hz + f / z, s = f / z;
-    if (y > H + 30 || s < .4) continue;
-    ctx.fillRect(W / 2 - s * .06, y, s * .12, s * .5);
-  }
-}
 function post(x, yBase, hgt, wdt, shade) {
   ctx.fillStyle = `rgba(22,20,18,${(.55 + shade * .4).toFixed(3)})`;
   ctx.fillRect(x - wdt / 2, yBase - hgt, wdt, hgt);
@@ -5320,8 +5331,8 @@ function frame(now) {
   const hz = H * .44 + bob, f = H * .78;
 
   if (PLATE.ready) drawPlate(dt, k);
-  else { sky(hz); clouds(hz, dt * 60); ground(hz); paving(hz, f); facades(hz, f);
-         lanes(hz, f); furniture(hz, f); }
+  else { sky(hz); clouds(hz, dt * 60); ground(hz); paving(hz, f); trees(hz, f);
+         furniture(hz, f); }
 
   // The UI blurs. It does not move, shrink, fade or disappear.
   // Only the 0..1 factor is set here; the peak is --hud-peak, a scale token,
