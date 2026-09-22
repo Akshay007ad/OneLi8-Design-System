@@ -5334,10 +5334,19 @@ function frame(now) {
   else { sky(hz); clouds(hz, dt * 60); ground(hz); paving(hz, f); trees(hz, f);
          furniture(hz, f); }
 
-  // The UI blurs. It does not move, shrink, fade or disappear.
-  // Only the 0..1 factor is set here; the peak is --hud-peak, a scale token,
-  // so the rendered blur is on the 3px grid by construction.
-  els.hud.style.setProperty('--hud-k', k.toFixed(3));
+  /* The UI blurs. It does not move, shrink, fade or disappear.
+
+     The factor is k SQUARED, not k. Linear in speed meant walking — 1.4 m/s,
+     about a fifth of top speed — already cost a fifth of the peak, which is
+     1.9px on 12px text, and walking is the everyday case: you are reading the
+     thing while you walk. Squaring holds the curve flat through the walking
+     range and loads the cost into running and sprinting, which is how games
+     ramp a speed effect. At the four beats it gives roughly 0, 0.4, 4.3 and
+     9.0px, so walking is a hint and sprinting is the full peak.
+
+     Only the 0..1 factor is set here; the peak is --hud-peak, a scale token. */
+  const blurK = k * k;
+  els.hud.style.setProperty('--hud-k', blurK.toFixed(3));
 
   const environmental = k > FACE_SWITCH;
   for (const w of widgets) {
@@ -5354,7 +5363,7 @@ function frame(now) {
 
   els.roSpeed.innerHTML = v.toFixed(1) + '<small> m/s</small>';
   els.roFace.textContent = environmental ? 'Environmental' : 'Stabilized';
-  els.roBlur.innerHTML = (k * PEAK_BLUR).toFixed(1) + '<small> px</small>';
+  els.roBlur.innerHTML = (blurK * PEAK_BLUR).toFixed(1) + '<small> px</small>';
 
   requestAnimationFrame(frame);
 }
