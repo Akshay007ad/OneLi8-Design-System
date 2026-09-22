@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OneLi8 · Motion study 01 — Gem under locomotion</title>
+<title>OneLi8 · Motion study 01 — Reading at speed</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,16 +50,43 @@
     gap: var(--ol8-dimension-scale-012);
   }
 
-  /* ---- head ---- */
-  .lab__head { display: flex; align-items: baseline; gap: var(--ol8-dimension-scale-012); flex-wrap: wrap; }
+  /* ---- head ----
+     Two columns rather than a stack, and the reason is the height budget: the
+     page is one screen with overflow hidden, so every pixel the head takes is
+     a pixel off the stage. Side by side, the title block and the paragraph
+     share one column's worth of height instead of summing. Baseline alignment
+     is gone — the eyebrow means the two columns no longer have a shared first
+     baseline to align on, so they align at the top. */
+  .lab__head {
+    display: grid;
+    grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+    gap: var(--ol8-dimension-scale-012) var(--ol8-dimension-scale-036);
+    align-items: start;
+  }
+  .lab__title { display: grid; gap: var(--ol8-dimension-scale-003); }
+  /* The study number was inside the paragraph, where it read as the first
+     fact about the content rather than as the label it is. Pulled out as an
+     eyebrow it identifies the page and leaves the paragraph free to open on
+     the actual idea. */
+  .lab__eyebrow {
+    margin: 0; font-size: var(--ol8-font-size-012); line-height: var(--ol8-font-line-018);
+    text-transform: uppercase; letter-spacing: .1em;
+    color: var(--ol8-color-neutral-240);
+  }
   .lab__head h1 {
     margin: 0; font-family: var(--ol8-font-family-display);
-    font-size: var(--ol8-font-size-021); line-height: var(--ol8-font-line-030);
+    font-size: var(--ol8-font-size-030); line-height: var(--ol8-font-line-039);
     font-weight: var(--ol8-font-weight-semibold); letter-spacing: -.01em;
+    text-wrap: balance;
   }
-  .lab__head p {
-    margin: 0; flex: 1 1 320px; min-width: 0;
-    font-size: var(--ol8-font-size-012); line-height: var(--ol8-font-line-018);
+  /* CHILD combinator, not descendant. .lab__head p is (0,2,1) and .lab__eyebrow
+     is (0,1,0), so a descendant selector here silently won the cascade against
+     the eyebrow's own rule and rendered it at 16px in the body colour. The
+     eyebrow is nested inside .lab__title, so > excludes it by structure rather
+     than by a specificity fight. */
+  .lab__head > p {
+    margin: 0; max-width: 62ch;
+    font-size: var(--ol8-font-size-016); line-height: var(--ol8-font-line-024);
     color: var(--ol8-color-neutral-120);
   }
   .lab__head b { color: var(--ol8-color-text-inverse); font-weight: var(--ol8-font-weight-semibold); }
@@ -184,13 +211,37 @@
      that exact neutral-840, so the colour is unchanged and everything INSIDE
      now resolves too. That was not cosmetic: the appearance switch's label was
      text-primary, near-black, on a near-black dock — invisible. */
+  /* The dock was one wrapping flex row holding five unrelated things, so the
+     controls and the measurements shared a single undifferentiated gap and the
+     two switches read as one run of text. It is two rows now — everything you
+     TOUCH above the hairline, everything you READ below it — and the breathing
+     comes from the horizontal axis, because vertical space here is stage space.
+
+     Side padding runs wider than top and bottom (24 against 15). A control
+     surface that ends flush with its own border reads as clipped, and the
+     segmented control already carries its own vertical padding. */
   .dock {
-    display: flex; flex-wrap: wrap; align-items: center;
-    gap: var(--ol8-dimension-scale-012) var(--ol8-dimension-scale-018);
-    padding: var(--ol8-dimension-scale-012);
+    display: grid;
+    gap: var(--ol8-dimension-scale-015);
+    padding: var(--ol8-dimension-scale-015) var(--ol8-dimension-scale-024);
     border: 1px solid var(--ol8-color-border-strong);
     border-radius: var(--ol8-shape-radius-medium);
     background: var(--ol8-color-surface-default);
+  }
+  /* 30 between groups against 12 within them. Proximity is the only thing
+     saying which control belongs to which question, so the between-group gap
+     has to beat the within-group gap by enough to be read as a gap and not as
+     slack — 30 is 2.5x, and both sit on the 3px grid. */
+  .dock__controls {
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: var(--ol8-dimension-scale-012) var(--ol8-dimension-scale-030);
+  }
+  /* Two switches are two independent decisions. At the old 18 the second
+     track sat closer to the first switch's LABEL than that label sat to its
+     own track, which is the grouping stated backwards. */
+  .dock__modes {
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: var(--ol8-dimension-scale-012) var(--ol8-dimension-scale-024);
   }
   /* The segmented control gives every segment flex: 1 1 0, so all four share the
      row's width equally and the LONGEST label decides whether any of them wrap.
@@ -202,12 +253,36 @@
      an override of the control: 408px is 4 x 102 and on the 3px grid. */
   #beats .ol8-segmented { min-inline-size: 408px; }
 
-  .dock__speed { flex: 1 1 180px; min-width: 150px; display: flex; flex-direction: column; gap: 3px; }
+  /* Its own row, deliberately, rather than a flex child that happened to wrap
+     at 28px over. The slider is the one CONTINUOUS control here — the beats
+     are four discrete peers and the switches are binary — and a continuous
+     control is worth more when it is longer: dragging 0 to 6.5 m/s across the
+     full dock resolves to about 0.007 m/s a pixel instead of 0.036. Full
+     width also means the dock stops reflowing between 900 and 1100. */
+  .dock__speed {
+    display: flex; flex-direction: column;
+    gap: var(--ol8-dimension-scale-003);
+  }
   .dock__speed label {
     font-size: var(--ol8-font-size-012); letter-spacing: .08em;
     text-transform: uppercase; color: var(--ol8-color-neutral-240);
   }
-  .readout { display: flex; gap: var(--ol8-dimension-scale-018); margin: 0; }
+  /* The hairline is the only structural change that buys clarity without
+     buying height: 1px plus 15 of padding separates input from output, where
+     18 more of plain gap would have read as the same row, further apart.
+
+     border-SUBTLE was the obvious token and measures 1.19:1 against the dock
+     in dark and 1.26:1 in light — the same whisper in both schemes, so it is
+     working as designed rather than failing in one of them. A whisper is the
+     wrong register for a divider that has a job. border-DEFAULT reads at
+     6.72:1, under the dock's own border-STRONG edge at 9.85:1, so the
+     container edge still outranks the division inside it. */
+  .readout {
+    display: flex; flex-wrap: wrap; margin: 0;
+    gap: var(--ol8-dimension-scale-012) var(--ol8-dimension-scale-036);
+    padding-block-start: var(--ol8-dimension-scale-015);
+    border-block-start: 1px solid var(--ol8-color-border-default);
+  }
   .readout div { display: flex; flex-direction: column; gap: 1px; }
   .readout dt {
     font-size: var(--ol8-font-size-012); letter-spacing: .08em;
@@ -253,7 +328,10 @@
   input[type="range"]:focus-visible { outline: var(--ol8-focus-ring-outerwidth) solid var(--ol8-color-focus-outer); outline-offset: 2px; }
 
   @media (max-width: 640px) {
-    .lab__head p { display: none; }
+    /* Same child combinator, same reason: the description goes, the eyebrow
+       and the title stay. Dropping the page's own identity to save three
+       lines of height is not the trade. */
+    .lab__head > p { display: none; }
     .readout { width: 100%; justify-content: space-between; }
   }
   @media (prefers-reduced-motion: reduce) { .hud { transition: none; } }
@@ -264,14 +342,14 @@
 <div class="lab">
 
   <header class="lab__head">
-    <h1>Gem under locomotion</h1>
-    <p>Motion study 01 &middot; the widgets never leave, and speed alone does not
-    decide what happens to them. <b>Ambient</b> assumes the street matters more:
-    the face goes <b>stabilized &rarr; environmental</b> and the whole surface blurs
-    to 9px, so the world resolves through a UI that has stopped asking to be read.
-    <b>Sports mode</b> inverts both terms for the reader whose stat is the reason
-    the display is on &mdash; the face goes <b>stabilized &rarr; legibility</b> and blur
-    caps at 0.9px. Same threshold, opposite direction.</p>
+    <div class="lab__title">
+      <p class="lab__eyebrow">Motion study 01</p>
+      <h1>Reading at speed</h1>
+    </div>
+    <p>Glass interfaces are designed standing still and then worn by a body that
+    moves. <b>Ambient</b> lets the UI recede as you speed up, so the street
+    resolves through it. <b>Sports mode</b> inverts that for the reader whose
+    number is the whole reason the display is on.</p>
   </header>
 
   <!-- The scheme is scoped to the STAGE, not the document: the street is dark,
@@ -293,9 +371,13 @@
   </div>
 
   <div class="dock" data-ol8-color-scheme="dark">
-    <div id="beats"></div>
-    <div id="appearance"></div>
-    <div id="mode"></div>
+    <div class="dock__controls">
+      <div id="beats"></div>
+      <div class="dock__modes">
+        <div id="appearance"></div>
+        <div id="mode"></div>
+      </div>
+    </div>
     <div class="dock__speed">
       <label for="speed">Speed</label>
       <input type="range" id="speed" min="0" max="7" step="0.1" value="0">

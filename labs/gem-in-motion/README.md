@@ -1,4 +1,26 @@
-# Motion study 01 — Gem under locomotion
+# Motion study 01 — Reading at speed
+
+Glass interfaces are designed standing still and then worn by a body that
+moves. This study puts the Gem material on a moving street and asks what the
+surface is allowed to give up as the reader speeds up.
+
+It runs two scenarios from one switch, because speed alone does not answer the
+question — *why* you are looking does.
+
+| | face at speed | blur at a sprint | the assumption |
+| --- | --- | --- | --- |
+| **Ambient** | `stabilized → environmental` | 9.0px | the street matters more than the UI |
+| **Sports** | `stabilized → legibility` | 0.9px | the number is the reason the display is on |
+
+`FACE_SWITCH` is 0.34 of top speed in **both** modes, deliberately. At an
+identical speed the ambient face steps *down* in presence and the sports face
+steps *up*, so the pair is compared by flipping one switch without touching the
+slider. The blur ramps are anchored to the four beats rather than fitted to a
+curve — see `BLUR_RAMPS` in `index.html`, and [gem-material.md](../../docs/gem-material.md)
+for the face ladder and the measured contrast behind it.
+
+The four ramp values are lab-local. If sports mode becomes product behaviour
+rather than a study, they want to be tokens.
 
 ## Adding a photographic plate
 
