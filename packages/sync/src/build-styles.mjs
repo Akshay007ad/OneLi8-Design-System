@@ -6,6 +6,14 @@
  * to install the vanilla package to get styles. Copying by hand guarantees the
  * two drift, so the copy is generated here and the react files are artifacts.
  *
+ * Run with --check to verify rather than write. `npm run build` regenerates
+ * these artifacts, and `npm run release` runs build first, so a stale copy was
+ * always repaired on the way out the door — silently, and only there. Nothing
+ * in `npm run check` noticed, so the repository could sit on GitHub carrying a
+ * react/styles copy that did not match its core source, which is exactly what
+ * happened when the Gem legibility face landed in core alone. The check makes
+ * the drift fail loudly where the other gates run.
+ *
  * The aggregate `styles.css` in each package is generated for the same reason.
  * It used to be written by hand, and ten stylesheets — Text Field, Form
  * Message, Select, Combobox, Selection Popup and the whole navigation family —
@@ -18,6 +26,16 @@ import { join, dirname, basename, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
+const CHECK = process.argv.includes('--check');
+const stale = [];
+/* One funnel for every artifact this script owns, so --check can never test a
+   different set of files than the write path produces. */
+function emit(path, content) {
+  if (!CHECK) return writeFileSync(path, content);
+  let current = null;
+  try { current = readFileSync(path, 'utf8'); } catch { /* missing counts as stale */ }
+  if (current !== content) stale.push(relative(ROOT, path));
+}
 const SRC = join(ROOT, 'packages/core/src');
 const OUT = join(ROOT, 'packages/react/src/styles');
 
@@ -41,7 +59,7 @@ for (const sheet of sheets) {
   if (names.has(name)) throw new Error(`[ol8] two stylesheets are both called ${name}; the flat react/styles layout needs unique names`);
   names.add(name);
   const rel = sheet.slice(ROOT.length + 1);
-  writeFileSync(join(OUT, name), banner(rel) + readFileSync(sheet, 'utf8'));
+  emit(join(OUT, name), banner(rel) + readFileSync(sheet, 'utf8'));
 }
 
 /* The load order the aggregate has always documented: tokens first because
@@ -61,9 +79,9 @@ const header = (pkg) =>
   `   because it adapts surfaces the component rules have already painted. */\n` +
   `@import "@oneli8/tokens/css";\n`;
 
-writeFileSync(join(ROOT, 'packages/core/styles.css'),
+emit(join(ROOT, 'packages/core/styles.css'),
   header('core') + ordered.map(s => `@import "./${relative(join(ROOT, 'packages/core'), s)}";\n`).join(''));
-writeFileSync(join(ROOT, 'packages/react/styles.css'),
+emit(join(ROOT, 'packages/react/styles.css'),
   header('react') + ordered.map(s => `@import "./src/styles/${basename(s)}";\n`).join(''));
 
 /* The per sheet export map in core is generated for the same reason the
@@ -85,8 +103,18 @@ pkg.exports = {
   ...styleExports,
   ...Object.fromEntries(TAIL.filter(k => k in kept).map(k => [k, kept[k]])),
 };
-writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
+emit(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
 
-console.log(`✓ ${sheets.length} stylesheets -> packages/react/src/styles (source: packages/core/src)`);
-console.log(`✓ aggregate styles.css generated for both packages (${ordered.length} imports each)`);
-console.log(`✓ ${ordered.length} per sheet exports generated in @oneli8/core`);
+if (CHECK) {
+  if (stale.length) {
+    console.error(`✗ generated style check: ${stale.length} artifact(s) do not match packages/core/src`);
+    for (const f of stale) console.error(`  · ${f}`);
+    console.error(`\n  Run \`npm run sync:styles\` and commit the result.`);
+    process.exit(1);
+  }
+  console.log(`✓ generated style check: ${sheets.length} react copies, 2 aggregates and the core export map all match their source`);
+} else {
+  console.log(`✓ ${sheets.length} stylesheets -> packages/react/src/styles (source: packages/core/src)`);
+  console.log(`✓ aggregate styles.css generated for both packages (${ordered.length} imports each)`);
+  console.log(`✓ ${ordered.length} per sheet exports generated in @oneli8/core`);
+}
