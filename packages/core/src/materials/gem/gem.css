@@ -508,6 +508,26 @@
   --_gem-blur: var(--ol8-material-gem-blur-environmental);
 }
 
+/* The third rung, and the SAME face as reduced transparency below reached for
+   a different reason. That one is the PREFERENCE route — the person asked for
+   less transparency, system-wide. This is the CONTEXT route: this surface is
+   legibility-critical right now, and the environment losing presence is the
+   correct trade rather than a regression. An athlete reading a split while
+   running laps is the case: speed is exactly when the ambient face recedes,
+   and exactly when this reader can least afford it.
+
+   Both land on legibilityFace because there is one dense-but-see-through face,
+   not two. 0.72 leaves 28% of the scene visible and measures 7.70:1 against
+   near-white ink in the worst region of a daylight plate, with no credit taken
+   for the halo — AAA while still worn-display honest.
+
+   Blur holds at the stabilized 12px. Environmental's 18px exists to let the
+   scene dominate, which is the opposite of what this face is for. */
+.ol8-gem[data-ol8-face="legibility"] {
+  --_gem-face: var(--ol8-material-gem-color-quiet-legibilityface);
+  --_gem-blur: var(--ol8-material-gem-blur-stabilized);
+}
+
 /* REDUCED TRANSPARENCY, THE WORN-DISPLAY READING OF IT
    Gem is worn, so the background is the real world and an opaque panel would
    occlude the street for the person who needs help reading the interface most.

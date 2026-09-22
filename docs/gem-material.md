@@ -176,6 +176,38 @@ a head-mounted display that flag should resolve to `legibilityFace` instead.
 `.ol8-gem[data-ol8-transparency="reduced"]` is the per-surface opt-in, because
 a media query cannot tell a phone from a lens.
 
+### Two routes to the same face
+
+`legibilityFace` has a second entrance, `.ol8-gem[data-ol8-face="legibility"]`,
+and the distinction between the two is worth keeping straight:
+
+| attribute | route | what it means |
+| --- | --- | --- |
+| `data-ol8-transparency="reduced"` | preference | the person asked for less transparency, and it holds regardless of what the surface is doing |
+| `data-ol8-face="legibility"` | context | this surface is legibility-critical *right now*, and the environment losing presence is the correct trade |
+
+Both resolve to the same token, because there is one dense-but-see-through
+face, not two. What differs is who decided and for how long.
+
+The context route completes the face ladder, and the third rung is the one the
+first two cannot express:
+
+```
+stabilized     app chrome, at rest
+environmental  the environment matters more than the UI
+legibility     the UI matters more than the environment
+```
+
+An athlete reading a split while running laps is the case that forces it.
+Speed is exactly when the environmental face recedes, and exactly when that
+reader can least afford it: the stat is the reason the display is on, the
+environment is a known track, and the glance is half a second at 5 m/s.
+Motion study 01 drives both ramps from one switch, so the pair can be compared
+at an identical speed — the same `FACE_SWITCH` threshold, opposite directions.
+Blur holds at the stabilized 12px on this rung; `blur.environmental`'s 9px
+exists to let the scene dominate, which is the opposite of what this face is
+for.
+
 ## The face is nearly free; the halo is the whole constraint
 
 | face | Light | Dark | content on it |

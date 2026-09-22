@@ -265,9 +265,13 @@
 
   <header class="lab__head">
     <h1>Gem under locomotion</h1>
-    <p>Motion study 01 &middot; the widgets never leave. Speed moves the gem face from
-    <b>stabilized</b> to <b>environmental</b> and blurs the whole surface, so the street
-    resolves through it while the UI stops asking to be read.</p>
+    <p>Motion study 01 &middot; the widgets never leave, and speed alone does not
+    decide what happens to them. <b>Ambient</b> assumes the street matters more:
+    the face goes <b>stabilized &rarr; environmental</b> and the whole surface blurs
+    to 9px, so the world resolves through a UI that has stopped asking to be read.
+    <b>Sports mode</b> inverts both terms for the reader whose stat is the reason
+    the display is on &mdash; the face goes <b>stabilized &rarr; legibility</b> and blur
+    caps at 0.9px. Same threshold, opposite direction.</p>
   </header>
 
   <!-- The scheme is scoped to the STAGE, not the document: the street is dark,
@@ -291,6 +295,7 @@
   <div class="dock" data-ol8-color-scheme="dark">
     <div id="beats"></div>
     <div id="appearance"></div>
+    <div id="mode"></div>
     <div class="dock__speed">
       <label for="speed">Speed</label>
       <input type="range" id="speed" min="0" max="7" step="0.1" value="0">
@@ -362,6 +367,16 @@ $('beats').innerHTML = renderSegmentedControl({
 $('appearance').innerHTML = renderChoiceItem('switch', 'Dark stage', {
   size: 'comfortable', checked: true, id: 'stageDark',
 });
+
+/* SPORTS MODE — the second scenario, and the reason the ramp is a parameter
+   rather than a law. Ambient assumes the street matters more than the UI, so
+   speed makes the interface recede. An athlete running laps inverts every term
+   of that: the stat IS the reason the display is on, the environment is a
+   known track, and the glance is a half second at 5 m/s. Receding is the wrong
+   answer at exactly the moment ambient recedes hardest. */
+$('mode').innerHTML = renderChoiceItem('switch', 'Sports mode', {
+  size: 'comfortable', checked: false, id: 'sportsMode',
+});
 hydrateSegmentedControls();
 hydrateChoiceItems();
 
@@ -419,7 +434,7 @@ const els = {
   roSpeed: $('roSpeed'), roFace: $('roFace'), roBlur: $('roBlur'),
 };
 const widgets = [...document.querySelectorAll('.widget')];
-const state = { target: 0, speed: 0, dist: 0, t: 0 };
+const state = { target: 0, speed: 0, dist: 0, t: 0, sports: false };
 
 /* The beat control is a segmented control: five peers, pick one. */
 document.addEventListener('ol8:segmentchange', e => {
@@ -437,6 +452,10 @@ $('appearance').addEventListener('change', e => {
   if (!input) return;
   if (input.checked) els.stage.dataset.ol8ColorScheme = 'dark';
   else delete els.stage.dataset.ol8ColorScheme;
+});
+$('mode').addEventListener('change', e => {
+  const input = e.target.closest('.ol8-choice__input');
+  if (input) state.sports = input.checked;
 });
 els.speed.addEventListener('input', () => {
   state.target = parseFloat(els.speed.value);
@@ -709,6 +728,41 @@ function drawPlate(dt, k) {
 }
 
 const FACE_SWITCH = 0.34;   // fraction of top speed where the face flips
+
+/* The UI blurs. It does not move, shrink, fade or disappear.
+
+   Linear in speed meant walking — 1.4 m/s, about a fifth of top speed —
+   already cost a fifth of the peak: 1.9px on 12px text, when walking is the
+   everyday case and you are reading the thing WHILE you walk.
+
+   Neither curve is fitted to a formula. No single exponent hits both of the
+   ambient numbers: k squared gives 0.42px at walking against the 0.3 asked
+   for, and raising the exponent to reach 0.3 drags running down to 4.0. The
+   beats ARE the design decision, so they are the anchors and the slider
+   interpolates between them. Fractions of the peak, so the ceiling stays
+   --hud-peak and every anchor moves with it.
+
+   Two ramps, because "how fast am I moving" and "why am I looking at this"
+   are different questions and only the first one is speed. Sports lags the
+   ambient ramp by two whole beats — running is handed what walking got — and
+   caps at a tenth of the peak, which is a motion HINT rather than a veil.
+   0.9px on a sprint is enough to say the surface belongs to a moving body
+   without costing a 16px number its edges. */
+const BLUR_RAMPS = {            // [speed fraction, fraction of peak]
+  //         0.0 m/s   1.4 m/s   4.5 m/s   6.5 m/s
+  ambient: [[0, 0], [0.2154, 0.0333], [0.6923, 0.4778], [1, 1     ]],
+  //         0.0px     0.3px     4.3px     9.0px
+  sports:  [[0, 0], [0.2154, 0     ], [0.6923, 0.0333], [1, 0.1   ]],
+  //         0.0px     0.0px     0.3px     0.9px
+};
+function rampAt(anchors, k) {
+  for (let i = 1; i < anchors.length; i++) {
+    const [k0, b0] = anchors[i - 1], [k1, b1] = anchors[i];
+    if (k > k1) continue;
+    return b0 + (b1 - b0) * ((k - k0) / (k1 - k0 || 1));
+  }
+  return 1;
+}
 // Read the peak back from the token, so the readout can never disagree with
 // what is actually rendered. Swap --hud-peak and this follows.
 const PEAK_BLUR = parseFloat(getComputedStyle(els.hud).getPropertyValue('--hud-peak')) || 9;
@@ -729,36 +783,18 @@ function frame(now) {
   else { sky(hz); clouds(hz, dt * 60); ground(hz); paving(hz, f); trees(hz, f);
          furniture(hz, f); }
 
-  /* The UI blurs. It does not move, shrink, fade or disappear.
-
-     Linear in speed meant walking — 1.4 m/s, about a fifth of top speed —
-     already cost a fifth of the peak: 1.9px on 12px text, when walking is the
-     everyday case and you are reading the thing WHILE you walk.
-
-     The curve is anchored to the beats rather than fitted to a formula. No
-     single exponent hits both of Akshay's numbers: k squared gives 0.42px at
-     walking against the 0.3 he asked for, and raising the exponent to reach
-     0.3 drags running down to 4.0. The beats ARE the design decision, so they
-     are the anchors and the slider interpolates between them. Fractions of the
-     peak, so the ceiling stays --hud-peak and every anchor moves with it. */
-  const BLUR_ANCHORS = [   // [speed fraction, fraction of peak]
-    [0,      0      ],     //  0.0 m/s  ->  0.0px
-    [0.2154, 0.0333],      //  1.4 m/s  ->  0.3px
-    [0.6923, 0.4778],      //  4.5 m/s  ->  4.3px
-    [1,      1     ],      //  6.5 m/s  ->  9.0px
-  ];
-  let blurK = 1;
-  for (let i = 1; i < BLUR_ANCHORS.length; i++) {
-    const [k0, b0] = BLUR_ANCHORS[i - 1], [k1, b1] = BLUR_ANCHORS[i];
-    if (k > k1) continue;
-    blurK = b0 + (b1 - b0) * ((k - k0) / (k1 - k0 || 1));
-    break;
-  }
+  const blurK = rampAt(BLUR_RAMPS[state.sports ? 'sports' : 'ambient'], k);
   els.hud.style.setProperty('--hud-k', blurK.toFixed(3));
 
-  const environmental = k > FACE_SWITCH;
+  /* One threshold, two destinations. Holding FACE_SWITCH the same in both
+     modes is the point of the study: at an identical speed the ambient face
+     steps DOWN in presence and the sports face steps UP, so the pair can be
+     compared by flipping one switch without moving the slider. */
+  const face = k > FACE_SWITCH
+    ? (state.sports ? 'legibility' : 'environmental')
+    : null;
   for (const w of widgets) {
-    if (environmental) w.dataset.ol8Face = 'environmental';
+    if (face) w.dataset.ol8Face = face;
     else delete w.dataset.ol8Face;
   }
 
@@ -769,7 +805,7 @@ function frame(now) {
   els.hr.textContent = Math.round(lerp(72, 178, k));
 
   els.roSpeed.innerHTML = v.toFixed(1) + '<small> m/s</small>';
-  els.roFace.textContent = environmental ? 'Environmental' : 'Stabilized';
+  els.roFace.textContent = face ? face[0].toUpperCase() + face.slice(1) : 'Stabilized';
   els.roBlur.innerHTML = (blurK * PEAK_BLUR).toFixed(1) + '<small> px</small>';
 
   requestAnimationFrame(frame);
