@@ -1356,292 +1356,12 @@
   .ol8-icon-btn[data-ol8-loading] .ol8-icon > svg { animation: ol8-spin 900ms linear infinite; }
 }
 </style>
-<!-- Token layers onto the chip: .ol8-chip geometry lives in choice-chip.css,
-     so a page using renderToken needs both or the terminals stretch. -->
-<style>/* inlined from ../../packages/core/src/molecules/choice-chip/choice-chip.css */
-/**
- * OneLi8 · Choice Chip (MOLECULE) — the Soft Hexagon
- * Figma: Select and Combobox / Choice Chip / Soft Hexagon 636:847 (8 variants)
- *
- * GEOMETRY, read from all four sizes in Figma:
- *   size         target  visible  rail inset  gap  label
- *   compact        48      30         9        9   12 / 18
- *   standard       48      36        12        9   12 / 18
- *   comfortable    48      42        15        9   16 / 24
- *   large          60      42        15        9   16 / 24
- * The terminal is a fixed 12 at every size and never scales with the label,
- * so peer chips of different lengths keep one shoulder depth and side angle.
- *
- * The visible silhouette sits inside a taller protected target, which is why
- * `min-block-size` is the target and the rail carries the visible height.
- */
-
-.ol8-chip {
-  --_height: var(--ol8-component-choice-chip-height-standard);
-  --_target: var(--ol8-component-choice-chip-target-standard);
-  --_inset:  var(--ol8-component-choice-chip-rail-inset-standard);
-  --_label-size: var(--ol8-font-size-012);
-  --_label-line: var(--ol8-font-line-018);
-
-  /* Inactive is the quiet Neutral treatment; Selected is Primary Soft. */
-  --_surface: var(--ol8-color-surface-sunken);
-  --_edge:    var(--ol8-color-border-subtle);
-  --_ink:     var(--ol8-color-text-primary);
-
-  /* The ring is painted at every state and is simply invisible until focus,
-     so focus never changes the geometry, only the colour. */
-  --_focus-outer: transparent;
-  --_focus-inner: transparent;
-
-  box-sizing: border-box;
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  min-block-size: var(--_target);
-  font-family: var(--ol8-font-family-functional);
-  font-variation-settings: "ARRR" var(--ol8-font-axis-arrr-baseline);
-  color: var(--_ink);
-  cursor: pointer;
-}
-.ol8-chip[data-ol8-availability="disabled"] { cursor: not-allowed; }
-
-/* ---- Size ------------------------------------------------------------ */
-.ol8-chip[data-ol8-size="compact"] {
-  --_height: var(--ol8-component-choice-chip-height-compact);
-  --_inset:  var(--ol8-component-choice-chip-rail-inset-compact);
-}
-.ol8-chip[data-ol8-size="standard"] {
-  --_height: var(--ol8-component-choice-chip-height-standard);
-  --_inset:  var(--ol8-component-choice-chip-rail-inset-standard);
-}
-.ol8-chip[data-ol8-size="comfortable"] {
-  --_height: var(--ol8-component-choice-chip-height-comfortable);
-  --_inset:  var(--ol8-component-choice-chip-rail-inset-comfortable);
-  --_label-size: var(--ol8-font-size-016);
-  --_label-line: var(--ol8-font-line-024);
-}
-.ol8-chip[data-ol8-size="large"] {
-  --_height: var(--ol8-component-choice-chip-height-large);
-  --_target: var(--ol8-component-choice-chip-target-large);
-  --_inset:  var(--ol8-component-choice-chip-rail-inset-large);
-  --_label-size: var(--ol8-font-size-016);
-  --_label-line: var(--ol8-font-line-024);
-}
-
-/* ---- Selection ------------------------------------------------------- */
-/* Never colour alone: the native checked state carries the same fact, and the
-   selected edge is a stronger contrast than the inactive one. */
-.ol8-chip[data-ol8-selection="selected"] {
-  --_surface: var(--ol8-color-selection-surface);
-  --_edge:    var(--ol8-color-primary-360);
-  --_ink:     var(--ol8-color-selection-content);
-}
-.ol8-chip[data-ol8-availability="disabled"] {
-  --_surface: var(--ol8-color-surface-disabled);
-  --_edge:    var(--ol8-color-border-disabled);
-  --_ink:     var(--ol8-color-text-disabled);
-}
-
-.ol8-chip__input {
-  position: absolute;
-  inline-size: 1px;
-  block-size: 1px;
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* ---- Terminals ------------------------------------------------------- */
-/* One viewBox serves every height: Figma's terminal paths share identical X
-   values at 30, 36 and 42, and Y values that are the same fractions of the
-   height, so stretching Y alone is exact rather than approximate. */
-.ol8-chip__terminal {
-  flex: none;
-  inline-size: var(--ol8-component-choice-chip-terminal);
-  block-size: var(--_height);
-  /* The point reaches 0.15 beyond the box, as it does in Figma, and the focus
-     ring is painted outside the silhouette. Neither may be clipped. */
-  overflow: visible;
-}
-/* The trailing terminal is the leading one mirrored, so they cannot drift. */
-.ol8-chip__terminal--trailing { transform: scaleX(-1); }
-
-.ol8-chip__fill { fill: var(--_surface); }
-
-/* Double width, clipped to the fill: the outer half is cut away and what
-   remains is an inside edge of exactly one border width, matching the rail's
-   own inside border. A centred stroke would stand 1px proud of the rail and
-   show a step at the shoulder. */
-.ol8-chip__edge {
-  fill: none;
-  stroke: var(--_edge);
-  stroke-width: calc(var(--ol8-border-width-standard) * 2);
-  vector-effect: non-scaling-stroke;
-}
-
-/* Both rings are painted before the fill and at double width, so the inner
-   half of each lands under the fill and only the outer half shows. This is how
-   the ring follows the hexagon instead of boxing it. */
-.ol8-chip__focus-outer,
-.ol8-chip__focus-inner { fill: none; vector-effect: non-scaling-stroke; }
-.ol8-chip__focus-outer {
-  stroke: var(--_focus-outer);
-  stroke-width: calc((var(--ol8-focus-ring-outerwidth) + var(--ol8-focus-ring-innerwidth)) * 2);
-}
-.ol8-chip__focus-inner {
-  stroke: var(--_focus-inner);
-  stroke-width: calc(var(--ol8-focus-ring-innerwidth) * 2);
-}
-
-.ol8-chip:has(> .ol8-chip__input:focus-visible) {
-  --_focus-outer: var(--ol8-color-focus-outer);
-  --_focus-inner: var(--ol8-color-focus-inner);
-}
-
-/* ---- Centre rail ----------------------------------------------------- */
-/* Only the rail grows with the label. It owns the top and bottom of the
-   perimeter; the terminals own the angled ends. */
-.ol8-chip__rail {
-  box-sizing: border-box;
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: var(--ol8-component-choice-gap-standard);
-  block-size: var(--_height);
-  padding-inline: var(--_inset);
-  background: var(--_surface);
-  border-block: var(--ol8-border-width-standard) solid var(--_edge);
-}
-
-/* The ring's flat runs, continuing the terminals' strokes across the rail.
-   Two colours in one band, ordered outward from the silhouette. */
-.ol8-chip__rail::before,
-.ol8-chip__rail::after {
-  content: "";
-  position: absolute;
-  inset-inline: 0;
-  block-size: calc(var(--ol8-focus-ring-outerwidth) + var(--ol8-focus-ring-innerwidth));
-}
-.ol8-chip__rail::before {
-  inset-block-end: 100%;
-  background: linear-gradient(
-    var(--_focus-outer) 0 var(--ol8-focus-ring-outerwidth),
-    var(--_focus-inner) var(--ol8-focus-ring-outerwidth) 100%);
-}
-.ol8-chip__rail::after {
-  inset-block-start: 100%;
-  background: linear-gradient(
-    var(--_focus-inner) 0 var(--ol8-focus-ring-innerwidth),
-    var(--_focus-outer) var(--ol8-focus-ring-innerwidth) 100%);
-}
-
-.ol8-chip__label {
-  font-size: var(--_label-size);
-  line-height: var(--_label-line);
-  font-weight: var(--ol8-font-weight-regular);
-  color: var(--_ink);
-}
-
-/* ---- Mark ------------------------------------------------------------ */
-/* Figma places the mark BEFORE the label in every variant, Remove included. */
-.ol8-chip__mark {
-  flex: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  inline-size: var(--ol8-component-choicechip-mark);
-  block-size: var(--ol8-component-choicechip-mark);
-  color: var(--_ink);
-}
-
-/* The Check does not scale with its slot. Figma's `Icon / Selection / Check`
-   is a governed small master, not an Icon Frame instance: Size=Small and
-   Size=Standard both carry the same 10.2 x 6.9 artwork at the same 1.8 stroke,
-   centred in an 18 or 24 box. So the source box stays 24 units and overflows
-   the smaller slot, exactly as Figma draws it. */
-.ol8-chip__mark > svg {
-  display: block;
-  flex: none;
-  inline-size: var(--ol8-size-icon-standard);
-  block-size: var(--ol8-size-icon-standard);
-  overflow: visible;
-}
-
-/* Both marks read at the one governed optical stroke, which is what Figma
-   draws and what the iconography contract calls contextual stroke
-   normalization: peer marks in one family match apparent weight. */
-.ol8-chip__mark > svg > * {
-  vector-effect: non-scaling-stroke;
-  stroke-width: var(--ol8-component-choice-optical-stroke);
-}
-</style>
-<style>/* inlined from ../../packages/core/src/molecules/token/token.css */
-/**
- * OneLi8 · Token (MOLECULE)
- * Figma: Select and Combobox / Molecule / Token 897:2106 (24 variants)
- *
- * The silhouette, sizes and colours all come from the Choice Chip stylesheet,
- * because Figma's Token instantiates the Choice Chip Geometry Owner rather than
- * redrawing it. Every rule here is about the one axis Token adds: the Mark.
- */
-
-/* A token is content, not a control. Only its Remove mark is interactive. */
-.ol8-token.ol8-chip { cursor: default; }
-
-/* ---- Remove ---------------------------------------------------------- */
-.ol8-token__remove {
-  position: relative;      /* anchors the expanded target below */
-  padding: 0;
-  border: 0;
-  background: none;
-  color: inherit;
-  cursor: pointer;
-  /* The ring follows the mark, not the chip: the chip is not the target. */
-  border-radius: var(--ol8-shape-radius-full);
-}
-
-/* The mark is drawn at 18 because that is what Figma draws, but the contract
-   asks for a target of at least 24 that does not overlap anything. The target
-   is expanded with a pseudo element so the drawn size and the reachable size
-   can differ without moving the label: it grows 3 into the 9 gap on one side
-   and into the rail inset on the other, so it still touches neither. */
-.ol8-token__remove::before {
-  content: "";
-  position: absolute;
-  inline-size: var(--ol8-component-choice-chip-mark-target);
-  block-size: var(--ol8-component-choice-chip-mark-target);
-  transform: translate(-50%, -50%);
-  inset-block-start: 50%;
-  inset-inline-start: 50%;
-}
-
-.ol8-token__remove:focus-visible {
-  outline: var(--ol8-focus-ring-innerwidth) solid var(--ol8-color-focus-inner);
-  outline-offset: var(--ol8-focus-ring-offset);
-}
-
-/* ---- Mark size parity ------------------------------------------------
-   The two marks have to read as one size, and they did not. The Icon Library's
-   cross spans 12 x 12 in the canonical 24 space while the check spans
-   10.2 x 6.9, so drawn at one frame size the cross was fifteen percent wider
-   and well over half again as tall, and it swamped the check beside it.
-
-   Figma does not draw it that way: its Remove mark is an Icon Frame instance at
-   18, so the cross comes out at 9 x 9 there, a little narrower than the check
-   and balanced against it. The oversized cross was this stylesheet rendering
-   the library source at full size, not a decision in the design.
-
-   So the cross is scaled to the 9 span Figma draws. The stroke does not follow
-   it: it is a non scaling stroke, so it stays the governed 1.8 that every glyph
-   in the system uses, which is also what Figma keeps. */
-.ol8-token__remove > svg > * {
-  transform: scale(0.75);        /* 9 / 12, the span Figma draws */
-  transform-box: fill-box;
-  transform-origin: center;
-}
-</style>
 <!-- The appearance switch is a Choice Item, and its track and thumb are the
      Selection Indicator atom, so BOTH sheets are required. Linking one and not
-     the other is how the Token terminals ended up 64x210 earlier in this lab. -->
+     the other is how the Token terminals ended up 64x210 earlier in this lab.
+     Token and Choice Chip are no longer linked: the tier pill was the only
+     Token on the page and it is gone, so shipping their stylesheets would be
+     weight for markup that no longer exists. -->
 <style>/* inlined from ../../packages/core/src/atoms/selection-indicator/selection-indicator.css */
 /**
  * OneLi8 · Selection Indicator (ATOM)
@@ -2816,6 +2536,9 @@
     display: flex; flex-direction: column; gap: var(--ol8-dimension-scale-006);
     min-inline-size: 0;
   }
+  /* With the tier pill gone the glyph is the card's only content, so it centres
+     rather than stacking from the top. */
+  #vitals { justify-content: center; align-items: center; }
   .widget--wide { grid-column: 1 / -1; }
 
   /* Transport: three controls, one group, so they read as a set rather than
@@ -2833,16 +2556,20 @@
      and what makes the card readable in one fixation. */
   .metric { position: relative; display: inline-flex; align-items: center; justify-content: center;
             align-self: center; }
-  /* Display, not xlarge. At 48 the heart was a glyph with a number crammed in;
-     the sketch draws it dominating its card, and 72 is the next Icon Frame
-     universal size with a token of its own. */
-  .metric .ol8-icon { --_ol8-icon-size: var(--ol8-size-icon-display); }
+  /* xlarge, not display. The stroke is 1.8 in the 24 SOURCE and scales
+     geometrically with the artwork — 1.35 at 18, 1.8 at 24, 3.6 at 48, 5.4 at
+     72 — so at display size the outline rendered 5.4px and pulled far more
+     attention than a resting heart rate deserves. It cannot be thinned at a
+     given size: the icon skill forbids per-size stroke values and size-specific
+     masters, and every stroked path in the pool is 1.8. Size is the only honest
+     lever, so this drops to 48 and the stroke comes back to 3.6. */
+  .metric .ol8-icon { --_ol8-icon-size: var(--ol8-size-icon-xlarge); }
   .metric__n {
     position: absolute; inset: 0;
     display: flex; align-items: center; justify-content: center;
-    font-size: var(--ol8-font-size-021); line-height: 1;
+    font-size: var(--ol8-font-size-016); line-height: 1;
     font-weight: var(--ol8-font-weight-semibold);
-    padding-block-start: var(--ol8-dimension-scale-006);   /* optical: a heart's mass sits high */
+    padding-block-start: var(--ol8-dimension-scale-003);   /* optical: a heart's mass sits high */
   }
   /* Lab layout only. Everything placed inside these rows is a real component. */
   .widget__row { display: flex; align-items: center; gap: var(--ol8-dimension-scale-009); }
@@ -4694,274 +4421,13 @@ function escapeAttr(v) { return String(v).replace(/&/g,'&amp;').replace(/"/g,'&q
   Object.assign(__x, { OL8_ICON_BUTTON_VARIANTS, OL8_ICON_BUTTON_SIZES, OL8_ICON_BUTTON_SHAPES, artworkSizeForIconButton, renderIconButton, hydrateIconButtons });
 });
 
-__def("packages/core/src/molecules/choice-chip/choice-chip.js", (__x, __req) => {
-/**
- * OneLi8 · Choice Chip (MOLECULE) — the Soft Hexagon.
- *
- * Figma: Select and Combobox / Choice Chip / Soft Hexagon 636:847 (8 variants,
- * Size x Selection, plus a Label text property and a Show Mark boolean).
- *
- * From the Figma description:
- *   "Compact/Standard/Comfortable/Large use approved 30/36/42/42px visible
- *    geometry inside protected 48/48/48/60px targets. Fixed 12px terminals and
- *    tokenized 9/12/15/15px inner rail insets preserve one silhouette at every
- *    label width."
- *
- * Figma builds the silhouette from three boxes, and so does this: a fixed 12px
- * left terminal, a centre rail that grows with the label, and a mirrored right
- * terminal. Only the rail grows, which is why a short chip and a long chip keep
- * the same shoulder depth and side angle. The contract is explicit that ends
- * which scale with the text are prohibited.
- *
- * WHY SVG RATHER THAN clip-path
- * The terminals are not polygons. Each has three small curves softening the
- * shoulders and the point, and the contract rejects approximating that softness
- * with extra vertices because it reads as an Octagon. `clip-path: polygon()`
- * can only draw straight vertices, so the terminals are real paths.
- *
- * HOW ONE PATH SERVES FOUR HEIGHTS
- * Read from Figma, every terminal path at 30, 36 and 42 has identical X values
- * and Y values that scale exactly with the height: 1/36, 1/12, 5/12, 11/24,
- * 13/24, 7/12, 11/12, 35/36 of the height, at every size. So one viewBox of
- * 12 x 30 with `preserveAspectRatio="none"` and a fixed 12px width reproduces
- * Figma at all four sizes: the height stretches, the width cannot.
- * `vector-effect="non-scaling-stroke"` keeps the edge an even 2px through that
- * uneven stretch.
- *
- * THE OPEN EDGE
- * Figma draws two vectors per terminal: a closed fill and an open outline that
- * "deliberately omits the hidden vertical closing edge", so the rail's own top
- * and bottom borders continue the perimeter without a doubled seam. This keeps
- * that construction. Figma reaches an inside stroke by scaling the outline path
- * to 98.75% of the width; here the edge is clipped to the fill instead, which
- * is the same rendered result stated directly.
- */
-const { renderIconSvg } = __req("packages/core/src/atoms/icon/icon.js");
-const OL8_CHIP_SIZES = ['compact', 'standard', 'comfortable', 'large'];
-
-/**
- * The terminal, in the 12 x 30 space Figma draws it in. The closed path is the
- * fill; the open one is the perimeter, missing the seam edge at x=12.
- */
-const OL8_CHIP_TERMINAL_FILL =
-  'M12 0 L8.96202541 0 C7.44303812 0 6.43037944 0.83333333 5.92405035 2.5 ' +
-  'L0.45569618 12.5 C-0.15189877 13.75 -0.15189877 16.25 0.45569618 17.5 ' +
-  'L5.92405035 27.5 C6.43037944 29.16666667 7.44303812 30 8.96202541 30 L12 30 Z';
-const OL8_CHIP_TERMINAL_EDGE =
-  'M12 0 L8.96202541 0 C7.44303812 0 6.43037944 0.83333333 5.92405035 2.5 ' +
-  'L0.45569618 12.5 C-0.15189877 13.75 -0.15189877 16.25 0.45569618 17.5 ' +
-  'L5.92405035 27.5 C6.43037944 29.16666667 7.44303812 30 8.96202541 30 L12 30';
-
-/**
- * One terminal. `side` only picks a class; the right terminal is the left one
- * mirrored in CSS, so the two can never drift apart.
- *
- * The focus bands are strokes on the same path, painted before the fill and at
- * double width, so their inner half lands under the fill and the visible half
- * sits outside the silhouette. That is how a ring follows a hexagon instead of
- * boxing it.
- */
-function renderTerminal(uid, side) {
-  const clip = `${uid}-clip-${side}`;
-  return `<svg class="ol8-chip__terminal ol8-chip__terminal--${side}" viewBox="0 0 12 30" ` +
-    `preserveAspectRatio="none" aria-hidden="true" focusable="false">` +
-    `<clipPath id="${clip}"><path d="${OL8_CHIP_TERMINAL_FILL}"/></clipPath>` +
-    `<path class="ol8-chip__focus-outer" d="${OL8_CHIP_TERMINAL_EDGE}"/>` +
-    `<path class="ol8-chip__focus-inner" d="${OL8_CHIP_TERMINAL_EDGE}"/>` +
-    `<path class="ol8-chip__fill" d="${OL8_CHIP_TERMINAL_FILL}"/>` +
-    `<path class="ol8-chip__edge" d="${OL8_CHIP_TERMINAL_EDGE}" clip-path="url(#${clip})"/>` +
-    `</svg>`;
-}
-
-/**
- * The silhouette plus its rail contents. Private: Figma names this the
- * "Choice Chip / Geometry Owner" and both the public chip and the Token
- * instantiate it rather than redrawing it.
- *
- * `mark` is markup for the rail's trailing slot, or an empty string. The mark
- * follows the label, which is the anatomy the contract writes down as "Label +
- * optional Remove mark", and one position serves Check and Remove alike so
- * peer marks never end up on opposite sides.
- */
-function renderChipShape(uid, label, mark = '') {
-  return renderTerminal(uid, 'leading') +
-    `<span class="ol8-chip__rail">` +
-      `<span class="ol8-chip__label">${escapeText(label)}</span>` +
-      mark +
-    `</span>` +
-    renderTerminal(uid, 'trailing');
-}
-
-/**
- * A Choice Chip is a real checkbox. The contract is explicit: "Every option is
- * a real Checkbox rendered with the approved quiet Choice Chip appearance",
- * with "native checked state" among the redundant cues, so selection is never
- * carried by colour alone.
- *
- * @param {string} label
- * @param {{size?:string,selected?:boolean,showMark?:boolean,disabled?:boolean,
- *          name?:string,value?:string,id?:string,className?:string}} [options]
- */
-function renderChoiceChip(label, options = {}) {
-  const {
-    size = 'standard', selected = false, showMark = false, disabled = false,
-    name, value, id, className,
-  } = options;
-
-  if (!OL8_CHIP_SIZES.includes(size)) throw new Error(`[ol8] unknown chip size "${size}"`);
-  if (!label || !String(label).trim()) throw new Error('[ol8] Choice Chip requires a label');
-
-  const uid = id ?? `ol8-chip-${Math.random().toString(36).slice(2, 9)}`;
-  const mark = showMark
-    ? `<span class="ol8-chip__mark" aria-hidden="true">${renderIconSvg('check')}</span>`
-    : '';
-
-  const inputAttrs = [
-    'type="checkbox"', 'class="ol8-chip__input"', `id="${uid}"`,
-    name ? `name="${escapeAttr(name)}"` : '',
-    value !== undefined ? `value="${escapeAttr(value)}"` : '',
-    selected ? 'checked' : '', disabled ? 'disabled' : '',
-  ].filter(Boolean).join(' ');
-
-  const rowAttrs = [
-    `class="ol8-chip${className ? ` ${className}` : ''}"`,
-    `for="${uid}"`,
-    `data-ol8-size="${size}"`,
-    `data-ol8-selection="${selected ? 'selected' : 'inactive'}"`,
-    `data-ol8-availability="${disabled ? 'disabled' : 'enabled'}"`,
-  ].filter(Boolean).join(' ');
-
-  return `<label ${rowAttrs}><input ${inputAttrs}>${renderChipShape(uid, label, mark)}</label>`;
-}
-
-/**
- * Keeps each chip's Selection attribute in step with its input. A chip in a
- * group is an ordinary checkbox, so the browser owns the toggling; this only
- * mirrors the result onto the attribute the stylesheet reads.
- */
-function hydrateChoiceChips(root = document) {
-  const chips = [...root.querySelectorAll('.ol8-chip')];
-  for (const chip of chips) {
-    const input = chip.querySelector(':scope > .ol8-chip__input');
-    if (!input) continue;
-    syncChip(chip);
-    if (chip.dataset.ol8ChipBound === 'true') continue;
-    input.addEventListener('change', () => syncChip(chip));
-    chip.dataset.ol8ChipBound = 'true';
-  }
-  return chips.length;
-}
-
-/** Repaints one chip from the live state of its input. */
-function syncChip(chip) {
-  const input = chip.querySelector(':scope > .ol8-chip__input');
-  if (!input) return;
-  chip.dataset.ol8Selection = input.checked ? 'selected' : 'inactive';
-  chip.dataset.ol8Availability = input.disabled ? 'disabled' : 'enabled';
-}
-
-/* Private. Exported only so Token can reuse the same escaping; neither name
-   reaches the package index. */
-function escapeAttr(v) { return String(v).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
-function escapeText(v) { return String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-  Object.assign(__x, { OL8_CHIP_SIZES, OL8_CHIP_TERMINAL_FILL, OL8_CHIP_TERMINAL_EDGE, renderChipShape, renderChoiceChip, hydrateChoiceChips, syncChip, escapeAttr });
-});
-
-__def("packages/core/src/molecules/token/token.js", (__x, __req) => {
-/**
- * OneLi8 · Token (MOLECULE) — a committed value.
- *
- * Figma: Select and Combobox / Molecule / Token 897:2106 (24 variants,
- * Size x Selection x Mark).
- *
- * From the Figma description:
- *   "Compact/Standard/Comfortable/Large delegate all 30/36/42/42px geometry to
- *    the Soft Hexagon Choice Chip owner. Selection and None/Check/Remove mark
- *    contracts remain independent; governed Check and Close atoms are reused
- *    instead of duplicated."
- *
- * So this draws no silhouette of its own. It instantiates the Choice Chip's
- * geometry exactly as the Figma component instantiates the Geometry Owner, and
- * adds the one thing that is genuinely its own: the Mark axis.
- *
- * A Token is not a Choice Chip. A chip is a checkbox a person toggles; a token
- * is a value that has already been committed, so it is ordinary content with an
- * optional Remove button rather than a form control.
- *
- * MARK
- * Figma's axis is the concrete None / Check / Remove. The contract adds `auto`
- * as the public default, which resolves rather than draws: "Remove for
- * removable committed values, Check for selected Choice Chips, and None for
- * unselected or informational chips." A variant cannot be `auto`, which is why
- * Figma has no such option and code does.
- */
-const { renderIconSvg } = __req("packages/core/src/atoms/icon/icon.js");
-const { renderChipShape, escapeAttr, OL8_CHIP_SIZES } = __req("packages/core/src/molecules/choice-chip/choice-chip.js");
-const OL8_TOKEN_SIZES = OL8_CHIP_SIZES;
-/** Figma draws the last three. `auto` resolves to one of them. */
-const OL8_TOKEN_MARKS = ['auto', 'none', 'check', 'remove'];
-
-/** The contract's resolution, stated once so both packages agree. */
-function resolveTokenMark(mark, { removable = true, selected = false } = {}) {
-  if (mark !== 'auto') return mark;
-  if (removable) return 'remove';
-  return selected ? 'check' : 'none';
-}
-
-/**
- * @param {string} label
- * @param {{size?:string,selected?:boolean,mark?:string,removable?:boolean,
- *          removeLabel?:string,id?:string,className?:string}} [options]
- */
-function renderToken(label, options = {}) {
-  const {
-    size = 'standard', selected = false, mark = 'auto', removable = true,
-    removeLabel, focusable = true, id, className,
-  } = options;
-
-  if (!OL8_TOKEN_SIZES.includes(size)) throw new Error(`[ol8] unknown token size "${size}"`);
-  if (!OL8_TOKEN_MARKS.includes(mark)) throw new Error(`[ol8] unknown token mark "${mark}"`);
-  if (!label || !String(label).trim()) throw new Error('[ol8] Token requires a label');
-  if (mark === 'remove' && !removable) {
-    throw new Error('[ol8] mark "remove" offers a removal path a non removable token does not have');
-  }
-
-  const uid = id ?? `ol8-token-${Math.random().toString(36).slice(2, 9)}`;
-  const resolved = resolveTokenMark(mark, { removable, selected });
-
-  // The Remove mark is the only interactive part, so it is a real button with
-  // its own accessible name. It follows the label, which is the anatomy the
-  // contract writes down, and the label stays the token's content: the complete
-  // value must remain readable, never shortened or overlaid by its mark.
-  const markup = resolved === 'remove'
-    ? `<button type="button" class="ol8-chip__mark ol8-token__remove" ` +
-      (focusable ? '' : 'tabindex="-1" ') +
-      `aria-label="${escapeAttr(removeLabel ?? `Remove ${label}`)}">${renderIconSvg('close')}</button>`
-    : resolved === 'check'
-      ? `<span class="ol8-chip__mark" aria-hidden="true">${renderIconSvg('check')}</span>`
-      : '';
-
-  const attrs = [
-    `class="ol8-token ol8-chip${className ? ` ${className}` : ''}"`,
-    `data-ol8-size="${size}"`,
-    `data-ol8-selection="${selected ? 'selected' : 'inactive'}"`,
-    `data-ol8-mark="${resolved}"`,
-  ].join(' ');
-
-  return `<span ${attrs}>${renderChipShape(uid, label, markup)}</span>`;
-}
-  Object.assign(__x, { OL8_TOKEN_SIZES, OL8_TOKEN_MARKS, resolveTokenMark, renderToken });
-});
-
 const { renderChoiceItem, hydrateChoiceItems } = __req("packages/core/src/molecules/choice-item/choice-item.js");
 const { renderSegmentedControl, hydrateSegmentedControls } = __req("packages/core/src/organisms/segmented-control/segmented-control.js");
 const { renderIcon } = __req("packages/core/src/atoms/icon/icon.js");
 const { renderButton, hydrateButtons } = __req("packages/core/src/molecules/button/button.js");
 const { renderIconButton, hydrateIconButtons } = __req("packages/core/src/molecules/icon-button/icon-button.js");
-const { renderToken } = __req("packages/core/src/molecules/token/token.js");
 
 /* ===== lab ===== */
-
 
 
 
@@ -5049,12 +4515,9 @@ $('hud').innerHTML = [
      ${stack('', 'Ferry Road', '400 m')}
    </div></article>`,
 
-  /* Vitals — the number lives INSIDE the heart, and the tier is a Token. */
+  /* Vitals — the number lives INSIDE the heart. Nothing beside it. */
   `<article class="ol8-gem widget" id="vitals">
-     <div class="widget__row widget__row--split">
-       <span></span><span id="hrChip">${renderToken('Resting', { size: 'compact', removable: false, focusable: false })}</span>
-     </div>
-     <span class="metric">${renderIcon('heart', { size: 72 })}<span class="metric__n" id="hr">72</span></span>
+     <span class="metric">${renderIcon('heart', { size: 48 })}<span class="metric__n" id="hr">72</span></span>
    </article>`,
 
   /* Message — a real secondary button on gem and a quiet dismiss. */
@@ -5072,7 +4535,7 @@ hydrateIconButtons();
 
 const els = {
   stage: $('stage'), scene: $('scene'), hud: $('hud'), caption: $('caption'),
-  speed: $('speed'), hr: $('hr'), hrChip: $('hrChip'),
+  speed: $('speed'), hr: $('hr'),
   roSpeed: $('roSpeed'), roFace: $('roFace'), roBlur: $('roBlur'),
 };
 const widgets = [...document.querySelectorAll('.widget')];
@@ -5366,7 +4829,6 @@ function drawPlate(dt, k) {
 }
 
 const FACE_SWITCH = 0.34;   // fraction of top speed where the face flips
-let lastTier = 'Resting';
 // Read the peak back from the token, so the readout can never disagree with
 // what is actually rendered. Swap --hud-peak and this follows.
 const PEAK_BLUR = parseFloat(getComputedStyle(els.hud).getPropertyValue('--hud-peak')) || 9;
@@ -5420,12 +4882,11 @@ function frame(now) {
     else delete w.dataset.ol8Face;
   }
 
-  els.hr.textContent = Math.round(lerp(72, 178, k));   // the glyph says what the number is
-  const tier = k < .1 ? 'Resting' : k < .45 ? 'Elevated' : 'Peak';
-  if (tier !== lastTier) {
-    lastTier = tier;
-    els.hrChip.innerHTML = renderToken(tier, { size: 'compact', removable: false, focusable: false });
-  }
+  /* The glyph says what the number is, so it carries no unit and no tier label.
+     The tier Token went with the pill: a rate climbing 72 -> 178 inside a heart
+     already reads as effort, and naming it as well was the card saying the same
+     thing twice. */
+  els.hr.textContent = Math.round(lerp(72, 178, k));
 
   els.roSpeed.innerHTML = v.toFixed(1) + '<small> m/s</small>';
   els.roFace.textContent = environmental ? 'Environmental' : 'Stabilized';

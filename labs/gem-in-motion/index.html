@@ -14,13 +14,12 @@
 <link rel="stylesheet" href="../../packages/core/src/atoms/icon/icon.css">
 <link rel="stylesheet" href="../../packages/core/src/molecules/button/button.css">
 <link rel="stylesheet" href="../../packages/core/src/molecules/icon-button/icon-button.css">
-<!-- Token layers onto the chip: .ol8-chip geometry lives in choice-chip.css,
-     so a page using renderToken needs both or the terminals stretch. -->
-<link rel="stylesheet" href="../../packages/core/src/molecules/choice-chip/choice-chip.css">
-<link rel="stylesheet" href="../../packages/core/src/molecules/token/token.css">
 <!-- The appearance switch is a Choice Item, and its track and thumb are the
      Selection Indicator atom, so BOTH sheets are required. Linking one and not
-     the other is how the Token terminals ended up 64x210 earlier in this lab. -->
+     the other is how the Token terminals ended up 64x210 earlier in this lab.
+     Token and Choice Chip are no longer linked: the tier pill was the only
+     Token on the page and it is gone, so shipping their stylesheets would be
+     weight for markup that no longer exists. -->
 <link rel="stylesheet" href="../../packages/core/src/atoms/selection-indicator/selection-indicator.css">
 <link rel="stylesheet" href="../../packages/core/src/molecules/choice-item/choice-item.css">
 <link rel="stylesheet" href="../../packages/core/src/organisms/segmented-control/segmented-control.css">
@@ -122,6 +121,9 @@
     display: flex; flex-direction: column; gap: var(--ol8-dimension-scale-006);
     min-inline-size: 0;
   }
+  /* With the tier pill gone the glyph is the card's only content, so it centres
+     rather than stacking from the top. */
+  #vitals { justify-content: center; align-items: center; }
   .widget--wide { grid-column: 1 / -1; }
 
   /* Transport: three controls, one group, so they read as a set rather than
@@ -139,16 +141,20 @@
      and what makes the card readable in one fixation. */
   .metric { position: relative; display: inline-flex; align-items: center; justify-content: center;
             align-self: center; }
-  /* Display, not xlarge. At 48 the heart was a glyph with a number crammed in;
-     the sketch draws it dominating its card, and 72 is the next Icon Frame
-     universal size with a token of its own. */
-  .metric .ol8-icon { --_ol8-icon-size: var(--ol8-size-icon-display); }
+  /* xlarge, not display. The stroke is 1.8 in the 24 SOURCE and scales
+     geometrically with the artwork — 1.35 at 18, 1.8 at 24, 3.6 at 48, 5.4 at
+     72 — so at display size the outline rendered 5.4px and pulled far more
+     attention than a resting heart rate deserves. It cannot be thinned at a
+     given size: the icon skill forbids per-size stroke values and size-specific
+     masters, and every stroked path in the pool is 1.8. Size is the only honest
+     lever, so this drops to 48 and the stroke comes back to 3.6. */
+  .metric .ol8-icon { --_ol8-icon-size: var(--ol8-size-icon-xlarge); }
   .metric__n {
     position: absolute; inset: 0;
     display: flex; align-items: center; justify-content: center;
-    font-size: var(--ol8-font-size-021); line-height: 1;
+    font-size: var(--ol8-font-size-016); line-height: 1;
     font-weight: var(--ol8-font-weight-semibold);
-    padding-block-start: var(--ol8-dimension-scale-006);   /* optical: a heart's mass sits high */
+    padding-block-start: var(--ol8-dimension-scale-003);   /* optical: a heart's mass sits high */
   }
   /* Lab layout only. Everything placed inside these rows is a real component. */
   .widget__row { display: flex; align-items: center; gap: var(--ol8-dimension-scale-009); }
@@ -305,7 +311,6 @@ import { renderSegmentedControl, hydrateSegmentedControls }
 import { renderIcon } from '../../packages/core/src/atoms/icon/icon.js';
 import { renderButton, hydrateButtons } from '../../packages/core/src/molecules/button/button.js';
 import { renderIconButton, hydrateIconButtons } from '../../packages/core/src/molecules/icon-button/icon-button.js';
-import { renderToken } from '../../packages/core/src/molecules/token/token.js';
 
 const $ = id => document.getElementById(id);
 const clamp = (v,a,b) => Math.min(b, Math.max(a,v));
@@ -390,12 +395,9 @@ $('hud').innerHTML = [
      ${stack('', 'Ferry Road', '400 m')}
    </div></article>`,
 
-  /* Vitals — the number lives INSIDE the heart, and the tier is a Token. */
+  /* Vitals — the number lives INSIDE the heart. Nothing beside it. */
   `<article class="ol8-gem widget" id="vitals">
-     <div class="widget__row widget__row--split">
-       <span></span><span id="hrChip">${renderToken('Resting', { size: 'compact', removable: false, focusable: false })}</span>
-     </div>
-     <span class="metric">${renderIcon('heart', { size: 72 })}<span class="metric__n" id="hr">72</span></span>
+     <span class="metric">${renderIcon('heart', { size: 48 })}<span class="metric__n" id="hr">72</span></span>
    </article>`,
 
   /* Message — a real secondary button on gem and a quiet dismiss. */
@@ -413,7 +415,7 @@ hydrateIconButtons();
 
 const els = {
   stage: $('stage'), scene: $('scene'), hud: $('hud'), caption: $('caption'),
-  speed: $('speed'), hr: $('hr'), hrChip: $('hrChip'),
+  speed: $('speed'), hr: $('hr'),
   roSpeed: $('roSpeed'), roFace: $('roFace'), roBlur: $('roBlur'),
 };
 const widgets = [...document.querySelectorAll('.widget')];
@@ -707,7 +709,6 @@ function drawPlate(dt, k) {
 }
 
 const FACE_SWITCH = 0.34;   // fraction of top speed where the face flips
-let lastTier = 'Resting';
 // Read the peak back from the token, so the readout can never disagree with
 // what is actually rendered. Swap --hud-peak and this follows.
 const PEAK_BLUR = parseFloat(getComputedStyle(els.hud).getPropertyValue('--hud-peak')) || 9;
@@ -761,12 +762,11 @@ function frame(now) {
     else delete w.dataset.ol8Face;
   }
 
-  els.hr.textContent = Math.round(lerp(72, 178, k));   // the glyph says what the number is
-  const tier = k < .1 ? 'Resting' : k < .45 ? 'Elevated' : 'Peak';
-  if (tier !== lastTier) {
-    lastTier = tier;
-    els.hrChip.innerHTML = renderToken(tier, { size: 'compact', removable: false, focusable: false });
-  }
+  /* The glyph says what the number is, so it carries no unit and no tier label.
+     The tier Token went with the pill: a rate climbing 72 -> 178 inside a heart
+     already reads as effort, and naming it as well was the card saying the same
+     thing twice. */
+  els.hr.textContent = Math.round(lerp(72, 178, k));
 
   els.roSpeed.innerHTML = v.toFixed(1) + '<small> m/s</small>';
   els.roFace.textContent = environmental ? 'Environmental' : 'Stabilized';
