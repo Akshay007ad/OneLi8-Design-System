@@ -103,19 +103,52 @@
      Peak blur is a scale token, not a typed number, so it cannot land off
      the 3px grid. JS only sets --hud-k, a unitless 0..1; swapping the peak
      between 006 and 009 is a one-token edit. */
+  /* Two columns, from the sketch: two full-width rows, then a split row where
+     the vitals card is narrower than the message. 132 + 186 is roughly the
+     42/58 of the drawing and both are on the 3px grid. */
   .hud {
     --hud-peak: var(--ol8-dimension-scale-009);
     position: absolute; inset: 0;
     padding: var(--ol8-dimension-scale-018);
-    display: flex; flex-direction: column; align-items: flex-end;
+    display: grid;
+    grid-template-columns: 132px 186px;
     gap: var(--ol8-dimension-scale-009);
+    align-content: start; justify-content: end;
     filter: blur(calc(var(--hud-k, 0) * var(--hud-peak)));
     transition: filter .18s linear;
   }
   .widget {
-    inline-size: 224px; max-inline-size: 48%;
     padding: var(--ol8-dimension-scale-009) var(--ol8-dimension-scale-012);
     display: flex; flex-direction: column; gap: var(--ol8-dimension-scale-006);
+    min-inline-size: 0;
+  }
+  .widget--wide { grid-column: 1 / -1; }
+
+  /* Transport: three controls, one group, so they read as a set rather than
+     three separate affordances. */
+  .widget__transport { display: flex; align-items: center; gap: var(--ol8-dimension-scale-003); }
+
+  /* The navigation arrow is BLOCK sized, not inline. The sketch draws it as a
+     sign you read at a glance, not a glyph beside text, which is the register
+     Akshay asked for: navigation icons are traffic signs, not mere icons. */
+  .widget__maneuver { flex: none; }
+  .widget__maneuver .ol8-icon { --_ol8-icon-size: var(--ol8-size-icon-xlarge); }
+
+  /* The metric sits INSIDE the glyph. The heart is not decoration beside a
+     number; the number is the heart's content, which is what the sketch draws
+     and what makes the card readable in one fixation. */
+  .metric { position: relative; display: inline-flex; align-items: center; justify-content: center;
+            align-self: center; }
+  /* Display, not xlarge. At 48 the heart was a glyph with a number crammed in;
+     the sketch draws it dominating its card, and 72 is the next Icon Frame
+     universal size with a token of its own. */
+  .metric .ol8-icon { --_ol8-icon-size: var(--ol8-size-icon-display); }
+  .metric__n {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: var(--ol8-font-size-021); line-height: 1;
+    font-weight: var(--ol8-font-weight-semibold);
+    padding-block-start: var(--ol8-dimension-scale-006);   /* optical: a heart's mass sits high */
   }
   /* Lab layout only. Everything placed inside these rows is a real component. */
   .widget__row { display: flex; align-items: center; gap: var(--ol8-dimension-scale-009); }
@@ -337,17 +370,35 @@ const stack = (k, v, s) =>
   (s ? `<span class="widget__s">${s}</span>` : '') + `</span>`;
 
 $('hud').innerHTML = [
-  // Now playing — an icon button owns the only action.
-  `<article class="ol8-gem widget"><div class="widget__row widget__row--split">
-     ${stack('Now playing', 'Sundara', 'Anoushka Shankar')}
-     ${renderIconButton('forward', 'Skip track', { variant: 'quiet', size: 'compact' })}
+  /* Now playing — the full transport set, not one control. The sketch draws
+     three: back, play, forward. All three are pool masters. */
+  `<article class="ol8-gem widget widget--wide"><div class="widget__row widget__row--split">
+     ${stack('', 'Sundara', 'Anoushka Shankar')}
+     <span class="widget__transport">
+       ${renderIconButton('skip-back', 'Previous track', { variant: 'quiet', size: 'compact' })}
+       ${renderIconButton('play', 'Play', { variant: 'quiet', size: 'compact' })}
+       ${renderIconButton('skip-forward', 'Next track', { variant: 'quiet', size: 'compact' })}
+     </span>
    </div></article>`,
 
-  // Message — a real secondary button and a quiet dismiss. The button carries
-  // material: 'gem' because it sits ON gem; without it Figma's regular
-  // secondary ink is dark and the button vanishes into a light gem face.
-  // The dismiss stays quiet: renderButton throws for gem on Quiet, since
-  // Figma 100:3 approves Gem for Primary and Secondary only.
+  /* Navigation — the maneuver sign at block size, the road name first and the
+     distance under it. `maneuver-right` is the sign register: a solid body
+     with no stroke, the way road signage reads, which is why it carries this
+     at 48 where `forward` would only ever be a glyph. */
+  `<article class="ol8-gem widget widget--wide"><div class="widget__row">
+     <span class="widget__maneuver">${renderIcon('maneuver-right', { size: 48 })}</span>
+     ${stack('', 'Ferry Road', '400 m')}
+   </div></article>`,
+
+  /* Vitals — the number lives INSIDE the heart, and the tier is a Token. */
+  `<article class="ol8-gem widget" id="vitals">
+     <div class="widget__row widget__row--split">
+       <span></span><span id="hrChip">${renderToken('Resting', { size: 'compact', removable: false, focusable: false })}</span>
+     </div>
+     <span class="metric">${renderIcon('heart', { size: 72 })}<span class="metric__n" id="hr">72</span></span>
+   </article>`,
+
+  /* Message — a real secondary button on gem and a quiet dismiss. */
   `<article class="ol8-gem widget">
      ${stack('Kabir Rao', 'Still coming by?', 'I&rsquo;ll wait at the north gate')}
      <div class="widget__row widget__row--split">
@@ -355,18 +406,6 @@ $('hud').innerHTML = [
        ${renderIconButton('close', 'Dismiss', { variant: 'quiet', size: 'compact' })}
      </div>
    </article>`,
-
-  // Navigation — a leading icon from the canonical pool.
-  `<article class="ol8-gem widget"><div class="widget__row">
-     ${renderIcon('forward', { size: 24 })}
-     ${stack('Navigation', '400 m', 'Left onto Ferry Rd')}
-   </div></article>`,
-
-  // Heart rate — the effort tier is a Token, not styled text.
-  `<article class="ol8-gem widget" id="vitals"><div class="widget__row widget__row--split">
-     ${stack('Heart rate', '<span id="hr">68 bpm</span>', '')}
-     <span id="hrChip">${renderToken('Resting', { size: 'compact', removable: false, focusable: false })}</span>
-   </div></article>`,
 ].join('');
 
 hydrateButtons();
@@ -722,7 +761,7 @@ function frame(now) {
     else delete w.dataset.ol8Face;
   }
 
-  els.hr.textContent = Math.round(lerp(68, 178, k)) + ' bpm';
+  els.hr.textContent = Math.round(lerp(72, 178, k));   // the glyph says what the number is
   const tier = k < .1 ? 'Resting' : k < .45 ? 'Elevated' : 'Peak';
   if (tier !== lastTier) {
     lastTier = tier;
